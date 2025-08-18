@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Electron Towers — v0.16r6</title>
   <style>
 /* v0.16r6 — stable baseline + per-shell grid + study cap */
@@ -113,6 +114,24 @@ body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantare
 .aufbau-diagram .badgebox{fill:#2a155f;stroke:#a583ff;stroke-width:1.2}
 .aufbau-diagram .badgetext{fill:#ffe882;font-weight:900;font-size:12px}
 
+
+/* === Mobile Optimizations (idempotent) === */
+@media (max-width: 1024px){
+  :root{ --tile:44px; }
+}
+@media (max-width: 820px){
+  :root{ --tile:40px; }
+}
+@media (max-width: 600px){
+  :root{ --tile:36px; }
+}
+@media (max-width: 430px){
+  :root{ --tile:32px; }
+}
+html, body{ -webkit-text-size-adjust: 100%; }
+* { -webkit-tap-highlight-color: rgba(0,0,0,0); }
+.ptile { touch-action: manipulation; }
+
 </style>
 </head>
 <body>
@@ -168,7 +187,6 @@ body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantare
           <div id="currentPick" class="current-pick">Selected: O (Z=8)</div>
           <div class="mini">Electrons: <span id="placedCount">0</span> / <span id="electronCount">8</span></div>
 <div class="mini" id="spectroLine">Config: <code id="spectro">—</code></div>
-<div class="mini" id="nobleLine">Noble gas: <code id="noble">—</code></div>
         </div>
         <div class="center" id="studyControls">
           <button id="prevStepBtn" class="btn">⟲ Back</button>
@@ -900,36 +918,7 @@ window.addEventListener("DOMContentLoaded", init);
 /* ==== STEP 4 ADDON: live spectroscopic readout + random New Game ==== */
 (function(){
   const ORDER = ["1s","2s","2p","3s","3p","4s","3d","4p","5s","4d","5p","6s","4f","5d","6p","7s","5f","6d","7p"];
-  
-  const NOBLE = [
-    {Z:2,   tag:"He"}, {Z:10,  tag:"Ne"}, {Z:18,  tag:"Ar"},
-    {Z:36,  tag:"Kr"}, {Z:54,  tag:"Xe"}, {Z:86,  tag:"Rn"},
-    {Z:118, tag:"Og"}
-  ];
-  function totalPlaced(){
-    let t=0; for (const sub of ORDER){ t += countIn(sub); } return t;
-  }
-  function nobleShorthand(){
-    const total = totalPlaced();
-    let core = null;
-    for (const n of NOBLE){ if (n.Z <= total) core = n; }
-    if (!core) return "—";
-    let remaining = {}; ORDER.forEach(s=> remaining[s]=countIn(s));
-    let toRemove = core.Z;
-    for (const s of ORDER){
-      if (toRemove<=0) break;
-      const have = remaining[s]||0;
-      const use = Math.min(have, toRemove);
-      remaining[s] = have - use;
-      toRemove -= use;
-    }
-    const parts=[]; 
-    for (const s of ORDER){
-      const n = remaining[s]; if (n>0) parts.push(s + '<sup>'+n+'</sup>');
-    }
-    return "["+core.tag+"]" + (parts.length? " " + parts.join(" ") : "");
-  }
-function countIn(sub){
+  function countIn(sub){
     if (state && state.building && state.building[sub]){
       return state.building[sub].reduce((sum,u)=> sum + (u ? u.length : 0), 0);
     }
@@ -939,12 +928,9 @@ function countIn(sub){
     return c;
   }
   function renderSpectro(){
-const el = document.getElementById("spectro"); if (!el) return;
+    const el = document.getElementById("spectro"); if (!el) return;
     const parts = [];
-    for (const sub of ORDER){ const n = countIn(sub); if (n>0) parts.push(sub + '<sup>'+n+'</sup>'); 
-    const nobleEl = document.getElementById('noble');
-    if (nobleEl){ nobleEl.innerHTML = nobleShorthand(); }
-  }
+    for (const sub of ORDER){ const n = countIn(sub); if (n>0) parts.push(sub + '<sup>'+n+'</sup>'); }
     el.innerHTML = parts.join(' ');
   }
   const building = document.getElementById("building");
@@ -978,6 +964,124 @@ const el = document.getElementById("spectro"); if (!el) return;
   }
 })();
 /* ==== END STEP 4 ADDON ==== */
+
+</script>
+
+<script>
+
+/* === Exceptions Toggle (Dual: Study + Game) — ES5-safe === */
+(function(){
+  try{
+    function onReady(fn){
+      if (document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', fn); } else { fn(); }
+    }
+    function get(id){ return document.getElementById(id); }
+
+    if (typeof window.EXCEPTIONS !== 'object') window.EXCEPTIONS = {};
+    var EXMORE = {
+      24: { s:"4s", d:"3d", s_prefill:1, d_target:5,  s_final:1 },
+      29: { s:"4s", d:"3d", s_prefill:1, d_target:10, s_final:1 },
+      41: { s:"5s", d:"4d", s_prefill:1, d_target:4,  s_final:1 },
+      42: { s:"5s", d:"4d", s_prefill:1, d_target:5,  s_final:1 },
+      44: { s:"5s", d:"4d", s_prefill:1, d_target:7,  s_final:1 },
+      45: { s:"5s", d:"4d", s_prefill:1, d_target:8,  s_final:1 },
+      46: { s:"5s", d:"4d", s_prefill:0, d_target:10, s_final:0 },
+      47: { s:"5s", d:"4d", s_prefill:1, d_target:10, s_final:1 },
+      78: { s:"6s", d:"5d", s_prefill:1, d_target:9,  s_final:1 },
+      79: { s:"6s", d:"5d", s_prefill:1, d_target:10, s_final:1 }
+    };
+    for (var k in EXMORE){ if (EXMORE.hasOwnProperty(k)) window.EXCEPTIONS[k] = EXMORE[k]; }
+
+    function ensureStateFlag(){
+      if (typeof window.state !== 'object') window.state = {};
+      if (!('exceptionsEnabled' in window.state)) window.state.exceptionsEnabled = false;
+    }
+
+    function buildToggle(id){
+      var label = document.createElement('label');
+      label.className = 'toggle small';
+      var input = document.createElement('input');
+      input.type = 'checkbox';
+      input.id = id;
+      label.appendChild(input);
+      label.appendChild(document.createTextNode(' Apply exceptions (Cr, Cu, Nb, Mo, Ru, Rh, Pd, Ag, Pt, Au)'));
+      return label;
+    }
+
+    function attachToggles(){
+      ensureStateFlag();
+      var gameBar = get('gameControls');
+      var studyBar = get('studyControls');
+      var actionsBar = document.querySelector('.actionsBar') || document.querySelector('#actionsBar');
+
+      var tg = get('exceptionsToggleGame');
+      var ts = get('exceptionsToggleStudy');
+      if (!tg){
+        var mountG = gameBar || actionsBar || document.body;
+        var l1 = buildToggle('exceptionsToggleGame');
+        mountG.appendChild(l1);
+        tg = get('exceptionsToggleGame');
+      }
+      if (!ts){
+        var mountS = studyBar || actionsBar || document.body;
+        var l2 = buildToggle('exceptionsToggleStudy');
+        mountS.appendChild(l2);
+        ts = get('exceptionsToggleStudy');
+      }
+      function sync(from, v){
+        window.state.exceptionsEnabled = !!v;
+        if (tg && from !== tg) tg.checked = !!v;
+        if (ts && from !== ts) ts.checked = !!v;
+        if (typeof window.refreshAufbauFocus === 'function') window.refreshAufbauFocus();
+        if (typeof window.toast === 'function') window.toast(v ? 'Exceptions ON' : 'Exceptions OFF');
+      }
+      if (tg){ tg.checked = !!window.state.exceptionsEnabled; tg.addEventListener('change', function(e){ sync(tg, e.target.checked); }); }
+      if (ts){ ts.checked = !!window.state.exceptionsEnabled; ts.addEventListener('change', function(e){ sync(ts, e.target.checked); }); }
+    }
+
+    function overrideChooser(){
+      if (!window._firstVacantSubshell_orig && typeof window.firstVacantSubshell === 'function'){
+        window._firstVacantSubshell_orig = window.firstVacantSubshell;
+      }
+      function countElectronsIn(sub){
+        var arr = window.state && window.state.building && window.state.building[sub];
+        if (!arr) return 0;
+        var sum = 0;
+        for (var i=0;i<arr.length;i++){ var u = arr[i]; sum += (u && u.length) ? u.length : 0; }
+        return sum;
+      }
+      var ORDER_SAFE = (typeof window.ORDER !== 'undefined') ? window.ORDER : [];
+      window.firstVacantSubshell = function(){
+        var def = null;
+        for (var oi=0; oi<ORDER_SAFE.length; oi++){
+          var s = ORDER_SAFE[oi];
+          if (typeof window.hasVacancy === 'function' && window.hasVacancy(s)){ def = s; break; }
+        }
+        if (!window.state || !window.state.exceptionsEnabled) return def;
+        var ex = window.EXCEPTIONS && window.EXCEPTIONS[window.state.targetZ];
+        if (!ex) return def;
+
+        var sCount = countElectronsIn(ex.s);
+        var dCount = countElectronsIn(ex.d);
+        var dHasVac = (typeof window.hasVacancy === 'function') ? window.hasVacancy(ex.d) : false;
+
+        if (ex.s_prefill === 0){
+          if (dHasVac && dCount < ex.d_target) return ex.d;
+        } else {
+          if (sCount >= ex.s_prefill && dHasVac && dCount < ex.d_target) return ex.d;
+        }
+        return def;
+      };
+    }
+
+    onReady(function(){
+      attachToggles();
+      overrideChooser();
+    });
+  }catch(err){
+    try{ console.error('[exceptions-toggle]', err); }catch(e){}
+  }
+})();
 
 </script>
 </body>
