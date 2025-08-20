@@ -92,7 +92,7 @@ body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantare
 .modal-header{display:flex;align-items:center;justify-content:space-between;gap:10px}
 .tabbar{display:flex;gap:8px;margin:10px 0}
 .tab{background:#1a0a35;color:#fff;border:2px solid var(--unit-border);border-radius:10px;padding:8px 12px;cursor:pointer}
-.tab.active{background:#26890c}
+.tab.active{background:var(--kahoot-green)}
 .tabpanel.hidden{display:none}
 .modal-footer{display:flex;align-items:center;justify-content:space-between;gap:10px}
 .modal-actions{display:flex;gap:10px}
@@ -487,7 +487,110 @@ function removeElectronFrom(wing, index){
   refreshInfo(); renderReadouts(); return popped;
 }
 
-/* ==== Exceptions set (neutral detours) ==== */
+/* ======= Rules ======= */
+function hasVacancy(sub){ return state.building[sub].some(u => u.length < 2); }
+function subshellRank(sub){ return ORDER.indexOf(sub); }
+function firstVacantSubshell(){ for (const s of ORDER){ if (hasVacancy(s)) return s; } return null; }
+function refreshAufbauFocus(){
+  const list = byId("aufbauList"); if (!list) return;
+  const target = computeTargetCountsCurrent();
+  const focus = firstSubshellNeedingElectrons(target);
+  list.querySelectorAll("li").forEach(li => li.classList.toggle("active", li.dataset.sub === focus));
+}
+
+<script>
+// --- Ion-aware target distribution helpers ---
+
+// Fill counts along Aufbau (ORDER) for a given number of electrons.
+// Optionally apply neutral exceptions for the chosen element Z.
+function computeNeutralCountsFor(totalElectrons, applyExceptionsForZ) {
+  let rem = totalElectrons;
+  const counts = {};
+  for (const sub of ORDER) {
+    const cap = subInfo(sub).capacity;
+    const put = Math.min(cap, rem);
+    if (put > 0) counts[sub] = put;
+    rem -= put;
+    if (rem <= 0) break;
+  }
+
+  // If we’re showing neutral exceptions for this element (Cr, Cu, …), nudge s→d.
+  if (applyExceptionsForZ && EXCEPTIONS[state.targetZ]) {
+    const ex = EXCEPTIONS[state.targetZ];
+    const sCap = subInfo(ex.s).capacity;
+    const dCap = subInfo(ex.d).capacity;
+
+    const sBefore = counts[ex.s] || 0;
+    const dBefore = counts[ex.d] || 0;
+
+    // Force exception targets
+    const sAfter = Math.min(sCap, ex.s_final);
+    let dAfter  = Math.max(dBefore, ex.d_target);
+
+    // Conserve electrons: any s electrons we removed go to d (up to capacity)
+    const moved = Math.max(0, sBefore - sAfter);
+    dAfter = Math.min(dCap, dAfter + moved);
+
+    counts[ex.s] = sAfter;
+    counts[ex.d] = dAfter;
+
+    // If totals drifted, trim/add on the d line to match totalElectrons.
+    const tot = Object.values(counts).reduce((a,b)=>a+b,0);
+    const diff = totalElectrons - tot;
+    if (diff !== 0) counts[ex.d] = Math.max(0, Math.min(dCap, (counts[ex.d]||0) + diff));
+  }
+  return counts;
+}
+
+// Removal priority for cations: highest n first; if tie, higher l (f>d>p>s)
+const REMOVAL_ORDER = ORDER.slice().sort((a,b)=>{
+  const A = subInfo(a), B = subInfo(b);
+  if (A.n !== B.n) return B.n - A.n;   // higher n first
+  return B.l - A.l;                     // then f>d>p>s
+});
+
+function removeElectronsFrom(counts, q){
+  let left = q;
+  for (const sub of REMOVAL_ORDER) {
+    const have = counts[sub] || 0;
+    if (!have) continue;
+    const take = Math.min(have, left);
+    counts[sub] = have - take;
+    left -= take;
+    if (left <= 0) break;
+  }
+  return counts;
+}
+
+// Compute the ion-aware target counts for CURRENT element/charge.
+function computeTargetCountsCurrent(){
+  const q = state.ionCharge || 0;
+
+  if (q > 0) { // cation: build neutral, then remove from highest n (e.g., 4s before 3d)
+    const neutral = computeNeutralCountsFor(state.targetZ, /*apply exceptions?*/ state.exceptionsEnabled && q===0);
+    return removeElectronsFrom({ ...neutral }, q);
+  }
+
+  if (q < 0) { // anion: just fill to Z - q electrons without applying neutral-exception hacks
+    const total = state.targetZ - q; // q is negative
+    return computeNeutralCountsFor(total, /*exceptions*/ false);
+  }
+
+  // Neutral: normal Aufbau, with optional exceptions toggle
+  return computeNeutralCountsFor(state.targetZ, state.exceptionsEnabled);
+}
+
+// Find the first subshell that still needs electrons to hit the target.
+function firstSubshellNeedingElectrons(target){
+  for (const sub of ORDER){
+    const have = (state.building[sub]||[]).reduce((s,u)=>s+(u?u.length:0),0);
+    const want = target[sub] || 0;
+    if (have < want) return sub;
+  }
+  return null;
+}
+</script>
+/* ==== Exceptions set ==== */
 const EXCEPTIONS = {
   24: { s:"4s", d:"3d", s_prefill:1, d_target:5,  s_final:1 },  // Cr
   29: { s:"4s", d:"3d", s_prefill:1, d_target:10, s_final:1 },  // Cu
@@ -501,7 +604,7 @@ const EXCEPTIONS = {
   79: { s:"6s", d:"5d", s_prefill:1, d_target:10, s_final:1 }   // Au
 };
 function countIn(sub){ return state.building[sub].reduce((sum,u)=> sum + (u ? u.length : 0), 0); }
-function hasVac(sub){ return state.building[sub].some(u => u.length < 2); }
+function hasVac(sub){ return hasVacancy(sub); }
 function exceptionPreferredSubshell(){
   if(!state.exceptionsEnabled) return null;
   const rule = EXCEPTIONS[state.targetZ];
@@ -517,93 +620,6 @@ function exceptionPreferredSubshell(){
   return null;
 }
 
-/* ======= Rules ======= */
-function hasVacancy(sub){ return state.building[sub].some(u => u.length < 2); }
-function subshellRank(sub){ return ORDER.indexOf(sub); }
-function firstVacantSubshell(){ for (const s of ORDER){ if (hasVacancy(s)) return s; } return null; }
-
-/* --- Ion-aware target distribution helpers --- */
-// Fill counts along Aufbau (ORDER) for a given number of electrons.
-// Optionally apply neutral exceptions for the chosen element Z.
-function computeNeutralCountsFor(totalElectrons, applyExceptionsForZ) {
-  let rem = totalElectrons;
-  const counts = {};
-  for (const sub of ORDER) {
-    const cap = subInfo(sub).capacity;
-    const put = Math.min(cap, rem);
-    if (put > 0) counts[sub] = put;
-    rem -= put;
-    if (rem <= 0) break;
-  }
-  // If we’re showing neutral exceptions (Cr, Cu, …), nudge s→d.
-  if (applyExceptionsForZ && EXCEPTIONS[state.targetZ]) {
-    const ex = EXCEPTIONS[state.targetZ];
-    const sCap = subInfo(ex.s).capacity;
-    const dCap = subInfo(ex.d).capacity;
-    const sBefore = counts[ex.s] || 0;
-    const dBefore = counts[ex.d] || 0;
-    const sAfter = Math.min(sCap, ex.s_final);
-    let dAfter  = Math.max(dBefore, ex.d_target);
-    const moved = Math.max(0, sBefore - sAfter);
-    dAfter = Math.min(dCap, dAfter + moved);
-    counts[ex.s] = sAfter;
-    counts[ex.d] = dAfter;
-    const tot = Object.values(counts).reduce((a,b)=>a+b,0);
-    const diff = totalElectrons - tot;
-    if (diff !== 0) counts[ex.d] = Math.max(0, Math.min(dCap, (counts[ex.d]||0) + diff));
-  }
-  return counts;
-}
-// Removal priority for cations: highest n first; if tie, higher l (f>d>p>s)
-const REMOVAL_ORDER = ORDER.slice().sort((a,b)=>{
-  const A = subInfo(a), B = subInfo(b);
-  if (A.n !== B.n) return B.n - A.n;
-  return B.l - A.l;
-});
-function removeElectronsFrom(counts, q){
-  let left = q;
-  for (const sub of REMOVAL_ORDER) {
-    const have = counts[sub] || 0;
-    if (!have) continue;
-    const take = Math.min(have, left);
-    counts[sub] = have - take;
-    left -= take;
-    if (left <= 0) break;
-  }
-  return counts;
-}
-// Compute the ion-aware target counts for CURRENT element/charge.
-function computeTargetCountsCurrent(){
-  const q = state.ionCharge || 0;
-  if (q > 0) { // cation: build neutral then remove from highest n (4s before 3d, etc.)
-    // If you prefer applying neutral exceptions before removal, set the 2nd arg to true.
-    const neutral = computeNeutralCountsFor(state.targetZ, /*apply exceptions on neutral?*/ false);
-    return removeElectronsFrom({ ...neutral }, q);
-  }
-  if (q < 0) { // anion: fill to Z - q electrons, no neutral-exception hacks
-    const total = state.targetZ - q; // q is negative
-    return computeNeutralCountsFor(total, false);
-  }
-  // Neutral: normal Aufbau, with optional exceptions toggle
-  return computeNeutralCountsFor(state.targetZ, state.exceptionsEnabled);
-}
-// Find the first subshell that still needs electrons to hit the target.
-function firstSubshellNeedingElectrons(target){
-  for (const sub of ORDER){
-    const have = (state.building[sub]||[]).reduce((s,u)=>s+(u?u.length:0),0);
-    const want = target[sub] || 0;
-    if (have < want) return sub;
-  }
-  return null;
-}
-
-function refreshAufbauFocus(){
-  const list = byId("aufbauList"); if (!list) return;
-  const target = computeTargetCountsCurrent();
-  const focus = firstSubshellNeedingElectrons(target);
-  list.querySelectorAll("li").forEach(li => li.classList.toggle("active", li.dataset.sub === focus));
-}
-
 function legalPlacement(wing, index, spin){
   // Ion-aware target: pick the subshell that still needs electrons
   const target = computeTargetCountsCurrent();
@@ -611,6 +627,7 @@ function legalPlacement(wing, index, spin){
   if (must && wing !== must){
     return { ok:false, rule:"Aufbau", msg:`Place in ${must} now.` };
   }
+
   const occ = state.building[wing][index];
   if (occ.length >= 2) return { ok:false, rule:"Pauli", msg:`Max 2 per orbital.` };
   if (occ.length === 1 && occ[0] === spin) return { ok:false, rule:"Pauli", msg:`Pair must be opposite spins.` };
@@ -678,8 +695,10 @@ function ghostNextMove(){
   const target = computeTargetCountsCurrent();
   const focus = firstSubshellNeedingElectrons(target);
   if (!focus) return null;
+
   const info = subInfo(focus);
   let spin = "up"; let index = 0; let slotIndex = 0;
+
   if (info.orbitals === 1){
     const occ = state.building[focus][0];
     if (occ.length === 1){ spin = (occ[0]==="up"?"down":"up"); slotIndex = 1; }
@@ -815,16 +834,15 @@ function renderReadouts(){
 
 /* ======= Info box ======= */
 function refreshInfo(){
-  // Use the same ion-aware target focus used by the list/ghost
-  const target = computeTargetCountsCurrent();
-  const focus = firstSubshellNeedingElectrons(target) || ORDER[ORDER.length-1];
+  const ex = state.exceptionsEnabled && EXCEPTIONS[state.targetZ];
+  const exPick = exceptionPreferredSubshell();
+  const focus = exPick || firstVacantSubshell() || ORDER[ORDER.length-1];
   const info = subInfo(focus);
   const electrons = electronsNeeded(); const placed = placedCount();
   const Z = state.targetZ || 1;
   const hundNote = (info.orbitals > 1) ? `<li><b>Hund:</b> single-occupy ${info.orbitals} orbitals with the <b>same spin</b> before pairing.</li>` : "";
   const crossover = (focus === "4s") ? `<li>Cross-over: <b>4s</b> slightly before <b>3d</b>.</li>` :
                     (focus === "3d") ? `<li>Now filling <b>3d</b> after <b>4s</b>.</li>` : "";
-  const ex = state.exceptionsEnabled && EXCEPTIONS[state.targetZ];
   const exNote = ex ? `<li><b>Exceptions:</b> ${sym(state.targetZ)} follows a stability detour (d<sup>${ex.d_target}</sup>, s→${ex.s_final}).</li>` : "";
   const modeText = state.mode==="study" ? "Study: click the glowing slot." : "Game: drag or click-to-place from the lobby.";
   const infoNow = byId("infoNow"); if (!infoNow) return;
@@ -846,7 +864,7 @@ function refreshInfo(){
 /* ======= Auto-play & timer ======= */
 function clearAutoPlay(){ if (state.autoTimer){ clearInterval(state.autoTimer); state.autoTimer=null; } const ap = byId("autoPlayToggle"); if (ap) ap.checked = false; }
 function startTimer(){ stopTimer(); state.startTime = Date.now(); const t = byId("timer"); if (t) t.textContent = "00:00";
-  state.timerId = setInterval(()=>{ const s = Math.floor((Date.now()-state.startTime)/1000); const m = Math.floor(s/60); const ss = s%60; const t2 = byId("timer"); if (t2) t2.textContent = `${String(m).padStart(2,"0")}:${String(ss).padStart(2,"0")}`; }, 1000);
+  state.timerId = setInterval(()=>{ const s = Math.floor((Date.now()-state.startTime)/1000); const m = Math.floor(s/60); const ss = s%60; const t = byId("timer"); if (t) t.textContent = `${String(m).padStart(2,"0")}:${String(ss).padStart(2,"0")}`; }, 1000);
 }
 function stopTimer(){ if (state.timerId){ clearInterval(state.timerId); state.timerId = null; } }
 
@@ -904,6 +922,7 @@ function attachExceptionsToggles(){
   };
   const gs=byId("gameControls"); if(gs && !byId("exceptionsToggleGame")) gs.appendChild(make("exceptionsToggleGame"));
   const ss=byId("studyControls"); if(ss && !byId("exceptionsToggleStudy")) ss.appendChild(make("exceptionsToggleStudy"));
+  // keep them in sync
   const g=byId("exceptionsToggleGame"), s=byId("exceptionsToggleStudy");
   function sync(from){ const v=from.checked; state.exceptionsEnabled = v; if(g && from!==g) g.checked=v; if(s && from!==s) s.checked=v; planStudyGhost(); }
   if(g) g.addEventListener("change",()=>sync(g));
@@ -921,7 +940,7 @@ function init(){
   on(byId("ionMinus"), "click", ()=> setIonCharge(-1));
   on(byId("ionPlus"), "click", ()=> setIonCharge(+1));
 
-  on(byId("newGameBtn"), "click", ()=>{
+  on(byId("newGameBtn"), "click", (ev)=>{
     const tiles = Array.from(document.querySelectorAll(".ptile"));
     if (tiles.length){
       const rnd = tiles[Math.floor(Math.random()*tiles.length)];
@@ -999,6 +1018,9 @@ function init(){
 }
 window.addEventListener("DOMContentLoaded", init);
   </script>
+  </script>
+
+  <!-- Ionization removal fix: remove from highest n first (within same n: f>d>p>s) -->
+  <script src="ion-fix-addon.js"></script>
 </body>
 </html>
-
