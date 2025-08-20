@@ -1,8 +1,4 @@
-You're hitting a JavaScript parse error because there’s a stray nested `<script>` tag inside your main `<script>` block, then code continues *outside* of any script tag, and there are two `</script>` closers. I fixed it by keeping **all JS in one single `<script>`** (no nesting, no orphaned code) and removing the duplicate closing tag. Nothing else was changed.
 
-Here’s the repaired file:
-
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
