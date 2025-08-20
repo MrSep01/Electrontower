@@ -497,6 +497,7 @@ function refreshAufbauFocus(){
   const focus = firstSubshellNeedingElectrons(target);
   list.querySelectorAll("li").forEach(li => li.classList.toggle("active", li.dataset.sub === focus));
 }
+</script>
 
 <script>
 // --- Ion-aware target distribution helpers ---
@@ -589,7 +590,7 @@ function firstSubshellNeedingElectrons(target){
   }
   return null;
 }
-  </scrip.t>
+</script>
 <script>
 /* ==== Exceptions set ==== */
 const EXCEPTIONS = {
