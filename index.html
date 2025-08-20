@@ -493,10 +493,103 @@ function subshellRank(sub){ return ORDER.indexOf(sub); }
 function firstVacantSubshell(){ for (const s of ORDER){ if (hasVacancy(s)) return s; } return null; }
 function refreshAufbauFocus(){
   const list = byId("aufbauList"); if (!list) return;
-  const focus = exceptionPreferredSubshell() || firstVacantSubshell();
+  const target = computeTargetCountsCurrent();
+  const focus = firstSubshellNeedingElectrons(target);
   list.querySelectorAll("li").forEach(li => li.classList.toggle("active", li.dataset.sub === focus));
 }
 
+<script>
+// --- Ion-aware target distribution helpers ---
+
+// Fill counts along Aufbau (ORDER) for a given number of electrons.
+// Optionally apply neutral exceptions for the chosen element Z.
+function computeNeutralCountsFor(totalElectrons, applyExceptionsForZ) {
+  let rem = totalElectrons;
+  const counts = {};
+  for (const sub of ORDER) {
+    const cap = subInfo(sub).capacity;
+    const put = Math.min(cap, rem);
+    if (put > 0) counts[sub] = put;
+    rem -= put;
+    if (rem <= 0) break;
+  }
+
+  // If we’re showing neutral exceptions for this element (Cr, Cu, …), nudge s→d.
+  if (applyExceptionsForZ && EXCEPTIONS[state.targetZ]) {
+    const ex = EXCEPTIONS[state.targetZ];
+    const sCap = subInfo(ex.s).capacity;
+    const dCap = subInfo(ex.d).capacity;
+
+    const sBefore = counts[ex.s] || 0;
+    const dBefore = counts[ex.d] || 0;
+
+    // Force exception targets
+    const sAfter = Math.min(sCap, ex.s_final);
+    let dAfter  = Math.max(dBefore, ex.d_target);
+
+    // Conserve electrons: any s electrons we removed go to d (up to capacity)
+    const moved = Math.max(0, sBefore - sAfter);
+    dAfter = Math.min(dCap, dAfter + moved);
+
+    counts[ex.s] = sAfter;
+    counts[ex.d] = dAfter;
+
+    // If totals drifted, trim/add on the d line to match totalElectrons.
+    const tot = Object.values(counts).reduce((a,b)=>a+b,0);
+    const diff = totalElectrons - tot;
+    if (diff !== 0) counts[ex.d] = Math.max(0, Math.min(dCap, (counts[ex.d]||0) + diff));
+  }
+  return counts;
+}
+
+// Removal priority for cations: highest n first; if tie, higher l (f>d>p>s)
+const REMOVAL_ORDER = ORDER.slice().sort((a,b)=>{
+  const A = subInfo(a), B = subInfo(b);
+  if (A.n !== B.n) return B.n - A.n;   // higher n first
+  return B.l - A.l;                     // then f>d>p>s
+});
+
+function removeElectronsFrom(counts, q){
+  let left = q;
+  for (const sub of REMOVAL_ORDER) {
+    const have = counts[sub] || 0;
+    if (!have) continue;
+    const take = Math.min(have, left);
+    counts[sub] = have - take;
+    left -= take;
+    if (left <= 0) break;
+  }
+  return counts;
+}
+
+// Compute the ion-aware target counts for CURRENT element/charge.
+function computeTargetCountsCurrent(){
+  const q = state.ionCharge || 0;
+
+  if (q > 0) { // cation: build neutral, then remove from highest n (e.g., 4s before 3d)
+    const neutral = computeNeutralCountsFor(state.targetZ, /*apply exceptions?*/ state.exceptionsEnabled && q===0);
+    return removeElectronsFrom({ ...neutral }, q);
+  }
+
+  if (q < 0) { // anion: just fill to Z - q electrons without applying neutral-exception hacks
+    const total = state.targetZ - q; // q is negative
+    return computeNeutralCountsFor(total, /*exceptions*/ false);
+  }
+
+  // Neutral: normal Aufbau, with optional exceptions toggle
+  return computeNeutralCountsFor(state.targetZ, state.exceptionsEnabled);
+}
+
+// Find the first subshell that still needs electrons to hit the target.
+function firstSubshellNeedingElectrons(target){
+  for (const sub of ORDER){
+    const have = (state.building[sub]||[]).reduce((s,u)=>s+(u?u.length:0),0);
+    const want = target[sub] || 0;
+    if (have < want) return sub;
+  }
+  return null;
+}
+</script>
 /* ==== Exceptions set ==== */
 const EXCEPTIONS = {
   24: { s:"4s", d:"3d", s_prefill:1, d_target:5,  s_final:1 },  // Cr
@@ -528,12 +621,13 @@ function exceptionPreferredSubshell(){
 }
 
 function legalPlacement(wing, index, spin){
-  const exPick = exceptionPreferredSubshell();
-  const defaultPick = firstVacantSubshell();
-  const must = exPick || defaultPick;
+  // Ion-aware target: pick the subshell that still needs electrons
+  const target = computeTargetCountsCurrent();
+  const must = firstSubshellNeedingElectrons(target);
   if (must && wing !== must){
-    return { ok:false, rule:"Aufbau", msg:`Place in ${must} now${exPick? " (exception rule)":""}.` };
+    return { ok:false, rule:"Aufbau", msg:`Place in ${must} now.` };
   }
+
   const occ = state.building[wing][index];
   if (occ.length >= 2) return { ok:false, rule:"Pauli", msg:`Max 2 per orbital.` };
   if (occ.length === 1 && occ[0] === spin) return { ok:false, rule:"Pauli", msg:`Pair must be opposite spins.` };
@@ -598,11 +692,13 @@ function onUnitClick(e, unit){
 
 function ghostNextMove(){
   if (overCap()) return null;
-  const exPick = exceptionPreferredSubshell();
-  const focus = exPick || firstVacantSubshell();
+  const target = computeTargetCountsCurrent();
+  const focus = firstSubshellNeedingElectrons(target);
   if (!focus) return null;
+
   const info = subInfo(focus);
   let spin = "up"; let index = 0; let slotIndex = 0;
+
   if (info.orbitals === 1){
     const occ = state.building[focus][0];
     if (occ.length === 1){ spin = (occ[0]==="up"?"down":"up"); slotIndex = 1; }
