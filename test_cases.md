@@ -1,142 +1,144 @@
-# Electron Configuration App - Test Cases
+# Electron Towers App - Comprehensive Test Cases
 
-## 🧪 **Test Plan for Periodic Table & Electron Configuration App**
+## 🧪 Test Plan Overview
+This document outlines comprehensive test cases for the Electron Towers app, covering functionality, UI/UX, performance, and edge cases.
 
-### **1. Periodic Table Layout Tests**
+## 📋 Test Categories
 
-#### **1.1 Element Positioning**
-- [ ] **Helium (He)** is in column 18, group 8A (noble gas)
-- [ ] **Hydrogen (H)** is in column 2, group 1A
-- [ ] **S-block elements** (groups 1-2) are in columns 2-3
-- [ ] **D-block elements** (groups 3-12) are in columns 4-13
-- [ ] **P-block elements** (groups 13-18) are in columns 14-19
-- [ ] **No gaps** between s-block, d-block, and p-block
+### 1. Core Functionality Tests
+#### 1.1 Periodic Table
+- [ ] **PT-001**: Periodic table renders correctly with all 118 elements
+- [ ] **PT-002**: Elements are positioned in correct groups and periods
+- [ ] **PT-003**: Block overlays (s, p, d, f) display correctly
+- [ ] **PT-004**: Group and period labels are accurate
+- [ ] **PT-005**: Element tiles show correct atomic number, symbol, and name
+- [ ] **PT-006**: Hover effects work on element tiles
+- [ ] **PT-007**: Clicking elements updates the electron tower
 
-#### **1.2 Block Overlays**
-- [ ] **S-block overlay** covers columns 2-3, periods 1-7
-- [ ] **D-block overlay** covers columns 4-13, periods 4-7
-- [ ] **P-block overlay** covers columns 14-19, periods 1-7
-- [ ] **F-block overlay** covers columns 4-17, periods 8-9 (below main table)
+#### 1.2 Electron Tower
+- [ ] **ET-001**: Tower builds correctly for any selected element
+- [ ] **ET-002**: Shells display correct number of electrons
+- [ ] **ET-003**: Subshells (s, p, d, f) are properly sized and positioned
+- [ ] **ET-004**: Electron animations work smoothly
+- [ ] **ET-005**: Tower height adjusts based on element's electron configuration
+- [ ] **ET-006**: Shell labels (1s, 2s, 2p, etc.) are accurate
 
-#### **1.3 Group Labels**
-- [ ] **Group 1A** appears above column 2
-- [ ] **Group 2A** appears above column 3
-- [ ] **Group 3B** appears above column 4
-- [ ] **Group 8A** appears above column 19
-- [ ] All group labels are correctly positioned
+#### 1.3 Study Mode
+- [ ] **SM-001**: Study mode loads without errors
+- [ ] **SM-002**: Autoplay toggle functions correctly
+- [ ] **SM-003**: Exceptions toggle works properly
+- [ ] **SM-004**: Reset button clears tower and returns to H
+- [ ] **SM-005**: Mode switching works between Study and Game
+- [ ] **SM-006**: No "Sandbox" option visible
 
-#### **1.4 Layout & Styling**
-- [ ] **Periodic table covers full width** of container
-- [ ] **No empty space** on right side
-- [ ] **Elements are centered** within their tiles
-- [ ] **Tile sizes are consistent** across all elements
-- [ ] **Responsive design** works on different screen sizes
+#### 1.4 Game Mode
+- [ ] **GM-001**: Game mode loads without errors
+- [ ] **GM-002**: New Game button is only visible in Game mode
+- [ ] **GM-003**: Game controls function properly
+- [ ] **GM-004**: Score tracking works
+- [ ] **GM-005**: Game ends correctly
 
-### **2. Core Functionality Tests**
+### 2. UI/UX Tests
+#### 2.1 Visual Design
+- [ ] **VD-001**: Color scheme is consistent throughout the app
+- [ ] **VD-002**: Glassmorphism effects render properly
+- [ ] **VD-003**: Responsive design works on different screen sizes
+- [ ] **VD-004**: Animations are smooth and not jarring
+- [ ] **VD-005**: Text is readable and properly contrasted
 
-#### **2.1 Study Mode**
-- [ ] **Element selection** works by clicking on periodic table tiles
-- [ ] **Target element** is highlighted when selected
-- [ ] **Electron configuration** displays correctly for selected element
-- [ ] **Aufbau list** shows correct subshell order
-- [ ] **Shell building** interface works properly
+#### 2.2 Layout
+- [ ] **LY-001**: Periodic table is centered and properly sized
+- [ ] **LY-002**: No "Group (A/B) →" text visible
+- [ ] **LY-003**: Electron tower positioning is correct
+- [ ] **LY-004**: Control panels are properly aligned
+- [ ] **LY-005**: No overlapping elements
 
-#### **2.2 Game Mode**
-- [ ] **Game mode toggle** switches from study to game mode
-- [ ] **Scoring system** works correctly
-- [ ] **Timer functionality** operates properly
-- [ ] **Hints system** provides helpful guidance
-- [ ] **Results logging** captures game outcomes
+#### 2.3 Interactive Elements
+- [ ] **IE-001**: All buttons respond to hover and click
+- [ ] **IE-002**: Toggle switches work smoothly
+- [ ] **IE-003**: Modal dialogs open and close properly
+- [ ] **IE-004**: Toast notifications display correctly
+- [ ] **IE-005**: Loading states are visible when appropriate
 
-#### **2.3 Ion Configuration**
-- [ ] **Ion charge selection** works (+, 2+, 3+, -, 2-, 3-)
-- [ ] **Cation configuration** removes electrons correctly (highest n, then highest l)
-- [ ] **Anion configuration** adds electrons correctly
-- [ ] **Ion-fix addon** functions properly
+### 3. Performance Tests
+#### 3.1 Memory Management
+- [ ] **PM-001**: No memory leaks during extended use
+- [ ] **PM-002**: Event listeners are properly cleaned up
+- [ ] **PM-003**: Intervals are cleared when switching modes
+- [ ] **PM-004**: DOM elements are properly managed
 
-#### **2.4 Teacher Addon**
-- [ ] **Teacher view** displays correctly
-- [ ] **Projector mode** works without memory leaks
-- [ ] **Results logging** captures student attempts
-- [ ] **Rubric display** shows assessment criteria
+#### 3.2 Responsiveness
+- [ ] **PR-001**: App responds quickly to user input
+- [ ] **PR-002**: Electron animations don't cause lag
+- [ ] **PR-003**: Large elements (like heavy atoms) don't freeze the UI
+- [ ] **PR-004**: Smooth scrolling and interactions
 
-### **3. Error Handling Tests**
+### 4. Error Handling Tests
+#### 4.1 Graceful Degradation
+- [ ] **EH-001**: App handles invalid element selections gracefully
+- [ ] **EH-002**: Network errors don't crash the app
+- [ ] **EH-003**: Console errors are logged but don't break functionality
+- [ ] **EH-004**: Fallback behaviors work when features fail
 
-#### **3.1 Robustness**
-- [ ] **Try-catch blocks** prevent crashes on invalid data
-- [ ] **DOM element checks** handle missing elements gracefully
-- [ ] **Memory leaks** are prevented (setInterval cleanup)
-- [ ] **Event listener cleanup** works on page unload
+#### 4.2 Edge Cases
+- [ ] **EC-001**: App works with very light elements (H, He)
+- [ ] **EC-002**: App handles very heavy elements (Uuo, etc.)
+- [ ] **EC-003**: Rapid mode switching doesn't cause issues
+- [ ] **EC-004**: Multiple rapid clicks are handled properly
 
-#### **3.2 Edge Cases**
-- [ ] **Invalid element selection** handled gracefully
-- [ ] **Missing periodic table data** doesn't crash app
-- [ ] **Browser compatibility** issues are handled
+### 5. Cross-Browser Tests
+#### 5.1 Browser Compatibility
+- [ ] **BC-001**: Chrome/Chromium works correctly
+- [ ] **BC-002**: Firefox works correctly
+- [ ] **BC-003**: Safari works correctly
+- [ ] **BC-004**: Edge works correctly
 
-### **4. User Experience Tests**
+### 6. Accessibility Tests
+#### 6.1 Screen Reader Support
+- [ ] **AR-001**: Elements have proper ARIA labels
+- [ ] **AR-002**: Keyboard navigation works
+- [ ] **AR-003**: Focus indicators are visible
+- [ ] **AR-004**: Color contrast meets WCAG guidelines
 
-#### **4.1 Navigation**
-- [ ] **Mode switching** (Study ↔ Game) works smoothly
-- [ ] **Element selection** is intuitive and responsive
-- [ ] **Visual feedback** for user interactions
-- [ ] **Loading states** display appropriately
+## 🚀 Test Execution Steps
 
-#### **4.2 Accessibility**
-- [ ] **Keyboard navigation** works for basic functions
-- [ ] **Screen reader compatibility** for element information
-- [ ] **Color contrast** meets accessibility standards
-- [ ] **Focus indicators** are visible
+### Phase 1: Manual Testing
+1. Open the app in browser
+2. Test each functionality systematically
+3. Document any issues found
+4. Verify fixes work correctly
 
-### **5. Performance Tests**
+### Phase 2: Automated Testing
+1. Create automated test scripts
+2. Run regression tests
+3. Performance benchmarking
+4. Cross-browser validation
 
-#### **5.1 Memory Management**
-- [ ] **No memory leaks** during extended use
-- [ ] **Event listeners** are properly cleaned up
-- [ ] **Intervals and timeouts** are cleared appropriately
-- [ ] **DOM manipulation** is efficient
+### Phase 3: User Acceptance Testing
+1. Gather user feedback
+2. Identify usability issues
+3. Prioritize improvements
+4. Implement final fixes
 
-#### **5.2 Responsiveness**
-- [ ] **Element selection** responds quickly
-- [ ] **Mode switching** is smooth
-- [ ] **Periodic table rendering** is fast
-- [ ] **No lag** during interactions
+## 📊 Test Results Template
 
-### **6. Cross-Browser Tests**
+```
+Test Case: [ID]
+Status: [PASS/FAIL/SKIP]
+Date: [YYYY-MM-DD]
+Tester: [Name]
+Notes: [Any observations or issues]
+```
 
-#### **6.1 Browser Compatibility**
-- [ ] **Chrome** - all functionality works
-- [ ] **Firefox** - all functionality works
-- [ ] **Safari** - all functionality works
-- [ ] **Edge** - all functionality works
+## 🎯 Success Criteria
+- All critical functionality tests pass
+- No major UI/UX issues
+- Performance meets acceptable standards
+- Cross-browser compatibility verified
+- Accessibility requirements met
 
-### **7. Mobile Responsiveness Tests**
-
-#### **7.1 Mobile Layout**
-- [ ] **Periodic table** fits mobile screen width
-- [ ] **Touch interactions** work properly
-- [ ] **Element tiles** are appropriately sized for mobile
-- [ ] **Navigation** is mobile-friendly
-
----
-
-## 🚀 **Testing Instructions**
-
-1. **Open the app** in different browsers
-2. **Test each functionality** systematically using the checklist above
-3. **Document any issues** found during testing
-4. **Verify fixes** work across different scenarios
-5. **Test on mobile devices** if possible
-
-## 📝 **Issue Reporting**
-
-For any issues found:
-- **Describe the problem** clearly
-- **Include steps to reproduce**
-- **Note browser/device information**
-- **Screenshot if helpful**
-
----
-
-**Test Status**: ⏳ **Ready to Execute**
-**Last Updated**: Current Session
-**Tester**: AI Assistant + User
+## 📝 Notes
+- Focus on critical path functionality first
+- Document any unexpected behaviors
+- Test edge cases thoroughly
+- Verify error handling works as expected

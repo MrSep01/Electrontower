@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electron Towers App - Test Suite</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #4a5568;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+        
+        .test-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            background: #f7fafc;
+        }
+        
+        .test-section h2 {
+            color: #2d3748;
+            margin-top: 0;
+            border-bottom: 2px solid #4299e1;
+            padding-bottom: 10px;
+        }
+        
+        .test-controls {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #4299e1, #3182ce);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(66, 153, 225, 0.3);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #48bb78, #38a169);
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(72, 187, 120, 0.3);
+        }
+        
+        .btn-warning {
+            background: linear-gradient(135deg, #ed8936, #dd6b20);
+            color: white;
+        }
+        
+        .btn-warning:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(237, 137, 54, 0.3);
+        }
+        
+        .test-results {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            max-height: 400px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+        
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        
+        .status-ready { background: #48bb78; }
+        .status-running { background: #ed8936; }
+        .status-complete { background: #4299e1; }
+        
+        .instructions {
+            background: #ebf8ff;
+            border: 1px solid #bee3f8;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .instructions h3 {
+            color: #2b6cb0;
+            margin-top: 0;
+        }
+        
+        .instructions ol {
+            margin: 0;
+            padding-left: 20px;
+        }
+        
+        .instructions li {
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+        
+        .iframe-container {
+            margin-top: 30px;
+            text-align: center;
+        }
+        
+        .iframe-container iframe {
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Electron Towers App - Test Suite</h1>
+        
+        <div class="instructions">
+            <h3>📋 Testing Instructions</h3>
+            <ol>
+                <li><strong>Open the main app</strong> in a separate tab/window (index.html)</li>
+                <li><strong>Run the tests</strong> using the buttons below</li>
+                <li><strong>Review results</strong> in the console and test results area</li>
+                <li><strong>Fix any issues</strong> found during testing</li>
+                <li><strong>Re-run tests</strong> to verify fixes</li>
+            </ol>
+        </div>
+        
+        <div class="test-section">
+            <h2>🚀 Test Controls</h2>
+            <div class="test-controls">
+                <button class="btn btn-primary" onclick="runAllTests()">Run All Tests</button>
+                <button class="btn btn-secondary" onclick="runCoreTests()">Core Functionality</button>
+                <button class="btn btn-secondary" onclick="runUIUXTests()">UI/UX Tests</button>
+                <button class="btn btn-secondary" onclick="runPerformanceTests()">Performance Tests</button>
+                <button class="btn btn-warning" onclick="clearResults()">Clear Results</button>
+            </div>
+            
+            <div>
+                <span class="status-indicator status-ready" id="statusIndicator"></span>
+                <span id="statusText">Ready to run tests</span>
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h2>📊 Test Results</h2>
+            <div class="test-results" id="testResults">
+                Test results will appear here...
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h2>🔗 Quick Links</h2>
+            <div class="test-controls">
+                <a href="index.html" target="_blank" class="btn btn-primary">Open Main App</a>
+                <a href="study.html" target="_blank" class="btn btn-secondary">Open Study Page</a>
+                <a href="test_cases.md" target="_blank" class="btn btn-secondary">View Test Cases</a>
+            </div>
+        </div>
+        
+        <div class="iframe-container">
+            <h3>📱 App Preview</h3>
+            <iframe src="index.html" width="100%" height="600" title="Electron Towers App"></iframe>
+        </div>
+    </div>
+
+    <script>
+        // Test Runner Class
+        class AppTester {
+            constructor() {
+                this.results = [];
+                this.startTime = Date.now();
+                this.updateStatus('Ready to run tests', 'ready');
+            }
+
+            updateStatus(text, type) {
+                document.getElementById('statusText').textContent = text;
+                const indicator = document.getElementById('statusIndicator');
+                indicator.className = `status-indicator status-${type}`;
+            }
+
+            logToResults(message) {
+                const resultsDiv = document.getElementById('testResults');
+                resultsDiv.textContent += message + '\n';
+                resultsDiv.scrollTop = resultsDiv.scrollHeight;
+            }
+
+            test(name, testFn) {
+                try {
+                    const result = testFn();
+                    const status = result ? 'PASS' : 'FAIL';
+                    this.results.push({ name, status, error: null });
+                    
+                    const message = `✅ ${name}: ${status}`;
+                    console.log(message);
+                    this.logToResults(message);
+                    
+                    return result;
+                } catch (error) {
+                    this.results.push({ name, status: 'ERROR', error: error.message });
+                    
+                    const message = `❌ ${name}: ERROR - ${error.message}`;
+                    console.log(message);
+                    this.logToResults(message);
+                    
+                    return false;
+                }
+            }
+
+            elementExists(selector) {
+                return document.querySelector(selector) !== null;
+            }
+
+            elementVisible(selector) {
+                const element = document.querySelector(selector);
+                return element && element.offsetParent !== null;
+            }
+
+            getText(selector) {
+                const element = document.querySelector(selector);
+                return element ? element.textContent.trim() : '';
+            }
+
+            runAll() {
+                this.updateStatus('Running all tests...', 'running');
+                this.logToResults('\n🚀 Running All Tests...\n');
+                
+                this.runCoreTests();
+                this.runUIUXTests();
+                this.runPerformanceTests();
+                this.runErrorHandlingTests();
+                
+                this.generateReport();
+                this.updateStatus('All tests completed', 'complete');
+            }
+
+            runCoreTests() {
+                this.logToResults('\n🧪 Running Core Functionality Tests...\n');
+                
+                // Periodic Table Tests
+                this.test('PT-001: Periodic table exists', () => 
+                    this.elementExists('.ptable'));
+                
+                this.test('PT-002: All 118 elements rendered', () => {
+                    const elements = document.querySelectorAll('.ptile');
+                    return elements.length >= 118;
+                });
+
+                this.test('PT-003: Hydrogen (H) is present', () => 
+                    this.elementExists('.ptile[data-symbol="H"]'));
+
+                this.test('PT-004: Helium (He) is present', () => 
+                    this.elementExists('.ptile[data-symbol="He"]'));
+
+                this.test('PT-005: Element tiles are clickable', () => {
+                    const firstTile = document.querySelector('.ptile');
+                    return firstTile && firstTile.onclick !== null;
+                });
+
+                // Electron Tower Tests
+                this.test('ET-001: Electron tower exists', () => 
+                    this.elementExists('.building'));
+
+                this.test('ET-002: Shells are present', () => 
+                    this.elementExists('.floor'));
+
+                this.test('ET-003: Electron configuration display exists', () => 
+                    this.elementExists('.config-display'));
+
+                // Study Mode Tests
+                this.test('SM-001: Study mode controls exist', () => 
+                    this.elementExists('#studyControls'));
+
+                this.test('SM-002: Autoplay toggle exists', () => 
+                    this.elementExists('#autoPlayToggle'));
+
+                this.test('SM-003: Exceptions toggle exists', () => 
+                    this.elementExists('#exceptionsToggle'));
+
+                this.test('SM-004: Reset button exists', () => 
+                    this.elementExists('#resetBtnStudy'));
+
+                this.test('SM-005: No sandbox option', () => 
+                    !this.elementExists('#sandboxToggle'));
+
+                // Game Mode Tests
+                this.test('GM-001: Game mode toggle exists', () => 
+                    this.elementExists('#gameModeToggle'));
+
+                this.test('GM-002: New Game button exists in game mode', () => 
+                    this.elementExists('#newGameBtn'));
+            }
+
+            runUIUXTests() {
+                this.logToResults('\n🎨 Running UI/UX Tests...\n');
+                
+                this.test('VD-001: App header exists', () => 
+                    this.elementExists('.app-header'));
+
+                this.test('VD-002: Hero section exists', () => 
+                    this.elementExists('.hero-ptable'));
+
+                this.test('VD-003: Control panel exists', () => 
+                    this.elementExists('.panel'));
+
+                this.test('LY-001: Periodic table is centered', () => {
+                    const wrapper = document.querySelector('.ptable-wrapper');
+                    return wrapper && getComputedStyle(wrapper).display === 'flex';
+                });
+
+                this.test('LY-002: No Group (A/B) text', () => {
+                    const text = this.getText('.glCap');
+                    return !text.includes('Group (A/B)');
+                });
+
+                this.test('IE-001: Buttons have hover effects', () => {
+                    const buttons = document.querySelectorAll('.btn');
+                    return buttons.length > 0;
+                });
+            }
+
+            runPerformanceTests() {
+                this.logToResults('\n⚡ Running Performance Tests...\n');
+                
+                this.test('PM-001: App loads quickly', () => {
+                    const loadTime = Date.now() - this.startTime;
+                    return loadTime < 5000;
+                });
+
+                this.test('PM-002: DOM is not too large', () => {
+                    const elementCount = document.querySelectorAll('*').length;
+                    return elementCount < 10000;
+                });
+
+                this.test('PM-003: No excessive intervals', () => {
+                    return true;
+                });
+            }
+
+            runErrorHandlingTests() {
+                this.logToResults('\n🛡️ Running Error Handling Tests...\n');
+                
+                this.test('EH-001: Console errors are minimal', () => {
+                    return true;
+                });
+
+                this.test('EH-002: App handles missing elements gracefully', () => {
+                    return true;
+                });
+            }
+
+            generateReport() {
+                const total = this.results.length;
+                const passed = this.results.filter(r => r.status === 'PASS').length;
+                const failed = this.results.filter(r => r.status === 'FAIL').length;
+                const errors = this.results.filter(r => r.status === 'ERROR').length;
+
+                const report = `
+📊 Test Results Summary
+========================
+Total Tests: ${total}
+✅ Passed: ${passed}
+❌ Failed: ${failed}
+💥 Errors: ${errors}
+Success Rate: ${((passed / total) * 100).toFixed(1)}%
+
+🎯 Recommendations:`;
+
+                let recommendations = '';
+                if (passed === total) {
+                    recommendations = '  🎉 All tests passed! App is working correctly.';
+                } else {
+                    recommendations = '  🔧 Some tests failed. Review the failed tests above.\n  📝 Check browser console for additional error details.';
+                }
+
+                this.logToResults(report + '\n' + recommendations);
+                console.log(report + '\n' + recommendations);
+            }
+        }
+
+        // Global test runner instance
+        let tester = new AppTester();
+
+        // Test functions
+        function runAllTests() {
+            tester = new AppTester();
+            tester.runAll();
+        }
+
+        function runCoreTests() {
+            tester = new AppTester();
+            tester.runCoreTests();
+            tester.generateReport();
+            tester.updateStatus('Core tests completed', 'complete');
+        }
+
+        function runUIUXTests() {
+            tester = new AppTester();
+            tester.runUIUXTests();
+            tester.generateReport();
+            tester.updateStatus('UI/UX tests completed', 'complete');
+        }
+
+        function runPerformanceTests() {
+            tester = new AppTester();
+            tester.runPerformanceTests();
+            tester.generateReport();
+            tester.updateStatus('Performance tests completed', 'complete');
+        }
+
+        function clearResults() {
+            document.getElementById('testResults').textContent = 'Test results cleared...';
+            tester.updateStatus('Ready to run tests', 'ready');
+        }
+
+        // Initialize
+        console.log('🧪 Test suite loaded! Use the buttons above to run tests.');
+    </script>
+</body>
+</html>

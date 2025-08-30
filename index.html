@@ -216,8 +216,6 @@ html, body{ -webkit-text-size-adjust: 100%; }
           <div class="mini">Shorthand: <code id="noble">—</code></div>
         </div>
         <div class="center" id="studyControls">
-          <button id="prevStepBtn" class="btn">⟲ Back</button>
-          <button id="nextStepBtn" class="btn primary">Next step ↠</button>
           <div class="toggle-group">
             <label class="toggle-btn" id="autoPlayToggle">
               <input type="checkbox"/>
@@ -344,8 +342,7 @@ html, body{ -webkit-text-size-adjust: 100%; }
         <ol>
           <li>Pick an element/ion from the periodic table (or search).</li>
           <li>Click the <b>glowing slot</b> to place the next electron (no dragging).</li>
-          <li>Use <b>Back</b> and <b>Next</b> to step; or enable <b>Auto-play</b>.</li>
-          <li>Toggle <b>Sandbox</b> to try illegal moves (you'll get rule feedback).</li>
+          <li>Enable <b>Auto-play</b> for automatic electron placement.</li>
           <li>Toggle <b>Exceptions</b> for Cr/Cu/Nb/Mo/Ru/Rh/Pd/Ag/Pt/Au behavior.</li>
         </ol>
       </div>
@@ -1291,22 +1288,7 @@ function init(){
   on(byId("tabGame"), "click", ()=> openHelp("game"));
   on(byId("helpBackdrop"), "click", (e)=>{ if (e.target.id==="helpBackdrop") closeHelp(); });
 
-  on(byId("prevStepBtn"), "click", ()=>{
-    for (let i=ORDER.length-1; i>=0; i--){
-      const sub = ORDER[i]; const units = state.building[sub];
-      for (let j=units.length-1; j>=0; j--){
-        if (units[j].length>0){ removeElectronFrom(sub, j); planStudyGhost(); return; }
-      }
-    }
-  });
-  on(byId("nextStepBtn"), "click", ()=>{
-    if (overCap()){ toast("Configuration complete for this element/ion."); clearGhost(); return; }
-    const mv = ghostNextMove();
-    if (!mv){ toast("No move — building complete."); return; }
-    const res = legalPlacement(mv.wing, mv.index, mv.spin);
-    if (!res.ok){ toast(`${res.rule} prevented this step.`); return; }
-    placeElectronInto(mv.wing, mv.index, mv.spin); refreshAufbauFocus(); planStudyGhost();
-  });
+
 
 
   // Set up autoplay toggle functionality
@@ -1361,6 +1343,7 @@ function init(){
     byId("studyControls").classList.remove("hidden"); byId("gameControls").classList.add("hidden");
     byId("studyActions").classList.remove("hidden"); byId("gameActions").classList.add("hidden");
     byId("lobbyBox").classList.add("hidden");
+    byId("score").parentElement.classList.add("hidden"); // Hide scoreboard in study mode
     stopTimer(); clearAutoPlay(); resetBuilding(); planStudyGhost();
   });
   on(byId("modeGame"), "click", ()=>{ state.mode="game";
@@ -1368,6 +1351,7 @@ function init(){
     byId("gameControls").classList.remove("hidden"); byId("studyControls").classList.add("hidden");
     byId("gameActions").classList.remove("hidden"); byId("studyActions").classList.add("hidden");
     byId("lobbyBox").classList.remove("hidden");
+    byId("score").parentElement.classList.remove("hidden"); // Show scoreboard in game mode
     clearAutoPlay(); newGame();
   });
 
@@ -1375,6 +1359,9 @@ function init(){
   const initialTile = Array.from(document.querySelectorAll(".ptile")).find(t=>parseInt(t.dataset.z,10)===8);
   if (initialTile) initialTile.click();
   stopTimer(); clearAutoPlay();
+  
+  // Set initial scoreboard visibility (hidden in study mode by default)
+  byId("score").parentElement.classList.add("hidden");
 
   // Readouts live via mutations
   const building = document.getElementById("building");
