@@ -251,7 +251,7 @@ html, body{ -webkit-text-size-adjust: 100%; }
           <h2>ℹ️ Learn as you play</h2>
           <div id="infoNow" class="info-now"></div>
           <details open><summary>Aufbau principle</summary><p>Electrons occupy the lowest-energy available subshells first.</p></details>
-          <details><summary>Hund’s rule</summary><p>In a set of degenerate orbitals (p, d, f), place one electron in each with the <b>same spin</b> before pairing.</p></details>
+          <details><summary>Hund's rule</summary><p>In a set of degenerate orbitals (p, d, f), place one electron in each with the <b>same spin</b> before pairing.</p></details>
           <details><summary>Pauli exclusion principle</summary><p>Each orbital holds at most two electrons and they must have <b>opposite spins</b> (↑↓).</p></details>
         </section>
       </aside>
@@ -295,7 +295,7 @@ html, body{ -webkit-text-size-adjust: 100%; }
           <li>Pick an element/ion from the periodic table (or search).</li>
           <li>Click the <b>glowing slot</b> to place the next electron (no dragging).</li>
           <li>Use <b>Back</b> and <b>Next</b> to step; or enable <b>Auto-play</b>.</li>
-          <li>Toggle <b>Sandbox</b> to try illegal moves (you’ll get rule feedback).</li>
+          <li>Toggle <b>Sandbox</b> to try illegal moves (you'll get rule feedback).</li>
           <li>Toggle <b>Exceptions</b> for Cr/Cu/Nb/Mo/Ru/Rh/Pd/Ag/Pt/Au behavior.</li>
         </ol>
       </div>
@@ -308,7 +308,7 @@ html, body{ -webkit-text-size-adjust: 100%; }
         </ol>
       </div>
       <div class="modal-footer">
-        <label class="toggle small"><input id="dontShowHelp" type="checkbox"/> Don’t show automatically again</label>
+        <label class="toggle small"><input id="dontShowHelp" type="checkbox"/> Don't show automatically again</label>
         <div class="modal-actions">
           <button id="helpOk" class="btn primary">Got it</button>
         </div>
@@ -513,7 +513,7 @@ function computeNeutralCountsFor(totalElectrons, applyExceptionsForZ) {
     if (rem <= 0) break;
   }
 
-  // If we’re showing neutral exceptions for this element (Cr, Cu, …), nudge s→d.
+  // If we're showing neutral exceptions for this element (Cr, Cu, …), nudge s→d.
   if (applyExceptionsForZ && EXCEPTIONS[state.targetZ]) {
     const ex = EXCEPTIONS[state.targetZ];
     const sCap = subInfo(ex.s).capacity;
@@ -649,236 +649,467 @@ function legalPlacement(wing, index, spin){
 
 /* ======= Study mode click-to-place ======= */
 function recommendedSpinFor(wing, index){
-  const info = subInfo(wing);
-  if (info.orbitals === 1){
-    const occ = state.building[wing][0];
-    if (occ.length === 0) return { spin:"up", slotIndex:0 };
-    if (occ.length === 1) return { spin:(occ[0]==="up"?"down":"up"), slotIndex:1 };
-  } else {
-    const units = state.building[wing];
-    const occ = units[index];
-    if (occ.length === 0){
-      const singles = units.filter(u => u.length === 1);
-      return { spin: singles.length ? singles[0][0] : "up", slotIndex:0 };
-    } else if (occ.length === 1){
-      return { spin:occ[0]==="up"?"down":"up", slotIndex:1 };
+  try {
+    const info = subInfo(wing);
+    if (info.orbitals === 1){
+      const occ = state.building[wing][0];
+      if (occ.length === 0) return { spin:"up", slotIndex:0 };
+      if (occ.length === 1) return { spin:(occ[0]==="up"?"down":"up"), slotIndex:1 };
+    } else {
+      const units = state.building[wing];
+      const occ = units[index];
+      if (occ.length === 0){
+        const singles = units.filter(u => u.length === 1);
+        return { spin: singles.length ? singles[0][0] : "up", slotIndex:0 };
+      } else if (occ.length === 1){
+        return { spin:occ[0]==="up"?"down":"up", slotIndex:1 };
+      }
     }
+    return { spin:"up", slotIndex:0 };
+  } catch(e) {
+    console.error('Recommended spin error:', e);
+    return { spin:"up", slotIndex:0 };
   }
-  return { spin:"up", slotIndex:0 };
 }
 
 function onUnitClick(e, unit){
-  if (state.mode !== "study") return;
-  if (overCap()){ toast("Configuration complete — no more electrons."); clearGhost(); return; }
-  const wing = unit.dataset.wing;
-  const index = parseInt(unit.dataset.index,10);
-  const rec = recommendedSpinFor(wing, index);
-  const res = legalPlacement(wing, index, rec.spin);
-  if (!res.ok){
-    const sandbox = byId("sandboxToggle")?.checked;
-    if (sandbox){
-      placeElectronInto(wing, index, rec.spin);
-      toast(`Sandbox: would violate ${res.rule} — ${res.msg}`);
+  try {
+    if (state.mode !== "study") return;
+    if (overCap()){ 
+      toast("Configuration complete — no more electrons."); 
+      clearGhost(); 
+      return; 
+    } 
+    const wing = unit.dataset.wing;
+    const index = parseInt(unit.dataset.index,10);
+    const rec = recommendedSpinFor(wing, index);
+    const res = legalPlacement(wing, index, rec.spin);
+    if (!res.ok){
+      const sandbox = byId("sandboxToggle")?.checked;
+      if (sandbox){
+        placeElectronInto(wing, index, rec.spin);
+        toast(`Sandbox: would violate ${res.rule} — ${res.msg}`);
+      } else {
+        unit.classList.add("invalid"); 
+        setTimeout(()=> unit.classList.remove("invalid"), 220);
+        toast(`${res.rule} violation: ${res.msg}`); 
+        return;
+      }
     } else {
-      unit.classList.add("invalid"); setTimeout(()=> unit.classList.remove("invalid"), 220);
-      toast(`${res.rule} violation: ${res.msg}`); return;
+      placeElectronInto(wing, index, rec.spin);
     }
-  } else {
-    placeElectronInto(wing, index, rec.spin);
+    refreshAufbauFocus(); 
+    planStudyGhost();
+  } catch(e) {
+    console.error('Unit click error:', e);
+    toast('An error occurred. Please try again.');
   }
-  refreshAufbauFocus(); planStudyGhost();
 }
 
 function ghostNextMove(){
-  if (overCap()) return null;
-  const target = computeTargetCountsCurrent();
-  const focus = firstSubshellNeedingElectrons(target);
-  if (!focus) return null;
+  try {
+    if (overCap()) return null;
+    const target = computeTargetCountsCurrent();
+    const focus = firstSubshellNeedingElectrons(target);
+    if (!focus) return null;
 
-  const info = subInfo(focus);
-  let spin = "up"; let index = 0; let slotIndex = 0;
+    const info = subInfo(focus);
+    let spin = "up"; 
+    let index = 0; 
+    let slotIndex = 0;
 
-  if (info.orbitals === 1){
-    const occ = state.building[focus][0];
-    if (occ.length === 1){ spin = (occ[0]==="up"?"down":"up"); slotIndex = 1; }
-  } else {
-    const units = state.building[focus];
-    const empties = units.map((u,i)=>({u,i})).filter(x=>x.u.length===0);
-    const singles = units.map((u,i)=>({u,i})).filter(x=>x.u.length===1);
-    if (empties.length>0){ index = empties[0].i; slotIndex=0; spin = singles.length>0 ? singles[0].u[0] : "up"; }
-    else if (singles.length>0){ index = singles[0].i; slotIndex=1; spin = singles[0].u[0]==="up" ? "down" : "up"; }
+    if (info.orbitals === 1){
+      const occ = state.building[focus][0];
+      if (occ.length === 1){ 
+        spin = (occ[0]==="up"?"down":"up"); 
+        slotIndex = 1; 
+      }
+    } else {
+      const units = state.building[focus];
+      const empties = units.map((u,i)=>({u,i})).filter(x=>x.u.length===0);
+      const singles = units.map((u,i)=>({u,i})).filter(x=>x.u.length===1);
+      if (empties.length>0){ 
+        index = empties[0].i; 
+        slotIndex=0; 
+        spin = singles.length>0 ? singles[0].u[0] : "up"; 
+      }
+      else if (singles.length>0){ 
+        index = singles[0].i; 
+        slotIndex=1; 
+        spin = singles[0].u[0]==="up" ? "down" : "up"; 
+      }
+    }
+    return { wing:focus, index, spin, slotIndex };
+  } catch(e) {
+    console.error('Ghost next move error:', e);
+    return null;
   }
-  return { wing:focus, index, spin, slotIndex };
 }
+
 function clearGhost(){
-  document.querySelectorAll(".unit.ghost").forEach(u => u.classList.remove("ghost"));
-  document.querySelectorAll(".slot.ghost-slot").forEach(s => s.classList.remove("ghost-slot"));
+  try {
+    document.querySelectorAll(".unit.ghost").forEach(u => u.classList.remove("ghost"));
+    document.querySelectorAll(".slot.ghost-slot").forEach(s => s.classList.remove("ghost-slot"));
+  } catch(e) {
+    console.error('Clear ghost error:', e);
+  }
 }
+
 function renderGhost(move){
-  clearGhost(); if (!move) return;
-  const unit = findUnitEl(move.wing, move.index); if (!unit) return;
-  unit.classList.add("ghost");
-  const slot = unit.querySelectorAll(".slot")[move.slotIndex || 0];
-  if (slot) slot.classList.add("ghost-slot");
+  try {
+    clearGhost(); 
+    if (!move) return;
+    const unit = findUnitEl(move.wing, move.index); 
+    if (!unit) return;
+    unit.classList.add("ghost");
+    const slot = unit.querySelectorAll(".slot")[move.slotIndex || 0];
+    if (slot) slot.classList.add("ghost-slot");
+  } catch(e) {
+    console.error('Render ghost error:', e);
+  }
 }
-function planStudyGhost(){ renderGhost(ghostNextMove()); refreshInfo(); }
+
+function planStudyGhost(){ 
+  try {
+    renderGhost(ghostNextMove()); 
+    refreshInfo(); 
+  } catch(e) {
+    console.error('Plan study ghost error:', e);
+  }
+}
 
 /* ======= Game (drag or click) ======= */
 function newGame(){
-  clearAutoPlay(); byId("score").textContent = "0"; state.score = 0;
-  stopTimer(); state.streak = 0; byId("streak").textContent = "0";
-  resetBuilding(); state.queue = []; state.nextId = 1;
-  const total = electronsNeeded();
-  for (let i=0;i<total;i++){ const spin = (i%2===0) ? "up" : "down"; state.queue.push({ id: state.nextId++, spin }); }
-  spawnNextElectron(); startTimer();
+  try {
+    clearAutoPlay(); 
+    byId("score").textContent = "0"; 
+    state.score = 0;
+    stopTimer(); 
+    state.streak = 0; 
+    byId("streak").textContent = "0";
+    resetBuilding(); 
+    state.queue = []; 
+    state.nextId = 1;
+    const total = electronsNeeded();
+    for (let i=0;i<total;i++){ 
+      const spin = (i%2===0) ? "up" : "down"; 
+      state.queue.push({ id: state.nextId++, spin }); 
+    }
+    spawnNextElectron(); 
+    startTimer();
+  } catch(e) {
+    console.error('New game error:', e);
+    toast('Failed to start new game. Please try again.');
+  }
 }
+
 function spawnNextElectron(){
-  const elLobby = byId("lobbyArea"); if (!elLobby) return; elLobby.innerHTML = "";
-  if (state.queue.length === 0){ toast("All tenants placed! 🎉"); stopTimer(); return; }
-  const e = state.queue[0];
-  const el = document.createElement("div");
-  el.className = `electron ${e.spin}`; el.setAttribute("draggable","true"); el.id = `electron-${e.id}`; el.dataset.spin = e.spin;
-  el.title = "Drag me into a unit."; el.textContent = e.spin === "up" ? "↑" : "↓";
-  on(el, "dragstart", (ev)=>{ ev.dataTransfer.setData("text/plain", JSON.stringify({ id:e.id })); });
-  elLobby.appendChild(el);
-  updateQueueInfo();
+  try {
+    const elLobby = byId("lobbyArea"); 
+    if (!elLobby) return; 
+    elLobby.innerHTML = "";
+    if (state.queue.length === 0){ 
+      toast("All tenants placed! 🎉"); 
+      stopTimer(); 
+      return; 
+    } 
+    const e = state.queue[0];
+    const el = document.createElement("div");
+    el.className = `electron ${e.spin}`; 
+    el.setAttribute("draggable","true"); 
+    el.id = `electron-${e.id}`; 
+    el.dataset.spin = e.spin;
+    el.title = "Drag me into a unit."; 
+    el.textContent = e.spin === "up" ? "↑" : "↓";
+    on(el, "dragstart", (ev)=>{
+      try {
+        ev.dataTransfer.setData("text/plain", JSON.stringify({ id:e.id })); 
+      } catch(e) {
+        console.error('Drag start error:', e);
+      }
+    });
+    elLobby.appendChild(el);
+    updateQueueInfo();
+  } catch(e) {
+    console.error('Spawn next electron error:', e);
+  }
 }
+
 function updateQueueInfo(){
-  const total = electronsNeeded(); const placed = total - state.queue.length;
-  const qi = byId("queueInfo"); if (qi) qi.textContent = `Queue: ${placed} / ${total}`;
+  try {
+    const total = electronsNeeded(); 
+    const placed = total - state.queue.length;
+    const qi = byId("queueInfo"); 
+    if (qi) qi.textContent = `Queue: ${placed} / ${total}`;
+  } catch(e) {
+    console.error('Update queue info error:', e);
+  }
 }
+
 function onDropToUnit(ev){
-  ev.preventDefault();
-  if (state.mode !== "game") return;
-  const unitEl = ev.currentTarget;
-  const wing = unitEl.dataset.wing; const idx = parseInt(unitEl.dataset.index,10);
-  const lobbyElectron = state.queue[0]; if (!lobbyElectron) return;
-  const res = legalPlacement(wing, idx, lobbyElectron.spin);
-  if (!res.ok){
-    unitEl.classList.add("invalid"); setTimeout(()=>unitEl.classList.remove("invalid"), 220);
-    addScore(-5); toast(`${res.rule} violation: ${res.msg}`);
-    state.streak = 0; byId("streak").textContent = "0"; return;
+  try {
+    ev.preventDefault();
+    if (state.mode !== "game") return;
+    const unitEl = ev.currentTarget;
+    const wing = unitEl.dataset.wing; 
+    const idx = parseInt(unitEl.dataset.index,10);
+    const lobbyElectron = state.queue[0]; 
+    if (!lobbyElectron) return;
+    const res = legalPlacement(wing, idx, lobbyElectron.spin);
+    if (!res.ok){
+      unitEl.classList.add("invalid"); 
+      setTimeout(()=>unitEl.classList.remove("invalid"), 220);
+      addScore(-5); 
+      toast(`${res.rule} violation: ${res.msg}`);
+      state.streak = 0; 
+      byId("streak").textContent = "0"; 
+      return;
+    }
+    state.queue.shift();
+    placeElectronInto(wing, idx, lobbyElectron.spin);
+    addScore(10);
+    const info = subInfo(wing);
+    if (info.orbitals > 1){
+      const singles = state.building[wing].filter(u => u.length === 1).length;
+      if (singles <= info.orbitals) addScore(5);
+    }
+    if (state.building[wing][idx].length === 2) addScore(15);
+    state.streak += 1; 
+    byId("streak").textContent = String(state.streak);
+    spawnNextElectron(); 
+    refreshAufbauFocus();
+  } catch(e) {
+    console.error('Drop to unit error:', e);
+    toast('An error occurred. Please try again.');
   }
-  state.queue.shift();
-  placeElectronInto(wing, idx, lobbyElectron.spin);
-  addScore(10);
-  const info = subInfo(wing);
-  if (info.orbitals > 1){
-    const singles = state.building[wing].filter(u => u.length === 1).length;
-    if (singles <= info.orbitals) addScore(5);
-  }
-  if (state.building[wing][idx].length === 2) addScore(15);
-  state.streak += 1; byId("streak").textContent = String(state.streak);
-  spawnNextElectron(); refreshAufbauFocus();
 }
+
 /* click-to-place also works in Game */
 document.addEventListener("click", function(ev){
-  if (state.mode !== "game") return;
-  const unit = ev.target.closest && ev.target.closest(".unit");
-  if (!unit) return;
-  ev.preventDefault();
-  const e0 = state.queue[0]; if (!e0){ toast("No electron in the lobby."); return; }
-  const wing = unit.dataset.wing; const idx = parseInt(unit.dataset.index,10);
-  const res = legalPlacement(wing, idx, e0.spin);
-  if (!res.ok){
-    unit.classList.add("invalid"); setTimeout(()=> unit.classList.remove("invalid"), 220);
-    addScore(-5); toast(`${res.rule} violation: ${res.msg}`);
-    state.streak = 0; byId("streak").textContent = "0"; return;
+  try {
+    if (state.mode !== "game") return;
+    const unit = ev.target.closest && ev.target.closest(".unit");
+    if (!unit) return;
+    ev.preventDefault();
+    const e0 = state.queue[0]; 
+    if (!e0){ 
+      toast("No electron in the lobby."); 
+      return; 
+    } 
+    const wing = unit.dataset.wing; 
+    const idx = parseInt(unit.dataset.index,10);
+    const res = legalPlacement(wing, idx, e0.spin);
+    if (!res.ok){
+      unit.classList.add("invalid"); 
+      setTimeout(()=> unit.classList.remove("invalid"), 220);
+      addScore(-5); 
+      toast(`${res.rule} violation: ${res.msg}`);
+      state.streak = 0; 
+      byId("streak").textContent = "0"; 
+      return;
+    }
+    state.queue.shift();
+    placeElectronInto(wing, idx, e0.spin);
+    addScore(10);
+    const info = subInfo(wing);
+    if (info.orbitals > 1){
+      const singles = state.building[wing].filter(u => u.length === 1).length;
+      if (singles <= info.orbitals) addScore(5);
+    }
+    if (state.building[wing][idx].length === 2) addScore(15);
+    state.streak += 1; 
+    byId("streak").textContent = String(state.streak);
+    spawnNextElectron(); 
+    refreshAufbauFocus();
+  } catch(e) {
+    console.error('Game click handler error:', e);
+    toast('An error occurred. Please try again.');
   }
-  state.queue.shift();
-  placeElectronInto(wing, idx, e0.spin);
-  addScore(10);
-  const info = subInfo(wing);
-  if (info.orbitals > 1){
-    const singles = state.building[wing].filter(u => u.length === 1).length;
-    if (singles <= info.orbitals) addScore(5);
-  }
-  if (state.building[wing][idx].length === 2) addScore(15);
-  state.streak += 1; byId("streak").textContent = String(state.streak);
-  spawnNextElectron(); refreshAufbauFocus();
 }, false);
 
 /* ======= Readouts (full + noble shorthand) ======= */
 function renderReadouts(){
-  // Full spectroscopic from current building
-  const el = document.getElementById("spectro"); if (el){
-    const parts=[];
-    for (const sub of ORDER){
-      const units=state.building[sub]; let n=0; for (const u of units) n+=u.length;
-      if (n>0) parts.push(sub + '<sup>'+n+'</sup>');
+  try {
+    // Full spectroscopic from current building
+    const el = document.getElementById("spectro"); 
+    if (el){
+      try {
+        const parts=[];
+        for (const sub of ORDER){
+          try {
+            const units=state.building[sub]; 
+            let n=0; 
+            for (const u of units) n+=u.length;
+            if (n>0) parts.push(sub + '<sup>'+n+'</sup>');
+          } catch(e) {
+            console.error('Render readouts error for sub:', sub, e);
+          }
+        }
+        el.innerHTML = parts.join(' ');
+      } catch(e) {
+        console.error('Spectro render error:', e);
+      }
     }
-    el.innerHTML = parts.join(' ');
+    
+    // Noble shorthand (live) from current building
+    try {
+      const en = placedCount();
+      const ns = document.getElementById("noble"); 
+      if (!ns) return; 
+      if (en === 0){ 
+        ns.textContent = "—"; 
+        return; 
+      } 
+      let core = NOBLES.filter(x=>x.Z <= en).slice(-1)[0];
+      if (!core){ 
+        ns.textContent = "—"; 
+        return; 
+      } 
+      // build theoretical core distribution (to subtract from observed)
+      const coreCounts = {}; 
+      let rem = core.Z;
+      for (const sub of ORDER){
+        try {
+          const cap = subInfo(sub).capacity;
+          const put = Math.min(cap, rem); 
+          if (put>0) coreCounts[sub]=put; 
+          rem -= put; 
+          if (rem<=0) break;
+        } catch(e) {
+          console.error('Core counts error for sub:', sub, e);
+        }
+      }
+      const outParts=[];
+      for (const sub of ORDER){
+        try {
+          const obs = state.building[sub].reduce((s,u)=>s+u.length,0);
+          const corev = coreCounts[sub]||0;
+          const left = Math.max(0, obs - corev);
+          if (left>0) outParts.push(sub + '<sup>'+left+'</sup>');
+        } catch(e) {
+          console.error('Out parts error for sub:', sub, e);
+        }
+      }
+      ns.innerHTML = `[${core.sym}] ` + (outParts.join(' ') || '');
+    } catch(e) {
+      console.error('Noble shorthand error:', e);
+    }
+  } catch(e) {
+    console.error('Render readouts error:', e);
   }
-  // Noble shorthand (live) from current building
-  const en = placedCount();
-  const ns = document.getElementById("noble"); if (!ns) return;
-  if (en === 0){ ns.textContent = "—"; return; }
-  let core = NOBLES.filter(x=>x.Z <= en).slice(-1)[0];
-  if (!core){ ns.textContent = "—"; return; }
-  // build theoretical core distribution (to subtract from observed)
-  const coreCounts = {}; let rem = core.Z;
-  for (const sub of ORDER){
-    const cap = subInfo(sub).capacity;
-    const put = Math.min(cap, rem); if (put>0) coreCounts[sub]=put; rem -= put; if (rem<=0) break;
-  }
-  const outParts=[];
-  for (const sub of ORDER){
-    const obs = state.building[sub].reduce((s,u)=>s+u.length,0);
-    const corev = coreCounts[sub]||0;
-    const left = Math.max(0, obs - corev);
-    if (left>0) outParts.push(sub + '<sup>'+left+'</sup>');
-  }
-  ns.innerHTML = `[${core.sym}] ` + (outParts.join(' ') || '');
 }
 
 /* ======= Info box ======= */
 function refreshInfo(){
-  const ex = state.exceptionsEnabled && EXCEPTIONS[state.targetZ];
-  const exPick = exceptionPreferredSubshell();
-  const focus = exPick || firstVacantSubshell() || ORDER[ORDER.length-1];
-  const info = subInfo(focus);
-  const electrons = electronsNeeded(); const placed = placedCount();
-  const Z = state.targetZ || 1;
-  const hundNote = (info.orbitals > 1) ? `<li><b>Hund:</b> single-occupy ${info.orbitals} orbitals with the <b>same spin</b> before pairing.</li>` : "";
-  const crossover = (focus === "4s") ? `<li>Cross-over: <b>4s</b> slightly before <b>3d</b>.</li>` :
-                    (focus === "3d") ? `<li>Now filling <b>3d</b> after <b>4s</b>.</li>` : "";
-  const exNote = ex ? `<li><b>Exceptions:</b> ${sym(state.targetZ)} follows a stability detour (d<sup>${ex.d_target}</sup>, s→${ex.s_final}).</li>` : "";
-  const modeText = state.mode==="study" ? "Study: click the glowing slot." : "Game: drag or click-to-place from the lobby.";
-  const infoNow = byId("infoNow"); if (!infoNow) return;
-  infoNow.innerHTML = `
-    <div><b>Now filling:</b> <code>${focus}</code> — n=${info.n}, ℓ=${info.l} (${info.letter}), Orbitals: ${info.orbitals}, Capacity: ${info.capacity} e⁻.</div>
-    <ul class="mini">
-      <li><b>Element:</b> ${sym(Z)} (Z=${Z}) • <b>Electrons:</b> ${placed} / ${electrons}${state.ionCharge!==0 ? ` (charge ${state.ionCharge>0?"+":""}${state.ionCharge})`:""}</li>
-      <li><b>Aufbau:</b> lowest-energy subshell first.</li>
-      ${hundNote}
-      <li><b>Pauli:</b> opposite spins in a pair (↑↓).</li>
-      ${crossover}
-      ${exNote}
-      <li>${modeText}</li>
-    </ul>`;
-  const ec = byId("electronCount"); if (ec) ec.textContent = electrons;
-  const pc = byId("placedCount"); if (pc) pc.textContent = placed;
+  try {
+    const ex = state.exceptionsEnabled && EXCEPTIONS[state.targetZ];
+    const exPick = exceptionPreferredSubshell();
+    const focus = exPick || firstVacantSubshell() || ORDER[ORDER.length-1];
+    const info = subInfo(focus);
+    const electrons = electronsNeeded(); 
+    const placed = placedCount();
+    const Z = state.targetZ || 1;
+    const hundNote = (info.orbitals > 1) ? `<li><b>Hund:</b> single-occupy ${info.orbitals} orbitals with the <b>same spin</b> before pairing.</li>` : "";
+    const crossover = (focus === "4s") ? `<li>Cross-over: <b>4s</b> slightly before <b>3d</b>.</li>` :
+                      (focus === "3d") ? `<li>Now filling <b>3d</b> after <b>4s</b>.</li>` : "";
+    const exNote = ex ? `<li><b>Exceptions:</b> ${sym(Z)} follows a stability detour (d<sup>${ex.d_target}</sup>, s→${ex.s_final}).</li>` : "";
+    const modeText = state.mode==="study" ? "Study: click the glowing slot." : "Game: drag or click-to-place from the lobby.";
+    const infoNow = byId("infoNow"); 
+    if (!infoNow) return; 
+    infoNow.innerHTML = `
+      <div><b>Now filling:</b> <code>${focus}</code> — n=${info.n}, ℓ=${info.l} (${info.letter}), Orbitals: ${info.orbitals}, Capacity: ${info.capacity} e⁻.</div>
+      <ul class="mini">
+        <li><b>Element:</b> ${sym(Z)} (Z=${Z}) • <b>Electrons:</b> ${placed} / ${electrons}${state.ionCharge!==0 ? ` (charge ${state.ionCharge>0?"+":""}${state.ionCharge})`:""}</li>
+        <li><b>Aufbau:</b> lowest-energy subshell first.</li>
+        ${hundNote}
+        <li><b>Pauli:</b> opposite spins in a pair (↑↓).</li>
+        ${crossover}
+        ${exNote}
+        <li>${modeText}</li>
+      </ul>`;
+    const ec = byId("electronCount"); 
+    if (ec) ec.textContent = electrons;
+    const pc = byId("placedCount"); 
+    if (pc) pc.textContent = placed;
+  } catch(e) {
+    console.error('Refresh info error:', e);
+  }
 }
 
 /* ======= Auto-play & timer ======= */
-function clearAutoPlay(){ if (state.autoTimer){ clearInterval(state.autoTimer); state.autoTimer=null; } const ap = byId("autoPlayToggle"); if (ap) ap.checked = false; }
-function startTimer(){ stopTimer(); state.startTime = Date.now(); const t = byId("timer"); if (t) t.textContent = "00:00";
-  state.timerId = setInterval(()=>{ const s = Math.floor((Date.now()-state.startTime)/1000); const m = Math.floor(s/60); const ss = s%60; const t = byId("timer"); if (t) t.textContent = `${String(m).padStart(2,"0")}:${String(ss).padStart(2,"0")}`; }, 1000);
+function clearAutoPlay(){ 
+  try {
+    if (state.autoTimer){ 
+      clearInterval(state.autoTimer); 
+      state.autoTimer=null; 
+    } 
+    const ap = byId("autoPlayToggle"); 
+    if (ap) ap.checked = false; 
+  } catch(e) {
+    console.error('Clear auto play error:', e);
+  }
 }
-function stopTimer(){ if (state.timerId){ clearInterval(state.timerId); state.timerId = null; } }
+
+function startTimer(){ 
+  try {
+    stopTimer(); 
+    state.startTime = Date.now(); 
+    const t = byId("timer"); 
+    if (t) t.textContent = "00:00";
+    state.timerId = setInterval(()=>{ 
+      try {
+        const s = Math.floor((Date.now()-state.startTime)/1000); 
+        const m = Math.floor(s/60); 
+        const ss = s%60; 
+        const t = byId("timer"); 
+        if (t) t.textContent = `${String(m).padStart(2,"0")}:${String(ss).padStart(2,"0")}`; 
+      } catch(e) {
+        console.error('Timer interval error:', e);
+        stopTimer();
+      }
+    }, 1000);
+  } catch(e) {
+    console.error('Start timer error:', e);
+  }
+}
+
+function stopTimer(){ 
+  try {
+    if (state.timerId){ 
+      clearInterval(state.timerId); 
+      state.timerId = null; 
+    } 
+  } catch(e) {
+    console.error('Stop timer error:', e);
+  }
+}
 
 /* ======= PT wiring ======= */
 function buildPT(){
-  const elPT = byId("ptable"); if (!elPT) return;
-  buildPTGrid(elPT, (Z, tile)=>{
-    state.targetZ = Z;
-    document.querySelectorAll(".ptile").forEach(t=>t.classList.remove("selected"));
-    tile.classList.add("selected");
-    byId("currentPick").textContent = `Selected: ${sym(Z)} — ${nameOf(Z)} (Z=${Z})`;
-    byId("electronCount").textContent = electronsNeeded();
-    if (state.mode === "study"){ resetBuilding(); planStudyGhost(); }
-    if (state.mode === "game"){ newGame(); }
-  }, state.targetZ);
+  try {
+    const elPT = byId("ptable"); 
+    if (!elPT) return; 
+    buildPTGrid(elPT, (Z, tile)=>{
+      try {
+        state.targetZ = Z;
+        document.querySelectorAll(".ptile").forEach(t=>t.classList.remove("selected"));
+        tile.classList.add("selected");
+        byId("currentPick").textContent = `Selected: ${sym(Z)} — ${nameOf(Z)} (Z=${Z})`;
+        byId("electronCount").textContent = electronsNeeded();
+        if (state.mode === "study"){ 
+          resetBuilding(); 
+          planStudyGhost(); 
+        }
+        if (state.mode === "game"){ 
+          newGame(); 
+        }
+      } catch(e) {
+        console.error('PT tile click error:', e);
+      }
+    }, state.targetZ);
+  } catch(e) {
+    console.error('Build PT error:', e);
+  }
 }
 
 /* ======= Ion & Search ======= */
