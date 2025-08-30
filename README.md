@@ -11,6 +11,14 @@ Works offline and on mobile. Includes:
 
 ---
 
+## 🌐 Live Demo
+
+**[Try the app online → https://mrsep01.github.io/Electrontower/](https://mrsep01.github.io/Electrontower/)**
+
+---
+
+---
+
 ## Quick Start (local)
 
 1. Download this repo as a ZIP or clone it.
