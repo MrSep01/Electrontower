@@ -3,80 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Electron Configuration Study Guide - Electrontower</title>
+    <title>Study Guide - Electron Towers</title>
     <style>
         :root {
-            --primary: #6366f1;
-            --primary-dark: #4f46e5;
-            --secondary: #8b5cf6;
+            --primary: #1e293b;
+            --secondary: #334155;
             --accent: #06b6d4;
-            --success: #10b981;
             --warning: #f59e0b;
+            --success: #10b981;
             --danger: #ef4444;
-            --dark: #1e293b;
-            --darker: #0f172a;
-            --light: #f8fafc;
-            --border: #e2e8f0;
-            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-                    --shadow-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-    }
-
-    /* ======= Custom Logo-Based Emojis ======= */
-    .custom-emoji {
-        display: inline-block;
-        width: 1.2em;
-        height: 1.2em;
-        vertical-align: middle;
-        position: relative;
-    }
-
-    .emoji-scientist {
-        background: linear-gradient(135deg, #87CEEB 0%, #B0E0E6 100%);
-        border-radius: 50%;
-        border: 2px solid #8b5cf6;
-    }
-
-    .emoji-scientist::before {
-        content: '';
-        position: absolute;
-        top: 2px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 8px;
-        height: 6px;
-        background: #8b5cf6;
-        border-radius: 4px 4px 2px 2px;
-    }
-
-    .emoji-scientist::after {
-        content: '';
-        position: absolute;
-        top: 8px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 6px;
-        height: 4px;
-        background: #fbbf24;
-        border-radius: 3px;
-    }
-
-    .emoji-atom {
-        background: white;
-        border: 2px solid #8b5cf6;
-        border-radius: 50%;
-    }
-
-    .emoji-atom::before {
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 3px;
-        height: 3px;
-        background: #8b5cf6;
-        border-radius: 50%;
-    }
+            --light: #f1f5f9;
+            --border: #475569;
+            --bg: #0f172a;
+            --card: #1e293b;
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-accent: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --gradient-warning: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            --gradient-success: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            --gradient-danger: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+        }
 
         * {
             margin: 0;
@@ -85,146 +31,623 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            color: var(--dark);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--light);
             line-height: 1.6;
+            min-height: 100vh;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
+        /* ======= Custom Logo-Based Emojis ======= */
+        .custom-emoji {
+            display: inline-block;
+            width: 1.2em;
+            height: 1.2em;
+            vertical-align: middle;
+            position: relative;
         }
 
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
-            color: white;
+        .emoji-scientist {
+            background: linear-gradient(135deg, #87CEEB 0%, #B0E0E6 100%);
+            border-radius: 50%;
+            border: 2px solid #8b5cf6;
         }
 
-        .header h1 {
-            font-size: 3rem;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        .emoji-scientist::before {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 8px;
+            height: 6px;
+            background: #8b5cf6;
+            border-radius: 4px 4px 2px 2px;
         }
 
-        .header p {
-            font-size: 1.2rem;
-            opacity: 0.9;
+        .emoji-scientist::after {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 4px;
+            background: #fbbf24;
+            border-radius: 3px;
         }
 
-        .nav {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 40px;
-            flex-wrap: wrap;
-        }
-
-        .nav-btn {
-            background: rgba(255,255,255,0.2);
-            color: white;
-            border: 2px solid rgba(255,255,255,0.3);
-            padding: 12px 24px;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .nav-btn:hover, .nav-btn.active {
-            background: rgba(255,255,255,0.3);
-            border-color: white;
-            transform: translateY(-2px);
-        }
-
-        .main-content {
-            display: none;
-        }
-
-        .main-content.active {
-            display: block;
-        }
-
-        .card {
+        .emoji-atom {
             background: white;
-            border-radius: 20px;
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: var(--shadow);
-            transition: all 0.3s ease;
-            border: 1px solid var(--border);
+            border: 2px solid #8b5cf6;
+            border-radius: 50%;
         }
 
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
+        .emoji-atom::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 3px;
+            height: 3px;
+            background: #8b5cf6;
+            border-radius: 50%;
         }
 
-        .card h2 {
-            color: var(--primary);
-            margin-bottom: 20px;
-            font-size: 1.8rem;
-            border-bottom: 3px solid var(--primary);
-            padding-bottom: 10px;
+        .emoji-beaker {
+            background: #8b5cf6;
+            border: 1px solid white;
+            border-radius: 2px 2px 0 0;
+            width: 8px;
+            height: 10px;
         }
 
-        .card h3 {
-            color: var(--secondary);
-            margin: 20px 0 15px 0;
-            font-size: 1.4rem;
+        .emoji-beaker::after {
+            content: '';
+            position: absolute;
+            top: -1px;
+            right: 1px;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+        }
+
+        .emoji-syringe {
+            background: white;
+            border: 1px solid #8b5cf6;
+            border-radius: 1px;
+            width: 4px;
+            height: 12px;
+        }
+
+        .emoji-syringe::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: 1px;
+            width: 2px;
+            height: 2px;
+            background: #8b5cf6;
+            border-radius: 50%;
+        }
+
+        .emoji-star {
+            background: white;
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            width: 10px;
+            height: 10px;
+        }
+
+        .emoji-electron {
+            background: #06b6d4;
+            border-radius: 50%;
+            width: 8px;
+            height: 8px;
+            box-shadow: 0 0 4px #06b6d4;
+        }
+
+        .emoji-nucleus {
+            background: #ef4444;
+            border-radius: 50%;
+            width: 10px;
+            height: 10px;
+            box-shadow: 0 0 4px #ef4444;
+        }
+
+        .emoji-energy {
+            background: #f59e0b;
+            border-radius: 50%;
+            width: 8px;
+            height: 8px;
+            box-shadow: 0 0 4px #f59e0b;
+        }
+
+        .emoji-study {
+            background: #10b981;
+            border-radius: 50%;
+            width: 10px;
+            height: 10px;
+            box-shadow: 0 0 4px #10b981;
+        }
+
+        .emoji-game {
+            background: #8b5cf6;
+            border-radius: 50%;
+            width: 10px;
+            height: 10px;
+            box-shadow: 0 0 4px #8b5cf6;
+        }
+
+        /* ======= Header Styles (Consistent with main app) ======= */
+        .app-header {
+            background: var(--card);
+            border-bottom: 2px solid var(--border);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .header-logo {
+            position: relative;
+            width: 60px;
+            height: 60px;
+            flex-shrink: 0;
+            background: linear-gradient(135deg, #87CEEB 0%, #B0E0E6 100%);
+            border-radius: 15px;
+            padding: 6px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+            overflow: hidden;
+        }
+
+        .logo-image {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .logo-placeholder {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            background: linear-gradient(135deg, #87CEEB 0%, #B0E0E6 100%);
+            border-radius: 10px;
+        }
+
+        /* Scientist elements */
+        .logo-scientist {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .logo-hair-purple {
+            position: absolute;
+            top: 8px;
+            left: 20px;
+            width: 20px;
+            height: 12px;
+            background: #8b5cf6;
+            border-radius: 10px 10px 8px 8px;
+        }
+
+        .logo-face-skin {
+            position: absolute;
+            top: 18px;
+            left: 22px;
+            width: 16px;
+            height: 12px;
+            background: #fbbf24;
+            border-radius: 8px;
+        }
+
+        .logo-eyes-blue {
+            position: absolute;
+            top: 20px;
+            left: 24px;
+            width: 12px;
+            height: 8px;
+            display: flex;
+            gap: 4px;
+        }
+
+        .logo-eyes-blue::before,
+        .logo-eyes-blue::after {
+            content: '';
+            width: 4px;
+            height: 4px;
+            background: #1e40af;
+            border-radius: 50%;
+        }
+
+        .logo-glasses-round {
+            position: absolute;
+            top: 19px;
+            left: 21px;
+            width: 18px;
+            height: 6px;
+            border: 2px solid #1e293b;
+            border-radius: 6px;
+        }
+
+        .logo-smile-friendly {
+            position: absolute;
+            top: 26px;
+            left: 25px;
+            width: 8px;
+            height: 4px;
+            border: 1px solid #dc2626;
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+        }
+
+        .logo-labcoat-white {
+            position: absolute;
+            top: 30px;
+            left: 18px;
+            width: 24px;
+            height: 14px;
+            background: white;
+            border-radius: 4px 4px 0 0;
+        }
+
+        .logo-tie-purple {
+            position: absolute;
+            top: 32px;
+            left: 26px;
+            width: 4px;
+            height: 10px;
+            background: #8b5cf6;
+            border-radius: 2px;
+        }
+
+        /* Science elements */
+        .logo-science-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .logo-atom-white {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border: 1px solid white;
+            border-radius: 50%;
+        }
+
+        .logo-atom-white:nth-child(1) {
+            top: 5px;
+            left: 5px;
+        }
+
+        .logo-atom-white:nth-child(2) {
+            top: 5px;
+            right: 5px;
+        }
+
+        .logo-beaker-purple {
+            position: absolute;
+            width: 6px;
+            height: 8px;
+            background: #8b5cf6;
+            border-radius: 3px 3px 0 0;
+        }
+
+        .logo-beaker-purple:nth-child(3) {
+            bottom: 5px;
+            left: 5px;
+        }
+
+        .logo-beaker-purple:nth-child(4) {
+            bottom: 5px;
+            right: 5px;
+        }
+
+        .logo-syringe-white {
+            position: absolute;
+            width: 3px;
+            height: 10px;
+            background: white;
+            border: 1px solid #8b5cf6;
+            border-radius: 1px;
+        }
+
+        .logo-syringe-white:nth-child(5) {
+            bottom: 8px;
+            left: 15px;
+        }
+
+        .logo-syringe-white:nth-child(6) {
+            bottom: 8px;
+            right: 15px;
+        }
+
+        .logo-star-white {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: white;
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+        }
+
+        .logo-star-white:nth-child(7) {
+            top: 12px;
+            left: 12px;
+        }
+
+        .logo-star-white:nth-child(8) {
+            top: 18px;
+            right: 10px;
+        }
+
+        .logo-star-white:nth-child(9) {
+            bottom: 15px;
+            left: 10px;
+        }
+
+        .logo-star-white:nth-child(10) {
+            bottom: 22px;
+            right: 8px;
+        }
+
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand-text h1 {
+            color: var(--light);
+            font-size: 24px;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .brand-text .subtitle {
+            color: var(--accent);
+            font-size: 14px;
+            margin: 5px 0 0 0;
+            opacity: 0.8;
+        }
+
+        .right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
 
         .btn {
-            background: var(--primary);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn.ghost {
+            background: transparent;
+            color: var(--light);
+            border: 2px solid var(--border);
+        }
+
+        .btn.ghost:hover {
+            background: var(--border);
+            border-color: var(--accent);
+        }
+
+        .btn.primary {
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn.primary:hover {
+            background: #0891b2;
+            transform: translateY(-2px);
+        }
+
+        /* ======= Main Content ======= */
+        .main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .page-title h1 {
+            font-size: 48px;
+            color: var(--accent);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .page-title p {
+            font-size: 20px;
+            color: var(--light);
+            opacity: 0.8;
+        }
+
+        /* ======= Big Tile Design ======= */
+        .study-tiles {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .study-tile {
+            background: var(--card);
+            border: 2px solid var(--border);
+            border-radius: 20px;
+            padding: 40px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .study-tile::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: var(--gradient-primary);
+        }
+
+        .study-tile.overview::before {
+            background: var(--gradient-primary);
+        }
+
+        .study-tile.rules::before {
+            background: var(--gradient-accent);
+        }
+
+        .study-tile.exceptions::before {
+            background: var(--gradient-warning);
+        }
+
+        .study-tile.ions::before {
+            background: var(--gradient-secondary);
+        }
+
+        .study-tile.practice::before {
+            background: var(--gradient-success);
+        }
+
+        .study-tile.assessment::before {
+            background: var(--gradient-danger);
+        }
+
+        .study-tile:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px rgba(6, 182, 212, 0.3);
+        }
+
+        .tile-header {
+            margin-bottom: 25px;
+        }
+
+        .tile-header h2 {
+            color: var(--light);
+            font-size: 28px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .tile-header p {
+            color: var(--light);
+            opacity: 0.8;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .tile-content {
+            flex-grow: 1;
+        }
+
+        .tile-features {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .tile-features li {
+            color: var(--light);
+            margin-bottom: 12px;
+            padding-left: 30px;
+            position: relative;
+            font-size: 15px;
+        }
+
+        .tile-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .tile-actions {
+            margin-top: 25px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .tile-btn {
+            background: var(--accent);
             color: white;
             border: none;
             padding: 12px 24px;
             border-radius: 25px;
             cursor: pointer;
-            font-size: 1rem;
+            font-size: 14px;
             font-weight: 600;
             transition: all 0.3s ease;
-            margin: 10px 5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .btn:hover {
-            background: var(--primary-dark);
+        .tile-btn:hover {
+            background: #0891b2;
             transform: translateY(-2px);
-            box-shadow: var(--shadow);
+            box-shadow: 0 5px 15px rgba(6, 182, 212, 0.4);
         }
 
-        .highlight {
-            background: linear-gradient(120deg, #a8edea 0%, #fed6e3 100%);
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-weight: 600;
-        }
-
-        .exception-box {
-            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
-            border: 2px solid var(--warning);
-            border-radius: 15px;
-            padding: 20px;
-            margin: 20px 0;
-        }
-
-        .ion-example {
-            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+        .tile-btn.secondary {
+            background: transparent;
+            color: var(--accent);
             border: 2px solid var(--accent);
+        }
+
+        .tile-btn.secondary:hover {
+            background: var(--accent);
+            color: white;
+        }
+
+        /* ======= Interactive Elements ======= */
+        .interactive-demo {
+            background: rgba(30, 41, 59, 0.4);
+            border: 1px solid var(--border);
             border-radius: 15px;
             padding: 20px;
             margin: 20px 0;
         }
 
-        .interactive-demo {
-            background: var(--light);
-            border-radius: 15px;
-            padding: 20px;
-            margin: 20px 0;
-            border: 2px solid var(--border);
+        .interactive-demo h4 {
+            color: var(--warning);
+            margin-bottom: 15px;
+            font-size: 18px;
         }
 
         .orbital-diagram {
@@ -232,12 +655,13 @@
             gap: 10px;
             margin: 20px 0;
             flex-wrap: wrap;
+            justify-content: center;
         }
 
         .orbital {
             width: 60px;
             height: 60px;
-            border: 2px solid var(--primary);
+            border: 2px solid var(--accent);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -245,526 +669,372 @@
             cursor: pointer;
             transition: all 0.3s ease;
             position: relative;
+            background: var(--card);
+            color: var(--light);
+            font-weight: bold;
         }
 
         .orbital:hover {
             transform: scale(1.1);
-            box-shadow: 0 5px 15px rgba(99, 102, 241, 0.4);
+            box-shadow: 0 5px 15px rgba(6, 182, 212, 0.4);
         }
 
         .orbital.filled {
-            background: var(--primary);
+            background: var(--accent);
             color: white;
         }
 
         .orbital.half-filled {
-            background: linear-gradient(90deg, var(--primary) 50%, transparent 50%);
-            color: var(--primary);
+            background: linear-gradient(90deg, var(--accent) 50%, transparent 50%);
+            color: var(--accent);
         }
 
+        /* ======= Footer (Consistent with main app) ======= */
+        .app-footer {
+            background: var(--card);
+            border-top: 2px solid var(--border);
+            padding: 30px 20px;
+            text-align: center;
+            color: var(--light);
+            opacity: 0.7;
+        }
+
+        /* ======= Responsive Design ======= */
         @media (max-width: 768px) {
-            .container { padding: 15px; }
-            .header h1 { font-size: 2rem; }
-            .nav { flex-direction: column; align-items: center; }
+            .study-tiles {
+                grid-template-columns: 1fr;
+            }
+            
+            .page-title h1 {
+                font-size: 36px;
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .study-tile {
+                padding: 30px;
+                min-height: 250px;
+            }
+            
+            .tile-header h2 {
+                font-size: 24px;
+            }
+            
+            .tile-actions {
+                flex-direction: column;
+            }
+            
+            .tile-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main {
+                padding: 20px 15px;
+            }
+            
+            .study-tile {
+                padding: 25px;
+            }
+            
+            .page-title h1 {
+                font-size: 28px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <div style="text-align: left; margin-bottom: 20px;">
-                <a href="index.html" class="btn" style="text-decoration: none; background: var(--secondary);"><span class="custom-emoji emoji-atom"></span> Back to App</a>
-            </div>
-            <h1><span class="custom-emoji emoji-scientist"></span> Electron Configuration Study Guide</h1>
-            <p>Master the fundamental principles of electron arrangement in atoms</p>
-        </div>
-
-        <div class="nav">
-            <button class="nav-btn active" onclick="showSection('overview')">Overview</button>
-            <button class="nav-btn" onclick="showSection('rules')">Core Rules</button>
-            <button class="nav-btn" onclick="showSection('aufbau-diagram')">Electron Aufbau Diagram</button>
-            <button class="nav-btn" onclick="showSection('exceptions')">Exceptions</button>
-            <button class="nav-btn" onclick="showSection('ions')">Ion Formation</button>
-            <button class="nav-btn" onclick="showSection('practice')">Practice</button>
-            <button class="nav-btn" onclick="showSection('quiz')">Assessment</button>
-        </div>
-
-        <div id="overview" class="main-content active">
-            <div class="card">
-                <h2>🎯 Learning Objectives</h2>
-                <p>By the end of this study guide, you will understand:</p>
-                <ul style="margin: 20px 0; padding-left: 20px;">
-                    <li><strong>Aufbau Principle:</strong> How electrons fill orbitals in order of increasing energy</li>
-                    <li><strong>Hund's Rule:</strong> Why electrons prefer to occupy separate orbitals with parallel spins</li>
-                    <li><strong>Pauli Exclusion Principle:</strong> Why no two electrons can have identical quantum numbers</li>
-                    <li><strong>Exceptions:</strong> Special cases like Chromium (Cr) and Copper (Cu)</li>
-                    <li><strong>Ion Formation:</strong> How atoms gain or lose electrons to form ions</li>
-                    <li><strong>Octet Rule:</strong> Why atoms seek 8 valence electrons for stability</li>
-                </ul>
-            </div>
-
-            <div class="card">
-                <h2>🔬 Why Electron Configurations Matter</h2>
-                <p>Electron configurations determine an element's chemical properties, reactivity, and bonding behavior. Understanding these principles is essential for:</p>
-                <ul style="margin: 20px 0; padding-left: 20px;">
-                    <li>Predicting chemical reactions</li>
-                    <li>Understanding periodic trends</li>
-                    <li>Explaining bonding patterns</li>
-                    <li>Designing new materials</li>
-                </ul>
-            </div>
-        </div>
-
-        <div id="rules" class="main-content">
-            <div class="card">
-                <h2>📚 The Three Fundamental Rules</h2>
-                
-                <h3>1. Aufbau Principle</h3>
-                <p><span class="highlight">Electrons fill orbitals in order of increasing energy.</span> This follows the pattern: 1s → 2s → 2p → 3s → 3p → 4s → 3d → 4p...</p>
-                
-                <div class="interactive-demo">
-                    <h4>Interactive Aufbau Sequence</h4>
-                    <div class="orbital-diagram" id="aufbauDemo">
-                        <div class="orbital" data-energy="1s">1s</div>
-                        <div class="orbital" data-energy="2s">2s</div>
-                        <div class="orbital" data-energy="2p">2p</div>
-                        <div class="orbital" data-energy="3s">3s</div>
-                        <div class="orbital" data-energy="3p">3p</div>
-                        <div class="orbital" data-energy="4s">4s</div>
-                        <div class="orbital" data-energy="3d">3d</div>
-                    </div>
-                    <button class="btn" onclick="demonstrateAufbau()">Show Filling Order</button>
-                </div>
-
-                <h3>2. Hund's Rule</h3>
-                <p><span class="highlight">Electrons prefer to occupy separate orbitals with parallel spins before pairing.</span> This maximizes the total spin and follows the principle of maximum multiplicity.</p>
-                
-                <div class="interactive-demo">
-                    <h4>Hund's Rule Demonstration</h4>
-                    <div class="orbital-diagram" id="hundDemo">
-                        <div class="orbital" data-orbital="p1">p₁</div>
-                        <div class="orbital" data-orbital="p2">p₂</div>
-                        <div class="orbital" data-orbital="p3">p₃</div>
-                    </div>
-                    <button class="btn" onclick="demonstrateHund()">Show Electron Distribution</button>
-                    <p style="margin-top: 15px; font-style: italic;">Click the orbitals to see how electrons distribute according to Hund's rule!</p>
-                </div>
-
-                <h3>3. Pauli Exclusion Principle</h3>
-                <p><span class="highlight">No two electrons in an atom can have identical quantum numbers.</span> This means each orbital can hold at most two electrons with opposite spins.</p>
-                
-                <div class="interactive-demo">
-                    <h4>Pauli Principle Visualization</h4>
-                    <div class="orbital-diagram" id="pauliDemo">
-                        <div class="orbital" data-orbital="s">s</div>
-                    </div>
-                    <button class="btn" onclick="demonstratePauli()">Show Maximum Occupancy</button>
-                </div>
-            </div>
-        </div>
-
-        <div id="aufbau-diagram" class="main-content">
-            <div class="card">
-                <h2><span class="custom-emoji emoji-atom"></span> Electron Aufbau Diagram</h2>
-                <p>Visual representation of how electrons fill atomic orbitals following the Aufbau principle.</p>
-                
-                <div class="interactive-demo">
-                    <h3>Diagonal Aufbau Sequence</h3>
-                    <p>The diagonal rule shows the order in which subshells are filled:</p>
-                    
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 15px; margin: 20px 0;">
-                        <div style="text-align: center; padding: 15px; background: var(--light); border-radius: 10px; border: 2px solid var(--primary);">
-                            <h4>1s</h4>
-                            <p style="font-size: 0.9rem; margin: 5px 0;">Energy Level 1</p>
-                            <p style="font-size: 0.8rem; color: var(--primary);">2 electrons</p>
+    <!-- ======= Header (Consistent with main app) ======= -->
+    <header class="app-header">
+        <div class="brand">
+            <div class="header-logo">
+                <div class="logo-image">
+                    <div class="logo-placeholder">
+                        <div class="logo-scientist">
+                            <div class="logo-hair-purple"></div>
+                            <div class="logo-face-skin"></div>
+                            <div class="logo-eyes-blue"></div>
+                            <div class="logo-glasses-round"></div>
+                            <div class="logo-smile-friendly"></div>
+                            <div class="logo-labcoat-white"></div>
+                            <div class="logo-tie-purple"></div>
                         </div>
-                        
-                        <div style="text-align: center; padding: 15px; background: var(--light); border-radius: 10px; border: 2px solid var(--primary);">
-                            <h4>2s</h4>
-                            <p style="font-size: 0.9rem; margin: 5px 0;">Energy Level 2</p>
-                            <p style="font-size: 0.8rem; color: var(--primary);">2 electrons</p>
+                        <div class="logo-science-elements">
+                            <div class="logo-atom-white"></div>
+                            <div class="logo-atom-white"></div>
+                            <div class="logo-beaker-purple"></div>
+                            <div class="logo-beaker-purple"></div>
+                            <div class="logo-syringe-white"></div>
+                            <div class="logo-syringe-white"></div>
+                            <div class="logo-star-white"></div>
+                            <div class="logo-star-white"></div>
+                            <div class="logo-star-white"></div>
+                            <div class="logo-star-white"></div>
                         </div>
-                        
-                        <div style="text-align: center; padding: 15px; background: var(--light); border-radius: 10px; border: 2px solid var(--primary);">
-                            <h4>2p</h4>
-                            <p style="font-size: 0.9rem; margin: 5px 0;">Energy Level 2</p>
-                            <p style="font-size: 0.8rem; color: var(--primary);">6 electrons</p>
-                        </div>
-                        
-                        <div style="text-align: center; padding: 15px; background: var(--light); border-radius: 10px; border: 2px solid var(--primary);">
-                            <h4>3s</h4>
-                            <p style="font-size: 0.9rem; margin: 5px 0;">Energy Level 3</p>
-                            <p style="font-size: 0.8rem; color: var(--primary);">2 electrons</p>
-                        </div>
-                        
-                        <div style="text-align: center; padding: 15px; background: var(--light); border-radius: 10px; border: 2px solid var(--primary);">
-                            <h4>3p</h4>
-                            <p style="font-size: 0.9rem; margin: 5px 0;">Energy Level 3</p>
-                            <p style="font-size: 0.8rem; color: var(--primary);">6 electrons</p>
-                        </div>
-                        
-                        <div style="text-align: center; padding: 15px; background: var(--light); border-radius: 10px; border: 2px solid var(--primary);">
-                            <h4>4s</h4>
-                            <p style="font-size: 0.9rem; margin: 5px 0;">Energy Level 4</p>
-                            <p style="font-size: 0.8rem; color: var(--primary);">2 electrons</p>
-                        </div>
-                        
-                        <div style="text-align: center; padding: 15px; background: var(--light); border-radius: 10px; border: 2px solid var(--primary);">
-                            <h4>3d</h4>
-                            <p style="font-size: 0.9rem; margin: 5px 0;">Energy Level 3</p>
-                            <p style="font-size: 0.8rem; color: var(--primary);">10 electrons</p>
-                        </div>
-                        
-                        <div style="text-align: center; padding: 15px; background: var(--light); border-radius: 10px; border: 2px solid var(--primary);">
-                            <h4>4p</h4>
-                            <p style="font-size: 0.9rem; margin: 5px 0;">Energy Level 4</p>
-                            <p style="font-size: 0.8rem; color: var(--primary);">6 electrons</p>
-                        </div>
-                    </div>
-                    
-                    <div style="text-align: center; margin: 20px 0;">
-                        <button class="btn" onclick="showAufbauSequence()">Show Filling Sequence</button>
-                    </div>
-                    
-                    <div id="aufbauSequence" style="display: none; text-align: center; padding: 20px; background: var(--light); border-radius: 15px; margin: 20px 0;">
-                        <h4>Filling Order Animation</h4>
-                        <div style="font-size: 1.2rem; font-weight: bold; color: var(--primary);">
-                            <span id="sequenceStep">1s</span> → <span id="sequenceNext">2s</span>
-                        </div>
-                        <p style="margin-top: 10px; color: var(--secondary);">Follow the diagonal pattern!</p>
-                    </div>
-                </div>
-                
-                <div class="interactive-demo">
-                    <h3>Energy Level Crossovers</h3>
-                    <p>Some energy levels have crossovers due to electron-electron repulsion:</p>
-                    
-                    <div style="background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%); border: 2px solid var(--warning); border-radius: 15px; padding: 20px; margin: 20px 0;">
-                        <h4>4s vs 3d Crossover</h4>
-                        <p><strong>Expected order:</strong> 3d → 4s</p>
-                        <p><strong>Actual order:</strong> 4s → 3d</p>
-                        <p><strong>Why:</strong> 4s orbital has lower energy than 3d due to shielding effects</p>
-                    </div>
-                    
-                    <div style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); border: 2px solid var(--accent); border-radius: 15px; padding: 20px; margin: 20px 0;">
-                        <h4>5s vs 4d Crossover</h4>
-                        <p><strong>Expected order:</strong> 4d → 5s</p>
-                        <p><strong>Actual order:</strong> 5s → 4d</p>
-                        <p><strong>Why:</strong> Similar shielding effects at higher energy levels</p>
                     </div>
                 </div>
             </div>
+            <div class="brand-text">
+                <h1>Electron Towers</h1>
+                <p class="subtitle">v0.16r8 — Study Guide & Learning Resources</p>
+            </div>
+        </div>
+        <div class="right">
+            <a href="index.html" class="btn ghost"><span class="custom-emoji emoji-atom"></span> Back to App</a>
+            <button class="btn primary"><span class="custom-emoji emoji-study"></span> Start Learning</button>
+        </div>
+    </header>
+
+    <!-- ======= Main Content ======= -->
+    <main class="main">
+        <div class="page-title">
+            <h1>
+                <span class="custom-emoji emoji-study"></span>
+                Master Electron Configuration
+                <span class="custom-emoji emoji-atom"></span>
+            </h1>
+            <p>Comprehensive study guide for understanding atomic structure and electron behavior</p>
         </div>
 
-        <div id="exceptions" class="main-content">
-            <div class="card">
-                <h2>⚠️ Notable Exceptions to the Rules</h2>
-                
-                <div class="exception-box">
-                    <h3>🔴 Chromium (Cr) - Atomic Number 24</h3>
-                    <p><strong>Expected:</strong> [Ar] 4s² 3d⁴</p>
-                    <p><strong>Actual:</strong> [Ar] 4s¹ 3d⁵</p>
-                    <p><strong>Why:</strong> Half-filled d-subshell provides extra stability</p>
+        <!-- ======= Big Study Tiles ======= -->
+        <div class="study-tiles">
+            <!-- Overview Tile -->
+            <div class="study-tile overview">
+                <div class="tile-header">
+                    <h2>
+                        <span class="custom-emoji emoji-study"></span>
+                        Overview
+                    </h2>
+                    <p>Master the fundamental principles of electron arrangement in atoms</p>
                 </div>
-
-                <div class="exception-box">
-                    <h3>🟡 Copper (Cu) - Atomic Number 29</h3>
-                    <p><strong>Expected:</strong> [Ar] 4s² 3d⁹</p>
-                    <p><strong>Actual:</strong> [Ar] 4s¹ 3d¹⁰</p>
-                    <p><strong>Why:</strong> Filled d-subshell provides maximum stability</p>
+                <div class="tile-content">
+                    <ul class="tile-features">
+                        <li><strong>Aufbau Principle:</strong> How electrons fill orbitals in order of increasing energy</li>
+                        <li><strong>Hund's Rule:</strong> Why electrons prefer to occupy separate orbitals with parallel spins</li>
+                        <li><strong>Pauli Exclusion Principle:</strong> Why no two electrons can have identical quantum numbers</li>
+                        <li><strong>Exceptions:</strong> Special cases like Chromium (Cr) and Copper (Cu)</li>
+                        <li><strong>Ion Formation:</strong> How atoms gain or lose electrons to form ions</li>
+                        <li><strong>Octet Rule:</strong> Why atoms seek 8 valence electrons for stability</li>
+                    </ul>
                 </div>
+                <div class="tile-actions">
+                    <button class="tile-btn" onclick="showSection('overview')">Learn More</button>
+                    <button class="tile-btn secondary" onclick="startOverview()">Begin Journey</button>
+                </div>
+            </div>
 
-                <div class="exception-box">
-                    <h3>🟢 Other Notable Exceptions</h3>
-                    <ul style="margin: 20px 0; padding-left: 20px;">
+            <!-- Core Rules Tile -->
+            <div class="study-tile rules">
+                <div class="tile-header">
+                    <h2>
+                        <span class="custom-emoji emoji-atom"></span>
+                        Core Rules
+                    </h2>
+                    <p>The three fundamental principles that govern electron behavior</p>
+                </div>
+                <div class="tile-content">
+                    <ul class="tile-features">
+                        <li><strong>Aufbau:</strong> Electrons fill lowest energy orbitals first</li>
+                        <li><strong>Hund's:</strong> Parallel spins before pairing in degenerate orbitals</li>
+                        <li><strong>Pauli:</strong> No two electrons can have identical quantum numbers</li>
+                        <li><strong>Energy Order:</strong> 1s → 2s → 2p → 3s → 3p → 4s → 3d → 4p...</li>
+                        <li><strong>Diagonal Pattern:</strong> Follow the energy level progression</li>
+                    </ul>
+                </div>
+                <div class="tile-actions">
+                    <button class="tile-btn" onclick="showSection('rules')">Explore Rules</button>
+                    <button class="tile-btn secondary" onclick="demonstrateRules()">Interactive Demo</button>
+                </div>
+            </div>
+
+            <!-- Exceptions Tile -->
+            <div class="study-tile exceptions">
+                <div class="tile-header">
+                    <h2>
+                        <span class="custom-emoji emoji-star"></span>
+                        Exceptions
+                    </h2>
+                    <p>Special cases where elements break the standard rules for stability</p>
+                </div>
+                <div class="tile-content">
+                    <ul class="tile-features">
+                        <li><strong>Chromium (Cr):</strong> [Ar] 4s¹ 3d⁵ instead of [Ar] 4s² 3d⁴</li>
+                        <li><strong>Copper (Cu):</strong> [Ar] 4s¹ 3d¹⁰ instead of [Ar] 4s² 3d⁹</li>
                         <li><strong>Molybdenum (Mo):</strong> [Kr] 5s¹ 4d⁵ (half-filled d-subshell)</li>
                         <li><strong>Silver (Ag):</strong> [Kr] 5s¹ 4d¹⁰ (filled d-subshell)</li>
-                        <li><strong>Gold (Au):</strong> [Xe] 6s¹ 4f¹⁴ 5d¹⁰ (filled d-subshell)</li>
+                        <li><strong>Why Exceptions:</strong> Half-filled and filled subshells provide extra stability</li>
                     </ul>
                 </div>
-            </div>
-        </div>
-
-        <div id="ions" class="main-content">
-            <div class="card">
-                <h2>⚡ Ion Formation: Cations vs Anions</h2>
-                
-                <h3>Cations (Positive Ions)</h3>
-                <p>Atoms <span class="highlight">lose electrons</span> to form positively charged ions. The order of electron loss follows specific rules:</p>
-                
-                <div class="ion-example">
-                    <h4>🎯 Electron Loss Priority</h4>
-                    <ol style="margin: 20px 0; padding-left: 20px;">
-                        <li><strong>Highest n value first</strong> - Outer shell electrons go first</li>
-                        <li><strong>Highest l value second</strong> - p electrons before s electrons</li>
-                        <li><strong>Exceptions apply</strong> - Consider stability of resulting configuration</li>
-                    </ol>
+                <div class="tile-actions">
+                    <button class="tile-btn" onclick="showSection('exceptions')">Study Exceptions</button>
+                    <button class="tile-btn secondary" onclick="explainExceptions()">Learn Why</button>
                 </div>
+            </div>
 
-                <h3>Anions (Negative Ions)</h3>
-                <p>Atoms <span class="highlight">gain electrons</span> to form negatively charged ions, typically to achieve octet stability.</p>
-                
-                <div class="ion-example">
-                    <h4>🎯 Electron Gain Strategy</h4>
-                    <ul style="margin: 20px 0; padding-left: 20px;">
-                        <li><strong>Fill available orbitals</strong> following Aufbau principle</li>
-                        <li><strong>Achieve octet</strong> when possible</li>
-                        <li><strong>Consider energy levels</strong> for stability</li>
+            <!-- Ion Formation Tile -->
+            <div class="study-tile ions">
+                <div class="tile-header">
+                    <h2>
+                        <span class="custom-emoji emoji-beaker"></span>
+                        Ion Formation
+                    </h2>
+                    <p>How atoms gain or lose electrons to achieve stability</p>
+                </div>
+                <div class="tile-content">
+                    <ul class="tile-features">
+                        <li><strong>Cations:</strong> Atoms lose electrons to form positive ions</li>
+                        <li><strong>Anions:</strong> Atoms gain electrons to form negative ions</li>
+                        <li><strong>Electron Loss Priority:</strong> Highest n value first, then highest l value</li>
+                        <li><strong>Octet Rule:</strong> Atoms seek 8 valence electrons for stability</li>
+                        <li><strong>Examples:</strong> Na⁺, Ca²⁺, Cl⁻, O²⁻</li>
                     </ul>
                 </div>
-            </div>
-
-            <div class="card">
-                <h2>🔒 The Octet Rule</h2>
-                <p><span class="highlight">Atoms tend to gain, lose, or share electrons to achieve 8 valence electrons.</span> This configuration provides maximum stability.</p>
-                
-                <div class="interactive-demo">
-                    <h4>Octet Rule Examples</h4>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 20px 0;">
-                        <div style="text-align: center; padding: 20px; background: var(--light); border-radius: 15px;">
-                            <h5>Neon (Ne)</h5>
-                            <p><strong>Configuration:</strong> 1s² 2s² 2p⁶</p>
-                            <p><strong>Valence:</strong> 8 electrons</p>
-                            <p><strong>Stability:</strong> ⭐⭐⭐⭐⭐</p>
-                        </div>
-                        
-                        <div style="text-align: center; padding: 20px; background: var(--light); border-radius: 15px;">
-                            <h5>Sodium (Na)</h5>
-                            <p><strong>Configuration:</strong> 1s² 2s² 2p⁶ 3s¹</p>
-                            <p><strong>Valence:</strong> 1 electron</p>
-                            <p><strong>Stability:</strong> ⭐⭐</p>
-                        </div>
-                        
-                        <div style="text-align: center; padding: 20px; background: var(--light); border-radius: 15px;">
-                            <h5>Chlorine (Cl)</h5>
-                            <p><strong>Configuration:</strong> 1s² 2s² 2p⁶ 3s² 3p⁵</p>
-                            <p><strong>Valence:</strong> 7 electrons</p>
-                            <p><strong>Stability:</strong> ⭐⭐⭐</p>
-                        </div>
-                    </div>
+                <div class="tile-actions">
+                    <button class="tile-btn" onclick="showSection('ions')">Study Ions</button>
+                    <button class="tile-btn secondary" onclick="ionExamples()">See Examples</button>
                 </div>
             </div>
-        </div>
 
-        <div id="practice" class="main-content">
-            <div class="card">
-                <h2>💪 Practice Problems</h2>
-                
-                <div class="interactive-demo">
-                    <h3>Problem 1: Write the electron configuration for Vanadium (V)</h3>
-                    <p><strong>Atomic Number:</strong> 23</p>
-                    <p><strong>Hint:</strong> Follow the Aufbau principle and remember the energy order!</p>
-                    <button class="btn" onclick="showSolution(1)">Show Solution</button>
-                    <div id="solution1" style="display: none; margin-top: 15px; padding: 15px; background: var(--light); border-radius: 10px;">
-                        <p><strong>Solution:</strong> [Ar] 4s² 3d³</p>
-                        <p><strong>Explanation:</strong> Vanadium follows the standard Aufbau order: 1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d³</p>
-                    </div>
+            <!-- Practice Tile -->
+            <div class="study-tile practice">
+                <div class="tile-header">
+                    <h2>
+                        <span class="custom-emoji emoji-syringe"></span>
+                        Practice
+                    </h2>
+                    <p>Interactive problems to test your understanding</p>
                 </div>
-
-                <div class="interactive-demo">
-                    <h3>Problem 2: Predict the ion formed by Calcium (Ca)</h3>
-                    <p><strong>Atomic Number:</strong> 20</p>
-                    <p><strong>Hint:</strong> Consider the octet rule and electron loss priority!</p>
-                    <button class="btn" onclick="showSolution(2)">Show Solution</button>
-                    <div id="solution2" style="display: none; margin-top: 15px; padding: 15px; background: var(--light); border-radius: 10px;">
-                        <p><strong>Solution:</strong> Ca²⁺</p>
-                        <p><strong>Explanation:</strong> Calcium loses its 2 valence electrons (4s²) to achieve a noble gas configuration [Ar]</p>
-                    </div>
+                <div class="tile-content">
+                    <ul class="tile-features">
+                        <li><strong>Problem 1:</strong> Write electron configuration for Vanadium (V)</li>
+                        <li><strong>Problem 2:</strong> Predict ion formed by Calcium (Ca)</li>
+                        <li><strong>Problem 3:</strong> Explain why Chromium is an exception</li>
+                        <li><strong>Step-by-step:</strong> Solutions with detailed explanations</li>
+                        <li><strong>Interactive:</strong> Click to reveal solutions</li>
+                    </ul>
                 </div>
+                <div class="tile-actions">
+                    <button class="tile-btn" onclick="showSection('practice')">Start Practice</button>
+                    <button class="tile-btn secondary" onclick="showProblems()">View Problems</button>
+                </div>
+            </div>
 
-                <div class="interactive-demo">
-                    <h3>Problem 3: Explain why Chromium is an exception</h3>
-                    <p><strong>Challenge:</strong> Use your knowledge of stability and energy levels!</p>
-                    <button class="btn" onclick="showSolution(3)">Show Solution</button>
-                    <div id="solution3" style="display: none; margin-top: 15px; padding: 15px; background: var(--light); border-radius: 10px;">
-                        <p><strong>Solution:</strong> Chromium promotes one 4s electron to the 3d subshell to achieve [Ar] 4s¹ 3d⁵</p>
-                        <p><strong>Why:</strong> Half-filled d-subshell provides extra stability due to exchange energy and symmetry</p>
-                    </div>
+            <!-- Assessment Tile -->
+            <div class="study-tile assessment">
+                <div class="tile-header">
+                    <h2>
+                        <span class="custom-emoji emoji-nucleus"></span>
+                        Assessment
+                    </h2>
+                    <p>Test your knowledge with interactive quizzes</p>
+                </div>
+                <div class="tile-content">
+                    <ul class="tile-features">
+                        <li><strong>3 Questions:</strong> Covering all major concepts</li>
+                        <li><strong>Immediate Feedback:</strong> Know right away if you're correct</li>
+                        <li><strong>Score Calculation:</strong> Percentage and personalized feedback</li>
+                        <li><strong>Reset Option:</strong> Take the quiz multiple times</li>
+                        <li><strong>Learning Focus:</strong> Identify areas for improvement</li>
+                    </ul>
+                </div>
+                <div class="tile-actions">
+                    <button class="tile-btn" onclick="showSection('assessment')">Take Quiz</button>
+                    <button class="tile-btn secondary" onclick="startAssessment()">Begin Test</button>
                 </div>
             </div>
         </div>
 
-        <div id="quiz" class="main-content">
-            <div class="card">
-                <h2>🧠 Interactive Assessment</h2>
-                <p>Test your understanding with these interactive questions!</p>
-                
-                <div class="interactive-demo">
-                    <h3>Question 1: Which rule states that electrons fill orbitals in order of increasing energy?</h3>
-                    <div style="margin: 15px 0;">
-                        <button class="btn" onclick="checkAnswer(this, 'aufbau')">Aufbau Principle</button>
-                        <button class="btn" onclick="checkAnswer(this, 'wrong')">Hund's Rule</button>
-                        <button class="btn" onclick="checkAnswer(this, 'wrong')">Pauli Exclusion Principle</button>
-                    </div>
-                </div>
-
-                <div class="interactive-demo">
-                    <h3>Question 2: Why does Chromium have the configuration [Ar] 4s¹ 3d⁵ instead of [Ar] 4s² 3d⁴?</h3>
-                    <div style="margin: 15px 0;">
-                        <button class="btn" onclick="checkAnswer(this, 'stability')">Half-filled d-subshell provides extra stability</button>
-                        <button class="btn" onclick="checkAnswer(this, 'wrong')">It's a mistake in the periodic table</button>
-                        <button class="btn" onclick="checkAnswer(this, 'wrong')">The 4s orbital is too small</button>
-                    </div>
-                </div>
-
-                <div class="interactive-demo">
-                    <h3>Question 3: When forming a cation, which electrons are lost first?</h3>
-                    <div style="margin: 15px 0;">
-                        <button class="btn" onclick="checkAnswer(this, 'outer')">Outer shell electrons (highest n)</button>
-                        <button class="btn" onclick="checkAnswer(this, 'wrong')">Inner shell electrons</button>
-                        <button class="btn" onclick="checkAnswer(this, 'wrong')">Random electrons</button>
-                    </div>
-                </div>
-
-                <div style="text-align: center; margin: 30px 0;">
-                    <button class="btn" style="background: var(--success);" onclick="calculateScore()">Calculate My Score</button>
-                    <button class="btn" style="background: var(--secondary);" onclick="resetQuiz()">Reset Quiz</button>
-                </div>
-
-                <div id="quizResults" style="display: none; text-align: center; padding: 20px; background: var(--light); border-radius: 15px; margin: 20px 0;">
-                    <h3>🎉 Quiz Results</h3>
-                    <p id="scoreDisplay"></p>
-                    <p id="feedback"></p>
-                </div>
+        <!-- ======= Call to Action ======= -->
+        <div style="text-align: center; margin: 50px 0;">
+            <h2 style="color: var(--accent); margin-bottom: 20px; font-size: 32px;">
+                <span class="custom-emoji emoji-game"></span>
+                Ready to Practice?
+                <span class="custom-emoji emoji-study"></span>
+            </h2>
+            <p style="color: var(--light); font-size: 18px; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto;">
+                Put your knowledge to the test with interactive electron configuration challenges. Build atoms step by step and master the principles through hands-on experience.
+            </p>
+            <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+                <a href="index.html" class="btn primary" style="font-size: 16px; padding: 15px 30px;">
+                    <span class="custom-emoji emoji-game"></span>
+                    Start Interactive App
+                </a>
+                <button class="btn ghost" style="font-size: 16px; padding: 15px 30px;">
+                    <span class="custom-emoji emoji-study"></span>
+                    Take Practice Quiz
+                </button>
             </div>
         </div>
-    </div>
+    </main>
+
+    <!-- ======= Footer (Consistent with main app) ======= -->
+    <footer class="app-footer">
+        <span><span class="custom-emoji emoji-scientist"></span> © 2025 Electron Towers APP • Mr.Sep Educational Services</span>
+    </footer>
 
     <script>
-        function showSection(sectionName) {
-            document.querySelectorAll('.main-content').forEach(section => {
-                section.classList.remove('active');
-            });
-            
-            document.getElementById(sectionName).classList.add('active');
-            
-            document.querySelectorAll('.nav-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            event.target.classList.add('active');
-        }
-
-        function demonstrateAufbau() {
-            const orbitals = document.querySelectorAll('#aufbauDemo .orbital');
-            let delay = 0;
-            
-            orbitals.forEach((orbital, index) => {
-                setTimeout(() => {
-                    orbital.classList.add('filled');
-                    orbital.textContent = '✓';
-                }, delay);
-                delay += 500;
-            });
-            
-            setTimeout(() => {
-                orbitals.forEach(orbital => {
-                    orbital.classList.remove('filled');
-                    orbital.textContent = orbital.dataset.energy;
+        // Interactive functionality for the study tiles
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add hover effects and animations
+            const studyTiles = document.querySelectorAll('.study-tile');
+            studyTiles.forEach(tile => {
+                tile.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-12px) scale(1.03)';
                 });
-            }, delay + 1000);
-        }
-
-        function demonstrateHund() {
-            const orbitals = document.querySelectorAll('#hundDemo .orbital');
-            orbitals.forEach((orbital, index) => {
-                if (index < 3) {
-                    orbital.classList.add('half-filled');
-                    orbital.innerHTML = '↑<br>p' + (index + 1);
-                }
-            });
-        }
-
-        function demonstratePauli() {
-            const orbital = document.querySelector('#pauliDemo .orbital');
-            orbital.classList.add('filled');
-            orbital.innerHTML = '↑↓<br>s';
-        }
-
-        function showSolution(problemNum) {
-            const solution = document.getElementById('solution' + problemNum);
-            solution.style.display = solution.style.display === 'none' ? 'block' : 'none';
-        }
-
-        function checkAnswer(selectedBtn, correctAnswer) {
-            // Reset all buttons in this question
-            const questionDiv = selectedBtn.closest('.interactive-demo');
-            questionDiv.querySelectorAll('.btn').forEach(btn => {
-                btn.style.background = 'var(--primary)';
-            });
-            
-            if (correctAnswer === 'aufbau') {
-                selectedBtn.style.background = 'var(--success)';
-                selectedBtn.dataset.correct = 'true';
-            } else if (correctAnswer === 'stability') {
-                selectedBtn.style.background = 'var(--success)';
-                selectedBtn.dataset.correct = 'true';
-            } else if (correctAnswer === 'outer') {
-                selectedBtn.style.background = 'var(--success)';
-                selectedBtn.dataset.correct = 'true';
-            } else {
-                selectedBtn.style.background = 'var(--danger)';
-                selectedBtn.dataset.correct = 'false';
-            }
-        }
-
-        let quizScore = 0;
-        let totalQuestions = 3;
-
-        function calculateScore() {
-            const correctAnswers = document.querySelectorAll('[data-correct="true"]').length;
-            const percentage = (correctAnswers / totalQuestions) * 100;
-            
-            document.getElementById('scoreDisplay').textContent = `Score: ${correctAnswers}/${totalQuestions} (${Math.round(percentage)}%)`;
-            
-            let feedback = '';
-            if (percentage >= 90) {
-                feedback = '🎉 Excellent! You have a strong understanding of electron configurations!';
-            } else if (percentage >= 70) {
-                feedback = '👍 Good work! Review the concepts you missed for even better understanding.';
-            } else if (percentage >= 50) {
-                feedback = '📚 Keep studying! Focus on the core principles and practice more problems.';
-            } else {
-                feedback = '📖 Time to review! Go back through the study materials and try again.';
-            }
-            
-            document.getElementById('feedback').textContent = feedback;
-            document.getElementById('quizResults').style.display = 'block';
-        }
-
-        function resetQuiz() {
-            quizScore = 0;
-            document.querySelectorAll('.btn').forEach(btn => {
-                btn.style.background = 'var(--primary)';
-                delete btn.dataset.correct;
-            });
-            document.getElementById('quizResults').style.display = 'none';
-        }
-
-        function showAufbauSequence() {
-            const sequenceDiv = document.getElementById('aufbauSequence');
-            const stepSpan = document.getElementById('sequenceStep');
-            const nextSpan = document.getElementById('sequenceNext');
-            
-            if (sequenceDiv.style.display === 'none') {
-                sequenceDiv.style.display = 'block';
                 
-                const sequence = ['1s', '2s', '2p', '3s', '3p', '4s', '3d', '4p', '5s', '4d', '5p', '6s', '4f', '5d', '6p'];
-                let currentIndex = 0;
-                
-                const interval = setInterval(() => {
-                    if (currentIndex < sequence.length - 1) {
-                        stepSpan.textContent = sequence[currentIndex];
-                        nextSpan.textContent = sequence[currentIndex + 1];
-                        currentIndex++;
-                    } else {
-                        clearInterval(interval);
-                        stepSpan.textContent = sequence[sequence.length - 1];
-                        nextSpan.textContent = 'Complete!';
-                    }
-                }, 800);
-            } else {
-                sequenceDiv.style.display = 'none';
-            }
+                tile.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+
+            // Add click effects for buttons
+            const buttons = document.querySelectorAll('.tile-btn, .btn');
+            buttons.forEach(button => {
+                button.addEventListener('click', function() {
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = 'scale(1)';
+                    }, 150);
+                });
+            });
+        });
+
+        // Placeholder functions for tile actions
+        function showSection(section) {
+            console.log('Showing section:', section);
+            // This would show detailed content for each section
+        }
+
+        function startOverview() {
+            console.log('Starting overview journey');
+            // This would begin an interactive overview
+        }
+
+        function demonstrateRules() {
+            console.log('Demonstrating rules');
+            // This would show interactive rule demonstrations
+        }
+
+        function explainExceptions() {
+            console.log('Explaining exceptions');
+            // This would provide detailed exception explanations
+        }
+
+        function ionExamples() {
+            console.log('Showing ion examples');
+            // This would display ion formation examples
+        }
+
+        function showProblems() {
+            console.log('Showing practice problems');
+            // This would display practice problems
+        }
+
+        function startAssessment() {
+            console.log('Starting assessment');
+            // This would begin the quiz
         }
     </script>
 </body>
