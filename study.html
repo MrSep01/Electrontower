@@ -1295,7 +1295,7 @@
                     </ul>
                 </div>
                 <div class="tile-actions">
-                    <button class="tile-btn" onclick="showSection('overview')">Learn More</button>
+                    <button class="tile-btn" onclick="showOverviewContent()">Learn More</button>
                     <button class="tile-btn secondary" onclick="startOverview()">Begin Journey</button>
                 </div>
             </div>
@@ -1831,7 +1831,7 @@
         // Interactive functionality for the study tiles
         document.addEventListener('DOMContentLoaded', function() {
             // Add hover effects and animations
-   is an o         const studyTiles = document.querySelectorAll('.study-tile');
+            const studyTiles = document.querySelectorAll('.study-tile');
             studyTiles.forEach(tile => {
                 tile.addEventListener('mouseenter', function() {
                     this.style.transform = 'translateY(-12px) scale(1.03)';
