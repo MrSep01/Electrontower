@@ -18,8 +18,65 @@
             --light: #f8fafc;
             --border: #e2e8f0;
             --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-            --shadow-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-        }
+                    --shadow-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    }
+
+    /* ======= Custom Logo-Based Emojis ======= */
+    .custom-emoji {
+        display: inline-block;
+        width: 1.2em;
+        height: 1.2em;
+        vertical-align: middle;
+        position: relative;
+    }
+
+    .emoji-scientist {
+        background: linear-gradient(135deg, #87CEEB 0%, #B0E0E6 100%);
+        border-radius: 50%;
+        border: 2px solid #8b5cf6;
+    }
+
+    .emoji-scientist::before {
+        content: '';
+        position: absolute;
+        top: 2px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 8px;
+        height: 6px;
+        background: #8b5cf6;
+        border-radius: 4px 4px 2px 2px;
+    }
+
+    .emoji-scientist::after {
+        content: '';
+        position: absolute;
+        top: 8px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 6px;
+        height: 4px;
+        background: #fbbf24;
+        border-radius: 3px;
+    }
+
+    .emoji-atom {
+        background: white;
+        border: 2px solid #8b5cf6;
+        border-radius: 50%;
+    }
+
+    .emoji-atom::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 3px;
+        height: 3px;
+        background: #8b5cf6;
+        border-radius: 50%;
+    }
 
         * {
             margin: 0;
@@ -216,15 +273,16 @@
     <div class="container">
         <div class="header">
             <div style="text-align: left; margin-bottom: 20px;">
-                <a href="index.html" class="btn" style="text-decoration: none; background: var(--secondary);">← Back to App</a>
+                <a href="index.html" class="btn" style="text-decoration: none; background: var(--secondary);"><span class="custom-emoji emoji-atom"></span> Back to App</a>
             </div>
-            <h1>🧪 Electron Configuration Study Guide</h1>
+            <h1><span class="custom-emoji emoji-scientist"></span> Electron Configuration Study Guide</h1>
             <p>Master the fundamental principles of electron arrangement in atoms</p>
         </div>
 
         <div class="nav">
             <button class="nav-btn active" onclick="showSection('overview')">Overview</button>
             <button class="nav-btn" onclick="showSection('rules')">Core Rules</button>
+            <button class="nav-btn" onclick="showSection('aufbau-diagram')">Electron Aufbau Diagram</button>
             <button class="nav-btn" onclick="showSection('exceptions')">Exceptions</button>
             <button class="nav-btn" onclick="showSection('ions')">Ion Formation</button>
             <button class="nav-btn" onclick="showSection('practice')">Practice</button>
@@ -301,6 +359,99 @@
                         <div class="orbital" data-orbital="s">s</div>
                     </div>
                     <button class="btn" onclick="demonstratePauli()">Show Maximum Occupancy</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="aufbau-diagram" class="main-content">
+            <div class="card">
+                <h2><span class="custom-emoji emoji-atom"></span> Electron Aufbau Diagram</h2>
+                <p>Visual representation of how electrons fill atomic orbitals following the Aufbau principle.</p>
+                
+                <div class="interactive-demo">
+                    <h3>Diagonal Aufbau Sequence</h3>
+                    <p>The diagonal rule shows the order in which subshells are filled:</p>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 15px; margin: 20px 0;">
+                        <div style="text-align: center; padding: 15px; background: var(--light); border-radius: 10px; border: 2px solid var(--primary);">
+                            <h4>1s</h4>
+                            <p style="font-size: 0.9rem; margin: 5px 0;">Energy Level 1</p>
+                            <p style="font-size: 0.8rem; color: var(--primary);">2 electrons</p>
+                        </div>
+                        
+                        <div style="text-align: center; padding: 15px; background: var(--light); border-radius: 10px; border: 2px solid var(--primary);">
+                            <h4>2s</h4>
+                            <p style="font-size: 0.9rem; margin: 5px 0;">Energy Level 2</p>
+                            <p style="font-size: 0.8rem; color: var(--primary);">2 electrons</p>
+                        </div>
+                        
+                        <div style="text-align: center; padding: 15px; background: var(--light); border-radius: 10px; border: 2px solid var(--primary);">
+                            <h4>2p</h4>
+                            <p style="font-size: 0.9rem; margin: 5px 0;">Energy Level 2</p>
+                            <p style="font-size: 0.8rem; color: var(--primary);">6 electrons</p>
+                        </div>
+                        
+                        <div style="text-align: center; padding: 15px; background: var(--light); border-radius: 10px; border: 2px solid var(--primary);">
+                            <h4>3s</h4>
+                            <p style="font-size: 0.9rem; margin: 5px 0;">Energy Level 3</p>
+                            <p style="font-size: 0.8rem; color: var(--primary);">2 electrons</p>
+                        </div>
+                        
+                        <div style="text-align: center; padding: 15px; background: var(--light); border-radius: 10px; border: 2px solid var(--primary);">
+                            <h4>3p</h4>
+                            <p style="font-size: 0.9rem; margin: 5px 0;">Energy Level 3</p>
+                            <p style="font-size: 0.8rem; color: var(--primary);">6 electrons</p>
+                        </div>
+                        
+                        <div style="text-align: center; padding: 15px; background: var(--light); border-radius: 10px; border: 2px solid var(--primary);">
+                            <h4>4s</h4>
+                            <p style="font-size: 0.9rem; margin: 5px 0;">Energy Level 4</p>
+                            <p style="font-size: 0.8rem; color: var(--primary);">2 electrons</p>
+                        </div>
+                        
+                        <div style="text-align: center; padding: 15px; background: var(--light); border-radius: 10px; border: 2px solid var(--primary);">
+                            <h4>3d</h4>
+                            <p style="font-size: 0.9rem; margin: 5px 0;">Energy Level 3</p>
+                            <p style="font-size: 0.8rem; color: var(--primary);">10 electrons</p>
+                        </div>
+                        
+                        <div style="text-align: center; padding: 15px; background: var(--light); border-radius: 10px; border: 2px solid var(--primary);">
+                            <h4>4p</h4>
+                            <p style="font-size: 0.9rem; margin: 5px 0;">Energy Level 4</p>
+                            <p style="font-size: 0.8rem; color: var(--primary);">6 electrons</p>
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center; margin: 20px 0;">
+                        <button class="btn" onclick="showAufbauSequence()">Show Filling Sequence</button>
+                    </div>
+                    
+                    <div id="aufbauSequence" style="display: none; text-align: center; padding: 20px; background: var(--light); border-radius: 15px; margin: 20px 0;">
+                        <h4>Filling Order Animation</h4>
+                        <div style="font-size: 1.2rem; font-weight: bold; color: var(--primary);">
+                            <span id="sequenceStep">1s</span> → <span id="sequenceNext">2s</span>
+                        </div>
+                        <p style="margin-top: 10px; color: var(--secondary);">Follow the diagonal pattern!</p>
+                    </div>
+                </div>
+                
+                <div class="interactive-demo">
+                    <h3>Energy Level Crossovers</h3>
+                    <p>Some energy levels have crossovers due to electron-electron repulsion:</p>
+                    
+                    <div style="background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%); border: 2px solid var(--warning); border-radius: 15px; padding: 20px; margin: 20px 0;">
+                        <h4>4s vs 3d Crossover</h4>
+                        <p><strong>Expected order:</strong> 3d → 4s</p>
+                        <p><strong>Actual order:</strong> 4s → 3d</p>
+                        <p><strong>Why:</strong> 4s orbital has lower energy than 3d due to shielding effects</p>
+                    </div>
+                    
+                    <div style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); border: 2px solid var(--accent); border-radius: 15px; padding: 20px; margin: 20px 0;">
+                        <h4>5s vs 4d Crossover</h4>
+                        <p><strong>Expected order:</strong> 4d → 5s</p>
+                        <p><strong>Actual order:</strong> 5s → 4d</p>
+                        <p><strong>Why:</strong> Similar shielding effects at higher energy levels</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -587,6 +738,33 @@
                 delete btn.dataset.correct;
             });
             document.getElementById('quizResults').style.display = 'none';
+        }
+
+        function showAufbauSequence() {
+            const sequenceDiv = document.getElementById('aufbauSequence');
+            const stepSpan = document.getElementById('sequenceStep');
+            const nextSpan = document.getElementById('sequenceNext');
+            
+            if (sequenceDiv.style.display === 'none') {
+                sequenceDiv.style.display = 'block';
+                
+                const sequence = ['1s', '2s', '2p', '3s', '3p', '4s', '3d', '4p', '5s', '4d', '5p', '6s', '4f', '5d', '6p'];
+                let currentIndex = 0;
+                
+                const interval = setInterval(() => {
+                    if (currentIndex < sequence.length - 1) {
+                        stepSpan.textContent = sequence[currentIndex];
+                        nextSpan.textContent = sequence[currentIndex + 1];
+                        currentIndex++;
+                    } else {
+                        clearInterval(interval);
+                        stepSpan.textContent = sequence[sequence.length - 1];
+                        nextSpan.textContent = 'Complete!';
+                    }
+                }, 800);
+            } else {
+                sequenceDiv.style.display = 'none';
+            }
         }
     </script>
 </body>

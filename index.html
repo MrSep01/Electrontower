@@ -39,6 +39,220 @@
 body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,'Noto Sans',sans-serif;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:var(--text)}
 .hidden{display:none!important}
 .app-header{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:3px solid var(--accent);background:rgba(99,102,241,0.9);position:sticky;top:0;z-index:30;backdrop-filter:blur(10px)}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.header-logo {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, #87CEEB 0%, #B0E0E6 100%);
+  border-radius: 15px;
+  padding: 6px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+  overflow: hidden;
+}
+
+.logo-image {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.logo-placeholder {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background: linear-gradient(135deg, #87CEEB 0%, #B0E0E6 100%);
+  border-radius: 10px;
+}
+
+/* Scientist elements */
+.logo-scientist {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.logo-hair-purple {
+  position: absolute;
+  top: 8px;
+  left: 20px;
+  width: 20px;
+  height: 12px;
+  background: #8b5cf6;
+  border-radius: 10px 10px 8px 8px;
+}
+
+.logo-face-skin {
+  position: absolute;
+  top: 18px;
+  left: 22px;
+  width: 16px;
+  height: 12px;
+  background: #fbbf24;
+  border-radius: 8px;
+}
+
+.logo-eyes-blue {
+  position: absolute;
+  top: 20px;
+  left: 24px;
+  width: 12px;
+  height: 8px;
+  display: flex;
+  gap: 4px;
+}
+
+.logo-eyes-blue::before,
+.logo-eyes-blue::after {
+  content: '';
+  width: 4px;
+  height: 4px;
+  background: #1e40af;
+  border-radius: 50%;
+}
+
+.logo-glasses-round {
+  position: absolute;
+  top: 19px;
+  left: 21px;
+  width: 18px;
+  height: 6px;
+  border: 2px solid #1e293b;
+  border-radius: 6px;
+}
+
+.logo-smile-friendly {
+  position: absolute;
+  top: 26px;
+  left: 25px;
+  width: 8px;
+  height: 4px;
+  border: 1px solid #dc2626;
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+}
+
+.logo-labcoat-white {
+  position: absolute;
+  top: 30px;
+  left: 18px;
+  width: 24px;
+  height: 14px;
+  background: white;
+  border-radius: 4px 4px 0 0;
+}
+
+.logo-tie-purple {
+  position: absolute;
+  top: 32px;
+  left: 26px;
+  width: 4px;
+  height: 10px;
+  background: #8b5cf6;
+  border-radius: 2px;
+}
+
+/* Science elements */
+.logo-science-elements {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.logo-atom-white {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border: 1px solid white;
+  border-radius: 50%;
+}
+
+.logo-atom-white:nth-child(1) {
+  top: 5px;
+  left: 5px;
+}
+
+.logo-atom-white:nth-child(2) {
+  top: 5px;
+  right: 5px;
+}
+
+.logo-beaker-purple {
+  position: absolute;
+  width: 6px;
+  height: 8px;
+  background: #8b5cf6;
+  border-radius: 3px 3px 0 0;
+}
+
+.logo-beaker-purple:nth-child(3) {
+  bottom: 5px;
+  left: 5px;
+}
+
+.logo-beaker-purple:nth-child(4) {
+  bottom: 5px;
+  right: 5px;
+}
+
+.logo-syringe-white {
+  position: absolute;
+  width: 3px;
+  height: 10px;
+  background: white;
+  border: 1px solid #8b5cf6;
+  border-radius: 1px;
+}
+
+.logo-syringe-white:nth-child(5) {
+  bottom: 8px;
+  left: 15px;
+}
+
+.logo-syringe-white:nth-child(6) {
+  bottom: 8px;
+  right: 15px;
+}
+
+.logo-star-white {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: white;
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+
+.logo-star-white:nth-child(7) {
+  top: 12px;
+  left: 12px;
+}
+
+.logo-star-white:nth-child(8) {
+  top: 18px;
+  right: 10px;
+}
+
+.logo-star-white:nth-child(9) {
+  bottom: 15px;
+  left: 10px;
+}
+
+.logo-star-white:nth-child(10) {
+  bottom: 22px;
+  right: 8px;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+}
 .brand h1{margin:0;font-size:22px}.subtitle{margin:2px 0 0;color:#fff;font-size:12px;opacity:.85}
 .btn{background:var(--primary);color:#fff;border:none;padding:10px 12px;border-radius:10px;cursor:pointer;font-weight:800;transition:all 0.3s ease}
 .btn:hover{background:var(--primary-dark);transform:translateY(-2px);box-shadow:var(--shadow)}
@@ -61,9 +275,9 @@ body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantare
 .ptile .sym{font-size:calc(var(--tile)*.32);line-height:1}.ptile .z{position:absolute;top:2px;left:4px;font-size:calc(var(--tile)*.22);opacity:.9}
 .ptile.s{background:#2c7be5}.ptile.p{background:#f2c31f;color:#231f20}.ptile.d{background:#8f5af7}.ptile.f{background:#fb6e6e}
 .ptile:hover{transform:translateY(-2px);box-shadow:0 4px 0 0 rgba(0,0,0,.25)} .ptile.selected{border-color:#fff;box-shadow:0 0 0 3px rgba(255,255,255,.45) inset}
-.block-overlay{border:2px dashed var(--warning);border-radius:12px;display:flex;align-items:flex-start;justify-content:flex-start;padding:4px;pointer-events:none;z-index:0}
-.block-overlay label{background:rgba(99,102,241,0.9);padding:2px 6px;border-radius:12px;font-size:calc(var(--tile)*.22);color:var(--light);backdrop-filter:blur(10px)}
-.toolbar.bottom{display:flex;align-items:center;gap:12px;justify-content:space-between;margin-top:10px}
+.block-overlay{border:2px dashed var(--warning);border-radius:12px;display:flex;align-items:flex-start;justify-content:flex-start;padding:4px;pointer-events:none;z-index:0;position:relative}
+.block-overlay label{background:rgba(99,102,241,0.9);padding:2px 6px;border-radius:12px;font-size:calc(var(--tile)*.22);color:var(--light);backdrop-filter:blur(10px);position:absolute;top:-8px;left:8px;z-index:10}
+.toolbar.bottom{display:flex;align-items:center;gap:16px;justify-content:center;margin-top:10px;flex-wrap:wrap}
 .current-pick{font-weight:900;color:var(--warning)}.mini{color:var(--light);font-size:12px}.stat{display:inline-flex;gap:6px;align-items:center}
 .below-ptable{display:grid;grid-template-columns:360px 1fr;gap:16px;margin-top:12px}
 .sidebar{display:flex;flex-direction:column;gap:16px}
@@ -113,10 +327,11 @@ body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantare
 .badge{display:inline-block;padding:2px 6px;border-radius:12px;font-size:11px;background:rgba(15,23,42,0.9);border:2px solid var(--secondary);color:#fff;backdrop-filter:blur(10px)}
 
 .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;z-index:2000}
-.modal-backdrop.hidden{display:none}
+.modal-backdrop.hidden{visibility:hidden;opacity:0}
 .modal{width:min(720px,92vw);background:rgba(30,41,59,0.95);border:2px solid var(--border);border-radius:20px;padding:12px;box-shadow:0 10px 40px rgba(0,0,0,.5);backdrop-filter:blur(10px)}
 .modal-header{display:flex;align-items:center;justify-content:space-between;gap:10px}
-.tabbar{display:flex;gap:8px;margin:10px 0}
+.modal-body{padding:20px;max-height:60vh;overflow-y:auto}
+ok .tabbar{display:flex;gap:8px;margin:10px 0}
 .tab{background:rgba(15,23,42,0.8);color:#fff;border:2px solid var(--border);border-radius:15px;padding:8px 12px;cursor:pointer;transition:all 0.3s ease}
 .tab:hover{background:rgba(255,255,255,0.1)}
 .tab.active{background:var(--success)}
@@ -124,14 +339,807 @@ body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantare
 .modal-footer{display:flex;align-items:center;justify-content:space-between;gap:10px}
 .modal-actions{display:flex;gap:10px}
 
+/* ======= Custom Logo-Based Emojis ======= */
+.custom-emoji {
+  display: inline-block;
+  width: 1.2em;
+  height: 1.2em;
+  vertical-align: middle;
+  position: relative;
+}
+
+.emoji-scientist {
+  background: linear-gradient(135deg, #87CEEB 0%, #B0E0E6 100%);
+  border-radius: 50%;
+  border: 2px solid #8b5cf6;
+}
+
+.emoji-scientist::before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 6px;
+  background: #8b5cf6;
+  border-radius: 4px 4px 2px 2px;
+}
+
+.emoji-scientist::after {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 4px;
+  background: #fbbf24;
+  border-radius: 3px;
+}
+
+.emoji-atom {
+  background: white;
+  border: 2px solid #8b5cf6;
+  border-radius: 50%;
+}
+
+.emoji-atom::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 3px;
+  height: 3px;
+  background: #8b5cf6;
+  border-radius: 50%;
+}
+
+.emoji-beaker {
+  background: #8b5cf6;
+  border: 1px solid white;
+  border-radius: 2px 2px 0 0;
+  width: 8px;
+  height: 10px;
+}
+
+.emoji-beaker::after {
+  content: '';
+  position: absolute;
+  top: -1px;
+  right: 1px;
+  width: 2px;
+  height: 2px;
+  background: white;
+  border-radius: 50%;
+}
+
+.emoji-syringe {
+  background: white;
+  border: 1px solid #8b5cf6;
+  border-radius: 1px;
+  width: 4px;
+  height: 12px;
+}
+
+.emoji-syringe::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: 1px;
+  width: 2px;
+  height: 2px;
+  background: #8b5cf6;
+  border-radius: 50%;
+}
+
+.emoji-star {
+  background: white;
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  width: 10px;
+  height: 10px;
+}
+
+.emoji-electron {
+  background: #06b6d4;
+  border-radius: 50%;
+  width: 8px;
+  height: 8px;
+  box-shadow: 0 0 4px #06b6d4;
+}
+
+.emoji-nucleus {
+  background: #ef4444;
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  box-shadow: 0 0 4px #ef4444;
+}
+
+.emoji-energy {
+  background: #f59e0b;
+  border-radius: 50%;
+  width: 8px;
+  height: 8px;
+  box-shadow: 0 0 4px #f59e0b;
+}
+
+.emoji-study {
+  background: #10b981;
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  box-shadow: 0 0 4px #10b981;
+}
+
+.emoji-game {
+  background: #8b5cf6;
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  box-shadow: 0 0 4px #8b5cf6;
+}
+
+/* ======= Version Modal Styles ======= */
+.version-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex: 1;
+}
+
+.app-logo {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, #87CEEB 0%, #B0E0E6 100%);
+  border-radius: 20px;
+  padding: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.logo-boy {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.logo-hair {
+  position: absolute;
+  top: 8px;
+  left: 25px;
+  width: 50px;
+  height: 30px;
+  background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);
+  border-radius: 25px 25px 20px 20px;
+  box-shadow: 0 3px 8px rgba(139, 92, 246, 0.4);
+}
+
+.logo-hair::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: 8px;
+  width: 12px;
+  height: 12px;
+  background: #8b5cf6;
+  border-radius: 50%;
+}
+
+.logo-hair::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  right: 5px;
+  width: 12px;
+  height: 12px;
+  background: #8b5cf6;
+  border-radius: 50%;
+}
+
+.logo-face {
+  position: absolute;
+  top: 32px;
+  left: 30px;
+  width: 40px;
+  height: 32px;
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  border-radius: 20px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+}
+
+.logo-face::before {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 6px;
+  background: #fca5a5;
+  border-radius: 50%;
+  top: 8px;
+  left: 4px;
+}
+
+.logo-face::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 6px;
+  background: #fca5a5;
+  border-radius: 50%;
+  top: 8px;
+  right: 4px;
+}
+
+.logo-eyes {
+  position: absolute;
+  top: 10px;
+  left: 8px;
+  display: flex;
+  gap: 12px;
+}
+
+.logo-eye {
+  width: 8px;
+  height: 8px;
+  background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+  border-radius: 50%;
+  position: relative;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.logo-eye::after {
+  content: '';
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  width: 3px;
+  height: 3px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+.logo-glasses {
+  position: absolute;
+  top: 8px;
+  left: 4px;
+  width: 32px;
+  height: 14px;
+  border: 3px solid #1e293b;
+  border-radius: 16px;
+  background: transparent;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.logo-smile {
+  position: absolute;
+  bottom: 6px;
+  left: 12px;
+  width: 16px;
+  height: 10px;
+  border: 2px solid #dc2626;
+  border-top: none;
+  border-radius: 0 0 16px 16px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.logo-labcoat {
+  position: absolute;
+  top: 58px;
+  left: 20px;
+  width: 60px;
+  height: 35px;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  border-radius: 10px 10px 0 0;
+  border: 2px solid #e5e7eb;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+}
+
+.logo-tie {
+  position: absolute;
+  top: 65px;
+  left: 42px;
+  width: 12px;
+  height: 25px;
+  background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.logo-atoms {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.logo-atom {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  border: 3px solid white;
+  border-radius: 50%;
+  background: transparent;
+  box-shadow: 0 2px 6px rgba(255,255,255,0.3);
+}
+
+.logo-atom::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  background: white;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+/* Add electron orbits */
+.logo-atom::after {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  width: 32px;
+  height: 32px;
+  border: 1px solid rgba(255,255,255,0.6);
+  border-radius: 50%;
+}
+
+.logo-atom.top-left {
+  top: 5px;
+  left: 5px;
+}
+
+.logo-atom.top-right {
+  top: 5px;
+  right: 5px;
+}
+
+.logo-beakers {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.logo-beaker {
+  position: absolute;
+  width: 18px;
+  height: 24px;
+  background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);
+  border-radius: 10px 10px 0 0;
+  border: 2px solid white;
+  box-shadow: 0 2px 6px rgba(139, 92, 246, 0.3);
+}
+
+/* Add liquid and bubbles */
+.logo-beaker::before {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 2px;
+  width: 14px;
+  height: 18px;
+  background: linear-gradient(135deg, #a855f7 0%, #8b5cf6 100%);
+  border-radius: 8px 8px 0 0;
+}
+
+.logo-beaker::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  right: 2px;
+  width: 4px;
+  height: 4px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+.logo-beaker.left {
+  bottom: 5px;
+  left: 5px;
+}
+
+.logo-beaker.right {
+  bottom: 5px;
+  right: 5px;
+}
+
+.logo-syringes {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.logo-syringe {
+  position: absolute;
+  width: 10px;
+  height: 28px;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  border: 2px solid #8b5cf6;
+  border-radius: 5px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* Add syringe details */
+.logo-syringe::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: 2px;
+  width: 6px;
+  height: 6px;
+  background: #8b5cf6;
+  border-radius: 50%;
+}
+
+.logo-syringe::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 2px;
+  width: 6px;
+  height: 12px;
+  background: linear-gradient(135deg, #a855f7 0%, #8b5cf6 100%);
+  border-radius: 3px;
+}
+
+.logo-syringe.left {
+  bottom: 5px;
+  left: 25px;
+}
+
+.logo-syringe.right {
+  bottom: 5px;
+  right: 25px;
+}
+
+/* Add additional scientific elements */
+.logo-stars {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.logo-star {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: white;
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+
+.logo-star:nth-child(1) {
+  top: 15px;
+  left: 15px;
+}
+
+.logo-star:nth-child(2) {
+  top: 25px;
+  right: 20px;
+}
+
+.logo-star:nth-child(3) {
+  bottom: 20px;
+  left: 20px;
+}
+
+.logo-star:nth-child(4) {
+  bottom: 30px;
+  right: 15px;
+}
+
+.version-info {
+  flex: 1;
+}
+
+.version-info h3 {
+  margin: 0 0 8px 0;
+  color: var(--light);
+  font-size: 24px;
+}
+
+.current-version {
+  margin: 0 0 4px 0;
+  color: var(--warning);
+  font-size: 16px;
+}
+
+.version-tagline {
+  margin: 0;
+  color: var(--light);
+  opacity: 0.8;
+  font-size: 14px;
+}
+
+.version-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.version-entry {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  background: rgba(30, 41, 59, 0.5);
+  border: 2px solid var(--border);
+  border-radius: 15px;
+  transition: all 0.3s ease;
+}
+
+.version-entry:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+.version-entry.current {
+  border-color: var(--success);
+  background: rgba(16, 185, 129, 0.1);
+}
+
+.version-badge {
+  background: var(--primary);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 20px;
+  font-weight: 800;
+  font-size: 14px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  height: fit-content;
+}
+
+.version-entry.current .version-badge {
+  background: var(--success);
+}
+
+.version-content {
+  flex: 1;
+}
+
+.version-content h4 {
+  margin: 0 0 8px 0;
+  color: var(--light);
+  font-size: 18px;
+}
+
+.version-date {
+  margin: 0 0 16px 0;
+  color: var(--accent);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.version-features h5 {
+  margin: 16px 0 8px 0;
+  color: var(--warning);
+  font-size: 14px;
+}
+
+.version-features ul {
+  margin: 0 0 16px 0;
+  padding-left: 20px;
+}
+
+.version-features li {
+  margin: 4px 0;
+  color: var(--light);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.version-features strong {
+  color: var(--accent);
+}
+
+/* Game Welcome Modal Styles */
+.welcome-section{margin-bottom:20px}
+.welcome-section h4{color:var(--success);margin-bottom:8px;font-size:16px}
+.welcome-section p{margin-bottom:12px;line-height:1.5}
+.welcome-section ul{margin:8px 0;padding-left:20px}
+.welcome-section li{margin-bottom:6px;line-height:1.4}
+
+.scoring-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:15px 0}
+.score-item{padding:10px;border-radius:8px;text-align:center;font-weight:600}
+.score-item.correct{background:rgba(72,187,120,0.2);border:2px solid #48bb78;color:#48bb78}
+.score-item.hund{background:rgba(66,153,225,0.2);border:2px solid #4299e1;color:#4299e1}
+.score-item.pauli{background:rgba(237,137,54,0.2);border:2px solid #ed8936;color:#ed8936}
+.score-item.wrong{background:rgba(245,101,101,0.2);border:2px solid #f56565;color:#f56565}
+
+/* Element Reveal Animation */
+.element-reveal{animation:elementReveal 1.5s ease-out}
+@keyframes elementReveal{
+  0%{transform:scale(0.5);opacity:0}
+  50%{transform:scale(1.2);opacity:0.8}
+  100%{transform:scale(1);opacity:1}
+}
+
+/* Configuration Display Area */
+.config-section{
+  margin:16px 0;
+  width:100%;
+}
+
+.config-display{
+  background:rgba(30,41,59,0.9);
+  border:2px solid var(--border);
+  border-radius:20px;
+  padding:20px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+  backdrop-filter:blur(10px);
+  width:100%;
+}
+
+.config-item{
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+}
+
+.config-item.config-full-width{
+  grid-column:span 2;
+}
+
+.config-label{
+  color:var(--warning);
+  font-weight:700;
+  font-size:14px;
+  text-transform:uppercase;
+  letter-spacing:0.5px;
+}
+
+.config-value{
+  color:#fff;
+  font-weight:600;
+  font-size:18px;
+  line-height:1.3;
+  word-break:break-word;
+}
+
+.config-value#newCurrentConfig,
+.config-value#newShorthandConfig{
+  font-family:monospace;
+  font-size:16px;
+  background:rgba(15,23,42,0.5);
+  padding:8px 12px;
+  border-radius:8px;
+  border:1px solid var(--secondary);
+  min-height:40px;
+  display:flex;
+  align-items:center;
+  word-break:break-word;
+  overflow-wrap:break-word;
+}
+
+/* Ensure superscript formatting is properly displayed */
+.config-value#newCurrentConfig,
+.config-value#newShorthandConfig {
+  color: #e2e8f0; /* Light text color */
+}
+
+/* Color coding for energy levels - Full Configuration */
+.config-value#newCurrentConfig .energy-level-1s { color: #3b82f6; } /* Blue for 1s */
+.config-value#newCurrentConfig .energy-level-2s { color: #10b981; } /* Green for 2s */
+.config-value#newCurrentConfig .energy-level-2p { color: #f59e0b; } /* Orange for 2p */
+.config-value#newCurrentConfig .energy-level-3s { color: #8b5cf6; } /* Purple for 3s */
+.config-value#newCurrentConfig .energy-level-3p { color: #ef4444; } /* Red for 3p */
+.config-value#newCurrentConfig .energy-level-3d { color: #06b6d4; } /* Cyan for 3d */
+.config-value#newCurrentConfig .energy-level-4s { color: #84cc16; } /* Lime for 4s */
+.config-value#newCurrentConfig .energy-level-4p { color: #f97316; } /* Orange-red for 4p */
+.config-value#newCurrentConfig .energy-level-4d { color: #ec4899; } /* Pink for 4d */
+.config-value#newCurrentConfig .energy-level-4f { color: #a855f7; } /* Violet for 4f */
+.config-value#newCurrentConfig .energy-level-5s { color: #22c55e; } /* Green for 5s */
+.config-value#newCurrentConfig .energy-level-5p { color: #f43f5e; } /* Rose for 5p */
+.config-value#newCurrentConfig .energy-level-5d { color: #14b8a6; } /* Teal for 5d */
+.config-value#newCurrentConfig .energy-level-5f { color: #a855f7; } /* Violet for 5f */
+.config-value#newCurrentConfig .energy-level-6s { color: #65a30d; } /* Lime for 6s */
+.config-value#newCurrentConfig .energy-level-6p { color: #ea580c; } /* Orange for 6p */
+.config-value#newCurrentConfig .energy-level-6d { color: #db2777; } /* Pink for 6d */
+.config-value#newCurrentConfig .energy-level-6f { color: #9333ea; } /* Purple for 6f */
+.config-value#newCurrentConfig .energy-level-7s { color: #4ade80; } /* Green for 7s */
+.config-value#newCurrentConfig .energy-level-7p { color: #fb923c; } /* Orange for 7p */
+.config-value#newCurrentConfig .energy-level-7d { color: #06b6d4; } /* Cyan for 7d */
+.config-value#newCurrentConfig .energy-level-7f { color: #c084fc; } /* Purple for 7f */
+
+/* Color coding for energy levels - Shorthand (same colors) */
+.config-value#newShorthandConfig .energy-level-1s { color: #3b82f6; } /* Blue for 1s */
+.config-value#newShorthandConfig .energy-level-2s { color: #10b981; } /* Green for 2s */
+.config-value#newCurrentConfig .energy-level-2p { color: #f59e0b; } /* Orange for 2p */
+.config-value#newShorthandConfig .energy-level-2p { color: #f59e0b; } /* Orange for 2p */
+.config-value#newShorthandConfig .energy-level-3s { color: #8b5cf6; } /* Purple for 3s */
+.config-value#newShorthandConfig .energy-level-3p { color: #ef4444; } /* Red for 3p */
+.config-value#newShorthandConfig .energy-level-3d { color: #06b6d4; } /* Cyan for 3d */
+.config-value#newShorthandConfig .energy-level-4s { color: #84cc16; } /* Lime for 4s */
+.config-value#newShorthandConfig .energy-level-4p { color: #f97316; } /* Orange-red for 4p */
+.config-value#newShorthandConfig .energy-level-4d { color: #ec4899; } /* Pink for 4d */
+.config-value#newShorthandConfig .energy-level-4f { color: #a855f7; } /* Violet for 4f */
+.config-value#newShorthandConfig .energy-level-5s { color: #22c55e; } /* Green for 5s */
+.config-value#newShorthandConfig .energy-level-5p { color: #f43f5e; } /* Rose for 5p */
+.config-value#newShorthandConfig .energy-level-5d { color: #14b8a6; } /* Teal for 5d */
+.config-value#newShorthandConfig .energy-level-5f { color: #a855f7; } /* Violet for 5f */
+.config-value#newShorthandConfig .energy-level-6s { color: #65a30d; } /* Lime for 6s */
+.config-value#newShorthandConfig .energy-level-6p { color: #ea580c; } /* Orange for 6p */
+.config-value#newShorthandConfig .energy-level-6d { color: #db2777; } /* Pink for 6d */
+.config-value#newShorthandConfig .energy-level-6f { color: #9333ea; } /* Purple for 6f */
+.config-value#newShorthandConfig .energy-level-7s { color: #4ade80; } /* Green for 7s */
+.config-value#newShorthandConfig .energy-level-7p { color: #fb923c; } /* Orange for 7p */
+.config-value#newShorthandConfig .energy-level-7d { color: #06b6d4; } /* Cyan for 7d */
+.config-value#newShorthandConfig .energy-level-7f { color: #c084fc; } /* Purple for 7f */
+
+/* Noble gas notation in gold */
+.config-value#newShorthandConfig .noble-gas {
+  color: #fbbf24; /* Gold color */
+  font-weight: bold;
+}
+
+/* Ion state styling */
+.config-value.positive-ion {
+  background: rgba(255, 243, 205, 0.9) !important;
+  border-color: #ffeaa7 !important;
+  color: #856404 !important;
+}
+
+.config-value.negative-ion {
+  background: rgba(209, 236, 241, 0.9) !important;
+  border-color: #bee5eb !important;
+  color: #0c5460 !important;
+}
+
+/* Ion charge info display */
+.ion-info {
+  font-size: 11px;
+  color: #666;
+  margin-left: 8px;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 3px;
+  background: rgba(0,0,0,0.1);
+  transition: background 0.2s;
+}
+
+.ion-info:hover {
+  background: rgba(0,0,0,0.2);
+}
+
+/* Congratulations Modal Styles */
+.congrats-section{margin-bottom:20px}
+.congrats-section h4{color:var(--success);margin-bottom:8px;font-size:16px}
+.congrats-section p{margin-bottom:12px;line-height:1.5}
+
+.score-display{display:grid;grid-template-columns:1fr;gap:12px;margin:15px 0}
+.score-item{padding:15px;border-radius:8px;text-align:center;font-weight:600;font-size:18px}
+.score-item.total{background:rgba(72,187,120,0.2);border:2px solid #48bb78;color:#48bb78}
+.score-item.time{background:rgba(66,153,225,0.2);border:2px solid #4299e1;color:#4299e1}
+.score-item.streak{background:rgba(237,137,54,0.2);border:2px solid #ed8936;color:#ed8936}
+
 /* Toggle Button Styles */
-.toggle-group{display:flex;gap:10px;align-items:center}
-.toggle-btn{display:flex;align-items:center;gap:8px;cursor:pointer;padding:8px 12px;background:rgba(255,255,255,0.1);border:2px solid var(--border);border-radius:15px;color:var(--light);transition:all 0.3s ease;backdrop-filter:blur(10px)}
+.toggle-group{display:flex;gap:12px;align-items:center;justify-content:center}
+.toggle-btn{display:flex;align-items:center;gap:8px;cursor:pointer;padding:10px 16px;background:rgba(255,255,255,0.1);border:2px solid var(--border);border-radius:15px;color:var(--light);transition:all 0.3s ease;backdrop-filter:blur(10px);min-width:120px;justify-content:center}
 .toggle-btn:hover{background:rgba(255,255,255,0.2);transform:translateY(-1px)}
 .toggle-btn input[type="checkbox"]{display:none}
 .toggle-btn input[type="checkbox"]:checked + .toggle-label{color:var(--success)}
 .toggle-btn input[type="checkbox"]:checked{background:rgba(16,185,129,0.2);border-color:var(--success)}
-.toggle-label{font-weight:600;font-size:14px}
+.toggle-label{font-weight:600;font-size:14px;text-align:center}
 
 @media (max-width:980px){.below-ptable{grid-template-columns:1fr}.game-area{grid-template-columns:24px 1fr}}
 
@@ -157,17 +1165,191 @@ body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantare
 html, body{ -webkit-text-size-adjust: 100%; }
 * { -webkit-tap-highlight-color: rgba(0,0,0,0); }
 .ptile { touch-action: manipulation; }
+
+/* ======= Enhanced Help Styles ======= */
+.help-section {
+  margin-bottom: 30px;
+}
+
+.help-section h4 {
+  color: var(--accent);
+  margin-bottom: 20px;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.help-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.help-step {
+  display: flex;
+  gap: 15px;
+  align-items: flex-start;
+  padding: 15px;
+  background: rgba(30, 41, 59, 0.3);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+}
+
+.step-number {
+  background: var(--accent);
+  color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.step-content strong {
+  color: var(--warning);
+  font-size: 16px;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.step-content p {
+  margin: 0;
+  color: var(--light);
+  line-height: 1.5;
+}
+
+.concept-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+.concept-card {
+  background: rgba(30, 41, 59, 0.4);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 15px;
+  transition: all 0.3s ease;
+}
+
+.concept-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.concept-card h5 {
+  color: var(--warning);
+  margin: 0 0 10px 0;
+  font-size: 14px;
+}
+
+.concept-card p {
+  margin: 0;
+  color: var(--light);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.scoring-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+}
+
+.score-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 15px;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.score-item.correct {
+  background: rgba(16, 185, 129, 0.1);
+  border-color: var(--success);
+}
+
+.score-item.hund {
+  background: rgba(245, 158, 11, 0.1);
+  border-color: var(--warning);
+}
+
+.score-item.pauli {
+  background: rgba(6, 182, 212, 0.1);
+  border-color: var(--accent);
+}
+
+.score-item.wrong {
+  background: rgba(239, 68, 68, 0.1);
+  border-color: var(--danger);
+}
+
+.score-item .custom-emoji {
+  margin-bottom: 8px;
+}
+
+.score-item strong {
+  color: var(--light);
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.score-item .score-value {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--warning);
+}
   </style>
 </head>
 <body>
   <header class="app-header">
     <div class="brand">
-      <h1>🏢 Electron Towers</h1>
-      <p class="subtitle">v0.16r8 — Stable base + diagonal Aufbau + Exceptions + Noble-gas shorthand</p>
+      <div class="header-logo">
+        <div class="logo-image">
+          <!-- Your cartoon scientist logo will be displayed here -->
+          <div class="logo-placeholder">
+            <div class="logo-scientist">
+              <div class="logo-hair-purple"></div>
+              <div class="logo-face-skin"></div>
+              <div class="logo-eyes-blue"></div>
+              <div class="logo-glasses-round"></div>
+              <div class="logo-smile-friendly"></div>
+              <div class="logo-labcoat-white"></div>
+              <div class="logo-tie-purple"></div>
+            </div>
+            <div class="logo-science-elements">
+              <div class="logo-atom-white"></div>
+              <div class="logo-atom-white"></div>
+              <div class="logo-beaker-purple"></div>
+              <div class="logo-beaker-purple"></div>
+              <div class="logo-syringe-white"></div>
+              <div class="logo-syringe-white"></div>
+              <div class="logo-star-white"></div>
+              <div class="logo-star-white"></div>
+              <div class="logo-star-white"></div>
+              <div class="logo-star-white"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="brand-text">
+        <h1>Electron Towers</h1>
+        <p class="subtitle">v0.16r8 — Stable base + diagonal Aufbau + Exceptions + Noble-gas shorthand</p>
+      </div>
     </div>
     <div class="right">
-      <a href="study.html" class="btn ghost" style="text-decoration: none; margin-right: 10px;">📚 Study Guide</a>
-      <button id="helpBtn" class="btn ghost">Help</button>
+      <button id="backBtn" class="btn ghost" style="display: none;"><span class="custom-emoji emoji-atom"></span> Back</button>
+      <a href="study.html" class="btn ghost" style="text-decoration: none; margin-right: 10px;"><span class="custom-emoji emoji-study"></span> Study Guide</a>
+      <button id="versionBtn" class="btn ghost"><span class="custom-emoji emoji-scientist"></span> Version</button>
+      <button id="helpBtn" class="btn ghost"><span class="custom-emoji emoji-atom"></span> Help</button>
     </div>
   </header>
 
@@ -177,8 +1359,8 @@ html, body{ -webkit-text-size-adjust: 100%; }
         <div class="group">
           <span class="lbl">Mode</span>
           <div class="seg">
-            <button id="modeStudy" class="seg-btn active">Study</button>
-            <button id="modeGame" class="seg-btn">Game</button>
+            <button id="modeStudy" class="seg-btn active"><span class="custom-emoji emoji-study"></span> Study</button>
+            <button id="modeGame" class="seg-btn"><span class="custom-emoji emoji-game"></span> Game</button>
           </div>
         </div>
         <div class="group">
@@ -186,6 +1368,7 @@ html, body{ -webkit-text-size-adjust: 100%; }
           <button id="ionMinus" class="btn">−</button>
           <div id="ionCharge" class="ion-box">0</div>
           <button id="ionPlus" class="btn">+</button>
+          <div id="ionChargeInfo" class="ion-info" title="Click to see all available charges"></div>
           <label class="toggle small"><input type="checkbox" id="hintToggle" checked/> Hints</label>
         </div>
         <div class="group grow">
@@ -210,26 +1393,23 @@ html, body{ -webkit-text-size-adjust: 100%; }
 
       <div class="toolbar bottom">
         <div class="left">
-          <div id="currentPick" class="current-pick">Selected: O (Z=8)</div>
-          <div class="mini">Electrons: <span id="placedCount">0</span> / <span id="electronCount">8</span></div>
-          <div class="mini">Config: <code id="spectro">—</code></div>
-          <div class="mini">Shorthand: <code id="noble">—</code></div>
         </div>
         <div class="center" id="studyControls">
           <div class="toggle-group">
             <label class="toggle-btn" id="autoPlayToggle">
               <input type="checkbox"/>
-              <span class="toggle-label">▶️ Auto-play</span>
+              <span class="toggle-label"><span class="custom-emoji emoji-energy"></span> Auto-play</span>
             </label>
             <label class="toggle-btn" id="exceptionsToggle">
               <input type="checkbox" checked/>
-              <span class="toggle-label">⚠️ Exceptions</span>
+              <span class="toggle-label"><span class="custom-emoji emoji-star"></span> Exceptions</span>
             </label>
           </div>
         </div>
         <div class="center hidden" id="gameControls">
           <div class="stat"><span class="lbl">Timer</span> <span id="timer">00:00</span></div>
           <div class="stat"><span class="lbl">Streak</span> <span id="streak">0</span></div>
+          <button id="startGameBtn" class="btn primary"><span class="custom-emoji emoji-game"></span> Start Game</button>
         </div>
         <div class="actions" id="actionsBar">
           <div id="studyActions">
@@ -243,15 +1423,41 @@ html, body{ -webkit-text-size-adjust: 100%; }
       </div>
     </section>
 
+    <!-- Configuration Display Area - Between Periodic Table and Energy Levels -->
+    <section class="config-section">
+      <div class="config-display">
+        <div class="config-item">
+          <span class="config-label">Selected:</span>
+          <span class="config-value" id="newCurrentPick">—</span>
+        </div>
+        <div class="config-item">
+          <span class="config-label">Electrons:</span>
+          <span class="config-value" id="newElectronCount">0 / 0</span>
+        </div>
+        <div class="config-item config-full-width">
+          <span class="config-label">Ion State:</span>
+          <span class="config-value" id="newIonState">—</span>
+        </div>
+        <div class="config-item config-full-width">
+          <span class="config-label">Config:</span>
+          <span class="config-value" id="newCurrentConfig">—</span>
+        </div>
+        <div class="config-item config-full-width">
+          <span class="config-label">Shorthand:</span>
+          <span class="config-value" id="newShorthandConfig">—</span>
+        </div>
+      </div>
+    </section>
+
     <section class="below-ptable">
       <aside class="sidebar">
         <section class="panel score">
-          <h2>Score</h2>
+          <h2><span class="custom-emoji emoji-energy"></span> Score</h2>
           <div class="score-num" id="score">0</div>
           <div class="mini">Correct +10 • Hund single +5 • Pauli pair +15 • Wrong −5</div>
         </section>
         <section class="panel energy">
-          <h2>Move-in Order (Aufbau)</h2>
+          <h2><span class="custom-emoji emoji-atom"></span> Move-in Order (Aufbau)</h2>
           <div id="aufbauDiagram" class="aufbau-diagram">
             <svg viewBox="0 0 576 604" aria-label="Aufbau diagonal diagram">
               <defs>
@@ -296,7 +1502,7 @@ html, body{ -webkit-text-size-adjust: 100%; }
           <ol id="aufbauList" style="display:none"></ol>
         </section>
         <section class="panel info">
-          <h2>ℹ️ Learn as you play</h2>
+          <h2><span class="custom-emoji emoji-study"></span> Learn as you play</h2>
           <div id="infoNow" class="info-now"></div>
           <details open><summary>Aufbau principle</summary><p>Electrons occupy the lowest-energy available subshells first.</p></details>
           <details><summary>Hund's rule</summary><p>In a set of degenerate orbitals (p, d, f), place one electron in each with the <b>same spin</b> before pairing.</p></details>
@@ -310,11 +1516,11 @@ html, body{ -webkit-text-size-adjust: 100%; }
         <div class="game-col">
           <div id="building" class="building"></div>
           <div class="lobby hidden" id="lobbyBox">
-            <div class="lobby-title">Lobby — Incoming Tenants</div>
+            <div class="lobby-title"><span class="custom-emoji emoji-electron"></span> Lobby — Incoming Tenants</div>
             <div id="lobbyArea" class="lobby-area"></div>
             <div class="lobby-actions">
-              <button id="flipSpinBtn" class="btn">Flip Spin (↑/↓)</button>
-              <button id="skipBtn" class="btn" title="Put this electron back in line (no score change)">Skip Electron</button>
+              <button id="flipSpinBtn" class="btn"><span class="custom-emoji emoji-energy"></span> Flip Spin (↑/↓)</button>
+              <button id="skipBtn" class="btn" title="Put this electron back in line (no score change)"><span class="custom-emoji emoji-electron"></span> Skip Electron</button>
               <div class="queue-info" id="queueInfo">Queue: 0 / 0</div>
             </div>
           </div>
@@ -324,7 +1530,7 @@ html, body{ -webkit-text-size-adjust: 100%; }
   </main>
 
   <footer class="app-footer">
-    <span>© 2025 Electron Towers APP • Stable + Mr.Sep Educational Services </span>
+    <span><span class="custom-emoji emoji-scientist"></span> © 2025 Electron Towers APP • Stable + Mr.Sep Educational Services</span>
   </footer>
 
   <!-- Help Modal -->
@@ -339,25 +1545,274 @@ html, body{ -webkit-text-size-adjust: 100%; }
         <button id="tabGame" class="tab">Game Mode</button>
       </div>
       <div id="helpStudy" class="tabpanel">
-        <ol>
-          <li>Pick an element/ion from the periodic table (or search).</li>
-          <li>Click the <b>glowing slot</b> to place the next electron (no dragging).</li>
-          <li>Enable <b>Auto-play</b> for automatic electron placement.</li>
-          <li>Toggle <b>Exceptions</b> for Cr/Cu/Nb/Mo/Ru/Rh/Pd/Ag/Pt/Au behavior.</li>
-        </ol>
+        <div class="help-section">
+          <h4><span class="custom-emoji emoji-study"></span> Study Mode Guide</h4>
+          <div class="help-steps">
+            <div class="help-step">
+              <div class="step-number">1</div>
+              <div class="step-content">
+                <strong>Select Your Element</strong>
+                <p>Pick any element from the periodic table or use the search bar. You can also explore different ion charges!</p>
+              </div>
+            </div>
+            <div class="help-step">
+              <div class="step-number">2</div>
+              <div class="step-content">
+                <strong>Follow the Glow</strong>
+                <p>Click the <span class="custom-emoji emoji-energy"></span> glowing slot to place electrons. The app guides you step-by-step!</p>
+              </div>
+            </div>
+            <div class="help-step">
+              <div class="step-number">3</div>
+              <div class="step-content">
+                <strong>Master the Rules</strong>
+                <p>Learn Aufbau, Hund's, and Pauli principles through interactive practice. Toggle <span class="custom-emoji emoji-star"></span> exceptions for advanced elements!</p>
+              </div>
+            </div>
+            <div class="help-step">
+              <div class="step-number">4</div>
+              <div class="step-content">
+                <strong>Auto-Play Learning</strong>
+                <p>Enable <span class="custom-emoji emoji-energy"></span> auto-play to see the correct sequence automatically!</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="help-section">
+          <h4><span class="custom-emoji emoji-atom"></span> Key Chemistry Concepts</h4>
+          <div class="concept-grid">
+            <div class="concept-card">
+              <h5>Aufbau Principle</h5>
+              <p>Electrons fill the lowest energy orbitals first, following the diagonal pattern.</p>
+            </div>
+            <div class="concept-card">
+              <h5>Hund's Rule</h5>
+              <p>Fill degenerate orbitals with parallel spins before pairing electrons.</p>
+            </div>
+            <div class="concept-card">
+              <h5>Pauli Exclusion</h5>
+              <p>Each orbital holds max 2 electrons with opposite spins (↑↓).</p>
+            </div>
+            <div class="concept-card">
+              <h5>Exceptions</h5>
+              <p>Some elements like Cr, Cu break the rules for stability!</p>
+            </div>
+          </div>
+        </div>
       </div>
+      
       <div id="helpGame" class="tabpanel hidden">
-        <ol>
-          <li>Press <b>New Game</b> (random element) to start the timer.</li>
-          <li>Drag or click-to-place electrons from the lobby into apartments.</li>
-          <li>Hund single + Pauli pair bonuses; violations deduct points.</li>
-          <li>Finish the configuration as fast and accurate as you can.</li>
-        </ol>
+        <div class="help-section">
+          <h4><span class="custom-emoji emoji-game"></span> Game Mode Challenge</h4>
+          <div class="help-steps">
+            <div class="help-step">
+              <div class="step-number">1</div>
+              <div class="step-content">
+                <strong>Start the Challenge</strong>
+                <p>Click <span class="custom-emoji emoji-game"></span> "Start Game" to get a random element and begin the timer!</p>
+              </div>
+            </div>
+            <div class="help-step">
+              <div class="step-number">2</div>
+              <div class="step-content">
+                <strong>Electron Management</strong>
+                <p>Drag electrons from the <span class="custom-emoji emoji-electron"></span> lobby or click to place them strategically!</p>
+              </div>
+            </div>
+            <div class="help-step">
+              <div class="step-number">3</div>
+              <div class="step-content">
+                <strong>Score Big Points</strong>
+                <p>Correct placement: <span class="custom-emoji emoji-energy"></span> +10, Hund single: +5, Pauli pair: +15!</p>
+              </div>
+            </div>
+            <div class="help-step">
+              <div class="step-number">4</div>
+              <div class="step-content">
+                <strong>Beat the Clock</strong>
+                <p>Complete configurations quickly and accurately to achieve high scores!</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="help-section">
+          <h4><span class="custom-emoji emoji-energy"></span> Scoring System</h4>
+          <div class="scoring-grid">
+            <div class="score-item correct">
+              <span class="custom-emoji emoji-electron"></span>
+              <strong>Correct Placement</strong>
+              <span class="score-value">+10</span>
+            </div>
+            <div class="score-item hund">
+              <span class="custom-emoji emoji-energy"></span>
+              <strong>Hund Single</strong>
+              <span class="score-value">+5</span>
+            </div>
+            <div class="score-item pauli">
+              <span class="custom-emoji emoji-atom"></span>
+              <strong>Pauli Pair</strong>
+              <span class="score-value">+15</span>
+            </div>
+            <div class="score-item wrong">
+              <span class="custom-emoji emoji-nucleus"></span>
+              <strong>Wrong Move</strong>
+              <span class="score-value">-5</span>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="modal-footer">
         <label class="toggle small"><input id="dontShowHelp" type="checkbox"/> Don't show automatically again</label>
         <div class="modal-actions">
           <button id="helpOk" class="btn primary">Got it</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Game Welcome Modal -->
+  <div id="gameWelcomeModal" class="modal-backdrop hidden" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="gameWelcomeTitle">
+      <div class="modal-header">
+        <h3 id="gameWelcomeTitle">🎮 Welcome to Game Mode!</h3>
+        <button id="gameWelcomeClose" class="btn ghost">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="welcome-section">
+          <h4>🚀 What You'll Do:</h4>
+          <p>Build electron configurations for random elements as fast and accurately as possible!</p>
+        </div>
+        
+        <div class="welcome-section">
+          <h4>🏆 What You'll Achieve:</h4>
+          <ul>
+            <li><strong>Speed Mastery</strong> - Build configurations quickly</li>
+            <li><strong>Rule Expert</strong> - Master Aufbau, Hund's, and Pauli principles</li>
+            <li><strong>Element Knowledge</strong> - Learn all 118 elements</li>
+            <li><strong>Problem Solving</strong> - Think strategically about electron placement</li>
+          </ul>
+        </div>
+        
+        <div class="welcome-section">
+          <h4>🎯 Scoring System:</h4>
+          <div class="scoring-grid">
+            <div class="score-item correct">Correct Placement: <strong>+10</strong></div>
+            <div class="score-item hund">Hund Single: <strong>+5</strong></div>
+            <div class="score-item pauli">Pauli Pair: <strong>+15</strong></div>
+            <div class="score-item wrong">Wrong Move: <strong>-5</strong></div>
+          </div>
+        </div>
+        
+        <div class="welcome-section">
+          <h4>💡 Pro Tips:</h4>
+          <ul>
+            <li>Start with the lowest energy orbitals first</li>
+            <li>Remember Hund's rule for parallel spins</li>
+            <li>Watch your streak for bonus points!</li>
+            <li>Practice makes perfect - try different elements</li>
+          </ul>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="modal-actions">
+          <button id="gameWelcomeStart" class="btn primary">🎯 Let's Play!</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Congratulations Modal -->
+  <div id="congratulationsModal" class="modal-backdrop hidden" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="congratulationsTitle">
+      <div class="modal-header">
+        <h3 id="congratulationsTitle">🎉 Congratulations!</h3>
+        <button id="congratulationsClose" class="btn ghost">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="congrats-section">
+          <h4>🏆 Element Configuration Complete!</h4>
+          <p>You've successfully built the electron configuration for <strong id="completedElement">this element</strong>!</p>
+        </div>
+        
+        <div class="congrats-section">
+          <h4>📊 Final Score</h4>
+          <div class="score-display">
+            <div class="score-item total">Total Score: <strong id="finalScore">0</strong></div>
+            <div class="score-item time">Time: <strong id="finalTime">00:00</strong></div>
+            <div class="score-item streak">Best Streak: <strong id="bestStreak">0</strong></div>
+          </div>
+        </div>
+        
+        <div class="congrats-section">
+          <h4>🎯 What's Next?</h4>
+          <p>Ready to challenge yourself with another element?</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="modal-actions">
+          <button id="nextElementBtn" class="btn primary">🎮 Next Element</button>
+          <button id="sameElementBtn" class="btn">🔄 Same Element</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Version History Modal -->
+  <div id="versionModal" class="modal-backdrop hidden" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="versionTitle">
+      <div class="modal-header">
+        <div class="version-header">
+          <div class="app-logo">
+            <div class="logo-boy">
+              <div class="logo-hair"></div>
+              <div class="logo-face">
+                <div class="logo-eyes">
+                  <div class="logo-eye left"></div>
+                  <div class="logo-eye right"></div>
+                </div>
+                <div class="logo-glasses"></div>
+                <div class="logo-smile"></div>
+              </div>
+              <div class="logo-labcoat"></div>
+              <div class="logo-tie"></div>
+            </div>
+            <div class="logo-atoms">
+              <div class="logo-atom top-left"></div>
+              <div class="logo-atom top-right"></div>
+            </div>
+            <div class="logo-beakers">
+              <div class="logo-beaker left"></div>
+              <div class="logo-beaker right"></div>
+            </div>
+            <div class="logo-syringes">
+              <div class="logo-syringe left"></div>
+              <div class="logo-syringe right"></div>
+            </div>
+            <div class="logo-stars">
+              <div class="logo-star"></div>
+              <div class="logo-star"></div>
+              <div class="logo-star"></div>
+              <div class="logo-star"></div>
+            </div>
+          </div>
+          <div class="version-info">
+            <h3 id="versionTitle">Electron Towers</h3>
+            <p class="current-version">Current Version: <strong>v0.16r8</strong></p>
+            <p class="version-tagline">Stable base + Diagonal Aufbau + Exceptions + Noble-gas shorthand</p>
+          </div>
+        </div>
+        <button id="versionClose" class="btn ghost">✕</button>
+      </div>
+      <div class="modal-body">
+        <div id="versionTimeline" class="version-timeline">
+          <!-- Version entries will be dynamically generated here -->
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="modal-actions">
+          <button id="versionCloseBtn" class="btn primary">Close</button>
         </div>
       </div>
     </div>
@@ -456,11 +1911,169 @@ const NOBLES = [
   {Z:2, sym:"He"}, {Z:10,sym:"Ne"}, {Z:18,sym:"Ar"}, {Z:36,sym:"Kr"},
   {Z:54,sym:"Xe"}, {Z:86,sym:"Rn"}, {Z:118,sym:"Og"}
 ];
+
+// Comprehensive element charge restrictions based on real chemistry and oxidation states
+const ELEMENT_CHARGES = {
+  // Period 1
+  1: { allowed: [0, 1], name: "Hydrogen", description: "Can lose 1e⁻ (H⁺) or remain neutral. H⁻ exists but is rare" },
+  2: { allowed: [0], name: "Helium", description: "Noble gas - no ion formation under normal conditions" },
+  
+  // Period 2
+  3: { allowed: [0, 1], name: "Lithium", description: "Alkali metal - loses 1e⁻ (Li⁺)" },
+  4: { allowed: [0, 2], name: "Beryllium", description: "Alkaline earth - loses 2e⁻ (Be²⁺)" },
+  5: { allowed: [0, 3], name: "Boron", description: "Metalloid - loses 3e⁻ (B³⁺)" },
+  6: { allowed: [-4, -3, -2, -1, 0, 1, 2, 3, 4], name: "Carbon", description: "Multiple oxidation states: C⁴⁻, C³⁻, C²⁻, C⁻, C, C⁺, C²⁺, C³⁺, C⁴⁺" },
+  7: { allowed: [-3, -2, -1, 0, 1, 2, 3, 4, 5], name: "Nitrogen", description: "Multiple oxidation states: N³⁻, N²⁻, N⁻, N, N⁺, N²⁺, N³⁺, N⁴⁺, N⁵⁺" },
+  8: { allowed: [-2, -1, 0], name: "Oxygen", description: "Non-metal - gains electrons: O²⁻, O⁻, O" },
+  9: { allowed: [-1, 0], name: "Fluorine", description: "Halogen - gains 1e⁻ (F⁻), never loses electrons" },
+  10: { allowed: [0], name: "Neon", description: "Noble gas - no ion formation" },
+  
+  // Period 3
+  11: { allowed: [0, 1], name: "Sodium", description: "Alkali metal - loses 1e⁻ (Na⁺)" },
+  12: { allowed: [0, 2], name: "Magnesium", description: "Alkaline earth - loses 2e⁻ (Mg²⁺)" },
+  13: { allowed: [0, 3], name: "Aluminum", description: "Post-transition metal - loses 3e⁻ (Al³⁺)" },
+  14: { allowed: [-4, -3, -2, -1, 0, 1, 2, 3, 4], name: "Silicon", description: "Metalloid - multiple oxidation states" },
+  15: { allowed: [-3, -2, -1, 0, 1, 2, 3, 4, 5], name: "Phosphorus", description: "Non-metal - multiple oxidation states" },
+  16: { allowed: [-2, -1, 0, 1, 2, 4, 6], name: "Sulfur", description: "Non-metal - multiple oxidation states: S²⁻, S⁻, S, S⁺, S²⁺, S⁴⁺, S⁶⁺" },
+  17: { allowed: [-1, 0, 1, 3, 5, 7], name: "Chlorine", description: "Halogen - gains 1e⁻ (Cl⁻), can have positive oxidation states" },
+  18: { allowed: [0], name: "Argon", description: "Noble gas - no ion formation" },
+  
+  // Period 4
+  19: { allowed: [0, 1], name: "Potassium", description: "Alkali metal - loses 1e⁻ (K⁺)" },
+  20: { allowed: [0, 2], name: "Calcium", description: "Alkaline earth - loses 2e⁻ (Ca²⁺)" },
+  21: { allowed: [0, 3], name: "Scandium", description: "Transition metal - loses 3e⁻ (Sc³⁺)" },
+  22: { allowed: [0, 2, 3, 4], name: "Titanium", description: "Transition metal - Ti²⁺, Ti³⁺, Ti⁴⁺" },
+  23: { allowed: [0, 2, 3, 4, 5], name: "Vanadium", description: "Transition metal - V²⁺, V³⁺, V⁴⁺, V⁵⁺" },
+  24: { allowed: [0, 2, 3, 6], name: "Chromium", description: "Transition metal - Cr²⁺, Cr³⁺, Cr⁶⁺" },
+  25: { allowed: [0, 2, 3, 4, 6, 7], name: "Manganese", description: "Transition metal - Mn²⁺, Mn³⁺, Mn⁴⁺, Mn⁶⁺, Mn⁷⁺" },
+  26: { allowed: [0, 2, 3, 6], name: "Iron", description: "Transition metal - Fe²⁺, Fe³⁺, Fe⁶⁺" },
+  27: { allowed: [0, 2, 3, 4], name: "Cobalt", description: "Transition metal - Co²⁺, Co³⁺, Co⁴⁺" },
+  28: { allowed: [0, 2, 3], name: "Nickel", description: "Transition metal - Ni²⁺, Ni³⁺" },
+  29: { allowed: [0, 1, 2], name: "Copper", description: "Transition metal - Cu⁺, Cu²⁺" },
+  30: { allowed: [0, 2], name: "Zinc", description: "Transition metal - Zn²⁺" },
+  31: { allowed: [0, 1, 3], name: "Gallium", description: "Post-transition metal - Ga⁺, Ga³⁺" },
+  32: { allowed: [-4, -3, -2, -1, 0, 1, 2, 3, 4], name: "Germanium", description: "Metalloid - multiple oxidation states" },
+  33: { allowed: [-3, -2, -1, 0, 1, 2, 3, 4, 5], name: "Arsenic", description: "Metalloid - multiple oxidation states" },
+  34: { allowed: [-2, -1, 0, 1, 2, 4, 6], name: "Selenium", description: "Non-metal - multiple oxidation states" },
+  35: { allowed: [-1, 0, 1, 3, 5, 7], name: "Bromine", description: "Halogen - gains 1e⁻ (Br⁻), can have positive oxidation states" },
+  36: { allowed: [0], name: "Krypton", description: "Noble gas - no ion formation" },
+  
+  // Period 5
+  37: { allowed: [0, 1], name: "Rubidium", description: "Alkali metal - loses 1e⁻ (Rb⁺)" },
+  38: { allowed: [0, 2], name: "Strontium", description: "Alkaline earth - loses 2e⁻ (Sr²⁺)" },
+  39: { allowed: [0, 3], name: "Yttrium", description: "Transition metal - loses 3e⁻ (Y³⁺)" },
+  40: { allowed: [0, 2, 3, 4], name: "Zirconium", description: "Transition metal - Zr²⁺, Zr³⁺, Zr⁴⁺" },
+  41: { allowed: [0, 2, 3, 4, 5], name: "Niobium", description: "Transition metal - Nb²⁺, Nb³⁺, Nb⁴⁺, Nb⁵⁺" },
+  42: { allowed: [0, 2, 3, 4, 5, 6], name: "Molybdenum", description: "Transition metal - Mo²⁺, Mo³⁺, Mo⁴⁺, Mo⁵⁺, Mo⁶⁺" },
+  43: { allowed: [0, 2, 3, 4, 5, 6, 7], name: "Technetium", description: "Transition metal - multiple oxidation states" },
+  44: { allowed: [0, 2, 3, 4, 5, 6, 7, 8], name: "Ruthenium", description: "Transition metal - multiple oxidation states" },
+  45: { allowed: [0, 1, 2, 3, 4, 5, 6], name: "Rhodium", description: "Transition metal - multiple oxidation states" },
+  46: { allowed: [0, 1, 2, 3, 4], name: "Palladium", description: "Transition metal - Pd⁺, Pd²⁺, Pd³⁺, Pd⁴⁺" },
+  47: { allowed: [0, 1, 2, 3], name: "Silver", description: "Transition metal - Ag⁺, Ag²⁺, Ag³⁺" },
+  48: { allowed: [0, 2], name: "Cadmium", description: "Transition metal - Cd²⁺" },
+  49: { allowed: [0, 1, 3], name: "Indium", description: "Post-transition metal - In⁺, In³⁺" },
+  50: { allowed: [-4, -3, -2, -1, 0, 1, 2, 3, 4], name: "Tin", description: "Post-transition metal - multiple oxidation states" },
+  51: { allowed: [-3, -2, -1, 0, 1, 2, 3, 4, 5], name: "Antimony", description: "Metalloid - multiple oxidation states" },
+  52: { allowed: [-2, -1, 0, 1, 2, 4, 6], name: "Tellurium", description: "Metalloid - multiple oxidation states" },
+  53: { allowed: [-1, 0, 1, 3, 5, 7], name: "Iodine", description: "Halogen - gains 1e⁻ (I⁻), can have positive oxidation states" },
+  54: { allowed: [0], name: "Xenon", description: "Noble gas - no ion formation" },
+  
+  // Period 6
+  55: { allowed: [0, 1], name: "Cesium", description: "Alkali metal - loses 1e⁻ (Cs⁺)" },
+  56: { allowed: [0, 2], name: "Barium", description: "Alkaline earth - loses 2e⁻ (Ba²⁺)" },
+  57: { allowed: [0, 3], name: "Lanthanum", description: "Lanthanide - loses 3e⁻ (La³⁺)" },
+  58: { allowed: [0, 3, 4], name: "Cerium", description: "Lanthanide - Ce³⁺, Ce⁴⁺" },
+  59: { allowed: [0, 3, 4], name: "Praseodymium", description: "Lanthanide - Pr³⁺, Pr⁴⁺" },
+  60: { allowed: [0, 2, 3], name: "Neodymium", description: "Lanthanide - Nd²⁺, Nd³⁺" },
+  61: { allowed: [0, 3], name: "Promethium", description: "Lanthanide - Pm³⁺" },
+  62: { allowed: [0, 2, 3], name: "Samarium", description: "Lanthanide - Sm²⁺, Sm³⁺" },
+  63: { allowed: [0, 2, 3], name: "Europium", description: "Lanthanide - Eu²⁺, Eu³⁺" },
+  64: { allowed: [0, 3], name: "Gadolinium", description: "Lanthanide - Gd³⁺" },
+  65: { allowed: [0, 3, 4], name: "Terbium", description: "Lanthanide - Tb³⁺, Tb⁴⁺" },
+  66: { allowed: [0, 3, 4], name: "Dysprosium", description: "Lanthanide - Dy³⁺, Dy⁴⁺" },
+  67: { allowed: [0, 3], name: "Holmium", description: "Lanthanide - Ho³⁺" },
+  68: { allowed: [0, 3], name: "Erbium", description: "Lanthanide - Er³⁺" },
+  69: { allowed: [0, 2, 3], name: "Thulium", description: "Lanthanide - Tm²⁺, Tm³⁺" },
+  70: { allowed: [0, 2, 3], name: "Ytterbium", description: "Lanthanide - Yb²⁺, Yb³⁺" },
+  71: { allowed: [0, 3], name: "Lutetium", description: "Lanthanide - Lu³⁺" },
+  72: { allowed: [0, 2, 3, 4], name: "Hafnium", description: "Transition metal - Hf²⁺, Hf³⁺, Hf⁴⁺" },
+  73: { allowed: [0, 2, 3, 4, 5], name: "Tantalum", description: "Transition metal - Ta²⁺, Ta³⁺, Ta⁴⁺, Ta⁵⁺" },
+  74: { allowed: [0, 2, 3, 4, 5, 6], name: "Tungsten", description: "Transition metal - W²⁺, W³⁺, W⁴⁺, W⁵⁺, W⁶⁺" },
+  75: { allowed: [0, 2, 3, 4, 5, 6, 7], name: "Rhenium", description: "Transition metal - multiple oxidation states" },
+  76: { allowed: [0, 2, 3, 4, 5, 6, 7, 8], name: "Osmium", description: "Transition metal - multiple oxidation states" },
+  77: { allowed: [0, 1, 2, 3, 4, 5, 6], name: "Iridium", description: "Transition metal - multiple oxidation states" },
+  78: { allowed: [0, 1, 2, 3, 4, 5, 6], name: "Platinum", description: "Transition metal - multiple oxidation states" },
+  79: { allowed: [0, 1, 3], name: "Gold", description: "Transition metal - Au⁺, Au³⁺" },
+  80: { allowed: [0, 1, 2], name: "Mercury", description: "Transition metal - Hg⁺, Hg²⁺" },
+  81: { allowed: [0, 1, 3], name: "Thallium", description: "Post-transition metal - Tl⁺, Tl³⁺" },
+  82: { allowed: [0, 2, 4], name: "Lead", description: "Post-transition metal - Pb²⁺, Pb⁴⁺" },
+  83: { allowed: [0, 1, 3, 5], name: "Bismuth", description: "Post-transition metal - Bi⁺, Bi³⁺, Bi⁵⁺" },
+  84: { allowed: [0, 2, 4, 6], name: "Polonium", description: "Post-transition metal - Po²⁺, Po⁴⁺, Po⁶⁺" },
+  85: { allowed: [0, 1, 3, 5, 7], name: "Astatine", description: "Halogen - can have multiple oxidation states" },
+  86: { allowed: [0], name: "Radon", description: "Noble gas - no ion formation" },
+  
+  // Period 7
+  87: { allowed: [0, 1], name: "Francium", description: "Alkali metal - loses 1e⁻ (Fr⁺)" },
+  88: { allowed: [0, 2], name: "Radium", description: "Alkaline earth - loses 2e⁻ (Ra²⁺)" },
+  89: { allowed: [0, 3], name: "Actinium", description: "Actinide - loses 3e⁻ (Ac³⁺)" },
+  90: { allowed: [0, 3, 4], name: "Thorium", description: "Actinide - Th³⁺, Th⁴⁺" },
+  91: { allowed: [0, 3, 4, 5], name: "Protactinium", description: "Actinide - Pa³⁺, Pa⁴⁺, Pa⁵⁺" },
+  92: { allowed: [0, 3, 4, 5, 6], name: "Uranium", description: "Actinide - U³⁺, U⁴⁺, U⁵⁺, U⁶⁺" },
+  93: { allowed: [0, 3, 4, 5, 6, 7], name: "Neptunium", description: "Actinide - multiple oxidation states" },
+  94: { allowed: [0, 3, 4, 5, 6, 7], name: "Plutonium", description: "Actinide - multiple oxidation states" },
+  95: { allowed: [0, 2, 3, 4, 5, 6], name: "Americium", description: "Actinide - multiple oxidation states" },
+  96: { allowed: [0, 3, 4], name: "Curium", description: "Actinide - Cm³⁺, Cm⁴⁺" },
+  97: { allowed: [0, 3, 4], name: "Berkelium", description: "Actinide - Bk³⁺, Bk⁴⁺" },
+  98: { allowed: [0, 3, 4], name: "Californium", description: "Actinide - Cf³⁺, Cf⁴⁺" },
+  99: { allowed: [0, 3, 4], name: "Einsteinium", description: "Actinide - Es³⁺, Es⁴⁺" },
+  100: { allowed: [0, 2, 3], name: "Fermium", description: "Actinide - Fm²⁺, Fm³⁺" },
+  101: { allowed: [0, 2, 3], name: "Mendelevium", description: "Actinide - Md²⁺, Md³⁺" },
+  102: { allowed: [0, 2, 3], name: "Nobelium", description: "Actinide - No²⁺, No³⁺" },
+  103: { allowed: [0, 3], name: "Lawrencium", description: "Actinide - Lr³⁺" },
+  
+  // Superheavy elements (Periods 8-9)
+  104: { allowed: [0, 3, 4], name: "Rutherfordium", description: "Transition metal - Rf³⁺, Rf⁴⁺" },
+  105: { allowed: [0, 3, 4, 5], name: "Dubnium", description: "Transition metal - Db³⁺, Db⁴⁺, Db⁵⁺" },
+  106: { allowed: [0, 3, 4, 5, 6], name: "Seaborgium", description: "Transition metal - Sg³⁺, Sg⁴⁺, Sg⁵⁺, Sg⁶⁺" },
+  107: { allowed: [0, 3, 4, 5, 6, 7], name: "Bohrium", description: "Transition metal - Bh³⁺, Bh⁴⁺, Bh⁵⁺, Bh⁶⁺, Bh⁷⁺" },
+  108: { allowed: [0, 2, 3, 4, 5, 6, 7, 8], name: "Hassium", description: "Transition metal - multiple oxidation states" },
+  109: { allowed: [0, 1, 2, 3, 4, 5, 6, 7], name: "Meitnerium", description: "Transition metal - multiple oxidation states" },
+  110: { allowed: [0, 1, 2, 3, 4, 5, 6], name: "Darmstadtium", description: "Transition metal - multiple oxidation states" },
+  111: { allowed: [0, 1, 2, 3, 4, 5], name: "Roentgenium", description: "Transition metal - multiple oxidation states" },
+  112: { allowed: [0, 1, 2], name: "Copernicium", description: "Transition metal - Cn⁺, Cn²⁺" },
+  113: { allowed: [0, 1, 3], name: "Nihonium", description: "Post-transition metal - Nh⁺, Nh³⁺" },
+  114: { allowed: [0, 2, 4], name: "Flerovium", description: "Post-transition metal - Fl²⁺, Fl⁴⁺" },
+  115: { allowed: [0, 1, 3, 5], name: "Moscovium", description: "Post-transition metal - Mc⁺, Mc³⁺, Mc⁵⁺" },
+  116: { allowed: [0, 2, 4, 6], name: "Livermorium", description: "Post-transition metal - Lv²⁺, Lv⁴⁺, Lv⁶⁺" },
+  117: { allowed: [0, 1, 3, 5, 7], name: "Tennessine", description: "Halogen - can have multiple oxidation states" },
+  118: { allowed: [0], name: "Oganesson", description: "Noble gas - no ion formation" }
+};
+
+// Default charges for elements not explicitly defined (fallback)
+const getDefaultCharges = (Z) => {
+  // Since we now have comprehensive coverage for all 118 elements,
+  // this function should rarely be called, but provides a safe fallback
+  if (Z <= 2) return [0]; // H, He
+  if (Z <= 10) return [0]; // Li to Ne: typically no ion formation except alkali/alkaline earth
+  if (Z <= 18) return [0]; // Na to Ar: typically no ion formation except alkali/alkaline earth
+  if (Z <= 36) return [0]; // K to Kr: typically no ion formation except alkali/alkaline earth
+  if (Z <= 54) return [0]; // Rb to Xe: typically no ion formation except alkali/alkaline earth
+  if (Z <= 86) return [0]; // Cs to Rn: typically no ion formation except alkali/alkaline earth
+  return [0]; // Beyond Rn: typically no ion formation
+};
+
+// Get allowed charges for a specific element
+function getElementAllowedCharges(Z) {
+  if (ELEMENT_CHARGES[Z]) {
+    return ELEMENT_CHARGES[Z].allowed;
+  }
+  return getDefaultCharges(Z);
+}
 const state={
   mode:"study", targetZ:8, ionCharge:0,
   queue:[], nextId:1, score:0, building:{},
   autoTimer:null, timerId:null, startTime:null, streak:0,
-  showHints:true, exceptionsEnabled:false
+  showHints:true, exceptionsEnabled:true
 };
 
 function on(el, type, handler){ if (el) el.addEventListener(type, handler); }
@@ -542,6 +2155,12 @@ function resetBuilding(){
   ORDER.forEach(sub => { const info = subInfo(sub); state.building[sub] = Array.from({length:info.orbitals}, ()=>[]); });
   document.querySelectorAll(".unit .slots").forEach(n => n.innerHTML = `<div class="slot" data-slot="0"></div><div class="slot" data-slot="1"></div>`);
   clearGhost(); refreshAufbauFocus(); refreshInfo(); renderReadouts();
+  
+  // Update the new configuration display
+  updateNewConfigurationDisplay();
+  
+  // Update the electron count display
+  updateQueueInfo();
 }
 
 function electronsNeeded(){ return Math.max(0, (state.targetZ || 1) - (state.ionCharge || 0)); }
@@ -560,8 +2179,33 @@ function placeElectronInto(wing, index, spin){
       const s = state.building[wing][index][i];
       slots[i].textContent = s ? (s==="up"?"↑":"↓") : "";
     }
+    
+    // Auto-scroll to keep the filled orbital visible with smoother scrolling
+    unit.scrollIntoView({ 
+      behavior: 'smooth', 
+      block: 'center',
+      inline: 'center'
+    });
   }
-  refreshInfo(); renderReadouts();
+  refreshInfo(); 
+  
+  // Update the new configuration display
+  updateNewConfigurationDisplay();
+  
+  renderReadouts();
+  
+  // Check if configuration is complete and scroll to config box
+  if (placedCount() >= electronsNeeded()) {
+    setTimeout(() => {
+      const configBox = document.querySelector('.config-section');
+      if (configBox) {
+        configBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }, 500);
+  }
+  
+  // Ensure the new configuration display is updated
+  updateQueueInfo();
 }
 
 function removeElectronFrom(wing, index){
@@ -573,8 +2217,130 @@ function removeElectronFrom(wing, index){
       const s = state.building[wing][index][i];
       slots[i].textContent = s ? (s==="up"?"↓" : "↑") : ""; // (kept original behavior)
     }
+    
+    // Auto-scroll to keep the modified orbital visible with smoother scrolling
+    unit.scrollIntoView({ 
+      behavior: 'smooth', 
+      block: 'center',
+      inline: 'center'
+    });
   }
-  refreshInfo(); renderReadouts(); return popped;
+  refreshInfo(); 
+  
+  // Update the new configuration display
+  updateNewConfigurationDisplay();
+  
+  renderReadouts(); 
+  return popped;
+}
+
+/* ======= Helper Functions ======= */
+function toSuperscript(num) {
+  return num.toString().replace(/0/g, '⁰').replace(/1/g, '¹').replace(/2/g, '²').replace(/3/g, '³').replace(/4/g, '⁴').replace(/5/g, '⁵').replace(/6/g, '⁶').replace(/7/g, '⁷').replace(/8/g, '⁸').replace(/9/g, '⁹');
+}
+
+function selectRandomElement() {
+  try {
+    // Select a random element between 1 and 118
+    const randomZ = Math.floor(Math.random() * 118) + 1;
+    state.targetZ = randomZ;
+    
+    // Update the periodic table selection
+    document.querySelectorAll(".ptile").forEach(t => t.classList.remove("selected"));
+    const randomTile = document.querySelector(`.ptile[data-z="${randomZ}"]`);
+    if (randomTile) {
+      randomTile.classList.add("selected");
+      randomTile.scrollIntoView({ block: "center", inline: "center", behavior: "smooth" });
+    }
+    
+    // Update the configuration display
+    const currentPickText = `Selected: ${sym(randomZ)} — ${nameOf(randomZ)} (Z=${randomZ})`;
+    const newCurrentPick = document.getElementById("newCurrentPick");
+    const newElectronCount = document.getElementById("newElectronCount");
+    if (newCurrentPick) newCurrentPick.textContent = currentPickText;
+    if (newElectronCount) newElectronCount.textContent = `0 / ${electronsNeeded()}`;
+    
+    // Update the configuration display
+    updateNewConfigurationDisplay();
+    
+    // Reset building for the new element
+    resetBuilding();
+    
+    console.log(`🎲 Randomly selected element: ${sym(randomZ)} (Z=${randomZ})`);
+    toast(`🎲 Random element selected: ${sym(randomZ)} — ${nameOf(randomZ)}`);
+    
+    return randomZ;
+  } catch(e) {
+    console.error('Select random element error:', e);
+    return 1; // Fallback to Hydrogen
+  }
+}
+
+function updateNewConfigurationDisplay() {
+  try {
+    // Update the main configuration display
+    const newCurrentConfig = document.getElementById("newCurrentConfig");
+    if (newCurrentConfig) {
+      const parts = [];
+      for (const sub of ORDER) {
+        const units = state.building[sub];
+        if (units) {
+          let n = 0;
+          for (const u of units) {
+            n += u.length;
+          }
+          if (n > 0) {
+            // Convert numbers to proper superscript characters and add color coding
+            const superscript = toSuperscript(n);
+            parts.push(`<span class="energy-level-${sub}">${sub}${superscript}</span>`);
+          }
+        }
+      }
+      newCurrentConfig.innerHTML = parts.length > 0 ? parts.join('&nbsp;&nbsp;') : '—';
+    }
+    
+    // Update the shorthand configuration display
+    const newShorthandConfig = document.getElementById("newShorthandConfig");
+    if (newShorthandConfig) {
+      const en = placedCount();
+      if (en === 0) {
+        newShorthandConfig.innerHTML = '—';
+      } else {
+        let core = NOBLES.filter(x => x.Z <= en).slice(-1)[0];
+        if (!core) {
+          newShorthandConfig.innerHTML = '—';
+        } else {
+          // Build theoretical core distribution
+          const coreCounts = {};
+          let rem = core.Z;
+          for (const sub of ORDER) {
+            const cap = subInfo(sub).capacity;
+            const put = Math.min(cap, rem);
+            if (put > 0) coreCounts[sub] = put;
+            rem -= put;
+            if (rem <= 0) break;
+          }
+          
+          // Build output parts
+          const outParts = [];
+          for (const sub of ORDER) {
+            const obs = state.building[sub].reduce((s, u) => s + u.length, 0);
+            const corev = coreCounts[sub] || 0;
+            const left = Math.max(0, obs - corev);
+            if (left > 0) {
+                          // Convert numbers to proper superscript characters and add color coding
+            const superscript = toSuperscript(left);
+            outParts.push(`<span class="energy-level-${sub}">${sub}${superscript}</span>`);
+          }
+        }
+        
+        newShorthandConfig.innerHTML = outParts.length > 0 ? `<span class="noble-gas">[${sym(core.Z)}]</span>&nbsp;&nbsp;${outParts.join('&nbsp;&nbsp;')}` : `<span class="noble-gas">[${sym(core.Z)}]</span>`;
+        }
+      }
+    }
+  } catch(e) {
+    console.error('Update new configuration display error:', e);
+  }
 }
 
 /* ======= Rules ======= */
@@ -655,8 +2421,8 @@ function removeElectronsFrom(counts, q){
 function computeTargetCountsCurrent(){
   const q = state.ionCharge || 0;
 
-  if (q > 0) { // cation: build neutral, then remove from highest n (e.g., 4s before 3d)
-    const neutral = computeNeutralCountsFor(state.targetZ, /*apply exceptions?*/ state.exceptionsEnabled && q===0);
+  if (q > 0) { // cation: build neutral with exceptions, then remove from highest n (e.g., 4s before 3d)
+    const neutral = computeNeutralCountsFor(state.targetZ, /*apply exceptions?*/ state.exceptionsEnabled);
     return removeElectronsFrom({ ...neutral }, q);
   }
 
@@ -871,6 +2637,9 @@ function planStudyGhost(){
 /* ======= Game (drag or click) ======= */
 function newGame(){
   try {
+    // Select a random element for the new game
+    selectRandomElement();
+    
     clearAutoPlay(); 
     byId("score").textContent = "0"; 
     state.score = 0;
@@ -880,13 +2649,41 @@ function newGame(){
     resetBuilding(); 
     state.queue = []; 
     state.nextId = 1;
+    
+    // Ensure exceptions are enabled for game mode
+    if (state.mode === "game") {
+      state.exceptionsEnabled = true;
+      const exceptionsToggle = byId("exceptionsToggle");
+      if (exceptionsToggle) {
+        const input = exceptionsToggle.querySelector("input");
+        if (input && !input.checked) {
+          input.checked = true;
+          toast("Exceptions enabled for Game Mode");
+        }
+      }
+    }
+    
     const total = electronsNeeded();
+    console.log('🎯 Starting new game with', total, 'electrons');
     for (let i=0;i<total;i++){ 
-      const spin = (i%2===0) ? "up" : "down"; 
+      // Default to "up" always, unless user has flipped to "down"
+      let spin = "up"; // Default to up
+      if (state.lastSpinPreference === "down") {
+        // Only use down if user explicitly flipped to down
+        spin = "down";
+        console.log('🔄 Using remembered spin preference: down');
+      } else {
+        console.log('🔄 Using default spin: up');
+      }
       state.queue.push({ id: state.nextId++, spin }); 
     }
+    console.log('📋 Queue populated with', state.queue.length, 'electrons');
     spawnNextElectron(); 
-    startTimer();
+    updateQueueInfo(); // Update initial queue display
+    // Don't auto-start timer - wait for Start Game button
+    // startTimer(); // Removed auto-start
+    // Show start button for new game
+    byId("startGameBtn").classList.remove("hidden");
   } catch(e) {
     console.error('New game error:', e);
     toast('Failed to start new game. Please try again.');
@@ -899,8 +2696,36 @@ function spawnNextElectron(){
     if (!elLobby) return; 
     elLobby.innerHTML = "";
     if (state.queue.length === 0){ 
-      toast("All tenants placed! 🎉"); 
-      stopTimer(); 
+      console.log('🎯 Queue is empty - game completed!');
+      console.log('🎉 About to call showCongratulations()');
+      console.log('🔍 Current state:', {
+        targetZ: state.targetZ,
+        mode: state.mode,
+        score: state.score,
+        streak: state.streak
+      });
+      
+      // Check if we actually have all electrons placed
+      const totalNeeded = electronsNeeded();
+      const totalPlaced = placedCount();
+      console.log('📊 Electron count check:', {
+        needed: totalNeeded,
+        placed: totalPlaced,
+        queueLength: state.queue.length
+      });
+      
+      if (totalPlaced === totalNeeded) {
+        console.log('✅ All electrons placed, showing congratulations!');
+        // Game completed! Show congratulations
+        try {
+          window.showCongratulations();
+          console.log('✅ showCongratulations() called successfully');
+        } catch (error) {
+          console.error('❌ Error calling showCongratulations:', error);
+        }
+      } else {
+        console.log('⚠️ Queue empty but not all electrons placed:', totalPlaced, '/', totalNeeded);
+      }
       return; 
     } 
     const e = state.queue[0];
@@ -919,7 +2744,6 @@ function spawnNextElectron(){
       }
     });
     elLobby.appendChild(el);
-    updateQueueInfo();
   } catch(e) {
     console.error('Spawn next electron error:', e);
   }
@@ -928,9 +2752,21 @@ function spawnNextElectron(){
 function updateQueueInfo(){
   try {
     const total = electronsNeeded(); 
-    const placed = total - state.queue.length;
+    const placed = placedCount(); // Use actual placed count instead of math
     const qi = byId("queueInfo"); 
     if (qi) qi.textContent = `Queue: ${placed} / ${total}`;
+    
+    // Also update the new configuration display
+    const newElectronCount = document.getElementById("newElectronCount");
+    if (newElectronCount) {
+      // For ions, show the actual electron count
+      if (state.ionCharge !== 0) {
+        const actualElectrons = state.targetZ - state.ionCharge;
+        newElectronCount.textContent = `${placed} / ${actualElectrons}`;
+      } else {
+        newElectronCount.textContent = `${placed} / ${total}`;
+      }
+    }
   } catch(e) {
     console.error('Update queue info error:', e);
   }
@@ -956,6 +2792,7 @@ function onDropToUnit(ev){
       return;
     }
     state.queue.shift();
+    console.log('📤 Electron placed, queue now has', state.queue.length, 'electrons');
     placeElectronInto(wing, idx, lobbyElectron.spin);
     addScore(10);
     const info = subInfo(wing);
@@ -966,6 +2803,7 @@ function onDropToUnit(ev){
     if (state.building[wing][idx].length === 2) addScore(15);
     state.streak += 1; 
     byId("streak").textContent = String(state.streak);
+    updateQueueInfo(); // Update queue info after electron is placed
     spawnNextElectron(); 
     refreshAufbauFocus();
   } catch(e) {
@@ -999,6 +2837,7 @@ document.addEventListener("click", function(ev){
       return;
     }
     state.queue.shift();
+    console.log('📤 Electron placed (click), queue now has', state.queue.length, 'electrons');
     placeElectronInto(wing, idx, e0.spin);
     addScore(10);
     const info = subInfo(wing);
@@ -1009,6 +2848,7 @@ document.addEventListener("click", function(ev){
     if (state.building[wing][idx].length === 2) addScore(15);
     state.streak += 1; 
     byId("streak").textContent = String(state.streak);
+    updateQueueInfo(); // Update queue info after electron is placed
     spawnNextElectron(); 
     refreshAufbauFocus();
   } catch(e) {
@@ -1036,6 +2876,24 @@ function renderReadouts(){
           }
         }
         el.innerHTML = parts.join(' ');
+        
+                  // Also update the new configuration display area
+          const configEl = document.getElementById("newCurrentConfig");
+          if (configEl) {
+            configEl.innerHTML = parts.join(' ');
+          }
+          
+          // Update the new shorthand configuration display
+          const shorthandEl = document.getElementById("newShorthandConfig");
+          if (shorthandEl) {
+            // Get the noble gas shorthand from the existing logic
+            const nobleEl = document.getElementById("noble");
+            if (nobleEl && nobleEl.textContent !== "—") {
+              shorthandEl.innerHTML = nobleEl.textContent;
+            } else {
+              shorthandEl.innerHTML = "—";
+            }
+          }
       } catch(e) {
         console.error('Spectro render error:', e);
       }
@@ -1080,7 +2938,14 @@ function renderReadouts(){
           console.error('Out parts error for sub:', sub, e);
         }
       }
-      ns.innerHTML = `[${core.sym}] ` + (outParts.join(' ') || '');
+      const shorthandText = `[${core.sym}] ` + (outParts.join(' ') || '');
+      ns.innerHTML = shorthandText;
+      
+      // Also update the new shorthand configuration display
+      const shorthandEl = document.getElementById("newShorthandConfig");
+      if (shorthandEl) {
+        shorthandEl.innerHTML = shorthandText;
+      }
     } catch(e) {
       console.error('Noble shorthand error:', e);
     }
@@ -1184,17 +3049,35 @@ function buildPT(){
     if (!elPT) return; 
     buildPTGrid(elPT, (Z, tile)=>{
       try {
+        // In game mode, don't allow element selection - just show a message
+        if (state.mode === "game") {
+          toast("Element selection disabled in Game Mode. Use 'New Game' to get a random element.");
+          return;
+        }
+        
         state.targetZ = Z;
+        state.ionCharge = 0; // Reset ion charge when selecting new element
+        const ic = byId("ionCharge"); if (ic) ic.textContent = "0";
+        
         document.querySelectorAll(".ptile").forEach(t=>t.classList.remove("selected"));
         tile.classList.add("selected");
-        byId("currentPick").textContent = `Selected: ${sym(Z)} — ${nameOf(Z)} (Z=${Z})`;
-        byId("electronCount").textContent = electronsNeeded();
+        
+        // Update the new configuration display area
+        const currentPickText = `${sym(Z)} — ${nameOf(Z)} (Z=${Z})`;
+        const newCurrentPick = document.getElementById("newCurrentPick");
+        const newElectronCount = document.getElementById("newElectronCount");
+        if (newCurrentPick) newCurrentPick.textContent = currentPickText;
+        if (newElectronCount) newElectronCount.textContent = `0 / ${electronsNeeded()}`;
+        
+        // Update ion state display
+        updateIonStateDisplay();
+        
+        // Update the configuration display
+        updateNewConfigurationDisplay();
+        
         if (state.mode === "study"){ 
           resetBuilding(); 
           planStudyGhost(); 
-        }
-        if (state.mode === "game"){ 
-          newGame(); 
         }
       } catch(e) {
         console.error('PT tile click error:', e);
@@ -1207,14 +3090,142 @@ function buildPT(){
 
 /* ======= Ion & Search ======= */
 function setIonCharge(delta){
-  state.ionCharge = Math.max(-10, Math.min(10, (state.ionCharge||0) + delta));
-  const ic = byId("ionCharge"); if (ic) ic.textContent = state.ionCharge > 0 ? `+${state.ionCharge}` : `${state.ionCharge}`;
-  const ec = byId("electronCount"); if (ec) ec.textContent = electronsNeeded();
+  // In game mode, don't allow ion charge changes
+  if (state.mode === "game") {
+    toast("Ion charge changes disabled in Game Mode. Focus on completing the electron configuration.");
+    return;
+  }
+  
+  // Check if element is selected
+  if (!state.targetZ || state.targetZ < 1) {
+    toast("Please select an element first");
+    return;
+  }
+  
+  // Get allowed charges for current element
+  const allowedCharges = getElementAllowedCharges(state.targetZ);
+  const currentCharge = state.ionCharge || 0;
+  
+  // Find the next/previous allowed charge
+  let newCharge;
+  if (delta > 0) {
+    // Going up: find next higher allowed charge
+    const higherCharges = allowedCharges.filter(c => c > currentCharge).sort((a, b) => a - b);
+    newCharge = higherCharges.length > 0 ? higherCharges[0] : currentCharge;
+  } else {
+    // Going down: find next lower allowed charge
+    const lowerCharges = allowedCharges.filter(c => c < currentCharge).sort((a, b) => b - a);
+    newCharge = lowerCharges.length > 0 ? lowerCharges[0] : currentCharge;
+  }
+  
+  // If no change possible, show message
+  if (newCharge === currentCharge) {
+    const elementName = names[state.targetZ - 1];
+    if (delta > 0) {
+      toast(`${elementName} is already at its highest allowed charge (${currentCharge > 0 ? '+' : ''}${currentCharge})`);
+    } else {
+      toast(`${elementName} is already at its lowest allowed charge (${currentCharge > 0 ? '+' : ''}${currentCharge})`);
+    }
+    return;
+  }
+  
+  state.ionCharge = newCharge;
+  
+  const ic = byId("ionCharge"); 
+  if (ic) {
+    const displayText = state.ionCharge > 0 ? `+${state.ionCharge}` : `${state.ionCharge}`;
+    ic.textContent = displayText;
+  }
+  
+  // Update ion state display
+  updateIonStateDisplay();
+  
   if (state.mode==="study"){ resetBuilding(); planStudyGhost(); }
-  if (state.mode==="game") newGame();
+}
+
+function updateIonStateDisplay() {
+  const ionStateElement = byId("newIonState");
+  if (!ionStateElement) return;
+  
+  if (state.ionCharge === 0) {
+    ionStateElement.textContent = "Neutral atom";
+    ionStateElement.className = "config-value";
+  } else {
+    const elementName = names[state.targetZ - 1];
+    const elementSymbol = symbols[state.targetZ - 1];
+    
+    if (state.ionCharge > 0) {
+      // For positive charges, show the actual charge number
+      const chargeSymbol = state.ionCharge === 1 ? '⁺' : 
+                          state.ionCharge === 2 ? '²⁺' : 
+                          state.ionCharge === 3 ? '³⁺' : 
+                          state.ionCharge === 4 ? '⁴⁺' : 
+                          state.ionCharge === 5 ? '⁵⁺' : 
+                          state.ionCharge === 6 ? '⁶⁺' : 
+                          state.ionCharge === 7 ? '⁷⁺' : 
+                          state.ionCharge === 8 ? '⁸⁺' : 
+                          `+${state.ionCharge}`;
+      ionStateElement.textContent = `${elementSymbol}${chargeSymbol} (lost ${state.ionCharge} electron${state.ionCharge > 1 ? 's' : ''})`;
+      ionStateElement.className = "config-value positive-ion";
+    } else {
+      // For negative charges, show the actual charge number
+      const chargeSymbol = state.ionCharge === -1 ? '⁻' : 
+                          state.ionCharge === -2 ? '²⁻' : 
+                          state.ionCharge === -3 ? '³⁻' : 
+                          state.ionCharge === -4 ? '⁴⁻' : 
+                          state.ionCharge === -5 ? '⁵⁻' : 
+                          state.ionCharge === -6 ? '⁶⁻' : 
+                          state.ionCharge === -7 ? '⁷⁻' : 
+                          state.ionCharge === -8 ? '⁸⁻' : 
+                          `${state.ionCharge}`;
+      ionStateElement.textContent = `${elementSymbol}${chargeSymbol} (gained ${Math.abs(state.ionCharge)} electron${Math.abs(state.ionCharge) > 1 ? 's' : ''})`;
+      ionStateElement.className = "config-value negative-ion";
+    }
+  }
+  
+  // Update ion charge info display
+  updateIonChargeInfo();
+}
+
+function updateIonChargeInfo() {
+  const ionInfoElement = byId("ionChargeInfo");
+  if (!ionInfoElement) return;
+  
+  if (!state.targetZ || state.targetZ < 1) {
+    ionInfoElement.textContent = "";
+    return;
+  }
+  
+  const allowedCharges = getElementAllowedCharges(state.targetZ);
+  const currentCharge = state.ionCharge || 0;
+  
+  // Format the allowed charges for display
+  const formattedCharges = allowedCharges.map(c => {
+    if (c === 0) return "0";
+    if (c > 0) return `+${c}`;
+    return `${c}`;
+  });
+  
+  // Highlight current charge
+  const chargeText = formattedCharges.map(c => {
+    if (c === (currentCharge > 0 ? `+${currentCharge}` : currentCharge < 0 ? `${currentCharge}` : "0")) {
+      return `[${c}]`; // Highlight current charge
+    }
+    return c;
+  }).join(" ");
+  
+  ionInfoElement.textContent = chargeText;
+  ionInfoElement.title = `Available charges: ${formattedCharges.join(", ")}`;
 }
 function searchPick(q){
   q = (q||"").trim().toLowerCase(); if (!q) return;
+  
+  // In game mode, don't allow element selection via search
+  if (state.mode === "game") {
+    toast("Element search disabled in Game Mode. Use 'New Game' to get a random element.");
+    return;
+  }
+  
   const asNum = parseInt(q,10); let Z = null;
   if (!isNaN(asNum) && asNum>=1 && asNum<=118) Z = asNum;
   if (!Z){ Z = symbols.findIndex(s=>s.toLowerCase()===q)+1;
@@ -1233,7 +3244,223 @@ function openHelp(which="study"){
   if (which === "game"){ tabGame.classList.add("active"); tabStudy.classList.remove("active"); helpGame.classList.remove("hidden"); helpStudy.classList.add("hidden"); }
   else { tabStudy.classList.add("active"); tabGame.classList.remove("active"); helpStudy.classList.remove("hidden"); helpGame.classList.add("hidden"); }
 }
+
+// Back button functionality
+function showBackButton() {
+  const backBtn = byId("backBtn");
+  if (backBtn) backBtn.style.display = "inline-flex";
+}
+
+function hideBackButton() {
+  const backBtn = byId("backBtn");
+  if (backBtn) backBtn.style.display = "none";
+}
+
+function goBack() {
+  // Add back navigation logic here
+  console.log("Back button clicked");
+}
+
 function closeHelp(){ const bd = byId("helpBackdrop"); bd.classList.add("hidden"); bd.setAttribute("aria-hidden","true"); }
+
+/* ======= Version modal ======= */
+function openVersion(){
+  const bd = byId("versionModal"); 
+  bd.classList.remove("hidden"); 
+  bd.setAttribute("aria-hidden","false");
+}
+
+function closeVersion(){ 
+  const bd = byId("versionModal"); 
+  bd.classList.add("hidden"); 
+  bd.setAttribute("aria-hidden","true"); 
+}
+
+// Version management system
+// 
+// HOW TO ADD A NEW VERSION:
+// 1. Call addNewVersion() with version data
+// 2. Example:
+//    addNewVersion(createVersionEntry("v0.16r9", "New Feature Release", {
+//      new: ["Feature 1 - Description", "Feature 2 - Description"],
+//      improvements: ["Improvement 1", "Improvement 2"],
+//      fixes: ["Fix 1", "Fix 2"]
+//    }));
+//
+// 3. The version page will automatically update with the new entry
+// 4. The header version will also update automatically
+//
+const VERSION_HISTORY = [
+  {
+    version: "v0.16r8",
+    title: "Current Stable Release",
+    date: "August 2025",
+    isCurrent: true,
+    features: {
+      new: [
+        "Smart Ion Charge System - Chemically accurate charge restrictions",
+        "Enhanced Ion Display - Clear charge indicators (Cr⁺, Cr²⁺, Cr³⁺, etc.)",
+        "Comprehensive Charge Database - All 118 elements with accurate oxidation states",
+        "Improved Electron Configuration - Correct ion formation (4s before 3d)",
+        "Default Exceptions - Always enabled for realistic learning"
+      ],
+      improvements: [
+        "Fixed electron configuration for all ions",
+        "Enhanced UI with ion state display",
+        "Smart charge navigation (jump to valid charges)",
+        "Better error messages and user feedback"
+      ]
+    }
+  },
+  {
+    version: "v0.16r7",
+    title: "Ion System Foundation",
+    date: "August 2025",
+    isCurrent: false,
+    features: {
+      new: [
+        "Ion Charge System - Basic +/- buttons for element charges",
+        "Ion State Display - Shows current ion configuration",
+        "Charge Info Display - Available charges for each element"
+      ]
+    }
+  },
+  {
+    version: "v0.16r6",
+    title: "Study Page & UX Improvements",
+    date: "August 2025",
+    isCurrent: false,
+    features: {
+      new: [
+        "Comprehensive Study Page - Interactive learning modules",
+        "UX Audit Implementation - Improved user experience",
+        "Color Scheme Updates - Consistent design language"
+      ]
+    }
+  },
+  {
+    version: "v0.16r5",
+    title: "Periodic Table Corrections",
+    date: "August 2025",
+    isCurrent: false,
+    features: {
+      fixes: [
+        "Corrected Helium position (Group 18)",
+        "Fixed f-block element placement",
+        "Removed gaps between s, d, and p blocks",
+        "Centered periodic table layout"
+      ]
+    }
+  },
+  {
+    version: "v0.16r4",
+    title: "Core Stability & Testing",
+    date: "August 2025",
+    isCurrent: false,
+    features: {
+      improvements: [
+        "Memory leak fixes",
+        "Enhanced error handling",
+        "Comprehensive test suite",
+        "Performance optimizations"
+      ]
+    }
+  },
+  {
+    version: "v0.16r3",
+    title: "Initial Release",
+    date: "August 2025",
+    isCurrent: false,
+    features: {
+      new: [
+        "Electron Configuration Builder - Visual electron placement",
+        "Periodic Table Integration - All 118 elements",
+        "Study Mode - Interactive learning environment",
+        "Game Mode - Timed challenges with scoring",
+        "Exceptions Support - Cr, Cu, and other special cases"
+      ]
+    }
+  }
+];
+
+// Function to add a new version (call this after each update)
+function addNewVersion(versionData) {
+  // Add to the beginning of the array (newest first)
+  VERSION_HISTORY.unshift(versionData);
+  
+  // Update the current version indicator
+  VERSION_HISTORY.forEach(v => v.isCurrent = false);
+  VERSION_HISTORY[0].isCurrent = true;
+  
+  // Update the version display
+  updateVersionDisplay();
+  
+  // Update the header version
+  updateHeaderVersion();
+}
+
+// Function to update the version display
+function updateVersionDisplay() {
+  const timelineContainer = byId("versionTimeline");
+  if (!timelineContainer) return;
+  
+  timelineContainer.innerHTML = VERSION_HISTORY.map(version => `
+    <div class="version-entry ${version.isCurrent ? 'current' : ''}">
+      <div class="version-badge">${version.version}</div>
+      <div class="version-content">
+        <h4>${version.title}</h4>
+        <p class="version-date">${version.date}</p>
+        <div class="version-features">
+          ${version.features.new ? `
+            <h5>✨ New Features:</h5>
+            <ul>
+              ${version.features.new.map(feature => `<li><strong>${feature.split(' - ')[0]}</strong> - ${feature.split(' - ')[1] || feature}</li>`).join('')}
+            </ul>
+          ` : ''}
+          ${version.features.improvements ? `
+            <h5>🔧 Improvements:</h5>
+            <ul>
+              ${version.features.improvements.map(feature => `<li>${feature}</li>`).join('')}
+            </ul>
+          ` : ''}
+          ${version.features.fixes ? `
+            <h5>🔧 Fixes:</h5>
+            <ul>
+              ${version.features.fixes.map(feature => `<li>${feature}</li>`).join('')}
+            </ul>
+          ` : ''}
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// Function to update the header version
+function updateHeaderVersion() {
+  const currentVersion = VERSION_HISTORY[0];
+  const subtitle = document.querySelector('.subtitle');
+  if (subtitle && currentVersion) {
+    subtitle.textContent = `${currentVersion.version} — ${currentVersion.title}`;
+  }
+}
+
+// Function to get current version info
+function getCurrentVersion() {
+  return VERSION_HISTORY[0];
+}
+
+// Function to create a new version entry (helper function)
+function createVersionEntry(version, title, features) {
+  const currentDate = new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+  
+  return {
+    version: version,
+    title: title,
+    date: currentDate,
+    isCurrent: true,
+    features: features
+  };
+}
 
 /* ======= Exceptions toggles (both modes, synced) ======= */
 function attachExceptionsToggles(){
@@ -1261,6 +3488,10 @@ function attachExceptionsToggles(){
 /* ======= Init ======= */
 function init(){
   buildAufbauList(); buildFloors(); buildPT(); attachExceptionsToggles();
+  
+  // Initialize version display
+  updateVersionDisplay();
+  updateHeaderVersion();
 
   const zr = byId("zoomRange"); if (zr){ document.documentElement.style.setProperty("--tile", zr.value+"px"); zr.addEventListener("input", ()=> document.documentElement.style.setProperty("--tile", zr.value+"px")); }
   const sb = byId("searchBox"); if (sb) addEventListener("keydown", (e)=>{ if (e.key === "Enter"){ searchPick(sb.value); } });
@@ -1268,6 +3499,23 @@ function init(){
   on(byId("hintToggle"), "change", e=> state.showHints = !!e.target.checked);
   on(byId("ionMinus"), "click", ()=> setIonCharge(-1));
   on(byId("ionPlus"), "click", ()=> setIonCharge(+1));
+  
+  // Add click handler for ion charge info
+  const ionInfo = byId("ionChargeInfo");
+  if (ionInfo) {
+    ionInfo.addEventListener("click", () => {
+      if (state.targetZ && state.targetZ > 0) {
+        const allowedCharges = getElementAllowedCharges(state.targetZ);
+        const elementName = names[state.targetZ - 1];
+        const formattedCharges = allowedCharges.map(c => {
+          if (c === 0) return "0";
+          if (c > 0) return `+${c}`;
+          return `${c}`;
+        });
+        toast(`${elementName} available charges: ${formattedCharges.join(", ")}`);
+      }
+    });
+  }
 
   on(byId("newGameBtn"), "click", (ev)=>{
     const tiles = Array.from(document.querySelectorAll(".ptile"));
@@ -1276,17 +3524,210 @@ function init(){
       rnd && rnd.click();
     }
     newGame();
+    // Don't show welcome modal again - just start the game directly
   });
 
   on(byId("resetBtnStudy"), "click", resetBuilding);
   on(byId("resetBtnGame"), "click", resetBuilding);
 
+  // Game Welcome Modal Functions
+  function showGameWelcome() {
+    const modal = byId("gameWelcomeModal");
+    if (modal) {
+      modal.classList.remove("hidden");
+    } else {
+      console.error('Game welcome modal not found!');
+    }
+  }
+
+  function hideGameWelcome() {
+    const modal = byId("gameWelcomeModal");
+    if (modal) {
+      modal.classList.add("hidden");
+    } else {
+      console.error('Game welcome modal not found!');
+    }
+  }
+
+  function startGame() {
+    hideGameWelcome();
+    newGame();
+    // Start the timer when game actually begins
+    startTimer();
+    // Add element reveal animation
+    const currentElement = byId("currentPick");
+    if (currentElement) {
+      currentElement.classList.add("element-reveal");
+      setTimeout(() => currentElement.classList.remove("element-reveal"), 1500);
+    }
+    // Hide start button and show game in progress
+    byId("startGameBtn").classList.add("hidden");
+  }
+
+  // Game Control Functions
+  function skipCurrentElectron() {
+    if (state.queue.length > 0) {
+      // Get the current electron from the front of the queue
+      const currentElectron = state.queue[0];
+      
+      // Move it to the back of the queue
+      state.queue.push(state.queue.shift());
+      
+      // Update the lobby display to show the new current electron
+      spawnNextElectron();
+      
+      // Show feedback
+      toast("Electron skipped - back in queue");
+      
+      console.log("Electron skipped, queue length:", state.queue.length);
+    } else {
+      toast("No electrons in queue to skip");
+    }
+  }
+
+  function flipCurrentElectronSpin() {
+    if (state.queue.length > 0) {
+      // Get the current electron from the front of the queue
+      const currentElectron = state.queue[0];
+      
+      // Flip the spin direction
+      currentElectron.spin = currentElectron.spin === "up" ? "down" : "up";
+      
+      // Remember this spin preference for future electrons
+      state.lastSpinPreference = currentElectron.spin;
+      
+      // Update the lobby display to show the flipped electron
+      spawnNextElectron();
+      
+      // Show feedback
+      toast(`Spin flipped to ${currentElectron.spin === "up" ? "↑" : "↓"}`);
+      
+      console.log("Spin flipped to:", currentElectron.spin);
+    } else {
+      toast("No electrons in queue to flip");
+    }
+  }
+
+  // Game Welcome Modal Event Handlers
+  on(byId("gameWelcomeClose"), "click", hideGameWelcome);
+  on(byId("gameWelcomeStart"), "click", startGame);
+  on(byId("startGameBtn"), "click", startGame);
+  
+  // Add backdrop click handler for welcome modal
+  on(byId("gameWelcomeModal"), "click", (e) => {
+    if (e.target.id === "gameWelcomeModal") {
+      hideGameWelcome();
+    }
+  });
+
+  // Game Control Button Event Handlers
+  on(byId("skipBtn"), "click", skipCurrentElectron);
+  on(byId("flipSpinBtn"), "click", flipCurrentElectronSpin);
+
+  // Congratulations Modal Functions
+  window.showCongratulations = function() {
+    console.log('🎉 showCongratulations called!');
+    
+    try {
+      stopTimer();
+      console.log('Timer stopped');
+      
+      // Get current element info
+      const currentPick = byId("currentPick");
+      const elementName = currentPick ? currentPick.textContent : "this element";
+      console.log('Element name:', elementName);
+      
+      // Update modal content
+      const completedElement = byId("completedElement");
+      const finalScore = byId("finalScore");
+      const finalTime = byId("finalTime");
+      const bestStreak = byId("bestStreak");
+      
+      if (completedElement) completedElement.textContent = elementName;
+      if (finalScore) finalScore.textContent = state.score || 0;
+      if (finalTime) finalTime.textContent = byId("timer").textContent || "00:00";
+      if (bestStreak) bestStreak.textContent = state.streak || 0;
+      
+      console.log('Modal content updated');
+      
+      // Show the modal
+      const modal = byId("congratulationsModal");
+      if (modal) {
+        console.log('Modal found, removing hidden class');
+        modal.classList.remove("hidden");
+        console.log('Modal should now be visible');
+      } else {
+        console.error('❌ Congratulations modal not found!');
+        console.error('Available modals:', document.querySelectorAll('[id*="modal"]'));
+      }
+      
+      // Hide start button since game is complete
+      const startBtn = byId("startGameBtn");
+      if (startBtn) {
+        startBtn.classList.add("hidden");
+        console.log('✅ Start button hidden');
+      } else {
+        console.log('⚠️ Start button not found');
+      }
+      
+
+      
+    } catch (error) {
+      console.error('❌ Error in showCongratulations:', error);
+      console.error('Error stack:', error.stack);
+    }
+  }
+
+  function hideCongratulations() {
+    byId("congratulationsModal").classList.add("hidden");
+  }
+
+  function startNextElement() {
+    hideCongratulations();
+    
+    // Pick a random element for the next game
+    const tiles = Array.from(document.querySelectorAll(".ptile"));
+    if (tiles.length) {
+      const rnd = tiles[Math.floor(Math.random() * tiles.length)];
+      if (rnd) {
+        rnd.click(); // This will trigger element selection
+        newGame(); // Start new game with the new element
+        showGameWelcome(); // Show welcome modal for new game
+      }
+    }
+  }
+
+  function restartSameElement() {
+    hideCongratulations();
+    newGame(); // Restart with the same element
+    showGameWelcome(); // Show welcome modal
+  }
+
+  // Congratulations Modal Event Handlers
+  on(byId("congratulationsClose"), "click", hideCongratulations);
+  on(byId("nextElementBtn"), "click", startNextElement);
+  on(byId("sameElementBtn"), "click", restartSameElement);
+  
+  // Add backdrop click handler for congratulations modal
+  on(byId("congratulationsModal"), "click", (e) => {
+    if (e.target.id === "congratulationsModal") {
+      hideCongratulations();
+    }
+  });
+
   on(byId("helpBtn"), "click", ()=> openHelp(state.mode));
-  on(byId("helpClose"), "click", closeHelp);
-  on(byId("helpOk"), "click", closeHelp);
-  on(byId("tabStudy"), "click", ()=> openHelp("study"));
-  on(byId("tabGame"), "click", ()=> openHelp("game"));
-  on(byId("helpBackdrop"), "click", (e)=>{ if (e.target.id==="helpBackdrop") closeHelp(); });
+on(byId("helpClose"), "click", closeHelp);
+on(byId("helpOk"), "click", closeHelp);
+on(byId("tabStudy"), "click", ()=> openHelp("study"));
+on(byId("tabGame"), "click", ()=> openHelp("game"));
+on(byId("helpBackdrop"), "click", (e)=>{ if (e.target.id==="helpBackdrop") closeHelp(); });
+
+// Version modal event listeners
+on(byId("versionBtn"), "click", openVersion);
+on(byId("versionClose"), "click", closeVersion);
+on(byId("versionCloseBtn"), "click", closeVersion);
+on(byId("versionModal"), "click", (e)=>{ if (e.target.id==="versionModal") closeVersion(); });
+on(byId("backBtn"), "click", goBack);
 
 
 
@@ -1346,13 +3787,37 @@ function init(){
     byId("score").parentElement.classList.add("hidden"); // Hide scoreboard in study mode
     stopTimer(); clearAutoPlay(); resetBuilding(); planStudyGhost();
   });
-  on(byId("modeGame"), "click", ()=>{ state.mode="game";
+  on(byId("modeGame"), "click", ()=>{ 
+    state.mode="game";
     byId("modeGame").classList.add("active"); byId("modeStudy").classList.remove("active");
     byId("gameControls").classList.remove("hidden"); byId("studyControls").classList.add("hidden");
     byId("gameActions").classList.remove("hidden"); byId("studyActions").classList.add("hidden");
     byId("lobbyBox").classList.remove("hidden");
     byId("score").parentElement.classList.remove("hidden"); // Show scoreboard in game mode
-    clearAutoPlay(); newGame();
+    clearAutoPlay(); 
+    
+    // Automatically enable exceptions in game mode
+    state.exceptionsEnabled = true;
+    const exceptionsToggle = byId("exceptionsToggle");
+    if (exceptionsToggle) {
+      const input = exceptionsToggle.querySelector("input");
+      if (input) {
+        input.checked = true;
+        toast("Exceptions automatically enabled for Game Mode");
+      }
+    }
+    
+    // Automatically select a random element when switching to game mode
+    selectRandomElement();
+    
+    // Show welcome modal only on first switch to game mode
+    if (!state.hasSeenGameWelcome) {
+      showGameWelcome();
+      state.hasSeenGameWelcome = true;
+    } else {
+      // If not first time, just start a new game directly
+      newGame();
+    }
   });
 
   // Initial element = Oxygen
@@ -1371,6 +3836,47 @@ function init(){
   }
   renderReadouts();
 }
+
+// Manual test function for congratulations modal
+window.testCongratulations = () => {
+  console.log('🧪 Manually testing congratulations modal...');
+  if (typeof window.showCongratulations === 'function') {
+    window.showCongratulations();
+  } else {
+    console.error('showCongratulations function not found');
+  }
+};
+
+// Force show congratulations modal
+window.forceShowCongratulations = () => {
+  console.log('🚀 Force showing congratulations modal...');
+  const modal = document.getElementById('congratulationsModal');
+  if (modal) {
+    // Remove all hidden states
+    modal.classList.remove('hidden');
+    modal.style.display = 'flex';
+    modal.style.visibility = 'visible';
+    modal.style.opacity = '1';
+    modal.style.position = 'fixed';
+    modal.style.zIndex = '2000';
+    
+    // Force reflow
+    modal.offsetHeight;
+    
+    console.log('✅ Modal forced to be visible');
+    console.log('Modal classes:', modal.className);
+    console.log('Modal styles:', {
+      display: modal.style.display,
+      visibility: modal.style.visibility,
+      opacity: modal.style.opacity,
+      position: modal.style.position,
+      zIndex: modal.style.zIndex
+    });
+  } else {
+    console.error('❌ Modal not found');
+  }
+};
+
 window.addEventListener("DOMContentLoaded", init);
   </script>
 
