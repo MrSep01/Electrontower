@@ -889,7 +889,7 @@ input[type="range"]::-moz-range-thumb {
   background:rgba(15,23,42,0.9);
   padding:8px;
   display:flex;
-  justify-content:flex-start; /* Changed from center to flex-start to show left side */
+  justify-content:center; /* Restored original desktop centering */
   width:100%;
   backdrop-filter:blur(10px);
   -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
@@ -932,7 +932,7 @@ input[type="range"]::-moz-range-thumb {
     position: relative;
     overflow-x: auto;
     overflow-y: hidden;
-    justify-content: flex-start; /* Ensure left alignment on small screens */
+    justify-content: flex-start; /* Mobile-only: left alignment for small screens */
   }
   
   .ptable-wrapper::after {
@@ -943,7 +943,6 @@ input[type="range"]::-moz-range-thumb {
   }
   
   .ptable {
-    justify-items: start; /* Ensure left alignment */
     min-width: 500px;
   }
 }
@@ -957,7 +956,6 @@ input[type="range"]::-moz-range-thumb {
   padding:6px;
   width:100%;
   min-width: 800px; /* Ensure minimum width for scrolling */
-  justify-items: start; /* Ensure elements align to start */
 }
 
 /* Mobile table adjustments */
@@ -965,7 +963,6 @@ input[type="range"]::-moz-range-thumb {
   .ptable {
     gap: 4px;
     padding: 4px;
-    justify-items: start; /* Ensure left alignment */
   }
 }
 
@@ -974,7 +971,6 @@ input[type="range"]::-moz-range-thumb {
     gap: 3px;
     padding: 3px;
     min-width: 600px;
-    justify-items: start; /* Ensure left alignment on mobile */
   }
   
   /* Improve mobile periodic table scrolling */
@@ -986,7 +982,7 @@ input[type="range"]::-moz-range-thumb {
     background: rgba(15, 23, 42, 0.9);
     padding: 8px;
     margin: 0 -8px;
-    justify-content: flex-start; /* Ensure left alignment */
+    justify-content: flex-start; /* Mobile-only: left alignment for mobile */
   }
   
   /* Add simple scroll hint */
