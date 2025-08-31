@@ -901,27 +901,10 @@ input[type="range"]::-moz-range-thumb {
     border-radius: var(--border-radius-mobile);
     padding: 6px;
     margin: 0 -8px; /* Extend to edges on mobile */
-    position: relative; /* For scroll indicators */
+    position: relative;
     overflow-x: auto;
     overflow-y: hidden;
     background: rgba(15, 23, 42, 0.9); /* Simple, clean background */
-  }
-  
-  /* Add scroll hint for mobile users */
-  .ptable-wrapper::after {
-    content: '← Scroll →';
-    position: absolute;
-    bottom: -25px;
-    left: 50%;
-    transform: translateX(-50%);
-    color: var(--warning);
-    font-size: 12px;
-    font-weight: 600;
-    background: rgba(15, 23, 42, 0.9);
-    padding: 4px 12px;
-    border-radius: 12px;
-    border: 1px solid var(--border);
-    white-space: nowrap;
   }
 }
 
@@ -934,8 +917,6 @@ input[type="range"]::-moz-range-thumb {
     overflow-y: hidden;
     justify-content: flex-start; /* Mobile-only: left alignment for small screens */
   }
-  
-
   
   .ptable {
     min-width: 500px;
@@ -979,8 +960,6 @@ input[type="range"]::-moz-range-thumb {
     margin: 0 -8px;
     justify-content: flex-start; /* Mobile-only: left alignment for mobile */
   }
-  
-
 }
 
 @media (max-width: 480px) {
@@ -996,11 +975,7 @@ input[type="range"]::-moz-range-thumb {
     border-radius: 14px;
   }
   
-  .ptable-wrapper::before,
-  .ptable-wrapper::after {
-    width: 16px;
-    height: 32px;
-  }
+
 }
 /* ===== Enhanced Periodic Table Tiles for Mobile ===== */
 .ptile{
