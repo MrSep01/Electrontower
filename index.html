@@ -528,6 +528,16 @@ body{
   .toolbar .group.grow {
     order: -1; /* Move search to top on mobile */
   }
+  
+  /* Special handling for ion group to keep controls horizontal */
+  .toolbar .group:has(.ion-controls) {
+    gap: 10px;
+  }
+  
+  .toolbar .group:has(.ion-controls) .ion-controls {
+    flex-direction: row;
+    gap: 8px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -577,6 +587,13 @@ body{
 }
 
 /* ===== Enhanced Ion Controls for Mobile ===== */
+.ion-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+}
+
 .ion-box {
   background: rgba(15, 23, 42, 0.9);
   border: 2px solid var(--secondary);
@@ -606,6 +623,10 @@ body{
 
 /* Mobile ion controls adjustments */
 @media (max-width: 768px) {
+  .ion-controls {
+    gap: 6px;
+  }
+  
   .ion-box {
     min-width: 48px;
     min-height: 48px;
@@ -622,6 +643,10 @@ body{
 }
 
 @media (max-width: 480px) {
+  .ion-controls {
+    gap: 4px;
+  }
+  
   .ion-box {
     min-width: 44px;
     min-height: 44px;
@@ -876,6 +901,37 @@ input[type="range"]::-moz-range-thumb {
     border-radius: var(--border-radius-mobile);
     padding: 6px;
     margin: 0 -8px; /* Extend to edges on mobile */
+    position: relative; /* For scroll indicators */
+    overflow-x: auto;
+    overflow-y: hidden;
+    /* Add mobile scroll indicator */
+    background: linear-gradient(90deg, 
+      rgba(15, 23, 42, 0.95) 0%, 
+      rgba(15, 23, 42, 0.9) 5%, 
+      rgba(15, 23, 42, 0.8) 15%, 
+      rgba(15, 23, 42, 0.6) 30%, 
+      rgba(15, 23, 42, 0.4) 50%, 
+      rgba(15, 23, 42, 0.6) 70%, 
+      rgba(15, 23, 42, 0.8) 85%, 
+      rgba(15, 23, 42, 0.9) 95%, 
+      rgba(15, 23, 42, 0.95) 100%);
+  }
+  
+  /* Add scroll hint for mobile users */
+  .ptable-wrapper::after {
+    content: '← Scroll →';
+    position: absolute;
+    bottom: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--warning);
+    font-size: 12px;
+    font-weight: 600;
+    background: rgba(15, 23, 42, 0.9);
+    padding: 4px 12px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    white-space: nowrap;
   }
 }
 
@@ -883,6 +939,15 @@ input[type="range"]::-moz-range-thumb {
   .ptable-wrapper {
     padding: 4px;
     margin: 0 -6px;
+    position: relative;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+  
+  .ptable-wrapper::after {
+    font-size: 11px;
+    padding: 3px 10px;
+    bottom: -22px;
   }
 }
 
@@ -911,6 +976,41 @@ input[type="range"]::-moz-range-thumb {
     padding: 3px;
     min-width: 600px;
   }
+  
+  /* Improve mobile periodic table scrolling */
+  .ptable-wrapper {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    border: 2px solid var(--border);
+    border-radius: 16px;
+    background: rgba(15, 23, 42, 0.9);
+    padding: 8px;
+    margin: 0 -8px;
+  }
+  
+  /* Add scroll indicators for mobile */
+  .ptable-wrapper::before,
+  .ptable-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 40px;
+    background: linear-gradient(90deg, rgba(15, 23, 42, 0.8) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 10;
+  }
+  
+  .ptable-wrapper::before {
+    left: 0;
+    background: linear-gradient(90deg, rgba(15, 23, 42, 0.8) 0%, transparent 100%);
+  }
+  
+  .ptable-wrapper::after {
+    right: 0;
+    background: linear-gradient(90deg, transparent 0%, rgba(15, 23, 42, 0.8) 100%);
+  }
 }
 
 @media (max-width: 480px) {
@@ -918,6 +1018,18 @@ input[type="range"]::-moz-range-thumb {
     gap: 2px;
     padding: 2px;
     min-width: 500px;
+  }
+  
+  .ptable-wrapper {
+    padding: 6px;
+    margin: 0 -6px;
+    border-radius: 14px;
+  }
+  
+  .ptable-wrapper::before,
+  .ptable-wrapper::after {
+    width: 16px;
+    height: 32px;
   }
 }
 /* ===== Enhanced Periodic Table Tiles for Mobile ===== */
@@ -963,6 +1075,16 @@ input[type="range"]::-moz-range-thumb {
 @media (max-width: 768px) {
   .ptile {
     border-radius: 8px;
+    min-width: 44px; /* Ensure minimum touch target */
+    min-height: 44px; /* Ensure minimum touch target */
+  }
+  
+  .ptile .sym {
+    font-size: calc(var(--tile) * 0.35); /* Slightly larger text */
+  }
+  
+  .ptile .z {
+    font-size: calc(var(--tile) * 0.25); /* Slightly larger atomic number */
   }
   
   .ptile:hover {
@@ -978,6 +1100,16 @@ input[type="range"]::-moz-range-thumb {
 @media (max-width: 480px) {
   .ptile {
     border-radius: 6px;
+    min-width: 40px;
+    min-height: 40px;
+  }
+  
+  .ptile .sym {
+    font-size: calc(var(--tile) * 0.38); /* Even larger text for small screens */
+  }
+  
+  .ptile .z {
+    font-size: calc(var(--tile) * 0.28);
   }
 }
 .block-overlay{border:2px dashed var(--warning);border-radius:12px;display:flex;align-items:flex-start;justify-content:flex-start;padding:4px;pointer-events:none;z-index:0;position:relative}
@@ -2645,6 +2777,19 @@ input[type="range"]::-moz-range-thumb {
 @media (max-width: 600px){ :root{ --tile:36px; } }
 @media (max-width: 430px){ :root{ --tile:32px; } }
 
+/* Mobile-specific tile sizing for better usability */
+@media (max-width: 768px) {
+  :root {
+    --tile: 52px; /* Larger tiles on mobile for better touch interaction */
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --tile: 48px; /* Still larger than default for mobile */
+  }
+}
+
 /* Enhanced mobile optimizations */
 html, body{ 
   -webkit-text-size-adjust: 100%; 
@@ -2980,9 +3125,11 @@ input, textarea, .search, .ptile .sym, .ptile .z {
         </div>
         <div class="group">
           <label class="lbl">Ion</label>
-          <button id="ionMinus" class="btn">−</button>
-          <div id="ionCharge" class="ion-box">0</div>
-          <button id="ionPlus" class="btn">+</button>
+          <div class="ion-controls">
+            <button id="ionMinus" class="btn">−</button>
+            <div id="ionCharge" class="ion-box">0</div>
+            <button id="ionPlus" class="btn">+</button>
+          </div>
           <div id="ionChargeInfo" class="ion-info" title="Click to see all available charges"></div>
           <label class="toggle small"><input type="checkbox" id="hintToggle" checked/> Hints</label>
         </div>
