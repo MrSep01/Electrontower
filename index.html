@@ -935,12 +935,7 @@ input[type="range"]::-moz-range-thumb {
     justify-content: flex-start; /* Mobile-only: left alignment for small screens */
   }
   
-  .ptable-wrapper::after {
-    font-size: 10px;
-    padding: 3px 8px;
-    bottom: -20px;
-    right: 8px;
-  }
+
   
   .ptable {
     min-width: 500px;
@@ -985,21 +980,7 @@ input[type="range"]::-moz-range-thumb {
     justify-content: flex-start; /* Mobile-only: left alignment for mobile */
   }
   
-  /* Add simple scroll hint */
-  .ptable-wrapper::after {
-    content: '→ Scroll to see more elements';
-    position: absolute;
-    bottom: -25px;
-    right: 10px;
-    color: var(--warning);
-    font-size: 11px;
-    font-weight: 600;
-    background: rgba(15, 23, 42, 0.9);
-    padding: 4px 8px;
-    border-radius: 8px;
-    border: 1px solid var(--border);
-    white-space: nowrap;
-  }
+
 }
 
 @media (max-width: 480px) {
@@ -1219,6 +1200,7 @@ input[type="range"]::-moz-range-thumb {
   align-items:flex-start;
   justify-content:center;
   padding-top:8px;
+  min-width: 40px; /* Ensure consistent width */
 }
 
 .energy-axis span{
@@ -1227,6 +1209,7 @@ input[type="range"]::-moz-range-thumb {
   color:var(--warning);
   font-weight:900;
   letter-spacing:.5px;
+  font-size: 12px; /* Slightly smaller to reduce layout impact */
 }
 
 /* Mobile energy axis adjustments */
