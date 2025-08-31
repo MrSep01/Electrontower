@@ -889,7 +889,7 @@ input[type="range"]::-moz-range-thumb {
   background:rgba(15,23,42,0.9);
   padding:8px;
   display:flex;
-  justify-content:center;
+  justify-content:flex-start; /* Changed from center to flex-start to show left side */
   width:100%;
   backdrop-filter:blur(10px);
   -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
@@ -904,17 +904,7 @@ input[type="range"]::-moz-range-thumb {
     position: relative; /* For scroll indicators */
     overflow-x: auto;
     overflow-y: hidden;
-    /* Add mobile scroll indicator */
-    background: linear-gradient(90deg, 
-      rgba(15, 23, 42, 0.95) 0%, 
-      rgba(15, 23, 42, 0.9) 5%, 
-      rgba(15, 23, 42, 0.8) 15%, 
-      rgba(15, 23, 42, 0.6) 30%, 
-      rgba(15, 23, 42, 0.4) 50%, 
-      rgba(15, 23, 42, 0.6) 70%, 
-      rgba(15, 23, 42, 0.8) 85%, 
-      rgba(15, 23, 42, 0.9) 95%, 
-      rgba(15, 23, 42, 0.95) 100%);
+    background: rgba(15, 23, 42, 0.9); /* Simple, clean background */
   }
   
   /* Add scroll hint for mobile users */
@@ -942,12 +932,19 @@ input[type="range"]::-moz-range-thumb {
     position: relative;
     overflow-x: auto;
     overflow-y: hidden;
+    justify-content: flex-start; /* Ensure left alignment on small screens */
   }
   
   .ptable-wrapper::after {
-    font-size: 11px;
-    padding: 3px 10px;
-    bottom: -22px;
+    font-size: 10px;
+    padding: 3px 8px;
+    bottom: -20px;
+    right: 8px;
+  }
+  
+  .ptable {
+    justify-items: start; /* Ensure left alignment */
+    min-width: 500px;
   }
 }
 
@@ -960,6 +957,7 @@ input[type="range"]::-moz-range-thumb {
   padding:6px;
   width:100%;
   min-width: 800px; /* Ensure minimum width for scrolling */
+  justify-items: start; /* Ensure elements align to start */
 }
 
 /* Mobile table adjustments */
@@ -967,6 +965,7 @@ input[type="range"]::-moz-range-thumb {
   .ptable {
     gap: 4px;
     padding: 4px;
+    justify-items: start; /* Ensure left alignment */
   }
 }
 
@@ -975,6 +974,7 @@ input[type="range"]::-moz-range-thumb {
     gap: 3px;
     padding: 3px;
     min-width: 600px;
+    justify-items: start; /* Ensure left alignment on mobile */
   }
   
   /* Improve mobile periodic table scrolling */
@@ -986,30 +986,23 @@ input[type="range"]::-moz-range-thumb {
     background: rgba(15, 23, 42, 0.9);
     padding: 8px;
     margin: 0 -8px;
+    justify-content: flex-start; /* Ensure left alignment */
   }
   
-  /* Add scroll indicators for mobile */
-  .ptable-wrapper::before,
+  /* Add simple scroll hint */
   .ptable-wrapper::after {
-    content: '';
+    content: '→ Scroll to see more elements';
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 20px;
-    height: 40px;
-    background: linear-gradient(90deg, rgba(15, 23, 42, 0.8) 0%, transparent 100%);
-    pointer-events: none;
-    z-index: 10;
-  }
-  
-  .ptable-wrapper::before {
-    left: 0;
-    background: linear-gradient(90deg, rgba(15, 23, 42, 0.8) 0%, transparent 100%);
-  }
-  
-  .ptable-wrapper::after {
-    right: 0;
-    background: linear-gradient(90deg, transparent 0%, rgba(15, 23, 42, 0.8) 100%);
+    bottom: -25px;
+    right: 10px;
+    color: var(--warning);
+    font-size: 11px;
+    font-weight: 600;
+    background: rgba(15, 23, 42, 0.9);
+    padding: 4px 8px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    white-space: nowrap;
   }
 }
 
@@ -2780,13 +2773,13 @@ input[type="range"]::-moz-range-thumb {
 /* Mobile-specific tile sizing for better usability */
 @media (max-width: 768px) {
   :root {
-    --tile: 52px; /* Larger tiles on mobile for better touch interaction */
+    --tile: 56px; /* Even larger tiles on mobile for better touch interaction */
   }
 }
 
 @media (max-width: 480px) {
   :root {
-    --tile: 48px; /* Still larger than default for mobile */
+    --tile: 52px; /* Larger tiles for small mobile screens */
   }
 }
 
