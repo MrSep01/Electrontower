@@ -11,7 +11,7 @@ describe('Electron Towers Core Functionality', () => {
 
   describe('App Initialization', () => {
     test('should load the app successfully', () => {
-      expect(document.title).toBe('Electron Towers — v0.16r8 (Stable + Diagonal Aufbau + Exceptions + Noble)');
+      expect(document.title).toBe('Electron Towers — v0.17r0 (Mobile Responsive + Testing + Diagonal Aufbau + Exceptions + Noble)');
     });
 
     test('should have main header elements', () => {

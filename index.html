@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Electron Towers — v0.16r8 (Stable + Diagonal Aufbau + Exceptions + Noble)</title>
+  <title>Electron Towers — v0.17r0 (Mobile Responsive + Testing + Diagonal Aufbau + Exceptions + Noble)</title>
   <style>
 /* ===== Design (Kahoot-inspired) ===== */
 :root{
@@ -3049,7 +3049,7 @@ input, textarea, .search, .ptile .sym, .ptile .z {
       </div>
       <div class="brand-text">
         <h1>Electron Towers</h1>
-        <p class="subtitle">v0.16r8 — Stable base + diagonal Aufbau + Exceptions + Noble-gas shorthand</p>
+        <p class="subtitle">v0.17r0 — Mobile Responsive + Testing + diagonal Aufbau + Exceptions + Noble-gas shorthand</p>
       </div>
     </div>
     <div class="right">
@@ -3508,7 +3508,7 @@ input, textarea, .search, .ptile .sym, .ptile .z {
           </div>
           <div class="version-info">
             <h3 id="versionTitle">Electron Towers</h3>
-            <p class="current-version">Current Version: <strong>v0.16r8</strong></p>
+            <p class="current-version">Current Version: <strong>v0.17r0</strong></p>
             <p class="version-tagline">Stable base + Diagonal Aufbau + Exceptions + Noble-gas shorthand</p>
           </div>
         </div>
@@ -3990,8 +3990,7 @@ function updateNewConfigurationDisplay() {
     // Update the main configuration display
     const newCurrentConfig = document.getElementById("newCurrentConfig");
     if (newCurrentConfig) {
-      const parts = [];
-      for (const sub of ORDER) {
+hun       for (const sub of ORDER) {
         const units = state.building[sub];
         if (units) {
           let n = 0;
@@ -5001,7 +5000,7 @@ function closeVersion(){
 //
 const VERSION_HISTORY = [
   {
-    version: "v0.16r8",
+            version: "v0.17r0",
     title: "Current Stable Release",
     date: "August 2025",
     isCurrent: true,

@@ -11,7 +11,7 @@ describe('Electron Towers Basic Functionality', () => {
 
   describe('App Structure', () => {
     test('should have correct document title', () => {
-      expect(document.title).toBe('Electron Towers — v0.16r8 (Stable + Diagonal Aufbau + Exceptions + Noble)');
+      expect(document.title).toBe('Electron Towers — v0.17r0 (Mobile Responsive + Testing + Diagonal Aufbau + Exceptions + Noble)');
     });
 
     test('should have proper HTML structure', () => {
