@@ -881,46 +881,13 @@ input[type="range"]::-moz-range-thumb {
     border-radius: 8px;
   }
 }
-/* ===== Enhanced Periodic Table for Mobile ===== */
+/* ===== Periodic Table Layout ===== */
 .ptable-wrapper{
   overflow:auto;
-  border:2px solid var(--border);
-  border-radius:20px;
-  background:rgba(15,23,42,0.9);
+  border:2px solid var(--unit-border);
+  border-radius:12px;
+  background:#1a0a35;
   padding:8px;
-  display:flex;
-  justify-content:center; /* Restored original desktop centering */
-  width:100%;
-  backdrop-filter:blur(10px);
-  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-}
-
-/* Mobile table wrapper adjustments */
-@media (max-width: 768px) {
-  .ptable-wrapper {
-    border-radius: var(--border-radius-mobile);
-    padding: 6px;
-    margin: 0 -8px; /* Extend to edges on mobile */
-    position: relative;
-    overflow-x: auto;
-    overflow-y: hidden;
-    background: rgba(15, 23, 42, 0.9); /* Simple, clean background */
-  }
-}
-
-@media (max-width: 480px) {
-  .ptable-wrapper {
-    padding: 4px;
-    margin: 0 -6px;
-    position: relative;
-    overflow-x: auto;
-    overflow-y: hidden;
-    justify-content: flex-start; /* Mobile-only: left alignment for small screens */
-  }
-  
-  .ptable {
-    min-width: 500px;
-  }
 }
 
 .ptable{
@@ -933,7 +900,7 @@ input[type="range"]::-moz-range-thumb {
   min-width:calc(36px + 32*var(--tile));
 }
 
-/* Mobile table adjustments */
+/* Mobile responsive adjustments */
 @media (max-width: 1024px) {
   .ptable {
     gap: 4px;
@@ -942,36 +909,32 @@ input[type="range"]::-moz-range-thumb {
 }
 
 @media (max-width: 768px) {
+  .ptable-wrapper {
+    border-radius: 10px;
+    padding: 6px;
+    margin: 0 -8px;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+  
   .ptable {
     gap: 3px;
     padding: 3px;
     min-width: calc(36px + 32*var(--tile));
   }
-  
-  /* Improve mobile periodic table scrolling */
-  .ptable-wrapper {
-    -webkit-overflow-scrolling: touch;
-    scroll-behavior: smooth;
-    border: 2px solid var(--border);
-    border-radius: 16px;
-    background: rgba(15, 23, 42, 0.9);
-    padding: 8px;
-    margin: 0 -8px;
-    justify-content: flex-start; /* Mobile-only: left alignment for mobile */
-  }
 }
 
 @media (max-width: 480px) {
+  .ptable-wrapper {
+    padding: 4px;
+    margin: 0 -6px;
+    border-radius: 8px;
+  }
+  
   .ptable {
     gap: 2px;
     padding: 2px;
     min-width: calc(36px + 32*var(--tile));
-  }
-  
-  .ptable-wrapper {
-    padding: 6px;
-    margin: 0 -6px;
-    border-radius: 14px;
   }
 }
 /* ===== Enhanced Periodic Table Tiles for Mobile ===== */
