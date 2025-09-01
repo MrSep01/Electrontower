@@ -4005,6 +4005,7 @@ function updateNewConfigurationDisplay() {
     // Update the main configuration display
     const newCurrentConfig = document.getElementById("newCurrentConfig");
     if (newCurrentConfig) {
+      const parts = []; // Define the parts array
       for (const sub of ORDER) {
         const units = state.building[sub];
         if (units) {
