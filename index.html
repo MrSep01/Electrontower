@@ -3818,9 +3818,25 @@ function buildAufbauList(){
 }
 
 function buildFloors(){
-  const elBuilding = byId("building"); elBuilding.innerHTML = "";
+  console.log("🔨 buildFloors() called");
+  const elBuilding = byId("building"); 
+  console.log("🏢 Building element:", elBuilding);
+  if (!elBuilding) {
+    console.error("❌ Building element not found!");
+    return;
+  }
+  
+  elBuilding.innerHTML = "";
   const byN = {};
-  ORDER.forEach(sub => { const { n } = subInfo(sub); (byN[n] = byN[n] || []).push(sub); });
+  console.log("📋 ORDER array:", ORDER);
+  
+  ORDER.forEach(sub => { 
+    const { n } = subInfo(sub); 
+    (byN[n] = byN[n] || []).push(sub); 
+  });
+  
+  console.log("🏗️ Organized by shell:", byN);
+  
   Object.keys(byN).sort((a,b)=>parseInt(a)-parseInt(b)).forEach(nStr => {
     const n = parseInt(nStr,10);
     const floor = document.createElement("div");
@@ -3854,6 +3870,8 @@ function buildFloors(){
       }
     });
   });
+  
+  console.log("✅ buildFloors() completed");
 }
 
 function resetBuilding(){
@@ -5192,7 +5210,14 @@ function attachExceptionsToggles(){
 
 /* ======= Init ======= */
 function init(){
-  buildAufbauList(); buildFloors(); buildPT(); attachExceptionsToggles();
+  console.log("🚀 init() function called");
+  buildAufbauList(); 
+  console.log("📚 buildAufbauList() completed");
+  buildFloors(); 
+  console.log("🏗️ buildFloors() completed");
+  buildPT(); 
+  console.log("🧪 buildPT() completed");
+  attachExceptionsToggles();
   
   // Initialize version display
   updateVersionDisplay();
