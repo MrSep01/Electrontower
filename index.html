@@ -926,12 +926,11 @@ input[type="range"]::-moz-range-thumb {
 .ptable{
   position:relative;
   display:grid;
-  grid-template-columns:36px 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns:36px repeat(32,var(--tile));
   grid-auto-rows:calc(var(--tile)*1.15);
   gap:6px;
   padding:6px;
-  width:100%;
-  min-width: 800px; /* Ensure minimum width for scrolling */
+  min-width:calc(36px + 32*var(--tile));
 }
 
 /* Mobile table adjustments */
@@ -946,7 +945,7 @@ input[type="range"]::-moz-range-thumb {
   .ptable {
     gap: 3px;
     padding: 3px;
-    min-width: 600px;
+    min-width: calc(36px + 32*var(--tile));
   }
   
   /* Improve mobile periodic table scrolling */
@@ -966,7 +965,7 @@ input[type="range"]::-moz-range-thumb {
   .ptable {
     gap: 2px;
     padding: 2px;
-    min-width: 500px;
+    min-width: calc(36px + 32*var(--tile));
   }
   
   .ptable-wrapper {
@@ -974,8 +973,6 @@ input[type="range"]::-moz-range-thumb {
     margin: 0 -6px;
     border-radius: 14px;
   }
-  
-
 }
 /* ===== Enhanced Periodic Table Tiles for Mobile ===== */
 .ptile{
@@ -3990,7 +3987,7 @@ function updateNewConfigurationDisplay() {
     // Update the main configuration display
     const newCurrentConfig = document.getElementById("newCurrentConfig");
     if (newCurrentConfig) {
-hun       for (const sub of ORDER) {
+      for (const sub of ORDER) {
         const units = state.building[sub];
         if (units) {
           let n = 0;
