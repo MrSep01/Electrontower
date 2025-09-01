@@ -434,36 +434,8 @@ body{
   }
 }
 
-/* ===== Enhanced Main Content with Mobile Responsiveness ===== */
-.main{
-  display:flex;
-  flex-direction:column;
-  gap:16px;
-  padding:12px 14px;
-}
-
-/* Mobile main adjustments */
-@media (max-width: 768px) {
-  .main {
-    gap: 12px;
-    padding: 10px 12px;
-  }
-}
-
-@media (max-width: 480px) {
-  .main {
-    gap: 10px;
-    padding: 8px 10px;
-  }
-}
-
-.hero-ptable{
-  background:rgba(30,41,59,0.9);
-  border:2px solid var(--border);
-  border-radius:20px;
-  padding:10px;
-  backdrop-filter:blur(10px);
-}
+.main{display:flex;flex-direction:column;gap:16px;padding:12px 14px}
+.hero-ptable{background:#240a49;border:2px solid var(--unit-border);border-radius:12px;padding:10px}
 
 /* Mobile hero adjustments */
 @media (max-width: 768px) {
