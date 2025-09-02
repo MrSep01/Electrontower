@@ -4,9 +4,217 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Learning Progress - Electron Tower</title>
-    <link rel="stylesheet" href="styles.css">
     <style>
-        /* Progress Dashboard Specific Styles */
+        /* ===== Design (Kahoot-inspired) ===== */
+        :root{
+          /* Beautiful study page color scheme */
+          --primary: #6366f1;
+          --primary-dark: #4f46e5;
+          --secondary: #8b5cf6;
+          --accent: #06b6d4;
+          --success: #10b981;
+          --warning: #f59e0b;
+          --danger: #ef4444;
+          --dark: #1e293b;
+          --darker: #0f172a;
+          --light: #f8fafc;
+          --border: #e2e8f0;
+          --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+          --shadow-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+          
+          /* Legacy variables for compatibility */
+          --kahoot-purple: var(--primary);
+          --kahoot-blue: var(--accent);
+          --kahoot-red: var(--danger);
+          --kahoot-yellow: var(--warning);
+          --kahoot-green: var(--success);
+          --panel: var(--darker);
+          --unit-border: var(--border);
+          --text: var(--light);
+          --unit-bg: var(--dark);
+          --tile: 48px;
+          
+          /* Mobile-first responsive variables */
+          --header-height: 80px;
+          --header-height-mobile: 70px;
+          --sidebar-width: 360px;
+          --sidebar-width-tablet: 300px;
+          --sidebar-width-mobile: 100%;
+          --toolbar-gap: 12px;
+          --toolbar-gap-mobile: 8px;
+          --border-radius: 20px;
+          --border-radius-mobile: 16px;
+          --padding: 20px;
+          --padding-mobile: 16px;
+          --padding-small: 12px;
+          --padding-small-mobile: 10px;
+        }
+
+        /* ===== Mobile-First Base Styles ===== */
+        *{box-sizing:border-box} 
+        html,body{height:100%}
+        body{
+          margin:0;
+          font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,'Noto Sans',sans-serif;
+          background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+          color:var(--light);
+          overflow-x:hidden;
+        }
+
+        /* ===== Header Styles ===== */
+        .app-header{
+          display:flex;
+          align-items:center;
+          justify-content:space-between;
+          padding: 14px 18px;
+          border-bottom:3px solid var(--accent);
+          background:rgba(99,102,241,0.9);
+          position:sticky;
+          top:0;
+          z-index:30;
+          backdrop-filter:blur(10px);
+          min-height: var(--header-height-mobile);
+          flex-wrap: wrap;
+          gap: 10px;
+        }
+
+        .brand {
+          display: flex;
+          align-items: center;
+          gap: 15px;
+        }
+
+        .brand h1 {
+          color: white;
+          font-size: 24px;
+          font-weight: bold;
+          margin: 0;
+        }
+
+        .brand .subtitle {
+          color: rgba(255, 255, 255, 0.8);
+          font-size: 12px;
+          margin: 0;
+        }
+
+        .header-logo {
+          width: 50px;
+          height: 50px;
+        }
+
+        .logo-image {
+          width: 100%;
+          height: 100%;
+          position: relative;
+        }
+
+        .logo-placeholder {
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(135deg, var(--primary), var(--secondary));
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .logo-scientist {
+          width: 30px;
+          height: 30px;
+          position: relative;
+        }
+
+        .logo-hair-purple { width: 20px; height: 8px; background: #8b5cf6; border-radius: 10px 10px 0 0; position: absolute; top: 0; left: 5px; }
+        .logo-face-skin { width: 16px; height: 12px; background: #fbbf24; border-radius: 8px; position: absolute; top: 6px; left: 7px; }
+        .logo-eyes-blue { width: 2px; height: 2px; background: #3b82f6; border-radius: 50%; position: absolute; top: 8px; left: 9px; }
+        .logo-eyes-blue::after { content: ''; width: 2px; height: 2px; background: #3b82f6; border-radius: 50%; position: absolute; left: 6px; }
+        .logo-glasses-round { width: 12px; height: 8px; border: 1px solid #1e293b; border-radius: 6px; position: absolute; top: 7px; left: 6px; }
+        .logo-smile-friendly { width: 6px; height: 3px; border: 1px solid #1e293b; border-top: none; border-radius: 0 0 6px 6px; position: absolute; top: 14px; left: 9px; }
+        .logo-labcoat-white { width: 18px; height: 8px; background: white; border-radius: 0 0 4px 4px; position: absolute; top: 18px; left: 6px; }
+        .logo-tie-purple { width: 2px; height: 6px; background: #8b5cf6; position: absolute; top: 18px; left: 14px; }
+
+        .logo-science-elements {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          pointer-events: none;
+        }
+
+        .logo-atom-white { width: 4px; height: 4px; background: white; border-radius: 50%; position: absolute; top: 10px; right: 5px; }
+        .logo-atom-white:nth-child(2) { top: 20px; right: 8px; }
+        .logo-beaker-purple { width: 3px; height: 6px; background: #8b5cf6; border-radius: 0 0 2px 2px; position: absolute; top: 15px; left: 2px; }
+        .logo-beaker-purple:nth-child(4) { top: 25px; left: 5px; }
+        .logo-syringe-white { width: 2px; height: 4px; background: white; position: absolute; top: 12px; left: 8px; }
+        .logo-syringe-white:nth-child(6) { top: 22px; left: 11px; }
+        .logo-star-white { width: 2px; height: 2px; background: white; position: absolute; top: 8px; left: 12px; }
+        .logo-star-white:nth-child(8) { top: 18px; left: 15px; }
+        .logo-star-white:nth-child(9) { top: 28px; left: 3px; }
+        .logo-star-white:nth-child(10) { top: 32px; left: 12px; }
+
+        .right {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+        }
+
+        .btn {
+          padding: 10px 16px;
+          border: none;
+          border-radius: var(--border-radius);
+          font-size: 14px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          text-decoration: none;
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+        }
+
+        .btn.primary {
+          background: var(--accent);
+          color: white;
+        }
+
+        .btn.primary:hover {
+          background: #0891b2;
+          transform: translateY(-2px);
+        }
+
+        .btn.ghost {
+          background: rgba(255, 255, 255, 0.1);
+          color: white;
+          border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn.ghost:hover {
+          background: rgba(255, 255, 255, 0.2);
+          transform: translateY(-2px);
+        }
+
+        /* ===== Footer Styles ===== */
+        .app-footer{
+          text-align:center;
+          padding:14px;
+          color:var(--warning);
+          border-top:3px solid var(--accent);
+          background:rgba(99,102,241,0.9);
+          backdrop-filter:blur(10px);
+        }
+
+        /* ===== Custom Emojis ===== */
+        .custom-emoji {
+          font-size: 1.2em;
+        }
+
+        .emoji-atom::before { content: '⚛️'; }
+        .emoji-study::before { content: '📚'; }
+        .emoji-star::before { content: '⭐'; }
+        .emoji-scientist::before { content: '👨‍🔬'; }
+
+        /* ===== Progress Dashboard Specific Styles ===== */
         .progress-dashboard {
             max-width: 1200px;
             margin: 0 auto;
@@ -270,7 +478,41 @@
             box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
         }
 
+        /* ===== Mobile Responsive Design ===== */
         @media (max-width: 768px) {
+            .app-header {
+                padding: 10px 14px;
+                min-height: var(--header-height-mobile);
+                flex-direction: column;
+                align-items: stretch;
+                gap: 12px;
+            }
+            
+            .app-header .brand {
+                justify-content: center;
+                order: 1;
+            }
+            
+            .app-header .right {
+                order: 2;
+                display: flex;
+                justify-content: center;
+                gap: 8px;
+                flex-wrap: wrap;
+            }
+
+            .brand {
+                gap: 12px;
+            }
+            
+            .brand h1 {
+                font-size: 20px !important;
+            }
+            
+            .brand .subtitle {
+                font-size: 11px !important;
+            }
+
             .progress-grid {
                 grid-template-columns: 1fr;
             }
@@ -287,6 +529,35 @@
             .progress-circle::before {
                 width: 90px;
                 height: 90px;
+            }
+
+            .app-footer {
+                padding: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .app-header {
+                padding: 8px 12px;
+                gap: 8px;
+            }
+            
+            .app-header .right {
+                gap: 6px;
+            }
+            
+            .app-header .right .btn {
+                padding: 8px 10px;
+                font-size: 14px;
+            }
+
+            .brand {
+                gap: 10px;
+            }
+
+            .app-footer {
+                padding: 10px;
+                font-size: 14px;
             }
         }
     </style>
