@@ -1674,6 +1674,7 @@
         </div>
         <div class="right">
             <a href="index.html" class="btn ghost"><span class="custom-emoji emoji-atom"></span> Back to App</a>
+            <a href="progress.html" class="btn ghost"><span class="custom-emoji emoji-star"></span> Progress</a>
             <button class="btn primary"><span class="custom-emoji emoji-study"></span> Start Learning</button>
         </div>
     </header>
@@ -1687,6 +1688,11 @@
                 <span class="custom-emoji emoji-atom"></span>
             </h1>
             <p>Comprehensive study guide for understanding atomic structure and electron behavior</p>
+            <div style="text-align: center; margin-top: 20px;">
+                <a href="progress.html" class="tile-btn" style="display: inline-block; text-decoration: none;">
+                    📊 View Progress Dashboard
+                </a>
+            </div>
         </div>
 
         <!-- ======= Big Study Tiles ======= -->
@@ -3395,6 +3401,9 @@
                 });
             });
 
+            // Update progress indicators on tiles
+            updateTileProgressIndicators();
+
             // Add click effects for buttons
             const buttons = document.querySelectorAll('.tile-btn, .btn');
             buttons.forEach(button => {
@@ -3881,6 +3890,9 @@
                 }
             }
             if (resultsElement) resultsElement.style.display = 'block';
+
+            // Track progress in localStorage
+            updateProgress('coreRules', score, 11);
         }
 
         // Hide detailed content and return to tiles
@@ -3888,6 +3900,134 @@
             document.getElementById('detailedContent').style.display = 'none';
             document.querySelector('.study-tiles').style.display = 'grid';
             document.querySelector('.page-title').style.display = 'block';
+        }
+
+        // Progress tracking function
+        function updateProgress(concept, score, totalQuestions) {
+            const savedProgress = localStorage.getItem('electronTowerProgress');
+            const progress = savedProgress ? JSON.parse(savedProgress) : getDefaultProgress();
+            
+            if (!progress.concepts[concept]) {
+                progress.concepts[concept] = { completed: false, score: 0, attempts: 0, timeSpent: 0 };
+            }
+            
+            progress.concepts[concept].score += score;
+            progress.concepts[concept].attempts++;
+            progress.concepts[concept].completed = (score / totalQuestions) >= 0.7; // 70% threshold
+            
+            // Update streak
+            const today = new Date().toDateString();
+            if (progress.lastStudyDate !== today) {
+                progress.streak++;
+                progress.lastStudyDate = today;
+            }
+            
+            localStorage.setItem('electronTowerProgress', JSON.stringify(progress));
+            
+            // Check for achievements
+            checkAchievements(progress);
+        }
+
+        function getDefaultProgress() {
+            return {
+                concepts: {
+                    overview: { completed: false, score: 0, attempts: 0, timeSpent: 0 },
+                    coreRules: { completed: false, score: 0, attempts: 0, timeSpent: 0 },
+                    sublevels: { completed: false, score: 0, attempts: 0, timeSpent: 0 },
+                    exceptions: { completed: false, score: 0, attempts: 0, timeSpent: 0 },
+                    applications: { completed: false, score: 0, attempts: 0, timeSpent: 0 },
+                    practice: { completed: false, score: 0, attempts: 0, timeSpent: 0 }
+                },
+                achievements: [],
+                streak: 0,
+                lastStudyDate: null,
+                totalQuizzes: 0,
+                totalTimeSpent: 0
+            };
+        }
+
+        function checkAchievements(progress) {
+            const achievements = progress.achievements || [];
+            
+            // First quiz achievement
+            const totalQuizzes = Object.values(progress.concepts).reduce((sum, c) => sum + c.attempts, 0);
+            if (totalQuizzes >= 1 && !achievements.includes('first_quiz')) {
+                achievements.push('first_quiz');
+                showAchievementNotification('First Steps', 'Complete your first quiz!');
+            }
+            
+            // Perfect score achievement
+            const hasPerfectScore = Object.values(progress.concepts).some(c => c.score > 0 && c.score === c.attempts);
+            if (hasPerfectScore && !achievements.includes('perfect_score')) {
+                achievements.push('perfect_score');
+                showAchievementNotification('Perfectionist', 'Get a perfect quiz score!');
+            }
+            
+            // All concepts achievement
+            const allCompleted = Object.values(progress.concepts).every(c => c.completed);
+            if (allCompleted && !achievements.includes('all_concepts')) {
+                achievements.push('all_concepts');
+                showAchievementNotification('Electron Expert', 'Complete all concepts!');
+            }
+            
+            progress.achievements = achievements;
+            localStorage.setItem('electronTowerProgress', JSON.stringify(progress));
+        }
+
+        function showAchievementNotification(title, description) {
+            // Create a simple notification
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: var(--success);
+                color: white;
+                padding: 15px 20px;
+                border-radius: 10px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+                z-index: 1000;
+                animation: slideIn 0.3s ease;
+            `;
+            notification.innerHTML = `
+                <div style="font-weight: bold; margin-bottom: 5px;">🏆 ${title}</div>
+                <div style="font-size: 0.9rem;">${description}</div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        function updateTileProgressIndicators() {
+            const savedProgress = localStorage.getItem('electronTowerProgress');
+            if (!savedProgress) return;
+            
+            const progress = JSON.parse(savedProgress);
+            
+            // Update Core Rules tile
+            const coreRulesProgress = progress.concepts.coreRules;
+            if (coreRulesProgress && coreRulesProgress.attempts > 0) {
+                const percentage = Math.round((coreRulesProgress.score / coreRulesProgress.attempts) * 100);
+                const tile = document.querySelector('.study-tile.rules');
+                if (tile) {
+                    const progressDiv = document.createElement('div');
+                    progressDiv.className = 'tile-progress';
+                    progressDiv.style.cssText = `
+                        background: var(--success);
+                        color: white;
+                        padding: 5px 10px;
+                        border-radius: 15px;
+                        font-size: 0.8rem;
+                        margin-top: 10px;
+                        text-align: center;
+                    `;
+                    progressDiv.innerHTML = `Progress: ${percentage}% (${coreRulesProgress.score}/${coreRulesProgress.attempts})`;
+                    tile.querySelector('.tile-header').appendChild(progressDiv);
+                }
+            }
         }
 
         // Show objective details when clicked
@@ -4278,6 +4418,9 @@
             resultsDiv.innerHTML = resultText;
             resultsDiv.className = `pauli-feedback ${resultClass}`;
             resultsDiv.style.display = 'block';
+
+            // Track progress for vocabulary quiz
+            updateProgress('coreRules', correct, total);
         }
 
         function resetVocabQuiz() {

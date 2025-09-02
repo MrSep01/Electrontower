@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Progress - Electron Tower</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Progress Dashboard Specific Styles */
+        .progress-dashboard {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: calc(100vh - 200px);
+        }
+
+        .dashboard-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .dashboard-title {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .dashboard-subtitle {
+            color: var(--light);
+            font-size: 1.1rem;
+        }
+
+        .progress-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .progress-card {
+            background: var(--dark);
+            border: 2px solid var(--border);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .progress-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .card-icon {
+            font-size: 2rem;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin: 0;
+        }
+
+        .overall-progress {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .progress-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: conic-gradient(var(--primary) 0deg, var(--primary) var(--progress-angle, 0deg), var(--border) var(--progress-angle, 0deg));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            position: relative;
+        }
+
+        .progress-circle::before {
+            content: '';
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: var(--dark);
+            position: absolute;
+        }
+
+        .progress-percentage {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary);
+            z-index: 1;
+        }
+
+        .concept-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .concept-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px;
+            margin-bottom: 10px;
+            background: var(--darker);
+            border-radius: 10px;
+            border-left: 4px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .concept-item.completed {
+            border-left-color: var(--success);
+            background: rgba(76, 175, 80, 0.1);
+        }
+
+        .concept-item.in-progress {
+            border-left-color: var(--warning);
+            background: rgba(255, 193, 7, 0.1);
+        }
+
+        .concept-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .concept-icon {
+            font-size: 1.5rem;
+        }
+
+        .concept-details h4 {
+            margin: 0;
+            color: var(--light);
+        }
+
+        .concept-details p {
+            margin: 5px 0 0;
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        .concept-status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .status-badge {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .status-not-started {
+            background: var(--border);
+            color: var(--muted);
+        }
+
+        .status-in-progress {
+            background: var(--warning);
+            color: var(--dark);
+        }
+
+        .status-completed {
+            background: var(--success);
+            color: white;
+        }
+
+        .achievement-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .achievement-item {
+            text-align: center;
+            padding: 20px;
+            background: var(--darker);
+            border-radius: 10px;
+            border: 2px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .achievement-item.unlocked {
+            border-color: var(--warning);
+            background: rgba(255, 193, 7, 0.1);
+        }
+
+        .achievement-icon {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            opacity: 0.3;
+        }
+
+        .achievement-item.unlocked .achievement-icon {
+            opacity: 1;
+        }
+
+        .achievement-title {
+            font-size: 1rem;
+            color: var(--light);
+            margin-bottom: 5px;
+        }
+
+        .achievement-desc {
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+            background: var(--darker);
+            border-radius: 10px;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary);
+            display: block;
+        }
+
+        .stat-label {
+            color: var(--light);
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+
+        .back-to-study {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .back-btn {
+            background: var(--primary);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .back-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .progress-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .dashboard-title {
+                font-size: 2rem;
+            }
+            
+            .progress-circle {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .progress-circle::before {
+                width: 90px;
+                height: 90px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ======= Header (Consistent with main app) ======= -->
+    <header class="app-header">
+        <div class="brand">
+            <div class="header-logo">
+                <div class="logo-image">
+                    <div class="logo-placeholder">
+                        <div class="logo-scientist">
+                            <div class="logo-hair-purple"></div>
+                            <div class="logo-face-skin"></div>
+                            <div class="logo-eyes-blue"></div>
+                            <div class="logo-glasses-round"></div>
+                            <div class="logo-smile-friendly"></div>
+                            <div class="logo-labcoat-white"></div>
+                            <div class="logo-tie-purple"></div>
+                        </div>
+                        <div class="logo-science-elements">
+                            <div class="logo-atom-white"></div>
+                            <div class="logo-atom-white"></div>
+                            <div class="logo-beaker-purple"></div>
+                            <div class="logo-beaker-purple"></div>
+                            <div class="logo-syringe-white"></div>
+                            <div class="logo-syringe-white"></div>
+                            <div class="logo-star-white"></div>
+                            <div class="logo-star-white"></div>
+                            <div class="logo-star-white"></div>
+                            <div class="logo-star-white"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="brand-text">
+                <h1>Electron Towers</h1>
+                <p class="subtitle">v0.16r8 — Progress Dashboard</p>
+            </div>
+        </div>
+        <div class="right">
+            <a href="index.html" class="btn ghost"><span class="custom-emoji emoji-atom"></span> Back to App</a>
+            <a href="study.html" class="btn primary"><span class="custom-emoji emoji-study"></span> Study Guide</a>
+        </div>
+    </header>
+
+    <main class="progress-dashboard">
+        <div class="dashboard-header">
+            <h1 class="dashboard-title">📊 Your Learning Progress</h1>
+            <p class="dashboard-subtitle">Track your journey through electron configuration concepts</p>
+        </div>
+
+        <!-- Overall Progress -->
+        <div class="progress-card">
+            <div class="card-header">
+                <span class="card-icon">🎯</span>
+                <h2 class="card-title">Overall Progress</h2>
+            </div>
+            <div class="overall-progress">
+                <div class="progress-circle" id="overallProgressCircle">
+                    <span class="progress-percentage" id="overallPercentage">0%</span>
+                </div>
+                <p style="color: var(--light);">Complete all concepts to master electron configuration!</p>
+            </div>
+        </div>
+
+        <!-- Concept Progress -->
+        <div class="progress-card">
+            <div class="card-header">
+                <span class="card-icon">📚</span>
+                <h2 class="card-title">Concept Progress</h2>
+            </div>
+            <ul class="concept-list" id="conceptList">
+                <!-- Populated by JavaScript -->
+            </ul>
+        </div>
+
+        <!-- Study Statistics -->
+        <div class="progress-card">
+            <div class="card-header">
+                <span class="card-icon">📈</span>
+                <h2 class="card-title">Study Statistics</h2>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-value" id="totalQuizzes">0</span>
+                    <div class="stat-label">Quizzes Completed</div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="averageScore">0%</span>
+                    <div class="stat-label">Average Score</div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="studyStreak">0</span>
+                    <div class="stat-label">Day Streak</div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="totalTime">0m</span>
+                    <div class="stat-label">Time Spent</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Achievements -->
+        <div class="progress-card">
+            <div class="card-header">
+                <span class="card-icon">🏆</span>
+                <h2 class="card-title">Achievements</h2>
+            </div>
+            <div class="achievement-grid" id="achievementGrid">
+                <!-- Populated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Back to Study -->
+        <div class="back-to-study">
+            <a href="study.html" class="back-btn">← Back to Study Guide</a>
+        </div>
+    </main>
+
+    <!-- ======= Footer (Consistent with main app) ======= -->
+    <footer class="app-footer">
+        <span><span class="custom-emoji emoji-scientist"></span> © 2025 Electron Towers APP • Mr.Sep Educational Services</span>
+    </footer>
+
+    <script>
+        // Progress Dashboard JavaScript
+        class ProgressDashboard {
+            constructor() {
+                this.concepts = {
+                    overview: { name: 'Overview', icon: '🔍', description: 'Introduction to electron configuration' },
+                    coreRules: { name: 'Core Rules', icon: '⚛️', description: 'Aufbau, Hund\'s, and Pauli principles' },
+                    sublevels: { name: 'Sublevels & Orbitals', icon: '🌌', description: 'Understanding orbital structure' },
+                    exceptions: { name: 'Exceptions', icon: '⚠️', description: 'Special cases and anomalies' },
+                    applications: { name: 'Applications', icon: '🧪', description: 'Real-world applications' },
+                    practice: { name: 'Practice', icon: '💪', description: 'Interactive practice problems' }
+                };
+
+                this.achievements = [
+                    { id: 'first_quiz', title: 'First Steps', desc: 'Complete your first quiz', icon: '👶' },
+                    { id: 'core_master', title: 'Core Master', desc: 'Master all core rules', icon: '🎓' },
+                    { id: 'perfect_score', title: 'Perfectionist', desc: 'Get a perfect quiz score', icon: '💯' },
+                    { id: 'streak_7', title: 'Week Warrior', desc: 'Study for 7 days straight', icon: '🔥' },
+                    { id: 'speed_demon', title: 'Speed Demon', desc: 'Complete a quiz in under 2 minutes', icon: '⚡' },
+                    { id: 'all_concepts', title: 'Electron Expert', desc: 'Complete all concepts', icon: '👨‍🔬' }
+                ];
+
+                this.init();
+            }
+
+            init() {
+                this.loadProgress();
+                this.updateOverallProgress();
+                this.updateConceptList();
+                this.updateStatistics();
+                this.updateAchievements();
+            }
+
+            loadProgress() {
+                const savedProgress = localStorage.getItem('electronTowerProgress');
+                this.progress = savedProgress ? JSON.parse(savedProgress) : this.getDefaultProgress();
+            }
+
+            getDefaultProgress() {
+                return {
+                    concepts: {
+                        overview: { completed: false, score: 0, attempts: 0, timeSpent: 0 },
+                        coreRules: { completed: false, score: 0, attempts: 0, timeSpent: 0 },
+                        sublevels: { completed: false, score: 0, attempts: 0, timeSpent: 0 },
+                        exceptions: { completed: false, score: 0, attempts: 0, timeSpent: 0 },
+                        applications: { completed: false, score: 0, attempts: 0, timeSpent: 0 },
+                        practice: { completed: false, score: 0, attempts: 0, timeSpent: 0 }
+                    },
+                    achievements: [],
+                    streak: 0,
+                    lastStudyDate: null,
+                    totalQuizzes: 0,
+                    totalTimeSpent: 0
+                };
+            }
+
+            updateOverallProgress() {
+                const completedConcepts = Object.values(this.progress.concepts).filter(c => c.completed).length;
+                const totalConcepts = Object.keys(this.concepts).length;
+                const percentage = Math.round((completedConcepts / totalConcepts) * 100);
+                
+                document.getElementById('overallPercentage').textContent = percentage + '%';
+                
+                const progressCircle = document.getElementById('overallProgressCircle');
+                const angle = (percentage / 100) * 360;
+                progressCircle.style.setProperty('--progress-angle', angle + 'deg');
+            }
+
+            updateConceptList() {
+                const conceptList = document.getElementById('conceptList');
+                conceptList.innerHTML = '';
+
+                Object.entries(this.concepts).forEach(([key, concept]) => {
+                    const progress = this.progress.concepts[key];
+                    const listItem = document.createElement('li');
+                    listItem.className = 'concept-item';
+                    
+                    if (progress.completed) {
+                        listItem.classList.add('completed');
+                    } else if (progress.attempts > 0) {
+                        listItem.classList.add('in-progress');
+                    }
+
+                    const statusBadge = this.getStatusBadge(progress);
+                    const scoreText = progress.attempts > 0 ? ` (${progress.score}/${progress.attempts})` : '';
+
+                    listItem.innerHTML = `
+                        <div class="concept-info">
+                            <span class="concept-icon">${concept.icon}</span>
+                            <div class="concept-details">
+                                <h4>${concept.name}</h4>
+                                <p>${concept.description}${scoreText}</p>
+                            </div>
+                        </div>
+                        <div class="concept-status">
+                            ${statusBadge}
+                        </div>
+                    `;
+
+                    conceptList.appendChild(listItem);
+                });
+            }
+
+            getStatusBadge(progress) {
+                if (progress.completed) {
+                    return '<span class="status-badge status-completed">✓ Completed</span>';
+                } else if (progress.attempts > 0) {
+                    return '<span class="status-badge status-in-progress">🔄 In Progress</span>';
+                } else {
+                    return '<span class="status-badge status-not-started">⭕ Not Started</span>';
+                }
+            }
+
+            updateStatistics() {
+                const totalQuizzes = Object.values(this.progress.concepts).reduce((sum, c) => sum + c.attempts, 0);
+                const totalScores = Object.values(this.progress.concepts).reduce((sum, c) => sum + c.score, 0);
+                const averageScore = totalQuizzes > 0 ? Math.round((totalScores / totalQuizzes) * 100) : 0;
+                const totalTime = Math.round(this.progress.totalTimeSpent / 60000); // Convert to minutes
+
+                document.getElementById('totalQuizzes').textContent = totalQuizzes;
+                document.getElementById('averageScore').textContent = averageScore + '%';
+                document.getElementById('studyStreak').textContent = this.progress.streak;
+                document.getElementById('totalTime').textContent = totalTime + 'm';
+            }
+
+            updateAchievements() {
+                const achievementGrid = document.getElementById('achievementGrid');
+                achievementGrid.innerHTML = '';
+
+                this.achievements.forEach(achievement => {
+                    const isUnlocked = this.progress.achievements.includes(achievement.id);
+                    const achievementItem = document.createElement('div');
+                    achievementItem.className = `achievement-item ${isUnlocked ? 'unlocked' : ''}`;
+                    
+                    achievementItem.innerHTML = `
+                        <div class="achievement-icon">${achievement.icon}</div>
+                        <div class="achievement-title">${achievement.title}</div>
+                        <div class="achievement-desc">${achievement.desc}</div>
+                    `;
+
+                    achievementGrid.appendChild(achievementItem);
+                });
+            }
+
+            // Static method to update progress from other pages
+            static updateConceptProgress(concept, score, totalQuestions, timeSpent = 0) {
+                const savedProgress = localStorage.getItem('electronTowerProgress');
+                const progress = savedProgress ? JSON.parse(savedProgress) : new ProgressDashboard().getDefaultProgress();
+                
+                if (!progress.concepts[concept]) {
+                    progress.concepts[concept] = { completed: false, score: 0, attempts: 0, timeSpent: 0 };
+                }
+                
+                progress.concepts[concept].score += score;
+                progress.concepts[concept].attempts++;
+                progress.concepts[concept].timeSpent += timeSpent;
+                progress.concepts[concept].completed = (score / totalQuestions) >= 0.7; // 70% threshold
+                
+                // Update streak
+                const today = new Date().toDateString();
+                if (progress.lastStudyDate !== today) {
+                    progress.streak++;
+                    progress.lastStudyDate = today;
+                }
+                
+                progress.totalTimeSpent += timeSpent;
+                
+                localStorage.setItem('electronTowerProgress', JSON.stringify(progress));
+                
+                // Check for achievements
+                ProgressDashboard.checkAchievements(progress);
+            }
+
+            static checkAchievements(progress) {
+                const achievements = progress.achievements || [];
+                
+                // First quiz achievement
+                const totalQuizzes = Object.values(progress.concepts).reduce((sum, c) => sum + c.attempts, 0);
+                if (totalQuizzes >= 1 && !achievements.includes('first_quiz')) {
+                    achievements.push('first_quiz');
+                }
+                
+                // Perfect score achievement
+                const hasPerfectScore = Object.values(progress.concepts).some(c => c.score > 0 && c.score === c.attempts);
+                if (hasPerfectScore && !achievements.includes('perfect_score')) {
+                    achievements.push('perfect_score');
+                }
+                
+                // All concepts achievement
+                const allCompleted = Object.values(progress.concepts).every(c => c.completed);
+                if (allCompleted && !achievements.includes('all_concepts')) {
+                    achievements.push('all_concepts');
+                }
+                
+                progress.achievements = achievements;
+                localStorage.setItem('electronTowerProgress', JSON.stringify(progress));
+            }
+        }
+
+        // Initialize dashboard when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new ProgressDashboard();
+        });
+    </script>
+</body>
+</html>
