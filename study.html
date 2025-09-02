@@ -3296,17 +3296,17 @@
                     <div class="quiz-question">
                         <h4>Question 4: In a 2p subshell, how should 4 electrons be arranged?</h4>
                         <div class="quiz-options">
-                            <button class="quiz-option" onclick="checkAnswer(4, 'a')">A) All in one orbital (↑↓↑↓)</button>
-                            <button class="quiz-option" onclick="checkAnswer(4, 'b')">B) Two orbitals with 2 electrons each (↑↓↑↓)</button>
-                            <button class="quiz-option" onclick="checkAnswer(4, 'c')">C) One electron in each orbital, then pair (↑↑↑↓)</button>
+                            <button class="quiz-option" onclick="checkAnswer(4, 'a')">A) All in one orbital (px: ↑↓, py: empty, pz: empty)</button>
+                            <button class="quiz-option" onclick="checkAnswer(4, 'b')">B) Two orbitals with 2 electrons each (px: ↑↓, py: ↑↓, pz: empty)</button>
+                            <button class="quiz-option" onclick="checkAnswer(4, 'c')">C) One electron in each orbital, then pair (px: ↑, py: ↑, pz: ↑↓)</button>
                         </div>
                     </div>
 
                     <div class="quiz-question">
                         <h4>Question 5: What happens when electrons pair in an orbital?</h4>
                         <div class="quiz-options">
-                            <button class="quiz-option" onclick="checkAnswer(5, 'a')">A) They have the same spin (↑↑)</button>
-                            <button class="quiz-option" onclick="checkAnswer(5, 'b')">B) They have opposite spins (↑↓)</button>
+                            <button class="quiz-option" onclick="checkAnswer(5, 'a')">A) They have the same spin (both ↑ or both ↓)</button>
+                            <button class="quiz-option" onclick="checkAnswer(5, 'b')">B) They have opposite spins (one ↑ and one ↓)</button>
                             <button class="quiz-option" onclick="checkAnswer(5, 'c')">C) They can have any spin combination</button>
                         </div>
                     </div>
@@ -3332,9 +3332,9 @@
                     <div class="quiz-question">
                         <h4>Question 8: What is the correct electron configuration for carbon (C)?</h4>
                         <div class="quiz-options">
-                            <button class="quiz-option" onclick="checkAnswer(8, 'a')">A) 1s² 2s² 2p²</button>
-                            <button class="quiz-option" onclick="checkAnswer(8, 'b')">B) 1s² 2s² 2p⁴</button>
-                            <button class="quiz-option" onclick="checkAnswer(8, 'c')">C) 1s² 2s⁴</button>
+                            <button class="quiz-option" onclick="checkAnswer(8, 'a')">A) 1s² 2s² 2p² (6 electrons total)</button>
+                            <button class="quiz-option" onclick="checkAnswer(8, 'b')">B) 1s² 2s² 2p⁴ (8 electrons total)</button>
+                            <button class="quiz-option" onclick="checkAnswer(8, 'c')">C) 1s² 2s⁴ (6 electrons total)</button>
                         </div>
                     </div>
 
@@ -3355,11 +3355,20 @@
                             <button class="quiz-option" onclick="checkAnswer(10, 'c')">C) 7 orbitals</button>
                         </div>
                     </div>
+
+                    <div class="quiz-question">
+                        <h4>Question 11: How are the 2p electrons arranged in nitrogen (N)?</h4>
+                        <div class="quiz-options">
+                            <button class="quiz-option" onclick="checkAnswer(11, 'a')">A) px: ↑↓, py: ↑↓, pz: ↑↓ (all paired)</button>
+                            <button class="quiz-option" onclick="checkAnswer(11, 'b')">B) px: ↑, py: ↑, pz: ↑ (all unpaired)</button>
+                            <button class="quiz-option" onclick="checkAnswer(11, 'c')">C) px: ↑↓, py: ↑, pz: empty (mixed)</button>
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="quiz-results" id="quizResults" style="display: none;">
                     <h4 style="color: var(--success);">Quiz Results</h4>
-                    <p>Score: <span id="quizScore">0</span>/10</p>
+                    <p>Score: <span id="quizScore">0</span>/11</p>
                     <p id="quizFeedback"></p>
                 </div>
             </div>
@@ -3803,13 +3812,14 @@
                 1: 'a', // 1s → 2s → 2p → 3s → 3p → 4s → 3d
                 2: 'b', // Spread out with parallel spins first
                 3: 'b', // 2 electrons max per orbital
-                4: 'c', // One electron in each orbital, then pair (↑↑↑↓)
-                5: 'b', // They have opposite spins (↑↓)
+                4: 'c', // One electron in each orbital, then pair (px: ↑, py: ↑, pz: ↑↓)
+                5: 'b', // They have opposite spins (one ↑ and one ↓)
                 6: 'a', // Neon (Ne)
                 7: 'b', // 2 unpaired electrons
-                8: 'a', // 1s² 2s² 2p²
+                8: 'a', // 1s² 2s² 2p² (6 electrons total)
                 9: 'b', // Hund's Rule
-                10: 'b' // 5 orbitals
+                10: 'b', // 5 orbitals
+                11: 'b' // px: ↑, py: ↑, pz: ↑ (all unpaired)
             };
 
             quizAnswers[questionNum] = selectedAnswer;
@@ -3827,7 +3837,7 @@
             });
 
             // Check if all questions are answered
-            if (Object.keys(quizAnswers).length === 10) {
+            if (Object.keys(quizAnswers).length === 11) {
                 setTimeout(showQuizResults, 1000);
             }
         }
@@ -3837,13 +3847,14 @@
                 1: 'a', // 1s → 2s → 2p → 3s → 3p → 4s → 3d
                 2: 'b', // Spread out with parallel spins first
                 3: 'b', // 2 electrons max per orbital
-                4: 'c', // One electron in each orbital, then pair (↑↑↑↓)
-                5: 'b', // They have opposite spins (↑↓)
+                4: 'c', // One electron in each orbital, then pair (px: ↑, py: ↑, pz: ↑↓)
+                5: 'b', // They have opposite spins (one ↑ and one ↓)
                 6: 'a', // Neon (Ne)
                 7: 'b', // 2 unpaired electrons
-                8: 'a', // 1s² 2s² 2p²
+                8: 'a', // 1s² 2s² 2p² (6 electrons total)
                 9: 'b', // Hund's Rule
-                10: 'b' // 5 orbitals
+                10: 'b', // 5 orbitals
+                11: 'b' // px: ↑, py: ↑, pz: ↑ (all unpaired)
             };
 
             let score = 0;
@@ -3859,12 +3870,14 @@
 
             if (scoreElement) scoreElement.textContent = score;
             if (feedbackElement) {
-                if (score === 3) {
-                    feedbackElement.textContent = '🎉 Excellent! You have mastered all three core rules!';
-                } else if (score === 2) {
-                    feedbackElement.textContent = '👍 Good work! Review the incorrect answer to strengthen your understanding.';
+                if (score >= 9) {
+                    feedbackElement.textContent = '🎉 Excellent! You have mastered the core rules and electron configurations!';
+                } else if (score >= 7) {
+                    feedbackElement.textContent = '👍 Good work! You understand most concepts. Review the incorrect answers to strengthen your understanding.';
+                } else if (score >= 5) {
+                    feedbackElement.textContent = '📚 Keep studying! You have a basic understanding but need more practice with the core rules.';
                 } else {
-                    feedbackElement.textContent = '📖 Review the core rules again. Understanding these fundamentals is crucial!';
+                    feedbackElement.textContent = '🔄 Review the material! Focus on the three core rules and orbital notation.';
                 }
             }
             if (resultsElement) resultsElement.style.display = 'block';
