@@ -2,15 +2,13 @@ module.exports = {
   testEnvironment: 'jsdom',
   setupFilesAfterEnv: ['<rootDir>/tests/setup.js'],
   testMatch: [
-    '<rootDir>/tests/basic-functionality.test.js'
+    '<rootDir>/tests/**/*.test.js'
   ],
   collectCoverageFrom: [
+    'study.html',
     'index.html',
-    'ion-fix-addon.js',
-    'teacher-addon.js',
-    'simple_test.js'
+    'progress.html'
   ],
-  coverageReporters: ['text', 'html', 'lcov'],
-  testTimeout: 10000,
+  coverageReporters: ['text', 'lcov', 'html'],
   verbose: true
 };

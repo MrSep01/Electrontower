@@ -18,6 +18,7 @@
           --dark: #1e293b;
           --darker: #0f172a;
           --light: #f8fafc;
+          --muted: #94a3b8;
           --border: #e2e8f0;
           --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
           --shadow-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
@@ -194,6 +195,17 @@
           transform: translateY(-2px);
         }
 
+        .btn.warning {
+          background: var(--warning);
+          color: white;
+          border: none;
+        }
+
+        .btn.warning:hover {
+          background: #d97706;
+          transform: translateY(-2px);
+        }
+
         /* ===== Footer Styles ===== */
         .app-footer{
           text-align:center;
@@ -223,8 +235,25 @@
         }
 
         .dashboard-header {
-            text-align: center;
             margin-bottom: 40px;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .header-text {
+            text-align: left;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .dashboard-title {
@@ -354,7 +383,7 @@
 
         .concept-details p {
             margin: 5px 0 0;
-            color: var(--muted);
+            color: rgba(255, 255, 255, 0.8);
             font-size: 0.9rem;
         }
 
@@ -373,7 +402,7 @@
 
         .status-not-started {
             background: var(--border);
-            color: var(--muted);
+            color: rgba(255, 255, 255, 0.7);
         }
 
         .status-in-progress {
@@ -424,7 +453,7 @@
 
         .achievement-desc {
             font-size: 0.8rem;
-            color: var(--muted);
+            color: rgba(255, 255, 255, 0.8);
         }
 
         .stats-grid {
@@ -521,6 +550,19 @@
                 font-size: 2rem;
             }
             
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .header-text {
+                text-align: center;
+            }
+            
+            .header-actions {
+                justify-content: center;
+            }
+            
             .progress-circle {
                 width: 120px;
                 height: 120px;
@@ -606,8 +648,16 @@
 
     <main class="progress-dashboard">
         <div class="dashboard-header">
-            <h1 class="dashboard-title">📊 Your Learning Progress</h1>
-            <p class="dashboard-subtitle">Track your journey through electron configuration concepts</p>
+            <div class="header-content">
+                <div class="header-text">
+                    <h1 class="dashboard-title">📊 Your Learning Progress</h1>
+                    <p class="dashboard-subtitle">Track your journey through electron configuration concepts</p>
+                </div>
+                <div class="header-actions">
+                    <button onclick="debugProgressPage()" class="btn ghost" style="font-size: 12px; padding: 8px 12px; margin-right: 8px;">Debug</button>
+                    <button onclick="resetProgressPage()" class="btn warning"><span class="custom-emoji emoji-reset"></span> Reset Progress</button>
+                </div>
+            </div>
         </div>
 
         <!-- Overall Progress -->
@@ -722,14 +772,27 @@
             }
 
             getDefaultProgress() {
+                const defaultConcept = {
+                    completed: false, 
+                    score: 0, 
+                    attempts: 0, 
+                    timeSpent: 0,
+                    activities: {
+                        vocabularyQuiz: { completed: false, score: 0, attempts: 0 },
+                        understandingCheck: { completed: false, score: 0, attempts: 0 },
+                        interactiveDemos: { completed: 0, total: 0 },
+                        contentEngagement: { completed: false, timeSpent: 0 }
+                    }
+                };
+                
                 return {
                     concepts: {
-                        overview: { completed: false, score: 0, attempts: 0, timeSpent: 0 },
-                        coreRules: { completed: false, score: 0, attempts: 0, timeSpent: 0 },
-                        sublevels: { completed: false, score: 0, attempts: 0, timeSpent: 0 },
-                        exceptions: { completed: false, score: 0, attempts: 0, timeSpent: 0 },
-                        applications: { completed: false, score: 0, attempts: 0, timeSpent: 0 },
-                        practice: { completed: false, score: 0, attempts: 0, timeSpent: 0 }
+                        overview: { ...defaultConcept },
+                        coreRules: { ...defaultConcept },
+                        sublevels: { ...defaultConcept },
+                        exceptions: { ...defaultConcept },
+                        applications: { ...defaultConcept },
+                        practice: { ...defaultConcept }
                     },
                     achievements: [],
                     streak: 0,
@@ -740,7 +803,25 @@
             }
 
             updateOverallProgress() {
-                const completedConcepts = Object.values(this.progress.concepts).filter(c => c.completed).length;
+                // Calculate completion based on activities for each concept
+                const completedConcepts = Object.values(this.progress.concepts).filter(concept => {
+                    if (!concept.activities) return false;
+                    
+                    const activities = concept.activities;
+                    const vocabWeight = 0.2;
+                    const understandingWeight = 0.3;
+                    const interactiveWeight = 0.3;
+                    const engagementWeight = 0.2;
+                    
+                    let completionScore = 0;
+                    if (activities.vocabularyQuiz.completed) completionScore += vocabWeight;
+                    if (activities.understandingCheck.completed) completionScore += understandingWeight;
+                    if (activities.interactiveDemos.completed > 0) completionScore += interactiveWeight;
+                    if (activities.contentEngagement.completed) completionScore += engagementWeight;
+                    
+                    return completionScore >= 0.7;
+                }).length;
+                
                 const totalConcepts = Object.keys(this.concepts).length;
                 const percentage = Math.round((completedConcepts / totalConcepts) * 100);
                 
@@ -760,21 +841,43 @@
                     const listItem = document.createElement('li');
                     listItem.className = 'concept-item';
                     
-                    if (progress.completed) {
+                    // Calculate completion based on activities
+                    let isCompleted = false;
+                    let activitiesCompleted = 0;
+                    let totalActivities = 4;
+                    
+                    if (progress.activities) {
+                        const activities = progress.activities;
+                        const vocabWeight = 0.2;
+                        const understandingWeight = 0.3;
+                        const interactiveWeight = 0.3;
+                        const engagementWeight = 0.2;
+                        
+                        let completionScore = 0;
+                        if (activities.vocabularyQuiz.completed) completionScore += vocabWeight;
+                        if (activities.understandingCheck.completed) completionScore += understandingWeight;
+                        if (activities.interactiveDemos.completed > 0) completionScore += interactiveWeight;
+                        if (activities.contentEngagement.completed) completionScore += engagementWeight;
+                        
+                        isCompleted = completionScore >= 0.7;
+                        activitiesCompleted = Math.round(completionScore * 4);
+                    }
+                    
+                    if (isCompleted) {
                         listItem.classList.add('completed');
-                    } else if (progress.attempts > 0) {
+                    } else if (activitiesCompleted > 0) {
                         listItem.classList.add('in-progress');
                     }
 
-                    const statusBadge = this.getStatusBadge(progress);
-                    const scoreText = progress.attempts > 0 ? ` (${progress.score}/${progress.attempts})` : '';
+                    const statusBadge = this.getStatusBadge(progress, activitiesCompleted, totalActivities);
+                    const activityText = activitiesCompleted > 0 ? ` (${activitiesCompleted}/${totalActivities} activities)` : '';
 
                     listItem.innerHTML = `
                         <div class="concept-info">
                             <span class="concept-icon">${concept.icon}</span>
                             <div class="concept-details">
                                 <h4>${concept.name}</h4>
-                                <p>${concept.description}${scoreText}</p>
+                                <p>${concept.description}${activityText}</p>
                             </div>
                         </div>
                         <div class="concept-status">
@@ -786,11 +889,29 @@
                 });
             }
 
-            getStatusBadge(progress) {
-                if (progress.completed) {
+            getStatusBadge(progress, activitiesCompleted = 0, totalActivities = 4) {
+                // Calculate completion based on activities
+                let isCompleted = false;
+                if (progress.activities) {
+                    const activities = progress.activities;
+                    const vocabWeight = 0.2;
+                    const understandingWeight = 0.3;
+                    const interactiveWeight = 0.3;
+                    const engagementWeight = 0.2;
+                    
+                    let completionScore = 0;
+                    if (activities.vocabularyQuiz.completed) completionScore += vocabWeight;
+                    if (activities.understandingCheck.completed) completionScore += understandingWeight;
+                    if (activities.interactiveDemos.completed > 0) completionScore += interactiveWeight;
+                    if (activities.contentEngagement.completed) completionScore += engagementWeight;
+                    
+                    isCompleted = completionScore >= 0.7;
+                }
+                
+                if (isCompleted) {
                     return '<span class="status-badge status-completed">✓ Completed</span>';
-                } else if (progress.attempts > 0) {
-                    return '<span class="status-badge status-in-progress">🔄 In Progress</span>';
+                } else if (activitiesCompleted > 0) {
+                    return `<span class="status-badge status-in-progress">🔄 ${activitiesCompleted}/${totalActivities}</span>`;
                 } else {
                     return '<span class="status-badge status-not-started">⭕ Not Started</span>';
                 }
@@ -882,6 +1003,33 @@
             }
         }
 
+        // Debug functions for troubleshooting
+        function debugProgressPage() {
+            console.log('🔍 Debugging Progress Page...');
+            
+            const savedProgress = localStorage.getItem('electronTowerProgress');
+            console.log('localStorage data:', savedProgress);
+            
+            if (savedProgress) {
+                const progress = JSON.parse(savedProgress);
+                console.log('Parsed progress:', progress);
+                console.log('Concepts:', progress.concepts);
+            } else {
+                console.log('No progress data found in localStorage');
+            }
+        }
+        
+        function resetProgressPage() {
+            console.log('🔄 Resetting progress from progress page...');
+            localStorage.removeItem('electronTowerProgress');
+            console.log('✅ Progress reset! Refreshing page...');
+            
+            // Show confirmation
+            if (confirm('All progress has been reset! The page will refresh to show the changes.')) {
+                location.reload();
+            }
+        }
+        
         // Initialize dashboard when page loads
         document.addEventListener('DOMContentLoaded', () => {
             new ProgressDashboard();
