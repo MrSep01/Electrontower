@@ -4328,6 +4328,280 @@
             </div>
         </div>
 
+        <!-- ======= Paper 2: Exceptions & Complex Cases ======= -->
+        <div id="paper2Content" class="content-section" style="display: none;">
+            <div class="content-header">
+                <button class="btn ghost" onclick="hidePaperContent()" style="display: flex; align-items: center; gap: 8px;">
+                    <span class="custom-emoji emoji-arrow-left"></span>
+                    Back to Assessment
+                </button>
+                <h1 class="content-title">
+                    <span class="custom-emoji emoji-nucleus"></span>
+                    Paper 2: Exceptions & Complex Cases
+                </h1>
+                <p class="content-subtitle">Duration: 45 minutes | Total Marks: 50</p>
+                <div class="paper-timer" id="paper2Timer">
+                    <span class="timer-label">Time Remaining:</span>
+                    <span class="timer-display" id="paper2TimeDisplay">45:00</span>
+                </div>
+            </div>
+
+            <!-- Paper Instructions -->
+            <div class="objectives-section">
+                <h3>📋 Instructions</h3>
+                <div class="instructions-box">
+                    <ul>
+                        <li>Answer <strong>ALL</strong> questions in this paper</li>
+                        <li>Focus on transition metal exceptions and complex cases</li>
+                        <li>Explain stability factors and energy considerations</li>
+                        <li>Use appropriate scientific terminology</li>
+                        <li>Total marks for this paper: <strong>50</strong></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Question 1 -->
+            <div class="quiz-section">
+                <div class="question-container">
+                    <h3>Question 1</h3>
+                    <div class="question-part">
+                        <h4>(a) [4 marks]</h4>
+                        <p>Write the electron configuration for the following transition metal exceptions:</p>
+                        <p><strong>(i)</strong> Chromium (Cr) - atomic number 24</p>
+                        <p><strong>(ii)</strong> Copper (Cu) - atomic number 29</p>
+                        <p><strong>(iii)</strong> Molybdenum (Mo) - atomic number 42</p>
+                        <p><strong>(iv)</strong> Silver (Ag) - atomic number 47</p>
+                        <div class="answer-space">
+                            <textarea id="q2a" placeholder="Write configurations here..." rows="5"></textarea>
+                        </div>
+                        <button class="btn secondary" onclick="showMarkScheme('q2a')">Show Mark Scheme</button>
+                        <div class="mark-scheme" id="q2a-scheme" style="display: none;">
+                            <strong>Mark Scheme:</strong>
+                            <p><strong>M1:</strong> Cr: [Ar] 4s¹ 3d⁵ (1 mark)</p>
+                            <p><strong>M2:</strong> Cu: [Ar] 4s¹ 3d¹⁰ (1 mark)</p>
+                            <p><strong>M3:</strong> Mo: [Kr] 5s¹ 4d⁵ (1 mark)</p>
+                            <p><strong>M4:</strong> Ag: [Kr] 5s¹ 4d¹⁰ (1 mark)</p>
+                        </div>
+                    </div>
+
+                    <div class="question-part">
+                        <h4>(b) [6 marks]</h4>
+                        <p>Explain why these elements have exceptional electron configurations instead of following the standard Aufbau principle. Include specific reasons for each element.</p>
+                        <div class="answer-space">
+                            <textarea id="q2b" placeholder="Explain the stability factors..." rows="6"></textarea>
+                        </div>
+                        <button class="btn secondary" onclick="showMarkScheme('q2b')">Show Mark Scheme</button>
+                        <div class="mark-scheme" id="q2b-scheme" style="display: none;">
+                            <strong>Mark Scheme:</strong>
+                            <p><strong>M1:</strong> Cr & Mo: Half-filled d subshell provides extra stability (1 mark)</p>
+                            <p><strong>M2:</strong> Cu & Ag: Filled d subshell provides extra stability (1 mark)</p>
+                            <p><strong>M3:</strong> Energy difference between s and d orbitals is small (1 mark)</p>
+                            <p><strong>M4:</strong> Symmetrical electron distribution reduces repulsion (1 mark)</p>
+                            <p><strong>M5:</strong> Lower energy configuration than expected Aufbau arrangement (1 mark)</p>
+                            <p><strong>M6:</strong> All four elements correctly explained (1 mark)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="quiz-section">
+                <div class="question-container">
+                    <h3>Question 2</h3>
+                    <div class="question-part">
+                        <h4>(a) [5 marks]</h4>
+                        <p>Compare the electron configurations of the following pairs and explain the differences:</p>
+                        <p><strong>(i)</strong> Vanadium (V) vs Chromium (Cr)</p>
+                        <p><strong>(ii)</strong> Nickel (Ni) vs Copper (Cu)</p>
+                        <p><strong>(iii)</strong> Palladium (Pd) vs Silver (Ag)</p>
+                        <div class="answer-space">
+                            <textarea id="q2a" placeholder="Compare and explain differences..." rows="6"></textarea>
+                        </div>
+                        <button class="btn secondary" onclick="showMarkScheme('q2a')">Show Mark Scheme</button>
+                        <div class="mark-scheme" id="q2a-scheme" style="display: none;">
+                            <strong>Mark Scheme:</strong>
+                            <p><strong>M1:</strong> V: [Ar] 4s² 3d³, Cr: [Ar] 4s¹ 3d⁵ - Cr has half-filled d subshell (1 mark)</p>
+                            <p><strong>M2:</strong> Ni: [Ar] 4s² 3d⁸, Cu: [Ar] 4s¹ 3d¹⁰ - Cu has filled d subshell (1 mark)</p>
+                            <p><strong>M3:</strong> Pd: [Kr] 5s² 4d⁸, Ag: [Kr] 5s¹ 4d¹⁰ - Ag has filled d subshell (1 mark)</p>
+                            <p><strong>M4:</strong> Exceptions occur when stability gained exceeds energy cost (1 mark)</p>
+                            <p><strong>M5:</strong> All three comparisons correctly explained (1 mark)</p>
+                        </div>
+                    </div>
+
+                    <div class="question-part">
+                        <h4>(b) [4 marks]</h4>
+                        <p>Predict the electron configuration of Gold (Au) - atomic number 79 - and explain your reasoning.</p>
+                        <div class="answer-space">
+                            <textarea id="q2b" placeholder="Predict Au configuration and explain..." rows="4"></textarea>
+                        </div>
+                        <button class="btn secondary" onclick="showMarkScheme('q2b')">Show Mark Scheme</button>
+                        <div class="mark-scheme" id="q2b-scheme" style="display: none;">
+                            <strong>Mark Scheme:</strong>
+                            <p><strong>M1:</strong> Au: [Xe] 6s¹ 5d¹⁰ (1 mark)</p>
+                            <p><strong>M2:</strong> Follows same pattern as Cu and Ag (1 mark)</p>
+                            <p><strong>M3:</strong> Filled 5d subshell provides extra stability (1 mark)</p>
+                            <p><strong>M4:</strong> Energy difference between 6s and 5d is small (1 mark)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="quiz-section">
+                <div class="question-container">
+                    <h3>Question 3</h3>
+                    <div class="question-part">
+                        <h4>(a) [6 marks]</h4>
+                        <p>Complete the following table for transition metal ions, showing how they form from their neutral atoms:</p>
+                        <div class="table-container">
+                            <table class="config-table">
+                                <thead>
+                                    <tr>
+                                        <th>Element</th>
+                                        <th>Neutral Configuration</th>
+                                        <th>Ion Formed</th>
+                                        <th>Ion Configuration</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Chromium (Cr)</td>
+                                        <td>[Ar] 4s¹ 3d⁵</td>
+                                        <td><input type="text" id="q3a-cr-ion" placeholder="e.g., Cr³⁺"></td>
+                                        <td><input type="text" id="q3a-cr-config" placeholder="Enter configuration"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Copper (Cu)</td>
+                                        <td>[Ar] 4s¹ 3d¹⁰</td>
+                                        <td><input type="text" id="q3a-cu-ion" placeholder="e.g., Cu²⁺"></td>
+                                        <td><input type="text" id="q3a-cu-config" placeholder="Enter configuration"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Iron (Fe)</td>
+                                        <td>[Ar] 4s² 3d⁶</td>
+                                        <td><input type="text" id="q3a-fe-ion" placeholder="e.g., Fe²⁺"></td>
+                                        <td><input type="text" id="q3a-fe-config" placeholder="Enter configuration"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <button class="btn secondary" onclick="showMarkScheme('q3a')">Show Mark Scheme</button>
+                        <div class="mark-scheme" id="q3a-scheme" style="display: none;">
+                            <strong>Mark Scheme:</strong>
+                            <p><strong>M1:</strong> Cr³⁺: [Ar] 3d³ (1 mark)</p>
+                            <p><strong>M2:</strong> Cu²⁺: [Ar] 3d⁹ (1 mark)</p>
+                            <p><strong>M3:</strong> Fe²⁺: [Ar] 3d⁶ (1 mark)</p>
+                            <p><strong>M4:</strong> 4s electrons lost first (1 mark)</p>
+                            <p><strong>M5:</strong> Then 3d electrons lost (1 mark)</p>
+                            <p><strong>M6:</strong> All three configurations correct (1 mark)</p>
+                        </div>
+                    </div>
+
+                    <div class="question-part">
+                        <h4>(b) [3 marks]</h4>
+                        <p>Explain why transition metals lose 4s electrons before 3d electrons when forming ions.</p>
+                        <div class="answer-space">
+                            <textarea id="q3b" placeholder="Explain electron loss order..." rows="4"></textarea>
+                        </div>
+                        <button class="btn secondary" onclick="showMarkScheme('q3b')">Show Mark Scheme</button>
+                        <div class="mark-scheme" id="q3b-scheme" style="display: none;">
+                            <strong>Mark Scheme:</strong>
+                            <p><strong>M1:</strong> 4s electrons are higher in energy than 3d electrons (1 mark)</p>
+                            <p><strong>M2:</strong> 4s electrons are further from nucleus (1 mark)</p>
+                            <p><strong>M3:</strong> Less energy required to remove 4s electrons (1 mark)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 4 -->
+            <div class="quiz-section">
+                <div class="question-container">
+                    <h3>Question 4</h3>
+                    <div class="question-part">
+                        <h4>(a) [5 marks]</h4>
+                        <p>Identify which of the following elements are exceptions to the Aufbau principle and explain why:</p>
+                        <p><strong>Elements:</strong> Scandium (Sc), Titanium (Ti), Vanadium (V), Chromium (Cr), Manganese (Mn), Iron (Fe), Cobalt (Co), Nickel (Ni), Copper (Cu), Zinc (Zn)</p>
+                        <div class="answer-space">
+                            <textarea id="q4a" placeholder="Identify exceptions and explain..." rows="5"></textarea>
+                        </div>
+                        <button class="btn secondary" onclick="showMarkScheme('q4a')">Show Mark Scheme</button>
+                        <div class="mark-scheme" id="q4a-scheme" style="display: none;">
+                            <strong>Mark Scheme:</strong>
+                            <p><strong>M1:</strong> Exceptions: Cr and Cu (1 mark)</p>
+                            <p><strong>M2:</strong> Cr: half-filled 3d subshell provides stability (1 mark)</p>
+                            <p><strong>M3:</strong> Cu: filled 3d subshell provides stability (1 mark)</p>
+                            <p><strong>M4:</strong> Other elements follow standard Aufbau principle (1 mark)</p>
+                            <p><strong>M5:</strong> Stability gained exceeds energy cost of exception (1 mark)</p>
+                        </div>
+                    </div>
+
+                    <div class="question-part">
+                        <h4>(b) [4 marks]</h4>
+                        <p>Explain why elements like Scandium (Sc) and Zinc (Zn) do NOT have exceptional configurations, even though they are transition metals.</p>
+                        <div class="answer-space">
+                            <textarea id="q4b" placeholder="Explain why Sc and Zn are not exceptions..." rows="4"></textarea>
+                        </div>
+                        <button class="btn secondary" onclick="showMarkScheme('q4b')">Show Mark Scheme</button>
+                        <div class="mark-scheme" id="q4b-scheme" style="display: none;">
+                            <strong>Mark Scheme:</strong>
+                            <p><strong>M1:</strong> Sc: only one d electron, no stability gain from half-filled subshell (1 mark)</p>
+                            <p><strong>M2:</strong> Zn: filled d subshell already achieved with standard configuration (1 mark)</p>
+                            <p><strong>M3:</strong> No energy advantage to changing s/d electron arrangement (1 mark)</p>
+                            <p><strong>M4:</strong> Standard Aufbau principle gives lowest energy configuration (1 mark)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 5 -->
+            <div class="quiz-section">
+                <div class="question-container">
+                    <h3>Question 5</h3>
+                    <div class="question-part">
+                        <h4>(a) [6 marks]</h4>
+                        <p>Draw orbital diagrams for the following elements showing their actual electron configurations:</p>
+                        <p><strong>(i)</strong> Chromium (Cr) - show 4s and 3d orbitals</p>
+                        <p><strong>(ii)</strong> Copper (Cu) - show 4s and 3d orbitals</p>
+                        <p><strong>(iii)</strong> Manganese (Mn) - show 4s and 3d orbitals</p>
+                        <div class="answer-space">
+                            <textarea id="q5a" placeholder="Draw orbital diagrams..." rows="6"></textarea>
+                        </div>
+                        <button class="btn secondary" onclick="showMarkScheme('q5a')">Show Mark Scheme</button>
+                        <div class="mark-scheme" id="q5a-scheme" style="display: none;">
+                            <strong>Mark Scheme:</strong>
+                            <p><strong>M1:</strong> Cr: 4s¹ (↑) 3d⁵ (↑ ↑ ↑ ↑ ↑) - one electron in 4s, five in separate 3d orbitals (2 marks)</p>
+                            <p><strong>M2:</strong> Cu: 4s¹ (↑) 3d¹⁰ (↑↓ ↑↓ ↑↓ ↑↓ ↑↓) - one electron in 4s, ten in 3d orbitals (2 marks)</p>
+                            <p><strong>M3:</strong> Mn: 4s² (↑↓) 3d⁵ (↑ ↑ ↑ ↑ ↑) - two electrons in 4s, five in separate 3d orbitals (2 marks)</p>
+                        </div>
+                    </div>
+
+                    <div class="question-part">
+                        <h4>(b) [4 marks]</h4>
+                        <p>Explain the magnetic properties of these three elements based on their electron configurations.</p>
+                        <div class="answer-space">
+                            <textarea id="q5b" placeholder="Explain magnetic properties..." rows="4"></textarea>
+                        </div>
+                        <button class="btn secondary" onclick="showMarkScheme('q5b')">Show Mark Scheme</button>
+                        <div class="mark-scheme" id="q5b-scheme" style="display: none;">
+                            <strong>Mark Scheme:</strong>
+                            <p><strong>M1:</strong> Cr: paramagnetic - unpaired electrons in 3d orbitals (1 mark)</p>
+                            <p><strong>M2:</strong> Cu: diamagnetic - all electrons paired in 3d orbitals (1 mark)</p>
+                            <p><strong>M3:</strong> Mn: paramagnetic - unpaired electrons in 3d orbitals (1 mark)</p>
+                            <p><strong>M4:</strong> Unpaired electrons create magnetic moment (1 mark)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Paper 2 Controls -->
+            <div class="paper-controls">
+                <button class="btn primary" onclick="submitPaper2()">Submit Paper 2</button>
+                <button class="btn secondary" onclick="savePaper2()">Save Progress</button>
+                <button class="btn ghost" onclick="resetPaper2()">Reset Paper</button>
+            </div>
+        </div>
+
         <!-- ======= Call to Action ======= -->
         <div style="text-align: center; margin: 50px 0;">
             <h2 style="color: var(--accent); margin-bottom: 20px; font-size: 32px;">
@@ -5783,22 +6057,187 @@
 
         function hidePaperContent() {
             document.getElementById('paper1Content').style.display = 'none';
+            document.getElementById('paper2Content').style.display = 'none';
+            document.getElementById('paper3Content').style.display = 'none';
             document.getElementById('assessmentContent').style.display = 'block';
             clearInterval(paper1TimerInterval);
+            clearInterval(paper2TimerInterval);
+            clearInterval(paper3TimerInterval);
         }
+
+        // ======= Paper 2 Functions =======
 
         // Paper 2 Functions
         function startPaper2() {
             console.log('Starting Paper 2: Exceptions & Complex Cases');
-            // This would begin Paper 2 with timer and question navigation
-            alert('Paper 2: Exceptions & Complex Cases\n\nDuration: 45 minutes\nMarks: 50\n\nTopics: Transition metal exceptions (Cr, Cu, Mo, Ag), stability factors, d-block patterns\n\nThis would launch the full Paper 2 examination.');
+            
+            try {
+                // Hide all other content sections
+                document.getElementById('detailedContent').style.display = 'block';
+                document.getElementById('paper2Content').style.display = 'block';
+                document.getElementById('assessmentContent').style.display = 'none';
+                document.getElementById('paper1Content').style.display = 'none';
+                document.getElementById('paper3Content').style.display = 'none';
+                document.getElementById('overviewContent').style.display = 'none';
+                document.getElementById('coreRulesContent').style.display = 'none';
+                document.getElementById('exceptionsContent').style.display = 'none';
+                document.getElementById('ionFormationContent').style.display = 'none';
+                
+                // Hide study tiles and page title
+                const studyTiles = document.querySelector('.study-tiles');
+                const pageTitle = document.querySelector('.page-title');
+                if (studyTiles) studyTiles.style.display = 'none';
+                if (pageTitle) pageTitle.style.display = 'none';
+                
+                // Start timer
+                startPaper2Timer();
+                
+                // Scroll to top of paper
+                window.scrollTo(0, 0);
+                
+                console.log('Paper 2 started successfully');
+            } catch (error) {
+                console.error('Error starting Paper 2:', error);
+                alert('Error starting Paper 2. Please check the console for details.');
+            }
+        }
+
+        // Paper 2 Timer
+        let paper2TimerInterval;
+        let paper2TimeRemaining = 45 * 60; // 45 minutes in seconds
+
+        function startPaper2Timer() {
+            paper2TimerInterval = setInterval(() => {
+                paper2TimeRemaining--;
+                updatePaper2TimerDisplay();
+                
+                if (paper2TimeRemaining <= 0) {
+                    clearInterval(paper2TimerInterval);
+                    alert('Time\'s up! Paper 2 has been automatically submitted.');
+                    submitPaper2();
+                }
+            }, 1000);
+        }
+
+        function updatePaper2TimerDisplay() {
+            const minutes = Math.floor(paper2TimeRemaining / 60);
+            const seconds = paper2TimeRemaining % 60;
+            const display = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            document.getElementById('paper2TimeDisplay').textContent = display;
         }
 
         function viewPaper2MarkScheme() {
             console.log('Viewing Paper 2 Mark Scheme');
-            // This would show the complete mark scheme for Paper 2
-            alert('Paper 2 Mark Scheme: Exceptions & Complex Cases\n\nThis would display the complete marking criteria and sample answers for all Paper 2 questions covering electron configuration exceptions.');
+            alert('Paper 2 Mark Scheme: Exceptions & Complex Cases\n\nThis would display the complete marking criteria and sample answers for all Paper 2 questions covering transition metal exceptions.');
         }
+
+        // Paper 2 Assessment Functions
+        function submitPaper2() {
+            clearInterval(paper2TimerInterval);
+            
+            // Collect all answers
+            const answers = {
+                q2a: document.getElementById('q2a').value,
+                q2b: document.getElementById('q2b').value,
+                q3a: {
+                    crIon: document.getElementById('q3a-cr-ion').value,
+                    crConfig: document.getElementById('q3a-cr-config').value,
+                    cuIon: document.getElementById('q3a-cu-ion').value,
+                    cuConfig: document.getElementById('q3a-cu-config').value,
+                    feIon: document.getElementById('q3a-fe-ion').value,
+                    feConfig: document.getElementById('q3a-fe-config').value
+                },
+                q3b: document.getElementById('q3b').value,
+                q4a: document.getElementById('q4a').value,
+                q4b: document.getElementById('q4b').value,
+                q5a: document.getElementById('q5a').value,
+                q5b: document.getElementById('q5b').value
+            };
+
+            // Calculate score (simplified - in real implementation, this would be more sophisticated)
+            let score = 0;
+            let totalMarks = 50;
+            
+            // Basic scoring logic (simplified)
+            Object.keys(answers).forEach(key => {
+                if (typeof answers[key] === 'string' && answers[key].trim().length > 0) {
+                    score += 2; // Give 2 marks for any non-empty answer
+                } else if (typeof answers[key] === 'object') {
+                    Object.keys(answers[key]).forEach(subKey => {
+                        if (answers[key][subKey].trim().length > 0) {
+                            score += 1;
+                        }
+                    });
+                }
+            });
+
+            const percentage = Math.round((score / totalMarks) * 100);
+            
+            alert(`Paper 2 Submitted!\n\nScore: ${score}/${totalMarks} (${percentage}%)\n\nTime taken: ${Math.floor((45 * 60 - paper2TimeRemaining) / 60)}:${((45 * 60 - paper2TimeRemaining) % 60).toString().padStart(2, '0')}\n\nYour answers have been saved.`);
+            
+            // Reset timer
+            paper2TimeRemaining = 45 * 60;
+            updatePaper2TimerDisplay();
+        }
+
+        function savePaper2() {
+            // Save progress to localStorage
+            const answers = {
+                q2a: document.getElementById('q2a').value,
+                q2b: document.getElementById('q2b').value,
+                q3a: {
+                    crIon: document.getElementById('q3a-cr-ion').value,
+                    crConfig: document.getElementById('q3a-cr-config').value,
+                    cuIon: document.getElementById('q3a-cu-ion').value,
+                    cuConfig: document.getElementById('q3a-cu-config').value,
+                    feIon: document.getElementById('q3a-fe-ion').value,
+                    feConfig: document.getElementById('q3a-fe-config').value
+                },
+                q3b: document.getElementById('q3b').value,
+                q4a: document.getElementById('q4a').value,
+                q4b: document.getElementById('q4b').value,
+                q5a: document.getElementById('q5a').value,
+                q5b: document.getElementById('q5b').value
+            };
+            
+            localStorage.setItem('paper2Answers', JSON.stringify(answers));
+            localStorage.setItem('paper2TimeRemaining', paper2TimeRemaining.toString());
+            
+            alert('Paper 2 progress saved successfully!');
+        }
+
+        function resetPaper2() {
+            if (confirm('Are you sure you want to reset Paper 2? All your answers will be lost.')) {
+                // Clear all answers
+                document.getElementById('q2a').value = '';
+                document.getElementById('q2b').value = '';
+                document.getElementById('q3a-cr-ion').value = '';
+                document.getElementById('q3a-cr-config').value = '';
+                document.getElementById('q3a-cu-ion').value = '';
+                document.getElementById('q3a-cu-config').value = '';
+                document.getElementById('q3a-fe-ion').value = '';
+                document.getElementById('q3a-fe-config').value = '';
+                document.getElementById('q3b').value = '';
+                document.getElementById('q4a').value = '';
+                document.getElementById('q4b').value = '';
+                document.getElementById('q5a').value = '';
+                document.getElementById('q5b').value = '';
+                
+                // Reset timer
+                clearInterval(paper2TimerInterval);
+                paper2TimeRemaining = 45 * 60;
+                updatePaper2TimerDisplay();
+                startPaper2Timer();
+                
+                // Hide all mark schemes
+                document.querySelectorAll('[id$="-scheme"]').forEach(scheme => {
+                    scheme.style.display = 'none';
+                });
+                
+                alert('Paper 2 has been reset.');
+            }
+        }
+
 
         // Paper 3 Functions
         function startPaper3() {
