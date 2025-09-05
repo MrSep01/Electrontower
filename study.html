@@ -4602,6 +4602,331 @@
             </div>
         </div>
 
+        <!-- ======= Paper 3: Ion Formation & Applications ======= -->
+        <div id="paper3Content" class="content-section" style="display: none;">
+            <div class="content-header">
+                <button class="btn ghost" onclick="hidePaperContent()" style="display: flex; align-items: center; gap: 8px;">
+                    <span class="custom-emoji emoji-arrow-left"></span>
+                    Back to Assessment
+                </button>
+                <h1 class="content-title">
+                    <span class="custom-emoji emoji-nucleus"></span>
+                    Paper 3: Ion Formation & Applications
+                </h1>
+                <p class="content-subtitle">Duration: 60 minutes | Total Marks: 60</p>
+                <div class="paper-timer" id="paper3Timer">
+                    <span class="timer-label">Time Remaining:</span>
+                    <span class="timer-display" id="paper3TimeDisplay">60:00</span>
+                </div>
+            </div>
+
+            <!-- Paper Instructions -->
+            <div class="objectives-section">
+                <h3>📋 Instructions</h3>
+                <div class="instructions-box">
+                    <ul>
+                        <li>Answer <strong>ALL</strong> questions in this paper</li>
+                        <li>Focus on ion formation mechanisms and practical applications</li>
+                        <li>Include detailed explanations and calculations where required</li>
+                        <li>Use appropriate scientific terminology and units</li>
+                        <li>Total marks for this paper: <strong>60</strong></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Question 1 -->
+            <div class="quiz-section">
+                <div class="question-container">
+                    <h3>Question 1</h3>
+                    <div class="question-part">
+                        <h4>(a) [6 marks]</h4>
+                        <p>Explain the process of ion formation for the following elements and write their ion configurations:</p>
+                        <p><strong>(i)</strong> Sodium (Na) - atomic number 11</p>
+                        <p><strong>(ii)</strong> Chlorine (Cl) - atomic number 17</p>
+                        <p><strong>(iii)</strong> Calcium (Ca) - atomic number 20</p>
+                        <p><strong>(iv)</strong> Oxygen (O) - atomic number 8</p>
+                        <div class="answer-space">
+                            <textarea id="q3a" placeholder="Explain ion formation processes and write configurations..." rows="8"></textarea>
+                        </div>
+                        <button class="btn secondary" onclick="showMarkScheme('q3a')">Show Mark Scheme</button>
+                        <div class="mark-scheme" id="q3a-scheme" style="display: none;">
+                            <strong>Mark Scheme:</strong>
+                            <p><strong>M1:</strong> Na: loses 1 electron from 3s orbital → Na⁺: [Ne] (1 mark)</p>
+                            <p><strong>M2:</strong> Cl: gains 1 electron in 3p orbital → Cl⁻: [Ar] (1 mark)</p>
+                            <p><strong>M3:</strong> Ca: loses 2 electrons from 4s orbital → Ca²⁺: [Ar] (1 mark)</p>
+                            <p><strong>M4:</strong> O: gains 2 electrons in 2p orbital → O²⁻: [Ne] (1 mark)</p>
+                            <p><strong>M5:</strong> All achieve noble gas configuration (1 mark)</p>
+                            <p><strong>M6:</strong> Correct electron loss/gain explanations (1 mark)</p>
+                        </div>
+                    </div>
+
+                    <div class="question-part">
+                        <h4>(b) [4 marks]</h4>
+                        <p>Calculate the ionic radius ratio for the following ion pairs and explain the trend:</p>
+                        <p><strong>Ion Pairs:</strong> Na⁺/Cl⁻, Ca²⁺/O²⁻, K⁺/Br⁻</p>
+                        <div class="answer-space">
+                            <textarea id="q3b" placeholder="Calculate ratios and explain trends..." rows="4"></textarea>
+                        </div>
+                        <button class="btn secondary" onclick="showMarkScheme('q3b')">Show Mark Scheme</button>
+                        <div class="mark-scheme" id="q3b-scheme" style="display: none;">
+                            <strong>Mark Scheme:</strong>
+                            <p><strong>M1:</strong> Na⁺/Cl⁻ ≈ 0.52, Ca²⁺/O²⁻ ≈ 0.74, K⁺/Br⁻ ≈ 0.68 (2 marks)</p>
+                            <p><strong>M2:</strong> Cations smaller than anions due to nuclear charge (1 mark)</p>
+                            <p><strong>M3:</strong> Higher charge = smaller ionic radius (1 mark)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="quiz-section">
+                <div class="question-container">
+                    <h3>Question 2</h3>
+                    <div class="question-part">
+                        <h4>(a) [8 marks]</h4>
+                        <p>Complete the following table for transition metal ion formation:</p>
+                        <div class="table-container">
+                            <table class="config-table">
+                                <thead>
+                                    <tr>
+                                        <th>Element</th>
+                                        <th>Neutral Config</th>
+                                        <th>Ion Formed</th>
+                                        <th>Ion Config</th>
+                                        <th>Magnetic Property</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Iron (Fe)</td>
+                                        <td>[Ar] 4s² 3d⁶</td>
+                                        <td><input type="text" id="q2a-fe-ion" placeholder="e.g., Fe²⁺"></td>
+                                        <td><input type="text" id="q2a-fe-config" placeholder="Enter config"></td>
+                                        <td><input type="text" id="q2a-fe-mag" placeholder="Para/Dia"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Iron (Fe)</td>
+                                        <td>[Ar] 4s² 3d⁶</td>
+                                        <td><input type="text" id="q2a-fe2-ion" placeholder="e.g., Fe³⁺"></td>
+                                        <td><input type="text" id="q2a-fe2-config" placeholder="Enter config"></td>
+                                        <td><input type="text" id="q2a-fe2-mag" placeholder="Para/Dia"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Copper (Cu)</td>
+                                        <td>[Ar] 4s¹ 3d¹⁰</td>
+                                        <td><input type="text" id="q2a-cu-ion" placeholder="e.g., Cu²⁺"></td>
+                                        <td><input type="text" id="q2a-cu-config" placeholder="Enter config"></td>
+                                        <td><input type="text" id="q2a-cu-mag" placeholder="Para/Dia"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Chromium (Cr)</td>
+                                        <td>[Ar] 4s¹ 3d⁵</td>
+                                        <td><input type="text" id="q2a-cr-ion" placeholder="e.g., Cr³⁺"></td>
+                                        <td><input type="text" id="q2a-cr-config" placeholder="Enter config"></td>
+                                        <td><input type="text" id="q2a-cr-mag" placeholder="Para/Dia"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <button class="btn secondary" onclick="showMarkScheme('q2a')">Show Mark Scheme</button>
+                        <div class="mark-scheme" id="q2a-scheme" style="display: none;">
+                            <strong>Mark Scheme:</strong>
+                            <p><strong>M1:</strong> Fe²⁺: [Ar] 3d⁶, paramagnetic (2 marks)</p>
+                            <p><strong>M2:</strong> Fe³⁺: [Ar] 3d⁵, paramagnetic (2 marks)</p>
+                            <p><strong>M3:</strong> Cu²⁺: [Ar] 3d⁹, paramagnetic (2 marks)</p>
+                            <p><strong>M4:</strong> Cr³⁺: [Ar] 3d³, paramagnetic (2 marks)</p>
+                        </div>
+                    </div>
+
+                    <div class="question-part">
+                        <h4>(b) [4 marks]</h4>
+                        <p>Explain why Fe³⁺ is more stable than Fe²⁺ in aqueous solution, considering electron configurations and charge density.</p>
+                        <div class="answer-space">
+                            <textarea id="q2b" placeholder="Explain Fe³⁺ stability over Fe²⁺..." rows="4"></textarea>
+                        </div>
+                        <button class="btn secondary" onclick="showMarkScheme('q2b')">Show Mark Scheme</button>
+                        <div class="mark-scheme" id="q2b-scheme" style="display: none;">
+                            <strong>Mark Scheme:</strong>
+                            <p><strong>M1:</strong> Fe³⁺ has half-filled 3d subshell (1 mark)</p>
+                            <p><strong>M2:</strong> Half-filled subshell provides extra stability (1 mark)</p>
+                            <p><strong>M3:</strong> Higher charge density in Fe³⁺ (1 mark)</p>
+                            <p><strong>M4:</strong> Better hydration in aqueous solution (1 mark)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="quiz-section">
+                <div class="question-container">
+                    <h3>Question 3</h3>
+                    <div class="question-part">
+                        <h4>(a) [6 marks]</h4>
+                        <p>Predict the electron configuration and properties of the following ions:</p>
+                        <p><strong>(i)</strong> Mn²⁺ (manganese ion)</p>
+                        <p><strong>(ii)</strong> Co³⁺ (cobalt ion)</p>
+                        <p><strong>(iii)</strong> Ni²⁺ (nickel ion)</p>
+                        <p>For each ion, state: electron configuration, magnetic property, and likely color in solution.</p>
+                        <div class="answer-space">
+                            <textarea id="q3a" placeholder="Predict configurations and properties..." rows="6"></textarea>
+                        </div>
+                        <button class="btn secondary" onclick="showMarkScheme('q3a')">Show Mark Scheme</button>
+                        <div class="mark-scheme" id="q3a-scheme" style="display: none;">
+                            <strong>Mark Scheme:</strong>
+                            <p><strong>M1:</strong> Mn²⁺: [Ar] 3d⁵, paramagnetic, pale pink (2 marks)</p>
+                            <p><strong>M2:</strong> Co³⁺: [Ar] 3d⁶, paramagnetic, blue (2 marks)</p>
+                            <p><strong>M3:</strong> Ni²⁺: [Ar] 3d⁸, paramagnetic, green (2 marks)</p>
+                        </div>
+                    </div>
+
+                    <div class="question-part">
+                        <h4>(b) [4 marks]</h4>
+                        <p>Explain why transition metal ions are often colored, while main group metal ions (like Na⁺, Ca²⁺) are colorless.</p>
+                        <div class="answer-space">
+                            <textarea id="q3b" placeholder="Explain color differences..." rows="4"></textarea>
+                        </div>
+                        <button class="btn secondary" onclick="showMarkScheme('q3b')">Show Mark Scheme</button>
+                        <div class="mark-scheme" id="q3b-scheme" style="display: none;">
+                            <strong>Mark Scheme:</strong>
+                            <p><strong>M1:</strong> Transition metals have partially filled d orbitals (1 mark)</p>
+                            <p><strong>M2:</strong> d-d electronic transitions absorb visible light (1 mark)</p>
+                            <p><strong>M3:</strong> Main group ions have filled/empty outer shells (1 mark)</p>
+                            <p><strong>M4:</strong> No d-d transitions possible in main group ions (1 mark)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 4 -->
+            <div class="quiz-section">
+                <div class="question-container">
+                    <h3>Question 4</h3>
+                    <div class="question-part">
+                        <h4>(a) [5 marks]</h4>
+                        <p>Calculate the effective nuclear charge (Zeff) for the following ions and explain the trend:</p>
+                        <p><strong>Ions:</strong> Na⁺, Mg²⁺, Al³⁺, Si⁴⁺</p>
+                        <p>Use the formula: Zeff = Z - S (where Z = atomic number, S = shielding constant)</p>
+                        <div class="answer-space">
+                            <textarea id="q4a" placeholder="Calculate Zeff and explain trends..." rows="5"></textarea>
+                        </div>
+                        <button class="btn secondary" onclick="showMarkScheme('q4a')">Show Mark Scheme</button>
+                        <div class="mark-scheme" id="q4a-scheme" style="display: none;">
+                            <strong>Mark Scheme:</strong>
+                            <p><strong>M1:</strong> Na⁺: Zeff = 11 - 2 = 9 (1 mark)</p>
+                            <p><strong>M2:</strong> Mg²⁺: Zeff = 12 - 2 = 10 (1 mark)</p>
+                            <p><strong>M3:</strong> Al³⁺: Zeff = 13 - 2 = 11 (1 mark)</p>
+                            <p><strong>M4:</strong> Si⁴⁺: Zeff = 14 - 2 = 12 (1 mark)</p>
+                            <p><strong>M5:</strong> Zeff increases with increasing charge (1 mark)</p>
+                        </div>
+                    </div>
+
+                    <div class="question-part">
+                        <h4>(b) [3 marks]</h4>
+                        <p>Explain how effective nuclear charge affects ionic radius and ionization energy.</p>
+                        <div class="answer-space">
+                            <textarea id="q4b" placeholder="Explain Zeff effects on radius and IE..." rows="3"></textarea>
+                        </div>
+                        <button class="btn secondary" onclick="showMarkScheme('q4b')">Show Mark Scheme</button>
+                        <div class="mark-scheme" id="q4b-scheme" style="display: none;">
+                            <strong>Mark Scheme:</strong>
+                            <p><strong>M1:</strong> Higher Zeff = smaller ionic radius (1 mark)</p>
+                            <p><strong>M2:</strong> Higher Zeff = higher ionization energy (1 mark)</p>
+                            <p><strong>M3:</strong> Electrons held more tightly by nucleus (1 mark)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 5 -->
+            <div class="quiz-section">
+                <div class="question-container">
+                    <h3>Question 5</h3>
+                    <div class="question-part">
+                        <h4>(a) [6 marks]</h4>
+                        <p>Explain the formation of complex ions and their electron configurations:</p>
+                        <p><strong>(i)</strong> [Fe(CN)₆]³⁻ - hexacyanoferrate(III) ion</p>
+                        <p><strong>(ii)</strong> [Cu(NH₃)₄]²⁺ - tetraamminecopper(II) ion</p>
+                        <p><strong>(iii)</strong> [Co(H₂O)₆]²⁺ - hexaaquacobalt(II) ion</p>
+                        <div class="answer-space">
+                            <textarea id="q5a" placeholder="Explain complex ion formation..." rows="6"></textarea>
+                        </div>
+                        <button class="btn secondary" onclick="showMarkScheme('q5a')">Show Mark Scheme</button>
+                        <div class="mark-scheme" id="q5a-scheme" style="display: none;">
+                            <strong>Mark Scheme:</strong>
+                            <p><strong>M1:</strong> [Fe(CN)₆]³⁻: Fe³⁺ + 6CN⁻, d²sp³ hybridization (2 marks)</p>
+                            <p><strong>M2:</strong> [Cu(NH₃)₄]²⁺: Cu²⁺ + 4NH₃, dsp² hybridization (2 marks)</p>
+                            <p><strong>M3:</strong> [Co(H₂O)₆]²⁺: Co²⁺ + 6H₂O, sp³d² hybridization (2 marks)</p>
+                        </div>
+                    </div>
+
+                    <div class="question-part">
+                        <h4>(b) [4 marks]</h4>
+                        <p>Predict the magnetic properties and colors of these complex ions, explaining your reasoning.</p>
+                        <div class="answer-space">
+                            <textarea id="q5b" placeholder="Predict magnetic properties and colors..." rows="4"></textarea>
+                        </div>
+                        <button class="btn secondary" onclick="showMarkScheme('q5b')">Show Mark Scheme</button>
+                        <div class="mark-scheme" id="q5b-scheme" style="display: none;">
+                            <strong>Mark Scheme:</strong>
+                            <p><strong>M1:</strong> [Fe(CN)₆]³⁻: paramagnetic, red (1 mark)</p>
+                            <p><strong>M2:</strong> [Cu(NH₃)₄]²⁺: paramagnetic, blue (1 mark)</p>
+                            <p><strong>M3:</strong> [Co(H₂O)₆]²⁺: paramagnetic, pink (1 mark)</p>
+                            <p><strong>M4:</strong> All have unpaired electrons in d orbitals (1 mark)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 6 -->
+            <div class="quiz-section">
+                <div class="question-container">
+                    <h3>Question 6</h3>
+                    <div class="question-part">
+                        <h4>(a) [8 marks]</h4>
+                        <p>Design an experiment to determine the electron configuration of an unknown transition metal ion in solution. Include:</p>
+                        <p><strong>(i)</strong> Experimental method</p>
+                        <p><strong>(ii)</strong> Measurements to be taken</p>
+                        <p><strong>(iii)</strong> How to interpret results</p>
+                        <p><strong>(iv)</strong> Safety considerations</p>
+                        <div class="answer-space">
+                            <textarea id="q6a" placeholder="Design experiment to determine electron configuration..." rows="8"></textarea>
+                        </div>
+                        <button class="btn secondary" onclick="showMarkScheme('q6a')">Show Mark Scheme</button>
+                        <div class="mark-scheme" id="q6a-scheme" style="display: none;">
+                            <strong>Mark Scheme:</strong>
+                            <p><strong>M1:</strong> UV-Vis spectroscopy to measure d-d transitions (2 marks)</p>
+                            <p><strong>M2:</strong> Magnetic susceptibility measurements (2 marks)</p>
+                            <p><strong>M3:</strong> Compare with known standards (2 marks)</p>
+                            <p><strong>M4:</strong> Safety: gloves, goggles, fume hood (2 marks)</p>
+                        </div>
+                    </div>
+
+                    <div class="question-part">
+                        <h4>(b) [4 marks]</h4>
+                        <p>Explain how the results of your experiment would help identify the electron configuration of the unknown ion.</p>
+                        <div class="answer-space">
+                            <textarea id="q6b" placeholder="Explain how results identify configuration..." rows="4"></textarea>
+                        </div>
+                        <button class="btn secondary" onclick="showMarkScheme('q6b')">Show Mark Scheme</button>
+                        <div class="mark-scheme" id="q6b-scheme" style="display: none;">
+                            <strong>Mark Scheme:</strong>
+                            <p><strong>M1:</strong> UV-Vis peaks indicate d-d transition energies (1 mark)</p>
+                            <p><strong>M2:</strong> Magnetic data shows number of unpaired electrons (1 mark)</p>
+                            <p><strong>M3:</strong> Color indicates specific d orbital splitting (1 mark)</p>
+                            <p><strong>M4:</strong> Combined data gives complete electron configuration (1 mark)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Paper 3 Controls -->
+            <div class="paper-controls">
+                <button class="btn primary" onclick="submitPaper3()">Submit Paper 3</button>
+                <button class="btn secondary" onclick="savePaper3()">Save Progress</button>
+                <button class="btn ghost" onclick="resetPaper3()">Reset Paper</button>
+            </div>
+        </div>
+
         <!-- ======= Call to Action ======= -->
         <div style="text-align: center; margin: 50px 0;">
             <h2 style="color: var(--accent); margin-bottom: 20px; font-size: 32px;">
@@ -6239,17 +6564,207 @@
         }
 
 
+        // ======= Paper 3 Functions =======
+
         // Paper 3 Functions
         function startPaper3() {
             console.log('Starting Paper 3: Ion Formation & Applications');
-            // This would begin Paper 3 with timer and question navigation
-            alert('Paper 3: Ion Formation & Applications\n\nDuration: 60 minutes\nMarks: 60\n\nTopics: Cation/anion formation, noble gas configuration, isoelectronic species, magnetic properties\n\nThis would launch the full Paper 3 examination.');
+            
+            try {
+                // Hide all other content sections
+                document.getElementById('detailedContent').style.display = 'block';
+                document.getElementById('paper3Content').style.display = 'block';
+                document.getElementById('assessmentContent').style.display = 'none';
+                document.getElementById('paper1Content').style.display = 'none';
+                document.getElementById('paper2Content').style.display = 'none';
+                document.getElementById('overviewContent').style.display = 'none';
+                document.getElementById('coreRulesContent').style.display = 'none';
+                document.getElementById('exceptionsContent').style.display = 'none';
+                document.getElementById('ionFormationContent').style.display = 'none';
+                
+                // Hide study tiles and page title
+                const studyTiles = document.querySelector('.study-tiles');
+                const pageTitle = document.querySelector('.page-title');
+                if (studyTiles) studyTiles.style.display = 'none';
+                if (pageTitle) pageTitle.style.display = 'none';
+                
+                // Start timer
+                startPaper3Timer();
+                
+                // Scroll to top of paper
+                window.scrollTo(0, 0);
+                
+                console.log('Paper 3 started successfully');
+            } catch (error) {
+                console.error('Error starting Paper 3:', error);
+                alert('Error starting Paper 3. Please check the console for details.');
+            }
+        }
+
+        // Paper 3 Timer
+        let paper3TimerInterval;
+        let paper3TimeRemaining = 60 * 60; // 60 minutes in seconds
+
+        function startPaper3Timer() {
+            paper3TimerInterval = setInterval(() => {
+                paper3TimeRemaining--;
+                updatePaper3TimerDisplay();
+                
+                if (paper3TimeRemaining <= 0) {
+                    clearInterval(paper3TimerInterval);
+                    alert('Time\'s up! Paper 3 has been automatically submitted.');
+                    submitPaper3();
+                }
+            }, 1000);
+        }
+
+        function updatePaper3TimerDisplay() {
+            const minutes = Math.floor(paper3TimeRemaining / 60);
+            const seconds = paper3TimeRemaining % 60;
+            const display = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            document.getElementById('paper3TimeDisplay').textContent = display;
         }
 
         function viewPaper3MarkScheme() {
             console.log('Viewing Paper 3 Mark Scheme');
-            // This would show the complete mark scheme for Paper 3
             alert('Paper 3 Mark Scheme: Ion Formation & Applications\n\nThis would display the complete marking criteria and sample answers for all Paper 3 questions covering ion formation and applications.');
+        }
+
+        // Paper 3 Assessment Functions
+        function submitPaper3() {
+            clearInterval(paper3TimerInterval);
+            
+            // Collect all answers
+            const answers = {
+                q3a: document.getElementById('q3a').value,
+                q3b: document.getElementById('q3b').value,
+                q2a: {
+                    feIon: document.getElementById('q2a-fe-ion').value,
+                    feConfig: document.getElementById('q2a-fe-config').value,
+                    feMag: document.getElementById('q2a-fe-mag').value,
+                    fe2Ion: document.getElementById('q2a-fe2-ion').value,
+                    fe2Config: document.getElementById('q2a-fe2-config').value,
+                    fe2Mag: document.getElementById('q2a-fe2-mag').value,
+                    cuIon: document.getElementById('q2a-cu-ion').value,
+                    cuConfig: document.getElementById('q2a-cu-config').value,
+                    cuMag: document.getElementById('q2a-cu-mag').value,
+                    crIon: document.getElementById('q2a-cr-ion').value,
+                    crConfig: document.getElementById('q2a-cr-config').value,
+                    crMag: document.getElementById('q2a-cr-mag').value
+                },
+                q2b: document.getElementById('q2b').value,
+                q3a: document.getElementById('q3a').value,
+                q3b: document.getElementById('q3b').value,
+                q4a: document.getElementById('q4a').value,
+                q4b: document.getElementById('q4b').value,
+                q5a: document.getElementById('q5a').value,
+                q5b: document.getElementById('q5b').value,
+                q6a: document.getElementById('q6a').value,
+                q6b: document.getElementById('q6b').value
+            };
+
+            // Calculate score (simplified - in real implementation, this would be more sophisticated)
+            let score = 0;
+            let totalMarks = 60;
+            
+            // Basic scoring logic (simplified)
+            Object.keys(answers).forEach(key => {
+                if (typeof answers[key] === 'string' && answers[key].trim().length > 0) {
+                    score += 2; // Give 2 marks for any non-empty answer
+                } else if (typeof answers[key] === 'object') {
+                    Object.keys(answers[key]).forEach(subKey => {
+                        if (answers[key][subKey].trim().length > 0) {
+                            score += 1;
+                        }
+                    });
+                }
+            });
+
+            const percentage = Math.round((score / totalMarks) * 100);
+            
+            alert(`Paper 3 Submitted!\n\nScore: ${score}/${totalMarks} (${percentage}%)\n\nTime taken: ${Math.floor((60 * 60 - paper3TimeRemaining) / 60)}:${((60 * 60 - paper3TimeRemaining) % 60).toString().padStart(2, '0')}\n\nYour answers have been saved.`);
+            
+            // Reset timer
+            paper3TimeRemaining = 60 * 60;
+            updatePaper3TimerDisplay();
+        }
+
+        function savePaper3() {
+            // Save progress to localStorage
+            const answers = {
+                q3a: document.getElementById('q3a').value,
+                q3b: document.getElementById('q3b').value,
+                q2a: {
+                    feIon: document.getElementById('q2a-fe-ion').value,
+                    feConfig: document.getElementById('q2a-fe-config').value,
+                    feMag: document.getElementById('q2a-fe-mag').value,
+                    fe2Ion: document.getElementById('q2a-fe2-ion').value,
+                    fe2Config: document.getElementById('q2a-fe2-config').value,
+                    fe2Mag: document.getElementById('q2a-fe2-mag').value,
+                    cuIon: document.getElementById('q2a-cu-ion').value,
+                    cuConfig: document.getElementById('q2a-cu-config').value,
+                    cuMag: document.getElementById('q2a-cu-mag').value,
+                    crIon: document.getElementById('q2a-cr-ion').value,
+                    crConfig: document.getElementById('q2a-cr-config').value,
+                    crMag: document.getElementById('q2a-cr-mag').value
+                },
+                q2b: document.getElementById('q2b').value,
+                q3a: document.getElementById('q3a').value,
+                q3b: document.getElementById('q3b').value,
+                q4a: document.getElementById('q4a').value,
+                q4b: document.getElementById('q4b').value,
+                q5a: document.getElementById('q5a').value,
+                q5b: document.getElementById('q5b').value,
+                q6a: document.getElementById('q6a').value,
+                q6b: document.getElementById('q6b').value
+            };
+            
+            localStorage.setItem('paper3Answers', JSON.stringify(answers));
+            localStorage.setItem('paper3TimeRemaining', paper3TimeRemaining.toString());
+            
+            alert('Paper 3 progress saved successfully!');
+        }
+
+        function resetPaper3() {
+            if (confirm('Are you sure you want to reset Paper 3? All your answers will be lost.')) {
+                // Clear all answers
+                document.getElementById('q3a').value = '';
+                document.getElementById('q3b').value = '';
+                document.getElementById('q2a-fe-ion').value = '';
+                document.getElementById('q2a-fe-config').value = '';
+                document.getElementById('q2a-fe-mag').value = '';
+                document.getElementById('q2a-fe2-ion').value = '';
+                document.getElementById('q2a-fe2-config').value = '';
+                document.getElementById('q2a-fe2-mag').value = '';
+                document.getElementById('q2a-cu-ion').value = '';
+                document.getElementById('q2a-cu-config').value = '';
+                document.getElementById('q2a-cu-mag').value = '';
+                document.getElementById('q2a-cr-ion').value = '';
+                document.getElementById('q2a-cr-config').value = '';
+                document.getElementById('q2a-cr-mag').value = '';
+                document.getElementById('q2b').value = '';
+                document.getElementById('q3a').value = '';
+                document.getElementById('q3b').value = '';
+                document.getElementById('q4a').value = '';
+                document.getElementById('q4b').value = '';
+                document.getElementById('q5a').value = '';
+                document.getElementById('q5b').value = '';
+                document.getElementById('q6a').value = '';
+                document.getElementById('q6b').value = '';
+                
+                // Reset timer
+                clearInterval(paper3TimerInterval);
+                paper3TimeRemaining = 60 * 60;
+                updatePaper3TimerDisplay();
+                startPaper3Timer();
+                
+                // Hide all mark schemes
+                document.querySelectorAll('[id$="-scheme"]').forEach(scheme => {
+                    scheme.style.display = 'none';
+                });
+                
+                alert('Paper 3 has been reset.');
+            }
         }
 
         // ======= Overview Tab Interactive Functions =======
