@@ -5820,7 +5820,6 @@
                         </div>
                     
                     <div class="demo-controls">
-                        <button class="tile-btn" onclick="testPauli()">Test Pauli Rule</button>
                         <button class="tile-btn secondary" onclick="resetPauli()">Reset</button>
                     </div>
                     
@@ -6133,8 +6132,6 @@
             // Update progress indicators on tiles
             updateTileProgressIndicators();
             
-            // Add debug buttons for testing (temporary)
-            addDebugButtons();
 
             // Add click effects for buttons
             const buttons = document.querySelectorAll('.tile-btn, .btn');
@@ -7138,21 +7135,6 @@
             }
         }
 
-        function testPauli() {
-            const feedbackElement = document.getElementById('pauliFeedback');
-            if (feedbackElement) {
-                if (electronCount === 0) {
-                    feedbackElement.textContent = '❌ No electrons added yet. Try adding electrons to test the rule!';
-                    feedbackElement.className = 'pauli-feedback error';
-                } else if (electronCount === 1) {
-                    feedbackElement.textContent = '✅ Good! One electron can occupy an orbital. Add another to test pairing!';
-                    feedbackElement.className = 'pauli-feedback success';
-                } else if (electronCount === 2) {
-                    feedbackElement.textContent = '✅ Perfect! Two electrons with opposite spins can share an orbital. Pauli principle demonstrated!';
-                    feedbackElement.className = 'pauli-feedback success';
-                }
-            }
-        }
 
         function resetPauli() {
             electronCount = 0;
@@ -7361,106 +7343,7 @@
             };
         }
 
-        // Test function to verify progress tracking
-        function testProgressSystem() {
-            console.log('🧪 Testing Progress System...');
-            
-            // Clear existing progress for clean test
-            localStorage.removeItem('electronTowerProgress');
-            
-            // Test 1: Content Engagement
-            console.log('Test 1: Content Engagement');
-            updateProgress('coreRules', 'contentEngagement', 0, 0, 1);
-            let progress = JSON.parse(localStorage.getItem('electronTowerProgress'));
-            console.log('After content engagement:', progress.concepts.coreRules.activities.contentEngagement);
-            
-            // Test 2: Interactive Demo
-            console.log('Test 2: Interactive Demo');
-            updateProgress('exceptions', 'interactiveDemo');
-            progress = JSON.parse(localStorage.getItem('electronTowerProgress'));
-            console.log('After interactive demo:', progress.concepts.exceptions.activities.interactiveDemos);
-            
-            // Test 3: Vocabulary Quiz
-            console.log('Test 3: Vocabulary Quiz');
-            updateProgress('coreRules', 'vocabularyQuiz', 6, 8);
-            progress = JSON.parse(localStorage.getItem('electronTowerProgress'));
-            console.log('After vocab quiz:', progress.concepts.coreRules.activities.vocabularyQuiz);
-            
-            // Test 4: Understanding Check
-            console.log('Test 4: Understanding Check');
-            updateProgress('exceptions', 'understandingCheck', 4, 5);
-            progress = JSON.parse(localStorage.getItem('electronTowerProgress'));
-            console.log('After understanding check:', progress.concepts.exceptions.activities.understandingCheck);
-            
-            // Test 5: Progress Calculation
-            console.log('Test 5: Progress Calculation');
-            const coreRulesActivities = progress.concepts.coreRules.activities;
-            const exceptionsActivities = progress.concepts.exceptions.activities;
-            
-            console.log('Core Rules Progress:', calculateConceptProgress(coreRulesActivities));
-            console.log('Exceptions Progress:', calculateConceptProgress(exceptionsActivities));
-            
-            // Update tile indicators
-            updateTileProgressIndicators();
-            
-            console.log('✅ Progress system test completed!');
-        }
         
-        // Comprehensive test simulating real user interactions
-        function testRealUserFlow() {
-            console.log('🎯 Testing Real User Flow...');
-            
-            // Clear existing progress
-            localStorage.removeItem('electronTowerProgress');
-            
-            // Simulate user clicking "Learn More" on Core Rules
-            console.log('Step 1: User clicks Learn More on Core Rules');
-            showCoreRulesContent();
-            
-            // Simulate user taking vocabulary quiz (6/8 correct)
-            console.log('Step 2: User takes vocabulary quiz (6/8 correct)');
-            updateProgress('coreRules', 'vocabularyQuiz', 6, 8);
-            
-            // Simulate user taking understanding check (8/11 correct)
-            console.log('Step 3: User takes understanding check (8/11 correct)');
-            updateProgress('coreRules', 'understandingCheck', 8, 11);
-            
-            // Simulate user clicking "Learn More" on Exceptions
-            console.log('Step 4: User clicks Learn More on Exceptions');
-            showExceptionsContent();
-            
-            // Simulate user running Cr exception demo
-            console.log('Step 5: User runs Chromium exception demo');
-            updateProgress('exceptions', 'interactiveDemo');
-            
-            // Simulate user running Cu exception demo
-            console.log('Step 6: User runs Copper exception demo');
-            updateProgress('exceptions', 'interactiveDemo');
-            
-            // Simulate user taking exceptions vocabulary quiz (4/5 correct)
-            console.log('Step 7: User takes exceptions vocabulary quiz (4/5 correct)');
-            updateProgress('exceptions', 'vocabularyQuiz', 4, 5);
-            
-            // Simulate user taking exceptions understanding check (3/5 correct)
-            console.log('Step 8: User takes exceptions understanding check (3/5 correct)');
-            updateProgress('exceptions', 'understandingCheck', 3, 5);
-            
-            // Check final progress
-            const progress = JSON.parse(localStorage.getItem('electronTowerProgress'));
-            console.log('Final Progress State:', progress);
-            
-            // Calculate and display progress
-            const coreRulesProgress = calculateConceptProgress(progress.concepts.coreRules.activities);
-            const exceptionsProgress = calculateConceptProgress(progress.concepts.exceptions.activities);
-            
-            console.log('Core Rules Progress:', coreRulesProgress);
-            console.log('Exceptions Progress:', exceptionsProgress);
-            
-            // Update tile indicators
-            updateTileProgressIndicators();
-            
-            console.log('✅ Real user flow test completed!');
-        }
         
         // Function to display current progress state
         function showProgressState() {
@@ -7488,42 +7371,8 @@
         }
         
         // Simple test to verify basic functionality
-        function quickTest() {
-            console.log('⚡ Quick Progress Test...');
-            
-            // Clear and test basic progress tracking
-            localStorage.removeItem('electronTowerProgress');
-            
-            // Test basic progress update
-            updateProgress('coreRules', 'contentEngagement', 0, 0, 1);
-            const progress = JSON.parse(localStorage.getItem('electronTowerProgress'));
-            
-            console.log('✅ Basic progress tracking works:', progress.concepts.coreRules.activities.contentEngagement.completed);
-            
-            // Test progress calculation
-            const progressData = calculateConceptProgress(progress.concepts.coreRules.activities);
-            console.log('✅ Progress calculation works:', progressData);
-            
-            // Test tile indicator update
-            updateTileProgressIndicators();
-            console.log('✅ Tile indicators updated');
-            
-            console.log('🎉 All basic tests passed!');
-        }
         
         // Manual test function to create progress and display it
-        function testProgressDisplay() {
-            console.log('🧪 Testing Progress Display...');
-            
-            // Create some test progress
-            updateProgress('coreRules', 'contentEngagement', 0, 0, 1);
-            updateProgress('coreRules', 'vocabularyQuiz', 6, 8);
-            updateProgress('exceptions', 'contentEngagement', 0, 0, 1);
-            updateProgress('exceptions', 'interactiveDemo');
-            
-            console.log('✅ Test progress created and displayed');
-            console.log('Check the Core Rules and Exceptions tiles for progress bars!');
-        }
         
         // Reset all progress function
         function resetAllProgress() {
@@ -7534,94 +7383,8 @@
         }
         
         // Quick test function for browser console
-        function testTileProgress() {
-            console.log('🎯 Testing Tile Progress Indicators...');
-            
-            // Clear existing progress
-            localStorage.removeItem('electronTowerProgress');
-            
-            // Test 1: No progress (should show 0%)
-            updateTileProgressIndicators();
-            console.log('✅ Test 1: No progress - should show 0%');
-            
-            // Test 2: Some progress
-            updateProgress('coreRules', 'contentEngagement', 0, 0, 1);
-            console.log('✅ Test 2: Content engagement - should show 20%');
-            
-            // Test 3: More progress
-            updateProgress('coreRules', 'vocabularyQuiz', 6, 8);
-            console.log('✅ Test 3: + Vocabulary quiz - should show 40%');
-            
-            // Test 4: Even more progress
-            updateProgress('coreRules', 'understandingCheck', 8, 11);
-            console.log('✅ Test 4: + Understanding check - should show 70%');
-            
-            // Test 5: Complete progress
-            updateProgress('coreRules', 'interactiveDemo');
-            console.log('✅ Test 5: + Interactive demo - should show 100%');
-            
-            console.log('🎉 All tests completed! Check the Core Rules tile for progress updates.');
-        }
         
-        // Debug function to check current progress state
-        function debugProgress() {
-            console.log('🔍 Debugging Progress State...');
-            
-            const savedProgress = localStorage.getItem('electronTowerProgress');
-            console.log('localStorage data:', savedProgress);
-            
-            if (savedProgress) {
-                const progress = JSON.parse(savedProgress);
-                console.log('Parsed progress:', progress);
-                console.log('Core Rules activities:', progress.concepts?.coreRules?.activities);
-                console.log('Exceptions activities:', progress.concepts?.exceptions?.activities);
-            } else {
-                console.log('No progress data found in localStorage');
-            }
-            
-            // Check if tiles exist
-            const coreRulesTile = document.querySelector('.study-tile.rules');
-            const exceptionsTile = document.querySelector('.study-tile.exceptions');
-            console.log('Core Rules tile found:', !!coreRulesTile);
-            console.log('Exceptions tile found:', !!exceptionsTile);
-            
-            if (coreRulesTile) {
-                const progressDiv = coreRulesTile.querySelector('.tile-progress');
-                console.log('Core Rules progress div:', progressDiv?.innerHTML);
-            }
-            
-            if (exceptionsTile) {
-                const progressDiv = exceptionsTile.querySelector('.tile-progress');
-                console.log('Exceptions progress div:', progressDiv?.innerHTML);
-            }
-        }
         
-        // Add debug buttons for testing (temporary)
-        function addDebugButtons() {
-            // Create debug panel
-            const debugPanel = document.createElement('div');
-            debugPanel.id = 'debug-panel';
-            debugPanel.style.cssText = `
-                position: fixed;
-                top: 10px;
-                right: 10px;
-                background: rgba(0,0,0,0.8);
-                color: white;
-                padding: 10px;
-                border-radius: 10px;
-                z-index: 1000;
-                font-size: 12px;
-            `;
-            
-            debugPanel.innerHTML = `
-                <div style="margin-bottom: 5px; font-weight: bold;">Debug Panel</div>
-                <button onclick="resetAllProgress()" style="margin: 2px; padding: 5px; font-size: 10px;">Reset</button>
-                <button onclick="debugProgress()" style="margin: 2px; padding: 5px; font-size: 10px;">Debug</button>
-                <button onclick="testTileProgress()" style="margin: 2px; padding: 5px; font-size: 10px;">Test</button>
-            `;
-            
-            document.body.appendChild(debugPanel);
-        }
         
         function calculateConceptProgress(activities) {
             const vocabWeight = 0.2;

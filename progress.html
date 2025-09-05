@@ -654,7 +654,6 @@
                     <p class="dashboard-subtitle">Track your journey through electron configuration concepts</p>
                 </div>
                 <div class="header-actions">
-                    <button onclick="debugProgressPage()" class="btn ghost" style="font-size: 12px; padding: 8px 12px; margin-right: 8px;">Debug</button>
                     <button onclick="resetProgressPage()" class="btn warning"><span class="custom-emoji emoji-reset"></span> Reset Progress</button>
                 </div>
             </div>
@@ -1003,21 +1002,6 @@
             }
         }
 
-        // Debug functions for troubleshooting
-        function debugProgressPage() {
-            console.log('🔍 Debugging Progress Page...');
-            
-            const savedProgress = localStorage.getItem('electronTowerProgress');
-            console.log('localStorage data:', savedProgress);
-            
-            if (savedProgress) {
-                const progress = JSON.parse(savedProgress);
-                console.log('Parsed progress:', progress);
-                console.log('Concepts:', progress.concepts);
-            } else {
-                console.log('No progress data found in localStorage');
-            }
-        }
         
         function resetProgressPage() {
             console.log('🔄 Resetting progress from progress page...');
