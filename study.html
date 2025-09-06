@@ -3761,45 +3761,42 @@
             </div>
 
             <!-- Quick Understanding Check -->
-            <div class="understanding-section">
-                <h3>🧠 Quick Understanding Check</h3>
-                <p>Apply your knowledge of ion formation to solve these problems.</p>
-                <div class="understanding-container" id="ionUnderstandingCheck">
-                    <div class="understanding-question">
+            <div class="content-card">
+                <h3>⚡ Quick Understanding Check</h3>
+                <div class="understanding-quiz">
+                    <div class="quiz-question">
                         <h4>Question 1: Predict the ion formed by magnesium (Mg)</h4>
                         <p><strong>Given:</strong> Mg has electron configuration [Ne] 3s²</p>
-                        <div class="understanding-options">
-                            <label><input type="radio" name="uq1" value="a"> Mg⁺ (loses 1 electron)</label>
-                            <label><input type="radio" name="uq1" value="b"> Mg²⁺ (loses 2 electrons)</label>
-                            <label><input type="radio" name="uq1" value="c"> Mg⁻ (gains 1 electron)</label>
-                            <label><input type="radio" name="uq1" value="d"> Mg²⁻ (gains 2 electrons)</label>
+                        <div class="quiz-options">
+                            <button class="quiz-option" onclick="checkIonAnswer(1, 'a')">A) Mg⁺ (loses 1 electron)</button>
+                            <button class="quiz-option" onclick="checkIonAnswer(1, 'b')">B) Mg²⁺ (loses 2 electrons)</button>
+                            <button class="quiz-option" onclick="checkIonAnswer(1, 'c')">C) Mg⁻ (gains 1 electron)</button>
+                            <button class="quiz-option" onclick="checkIonAnswer(1, 'd')">D) Mg²⁻ (gains 2 electrons)</button>
                         </div>
                     </div>
-                    <div class="understanding-question">
+
+                    <div class="quiz-question">
                         <h4>Question 2: Which ion has the same electron configuration as Argon?</h4>
-                        <div class="understanding-options">
-                            <label><input type="radio" name="uq2" value="a"> Cl⁻</label>
-                            <label><input type="radio" name="uq2" value="b"> K⁺</label>
-                            <label><input type="radio" name="uq2" value="c"> Both Cl⁻ and K⁺</label>
-                            <label><input type="radio" name="uq2" value="d"> Neither</label>
+                        <div class="quiz-options">
+                            <button class="quiz-option" onclick="checkIonAnswer(2, 'a')">A) Cl⁻</button>
+                            <button class="quiz-option" onclick="checkIonAnswer(2, 'b')">B) K⁺</button>
+                            <button class="quiz-option" onclick="checkIonAnswer(2, 'c')">C) Both Cl⁻ and K⁺</button>
+                            <button class="quiz-option" onclick="checkIonAnswer(2, 'd')">D) Neither</button>
                         </div>
                     </div>
-                    <div class="understanding-question">
+
+                    <div class="quiz-question">
                         <h4>Question 3: What is the electron configuration of Fe³⁺?</h4>
                         <p><strong>Given:</strong> Fe has electron configuration [Ar] 4s² 3d⁶</p>
-                        <div class="understanding-options">
-                            <label><input type="radio" name="uq3" value="a"> [Ar] 4s² 3d³</label>
-                            <label><input type="radio" name="uq3" value="b"> [Ar] 3d⁵</label>
-                            <label><input type="radio" name="uq3" value="c"> [Ar] 4s¹ 3d⁶</label>
-                            <label><input type="radio" name="uq3" value="d"> [Ar] 4s² 3d⁶</label>
+                        <div class="quiz-options">
+                            <button class="quiz-option" onclick="checkIonAnswer(3, 'a')">A) [Ar] 4s² 3d³</button>
+                            <button class="quiz-option" onclick="checkIonAnswer(3, 'b')">B) [Ar] 3d⁵</button>
+                            <button class="quiz-option" onclick="checkIonAnswer(3, 'c')">C) [Ar] 4s¹ 3d⁶</button>
+                            <button class="quiz-option" onclick="checkIonAnswer(3, 'd')">D) [Ar] 4s² 3d⁶</button>
                         </div>
                     </div>
-                    <div class="understanding-actions">
-                        <button class="btn primary" onclick="checkIonUnderstanding()">Submit Answers</button>
-                        <button class="btn secondary" onclick="resetIonUnderstanding()">Reset</button>
-                    </div>
-                    <div class="understanding-results" id="ionUnderstandingResults" style="display: none;"></div>
                 </div>
+                <div class="quiz-results" id="ionUnderstandingResults" style="display: none;"></div>
             </div>
         </div>
 
@@ -10956,38 +10953,52 @@
         }
 
         // Ion Formation Understanding Check
-        function checkIonUnderstanding() {
-            console.log('🧪 Testing Ion Formation Understanding Check...');
+        let ionQuizAnswers = {};
+        const ionCorrectAnswers = {
+            1: 'b', // Mg²⁺ (loses 2 electrons)
+            2: 'c', // Both Cl⁻ and K⁺ are isoelectronic with Ar
+            3: 'b'  // Fe³⁺: [Ar] 3d⁵ (loses 2 from 4s, 1 from 3d)
+        };
+
+        function checkIonAnswer(questionNum, selectedAnswer) {
+            ionQuizAnswers[questionNum] = selectedAnswer;
             
-            const answers = {
-                uq1: 'b', // Mg²⁺ (loses 2 electrons)
-                uq2: 'c', // Both Cl⁻ and K⁺ are isoelectronic with Ar
-                uq3: 'b'  // Fe³⁺: [Ar] 3d⁵ (loses 2 from 4s, 1 from 3d)
-            };
+            // Update button appearance
+            const options = document.querySelectorAll(`.understanding-quiz .quiz-question:nth-child(${questionNum}) .quiz-option`);
+            options.forEach(option => {
+                option.classList.remove('correct', 'incorrect');
+                const optionLetter = option.textContent.charAt(0).toLowerCase();
+                if (optionLetter === ionCorrectAnswers[questionNum]) {
+                    option.classList.add('correct');
+                } else if (optionLetter === selectedAnswer) {
+                    option.classList.add('incorrect');
+                }
+            });
 
+            // Check if all questions answered
+            const totalQuestions = Object.keys(ionCorrectAnswers).length;
+            const answeredQuestions = Object.keys(ionQuizAnswers).length;
+            
+            if (answeredQuestions === totalQuestions) {
+                showIonQuizResults();
+            }
+        }
+
+        function showIonQuizResults() {
             let correct = 0;
-            let total = Object.keys(answers).length;
+            const total = Object.keys(ionCorrectAnswers).length;
 
-            console.log('📊 Checking answers...');
-            Object.keys(answers).forEach(question => {
-                const selected = document.querySelector(`input[name="${question}"]:checked`);
-                console.log(`Question ${question}: Selected = ${selected ? selected.value : 'none'}, Correct = ${answers[question]}`);
-                if (selected && selected.value === answers[question]) {
+            Object.keys(ionCorrectAnswers).forEach(question => {
+                if (ionQuizAnswers[question] === ionCorrectAnswers[question]) {
                     correct++;
                 }
             });
 
             const resultsDiv = document.getElementById('ionUnderstandingResults');
-            if (!resultsDiv) {
-                console.error('❌ Results div not found!');
-                return;
-            }
-            
             const percentage = Math.round((correct / total) * 100);
-            console.log(`📈 Score: ${correct}/${total} (${percentage}%)`);
             
             resultsDiv.innerHTML = `
-                <div class="understanding-score">
+                <div class="quiz-score">
                     <h4>Understanding Check Results</h4>
                     <p>You scored ${correct}/${total} (${percentage}%)</p>
                     <p>${percentage >= 70 ? '🎉 Excellent! You understand ion formation concepts!' : '📚 Review the concepts and try again.'}</p>
@@ -10997,22 +11008,15 @@
 
             // Track progress
             updateProgress('ionFormation', 'understandingCheck', correct, total);
-            console.log('✅ Ion Formation Understanding Check completed!');
         }
 
         function resetIonUnderstanding() {
-            console.log('🔄 Resetting Ion Formation Understanding Check...');
-            const inputs = document.querySelectorAll('#ionUnderstandingCheck input[type="radio"]');
-            console.log(`Found ${inputs.length} radio inputs`);
-            inputs.forEach(input => input.checked = false);
-            const resultsDiv = document.getElementById('ionUnderstandingResults');
-            if (resultsDiv) {
-                resultsDiv.style.display = 'none';
-                console.log('✅ Results hidden');
-            } else {
-                console.error('❌ Results div not found!');
-            }
-            console.log('✅ Ion Formation Understanding Check reset!');
+            ionQuizAnswers = {};
+            const options = document.querySelectorAll('.understanding-quiz .quiz-option');
+            options.forEach(option => {
+                option.classList.remove('correct', 'incorrect');
+            });
+            document.getElementById('ionUnderstandingResults').style.display = 'none';
         }
 
         // Update tile click handlers to show detailed content
@@ -12869,4 +12873,5 @@
         }
     </script>
 </body>
+</html>
 </html>
