@@ -9150,6 +9150,7 @@
 
         // Show detailed content when clicking on Ion Formation tile
         function showIonFormationContent() {
+            console.log('🎯 showIonFormationContent() called!');
             document.getElementById('detailedContent').style.display = 'block';
             document.getElementById('overviewContent').style.display = 'none';
             document.getElementById('coreRulesContent').style.display = 'none';
@@ -9157,6 +9158,8 @@
             document.getElementById('ionFormationContent').style.display = 'block';
             document.querySelector('.study-tiles').style.display = 'none';
             document.querySelector('.page-title').style.display = 'none';
+            
+            console.log('📱 Content switched to Ion Formation');
             
             // Initialize the interactive demos
             initializeIonFormationDemos();
@@ -10651,9 +10654,47 @@
 
         // ======= Ion Formation Interactive Functions =======
 
+        // Test function for debugging
+        function testIonFormation() {
+            console.log('🧪 Testing Ion Formation functionality...');
+            
+            // Test if we can find the buildings
+            const sodiumBuilding = document.getElementById('sodiumBuilding');
+            const chlorineBuilding = document.getElementById('chlorineBuilding');
+            const ironBuilding = document.getElementById('ironBuilding');
+            
+            console.log('Buildings found:');
+            console.log('Sodium:', sodiumBuilding);
+            console.log('Chlorine:', chlorineBuilding);
+            console.log('Iron:', ironBuilding);
+            
+            if (sodiumBuilding) {
+                const slots = sodiumBuilding.querySelectorAll('.slot');
+                console.log('Sodium slots found:', slots.length);
+                slots.forEach((slot, index) => {
+                    console.log(`Slot ${index}:`, slot.textContent, slot.getAttribute('data-orbital'));
+                });
+            }
+            
+            // Test the reset function
+            console.log('Testing resetSodiumDemo...');
+            resetSodiumDemo();
+        }
+
         // Initialize Ion Formation demos
         function initializeIonFormationDemos() {
             console.log('🔧 Initializing Ion Formation demos...');
+            
+            // Test if elements exist
+            const sodiumBuilding = document.getElementById('sodiumBuilding');
+            const chlorineBuilding = document.getElementById('chlorineBuilding');
+            const ironBuilding = document.getElementById('ironBuilding');
+            
+            console.log('Element check:');
+            console.log('Sodium building:', sodiumBuilding ? '✅ Found' : '❌ Not found');
+            console.log('Chlorine building:', chlorineBuilding ? '✅ Found' : '❌ Not found');
+            console.log('Iron building:', ironBuilding ? '✅ Found' : '❌ Not found');
+            
             // Initialize Sodium demo
             resetSodiumDemo();
             // Initialize Chlorine demo  
