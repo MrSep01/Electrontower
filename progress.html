@@ -1219,6 +1219,74 @@
             console.log('✅ Progress data reset! Refresh the page to see all concepts and achievements.');
         }
 
+        // Test function to verify progress dashboard functionality
+        function testProgressDashboard() {
+            console.log('🧪 TESTING PROGRESS DASHBOARD');
+            console.log('=============================');
+            
+            // Check if all elements exist
+            console.log('\n📋 TEST 1: DOM Elements Check');
+            const elements = {
+                overallProgress: document.getElementById('overallPercentage'),
+                conceptList: document.getElementById('conceptList'),
+                totalQuizzes: document.getElementById('totalQuizzes'),
+                averageScore: document.getElementById('averageScore'),
+                studyStreak: document.getElementById('studyStreak'),
+                totalTime: document.getElementById('totalTime'),
+                achievementGrid: document.getElementById('achievementGrid')
+            };
+            
+            Object.entries(elements).forEach(([name, element]) => {
+                if (element) {
+                    console.log(`✅ ${name}: Found`);
+                } else {
+                    console.error(`❌ ${name}: Missing`);
+                }
+            });
+            
+            // Check concepts
+            console.log('\n📋 TEST 2: Concepts Check');
+            const progress = JSON.parse(localStorage.getItem('electronTowerProgress'));
+            if (progress && progress.concepts) {
+                const expectedConcepts = ['overview', 'coreRules', 'exceptions', 'ionFormation', 'assessment'];
+                expectedConcepts.forEach(concept => {
+                    if (progress.concepts[concept]) {
+                        console.log(`✅ ${concept}: Present`);
+                    } else {
+                        console.error(`❌ ${concept}: Missing`);
+                    }
+                });
+            } else {
+                console.error('❌ Progress data not found');
+            }
+            
+            // Check achievements
+            console.log('\n📋 TEST 3: Achievements Check');
+            if (progress && progress.achievements) {
+                console.log(`✅ Achievements: ${progress.achievements.length} unlocked`);
+                progress.achievements.forEach(achievement => {
+                    console.log(`  - ${achievement}`);
+                });
+            } else {
+                console.log('ℹ️ No achievements unlocked yet');
+            }
+            
+            // Test dashboard refresh
+            console.log('\n📋 TEST 4: Dashboard Refresh Test');
+            try {
+                dashboard.loadProgress();
+                dashboard.updateOverallProgress();
+                dashboard.updateConceptList();
+                dashboard.updateStatistics();
+                dashboard.updateAchievements();
+                console.log('✅ Dashboard refresh successful');
+            } catch (error) {
+                console.error('❌ Dashboard refresh failed:', error);
+            }
+            
+            console.log('\n🎉 PROGRESS DASHBOARD TEST COMPLETED!');
+        }
+
         // Run test when page loads
         document.addEventListener('DOMContentLoaded', function() {
             setTimeout(testProgressSections, 1000);

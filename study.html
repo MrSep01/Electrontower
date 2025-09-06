@@ -9786,36 +9786,46 @@
             console.log('✅ All progress reset! Tiles should now show 0% progress.');
         }
         
-        // Quick test function for browser console
-        function testProgressSync() {
-            console.log('🧪 Testing Complete Progress System...');
+        // Comprehensive test function for browser console
+        function testCompleteSystem() {
+            console.log('🧪 COMPREHENSIVE PROGRESS & ACHIEVEMENTS TEST');
+            console.log('==============================================');
             
-            // Test Overview progress (1 activity)
+            // Reset progress first
+            console.log('🔄 Resetting progress data...');
+            localStorage.removeItem('electronTowerProgress');
+            
+            // Test 1: Overview progress (1 activity)
+            console.log('\n📋 TEST 1: Overview Progress');
             updateProgress('overview', 'understandingCheck', 5, 5, 0);
             console.log('✅ Overview: Assessment completed (1/1 activity)');
             
-            // Test Core Rules progress (4 activities)
+            // Test 2: Core Rules progress (4 activities)
+            console.log('\n📋 TEST 2: Core Rules Progress');
             updateProgress('coreRules', 'contentEngagement', 0, 0, 1);
             updateProgress('coreRules', 'understandingCheck', 4, 5, 0);
             updateProgress('coreRules', 'interactiveDemos', 1, 1, 0);
             updateProgress('coreRules', 'vocabularyQuiz', 8, 10, 0);
             console.log('✅ Core Rules: All 4 activities completed');
             
-            // Test Exceptions progress (4 activities)
+            // Test 3: Exceptions progress (4 activities)
+            console.log('\n📋 TEST 3: Exceptions Progress');
             updateProgress('exceptions', 'contentEngagement', 0, 0, 1);
             updateProgress('exceptions', 'understandingCheck', 4, 5, 0);
             updateProgress('exceptions', 'interactiveDemos', 1, 1, 0);
             updateProgress('exceptions', 'vocabularyQuiz', 7, 10, 0);
             console.log('✅ Exceptions: All 4 activities completed');
             
-            // Test Ion Formation progress (4 activities)
+            // Test 4: Ion Formation progress (4 activities)
+            console.log('\n📋 TEST 4: Ion Formation Progress');
             updateProgress('ionFormation', 'contentEngagement', 0, 0, 1);
             updateProgress('ionFormation', 'understandingCheck', 4, 5, 0);
             updateProgress('ionFormation', 'interactiveDemos', 1, 1, 0);
             updateProgress('ionFormation', 'vocabularyQuiz', 6, 10, 0);
             console.log('✅ Ion Formation: All 4 activities completed');
             
-            // Test Assessment progress (7 activities)
+            // Test 5: Assessment progress (7 activities)
+            console.log('\n📋 TEST 5: Assessment Progress');
             updateProgress('assessment', 'contentEngagement', 0, 0, 1);
             updateProgress('assessment', 'understandingCheck', 4, 5, 0);
             updateProgress('assessment', 'interactiveDemos', 1, 1, 0);
@@ -9825,21 +9835,68 @@
             updateProgress('assessment', 'paper3', 50, 60, 0);
             console.log('✅ Assessment: All 7 activities completed');
             
-            // Update tile indicators
+            // Test 6: Update tile indicators
+            console.log('\n📋 TEST 6: Tile Progress Indicators');
             updateTileProgressIndicators();
+            console.log('✅ Tile progress indicators updated');
             
-            // Trigger dashboard refresh
+            // Test 7: Trigger dashboard refresh
+            console.log('\n📋 TEST 7: Cross-Interface Sync');
             triggerProgressDashboardRefresh();
+            console.log('✅ Dashboard refresh triggered');
             
-            console.log('🎉 Complete progress test finished!');
+            // Test 8: Check achievements
+            console.log('\n📋 TEST 8: Achievements Check');
+            showAllAchievements();
+            
+            // Test 9: Verify progress data
+            console.log('\n📋 TEST 9: Progress Data Verification');
+            const progress = JSON.parse(localStorage.getItem('electronTowerProgress'));
+            console.log('📊 Progress Data Summary:');
+            Object.entries(progress.concepts).forEach(([key, concept]) => {
+                const activities = concept.activities;
+                let completedCount = 0;
+                let totalCount = 0;
+                
+                if (key === 'overview') {
+                    totalCount = 1;
+                    completedCount = activities.understandingCheck.completed ? 1 : 0;
+                } else if (key === 'assessment') {
+                    totalCount = 7;
+                    if (activities.contentEngagement.completed) completedCount++;
+                    if (activities.understandingCheck.completed) completedCount++;
+                    if (activities.interactiveDemos.completed > 0) completedCount++;
+                    if (activities.vocabularyQuiz.completed) completedCount++;
+                    if (activities.paper1 && activities.paper1.completed) completedCount++;
+                    if (activities.paper2 && activities.paper2.completed) completedCount++;
+                    if (activities.paper3 && activities.paper3.completed) completedCount++;
+                } else {
+                    totalCount = 4;
+                    if (activities.contentEngagement.completed) completedCount++;
+                    if (activities.understandingCheck.completed) completedCount++;
+                    if (activities.interactiveDemos.completed > 0) completedCount++;
+                    if (activities.vocabularyQuiz.completed) completedCount++;
+                }
+                
+                const percentage = Math.round((completedCount / totalCount) * 100);
+                console.log(`  ${key}: ${percentage}% (${completedCount}/${totalCount} activities) - ${concept.completed ? 'COMPLETED' : 'IN PROGRESS'}`);
+            });
+            
+            console.log('\n🎉 COMPREHENSIVE TEST COMPLETED!');
+            console.log('================================');
             console.log('📊 Expected Results:');
-            console.log('  - Overview: 100% (1/1 activity)');
-            console.log('  - Core Rules: 100% (4/4 activities)');
-            console.log('  - Exceptions: 100% (4/4 activities)');
-            console.log('  - Ion Formation: 100% (4/4 activities)');
-            console.log('  - Assessment: 100% (7/7 activities)');
+            console.log('  - Overview: 100% (1/1 activity) - COMPLETED');
+            console.log('  - Core Rules: 100% (4/4 activities) - COMPLETED');
+            console.log('  - Exceptions: 100% (4/4 activities) - COMPLETED');
+            console.log('  - Ion Formation: 100% (4/4 activities) - COMPLETED');
+            console.log('  - Assessment: 100% (7/7 activities) - COMPLETED');
+            console.log('🏆 Expected Achievements: 6/6 unlocked');
             console.log('🔍 Check both study tiles and progress.html dashboard for consistency!');
-            console.log('🏆 Check achievements with: showAllAchievements()');
+        }
+
+        // Quick test function for browser console (legacy)
+        function testProgressSync() {
+            testCompleteSystem();
         }
         
         function calculateConceptProgress(activities) {
