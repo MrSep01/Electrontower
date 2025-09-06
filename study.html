@@ -8727,6 +8727,9 @@
             
             // Update tile progress
             updateTileProgressIndicators();
+            
+            // Trigger progress dashboard refresh if it's open in another tab
+            triggerProgressDashboardRefresh();
         }
 
         function markProgressItemCompleted(itemId) {
@@ -8858,6 +8861,24 @@
             
             if (submitBtn) submitBtn.style.display = 'inline-flex';
             if (resetBtn) resetBtn.style.display = 'none';
+        }
+
+        // ======= Cross-Tab Progress Sync =======
+
+        function triggerProgressDashboardRefresh() {
+            // Dispatch a custom event that progress.html can listen for
+            window.dispatchEvent(new CustomEvent('progressUpdated', {
+                detail: { source: 'study.html' }
+            }));
+            
+            // Also try to communicate with progress.html if it's open in another tab
+            if (window.opener && !window.opener.closed) {
+                try {
+                    window.opener.postMessage({ type: 'progressUpdated' }, '*');
+                } catch (e) {
+                    // Cross-origin or other security restrictions
+                }
+            }
         }
 
         // ======= Core Rules Interactive Functions =======

@@ -953,13 +953,48 @@
                 const progress = savedProgress ? JSON.parse(savedProgress) : new ProgressDashboard().getDefaultProgress();
                 
                 if (!progress.concepts[concept]) {
-                    progress.concepts[concept] = { completed: false, score: 0, attempts: 0, timeSpent: 0 };
+                    progress.concepts[concept] = { 
+                        completed: false, 
+                        score: 0, 
+                        attempts: 0, 
+                        timeSpent: 0,
+                        activities: {
+                            vocabularyQuiz: { completed: false, score: 0, attempts: 0 },
+                            understandingCheck: { completed: false, score: 0, attempts: 0 },
+                            interactiveDemos: { completed: 0, total: 0 },
+                            contentEngagement: { completed: false, timeSpent: 0 }
+                        }
+                    };
+                }
+                
+                // Ensure activities structure exists
+                if (!progress.concepts[concept].activities) {
+                    progress.concepts[concept].activities = {
+                        vocabularyQuiz: { completed: false, score: 0, attempts: 0 },
+                        understandingCheck: { completed: false, score: 0, attempts: 0 },
+                        interactiveDemos: { completed: 0, total: 0 },
+                        contentEngagement: { completed: false, timeSpent: 0 }
+                    };
                 }
                 
                 progress.concepts[concept].score += score;
                 progress.concepts[concept].attempts++;
                 progress.concepts[concept].timeSpent += timeSpent;
-                progress.concepts[concept].completed = (score / totalQuestions) >= 0.7; // 70% threshold
+                
+                // Update completion based on activities (compatible with study.html system)
+                const activities = progress.concepts[concept].activities;
+                const vocabWeight = 0.2;
+                const understandingWeight = 0.3;
+                const interactiveWeight = 0.3;
+                const engagementWeight = 0.2;
+                
+                let completionScore = 0;
+                if (activities.vocabularyQuiz.completed) completionScore += vocabWeight;
+                if (activities.understandingCheck.completed) completionScore += understandingWeight;
+                if (activities.interactiveDemos.completed > 0) completionScore += interactiveWeight;
+                if (activities.contentEngagement.completed) completionScore += engagementWeight;
+                
+                progress.concepts[concept].completed = completionScore >= 0.7;
                 
                 // Update streak
                 const today = new Date().toDateString();
@@ -1016,7 +1051,47 @@
         
         // Initialize dashboard when page loads
         document.addEventListener('DOMContentLoaded', () => {
-            new ProgressDashboard();
+            const dashboard = new ProgressDashboard();
+            
+            // Refresh progress when page becomes visible (in case it was updated from another tab)
+            document.addEventListener('visibilitychange', () => {
+                if (!document.hidden) {
+                    dashboard.loadProgress();
+                    dashboard.updateOverallProgress();
+                    dashboard.updateConceptList();
+                    dashboard.updateStatistics();
+                    dashboard.updateAchievements();
+                }
+            });
+            
+            // Also refresh on focus (for better cross-tab sync)
+            window.addEventListener('focus', () => {
+                dashboard.loadProgress();
+                dashboard.updateOverallProgress();
+                dashboard.updateConceptList();
+                dashboard.updateStatistics();
+                dashboard.updateAchievements();
+            });
+            
+            // Listen for progress updates from other tabs/pages
+            window.addEventListener('progressUpdated', () => {
+                dashboard.loadProgress();
+                dashboard.updateOverallProgress();
+                dashboard.updateConceptList();
+                dashboard.updateStatistics();
+                dashboard.updateAchievements();
+            });
+            
+            // Listen for messages from other windows
+            window.addEventListener('message', (event) => {
+                if (event.data && event.data.type === 'progressUpdated') {
+                    dashboard.loadProgress();
+                    dashboard.updateOverallProgress();
+                    dashboard.updateConceptList();
+                    dashboard.updateStatistics();
+                    dashboard.updateAchievements();
+                }
+            });
         });
     </script>
 </body>
