@@ -8126,6 +8126,70 @@
             document.getElementById('ionFormationContent').style.display = 'none';
             document.querySelector('.study-tiles').style.display = 'none';
             document.querySelector('.page-title').style.display = 'none';
+            
+            // Initialize Assessment progress tracking
+            initializeAssessmentProgress();
+        }
+
+        // ======= Assessment Progress Tracking Functions =======
+
+        function initializeAssessmentProgress() {
+            // Load saved progress
+            const savedProgress = localStorage.getItem('electronTowerProgress');
+            let progress = savedProgress ? JSON.parse(savedProgress) : getDefaultProgress();
+            
+            // Initialize assessment concept if not exists
+            if (!progress.concepts.assessment) {
+                progress.concepts.assessment = {
+                    completed: false,
+                    score: 0,
+                    attempts: 0,
+                    timeSpent: 0,
+                    activities: {
+                        vocabularyQuiz: { completed: false, score: 0, attempts: 0 },
+                        understandingCheck: { completed: false, score: 0, attempts: 0 },
+                        interactiveDemos: { completed: 0, total: 0 },
+                        contentEngagement: { completed: false, timeSpent: 0 },
+                        paper1: { completed: false, score: 0, attempts: 0 },
+                        paper2: { completed: false, score: 0, attempts: 0 },
+                        paper3: { completed: false, score: 0, attempts: 0 }
+                    }
+                };
+                localStorage.setItem('electronTowerProgress', JSON.stringify(progress));
+            }
+            
+            // Track content engagement
+            updateProgress('assessment', 'contentEngagement', 0, 0, 1);
+            
+            // Update progress display
+            updateAssessmentProgressDisplay();
+        }
+
+        function updateAssessmentProgressDisplay() {
+            const savedProgress = localStorage.getItem('electronTowerProgress');
+            const progress = savedProgress ? JSON.parse(savedProgress) : getDefaultProgress();
+            const assessmentProgress = progress.concepts.assessment;
+            
+            if (!assessmentProgress) return;
+            
+            // Calculate completion based on activities (7 total: 4 standard + 3 papers)
+            const activities = assessmentProgress.activities;
+            let completedCount = 0;
+            const totalCount = 7;
+            
+            // Check standard activities
+            if (activities.contentEngagement.completed) completedCount++;
+            if (activities.understandingCheck.completed) completedCount++;
+            if (activities.interactiveDemos.completed > 0) completedCount++;
+            if (activities.vocabularyQuiz.completed) completedCount++;
+            
+            // Check paper completions
+            if (activities.paper1.completed) completedCount++;
+            if (activities.paper2.completed) completedCount++;
+            if (activities.paper3.completed) completedCount++;
+            
+            // Update tile progress
+            updateTileProgressIndicators();
         }
 
         // Paper 1 Functions
@@ -8243,6 +8307,9 @@
             });
 
             const percentage = Math.round((score / totalMarks) * 100);
+            
+            // Track Paper 1 completion
+            updateProgress('assessment', 'paper1', score, totalMarks, 0);
             
             alert(`Paper 1 Submitted!\n\nScore: ${score}/${totalMarks} (${percentage}%)\n\nTime taken: ${Math.floor((45 * 60 - paper1TimeRemaining) / 60)}:${((45 * 60 - paper1TimeRemaining) % 60).toString().padStart(2, '0')}\n\nYour answers have been saved.`);
             
@@ -8433,6 +8500,9 @@
 
             const percentage = Math.round((score / totalMarks) * 100);
             
+            // Track Paper 2 completion
+            updateProgress('assessment', 'paper2', score, totalMarks, 0);
+            
             alert(`Paper 2 Submitted!\n\nScore: ${score}/${totalMarks} (${percentage}%)\n\nTime taken: ${Math.floor((45 * 60 - paper2TimeRemaining) / 60)}:${((45 * 60 - paper2TimeRemaining) % 60).toString().padStart(2, '0')}\n\nYour answers have been saved.`);
             
             // Reset timer
@@ -8620,6 +8690,9 @@
             });
 
             const percentage = Math.round((score / totalMarks) * 100);
+            
+            // Track Paper 3 completion
+            updateProgress('assessment', 'paper3', score, totalMarks, 0);
             
             alert(`Paper 3 Submitted!\n\nScore: ${score}/${totalMarks} (${percentage}%)\n\nTime taken: ${Math.floor((60 * 60 - paper3TimeRemaining) / 60)}:${((60 * 60 - paper3TimeRemaining) % 60).toString().padStart(2, '0')}\n\nYour answers have been saved.`);
             
