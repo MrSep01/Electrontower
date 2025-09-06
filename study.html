@@ -10622,6 +10622,11 @@
                 slot.style.backgroundColor = '';
                 slot.style.border = '';
                 slot.style.borderRadius = '';
+                slot.style.transform = '';
+                slot.style.scale = '';
+                slot.style.boxShadow = '';
+                slot.style.outline = '';
+                slot.className = 'slot'; // Reset all classes
             });
 
             // Restore original electron configuration for Sodium (Na: [Ne] 3s¹)
@@ -10703,6 +10708,14 @@
                 slot.style.opacity = '1';
                 slot.style.color = 'inherit';
                 slot.style.fontWeight = 'normal';
+                slot.style.backgroundColor = '';
+                slot.style.border = '';
+                slot.style.borderRadius = '';
+                slot.style.transform = '';
+                slot.style.scale = '';
+                slot.style.boxShadow = '';
+                slot.style.outline = '';
+                slot.className = 'slot'; // Reset all classes
             });
 
             // Restore original electron configuration for Chlorine (Cl: [Ne] 3s² 3p⁵)
@@ -10798,6 +10811,16 @@
             slots.forEach(slot => {
                 slot.textContent = '';
                 slot.style.opacity = '1';
+                slot.style.color = 'inherit';
+                slot.style.fontWeight = 'normal';
+                slot.style.backgroundColor = '';
+                slot.style.border = '';
+                slot.style.borderRadius = '';
+                slot.style.transform = '';
+                slot.style.scale = '';
+                slot.style.boxShadow = '';
+                slot.style.outline = '';
+                slot.className = 'slot'; // Reset all classes
             });
 
             // Restore original electron configuration for Iron (Fe: [Ar] 4s² 3d⁶)
