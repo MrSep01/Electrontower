@@ -3320,7 +3320,7 @@
                                             <div class="unit" data-wing="3s" data-index="0">
                                                 <div class="unit-label">3s</div>
                                                 <div class="slots">
-                                                    <div class="slot" data-slot="0" data-orbital="3s-1">↑</div>
+                                                    <div class="slot" data-slot="0" data-orbital="3s-1"></div>
                                                     <div class="slot" data-slot="1" data-orbital="3s-2"></div>
                                                 </div>
                                             </div>
@@ -3420,8 +3420,8 @@
                                             <div class="unit" data-wing="3s" data-index="0">
                                                 <div class="unit-label">3s</div>
                                                 <div class="slots">
-                                                    <div class="slot" data-slot="0" data-orbital="3s-1">↑</div>
-                                                    <div class="slot" data-slot="1" data-orbital="3s-2">↓</div>
+                                                    <div class="slot" data-slot="0" data-orbital="3s-1"></div>
+                                                    <div class="slot" data-slot="1" data-orbital="3s-2"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -3546,8 +3546,8 @@
                                             <div class="unit" data-wing="4s" data-index="0">
                                                 <div class="unit-label">4s</div>
                                                 <div class="slots">
-                                                    <div class="slot" data-slot="0" data-orbital="4s-1">↑</div>
-                                                    <div class="slot" data-slot="1" data-orbital="4s-2">↓</div>
+                                                    <div class="slot" data-slot="0" data-orbital="4s-1"></div>
+                                                    <div class="slot" data-slot="1" data-orbital="4s-2"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -3564,8 +3564,8 @@
                                             <div class="unit" data-wing="3s" data-index="0">
                                                 <div class="unit-label">3s</div>
                                                 <div class="slots">
-                                                    <div class="slot" data-slot="0" data-orbital="3s-1">↑</div>
-                                                    <div class="slot" data-slot="1" data-orbital="3s-2">↓</div>
+                                                    <div class="slot" data-slot="0" data-orbital="3s-1"></div>
+                                                    <div class="slot" data-slot="1" data-orbital="3s-2"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -10736,16 +10736,22 @@
                     console.log('Removing electron from 3s-1 slot');
                     slot3s1.textContent = '';
                     slot3s1.style.opacity = '0.3';
+                    slot3s1.style.backgroundColor = '#ff6b6b';
+                    slot3s1.style.border = '2px solid #ff6b6b';
+                    slot3s1.style.borderRadius = '4px';
                     
                     // Update configuration display
                     if (standardConfig) {
                         standardConfig.style.opacity = '0.5';
                         standardConfig.style.textDecoration = 'line-through';
+                        standardConfig.style.backgroundColor = '#ff6b6b20';
                     }
                     if (actualConfig) {
                         actualConfig.style.fontWeight = 'bold';
                         actualConfig.style.color = 'var(--success)';
+                        actualConfig.style.backgroundColor = '#51cf6620';
                     }
+                    console.log('✅ Electron removed and styling applied');
                 }, 1000);
             } else {
                 console.error('❌ 3s-1 slot not found!');
@@ -10777,6 +10783,9 @@
                 slot.style.opacity = '1';
                 slot.style.color = 'inherit';
                 slot.style.fontWeight = 'normal';
+                slot.style.backgroundColor = '';
+                slot.style.border = '';
+                slot.style.borderRadius = '';
             });
 
             // Restore original electron configuration for Sodium (Na: 1s² 2s² 2p⁶ 3s¹)
@@ -10792,17 +10801,19 @@
             const slot2p6 = building.querySelector('[data-orbital="2p-6"]');
             const slot3s1 = building.querySelector('[data-orbital="3s-1"]');
 
-            if (slot1s1) slot1s1.textContent = '↑';
-            if (slot1s2) slot1s2.textContent = '↓';
-            if (slot2s1) slot2s1.textContent = '↑';
-            if (slot2s2) slot2s2.textContent = '↓';
-            if (slot2p1) slot2p1.textContent = '↑';
-            if (slot2p2) slot2p2.textContent = '↓';
-            if (slot2p3) slot2p3.textContent = '↑';
-            if (slot2p4) slot2p4.textContent = '↓';
-            if (slot2p5) slot2p5.textContent = '↑';
-            if (slot2p6) slot2p6.textContent = '↓';
-            if (slot3s1) slot3s1.textContent = '↑';
+            console.log('Restoring electron configuration...');
+            if (slot1s1) { slot1s1.textContent = '↑'; slot1s1.style.color = '#51cf66'; }
+            if (slot1s2) { slot1s2.textContent = '↓'; slot1s2.style.color = '#51cf66'; }
+            if (slot2s1) { slot2s1.textContent = '↑'; slot2s1.style.color = '#51cf66'; }
+            if (slot2s2) { slot2s2.textContent = '↓'; slot2s2.style.color = '#51cf66'; }
+            if (slot2p1) { slot2p1.textContent = '↑'; slot2p1.style.color = '#51cf66'; }
+            if (slot2p2) { slot2p2.textContent = '↓'; slot2p2.style.color = '#51cf66'; }
+            if (slot2p3) { slot2p3.textContent = '↑'; slot2p3.style.color = '#51cf66'; }
+            if (slot2p4) { slot2p4.textContent = '↓'; slot2p4.style.color = '#51cf66'; }
+            if (slot2p5) { slot2p5.textContent = '↑'; slot2p5.style.color = '#51cf66'; }
+            if (slot2p6) { slot2p6.textContent = '↓'; slot2p6.style.color = '#51cf66'; }
+            if (slot3s1) { slot3s1.textContent = '↑'; slot3s1.style.color = '#51cf66'; }
+            console.log('✅ Electron configuration restored with visual feedback');
 
             // Reset configuration display styling
             if (standardConfig) {
