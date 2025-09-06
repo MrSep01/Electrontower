@@ -10706,11 +10706,16 @@
 
         // Sodium Cation Formation Demonstration
         function showSodiumCation() {
+            console.log('🧪 showSodiumCation() called!');
             const building = document.getElementById('sodiumBuilding');
             const standardConfig = document.getElementById('sodiumStandard');
             const actualConfig = document.getElementById('sodiumActual');
             
-            if (!building) return;
+            if (!building) {
+                console.error('❌ Sodium building not found in showSodiumCation!');
+                return;
+            }
+            console.log('✅ Sodium building found in showSodiumCation');
 
             // Reset configuration displays
             if (standardConfig) standardConfig.textContent = 'Na: 1s² 2s² 2p⁶ 3s¹';
@@ -10718,8 +10723,11 @@
 
             // Animate electron loss from 3s orbital
             const slot3s1 = document.querySelector('[data-orbital="3s-1"]');
+            console.log('Looking for 3s-1 slot:', slot3s1);
             if (slot3s1) {
+                console.log('Found 3s-1 slot, current content:', slot3s1.textContent);
                 setTimeout(() => {
+                    console.log('Removing electron from 3s-1 slot');
                     slot3s1.textContent = '';
                     slot3s1.style.opacity = '0.3';
                     
@@ -10733,6 +10741,8 @@
                         actualConfig.style.color = 'var(--success)';
                     }
                 }, 1000);
+            } else {
+                console.error('❌ 3s-1 slot not found!');
             }
 
             // Track interactive demo completion
@@ -10742,16 +10752,16 @@
         }
 
         function resetSodiumDemo() {
-            console.log('🔄 Resetting Sodium demo...');
+            console.log('🔄 resetSodiumDemo() called!');
             const building = document.getElementById('sodiumBuilding');
             const standardConfig = document.getElementById('sodiumStandard');
             const actualConfig = document.getElementById('sodiumActual');
             
             if (!building) {
-                console.error('❌ Sodium building not found!');
+                console.error('❌ Sodium building not found in resetSodiumDemo!');
                 return;
             }
-            console.log('✅ Sodium building found');
+            console.log('✅ Sodium building found in resetSodiumDemo');
 
             // Reset all slots
             const slots = building.querySelectorAll('.slot');
