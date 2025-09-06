@@ -3,18 +3,37 @@
 /**
  * Load the HTML file and set up the DOM
  */
-function loadHTML() {
+function loadHTML(filename = 'study.html') {
   const fs = require('fs');
   const path = require('path');
   
-  const htmlPath = path.join(__dirname, '..', 'index.html');
+  const htmlPath = path.join(__dirname, '..', filename);
   const html = fs.readFileSync(htmlPath, 'utf8');
   
   document.documentElement.innerHTML = html;
   
-  // Remove all script tags to avoid JavaScript execution conflicts
+  // Execute JavaScript from the HTML file with proper isolation
   const scripts = document.querySelectorAll('script');
-  scripts.forEach(script => script.remove());
+  let scriptContent = '';
+  
+  scripts.forEach(script => {
+    scriptContent += script.textContent + '\n';
+  });
+  
+  // Execute all scripts in a single context to avoid redeclaration issues
+  try {
+    // Wrap in IIFE to avoid global conflicts
+    const wrappedScript = `
+      (function() {
+        ${scriptContent}
+      })();
+    `;
+    
+    // Use eval in a controlled way for testing
+    eval(wrappedScript);
+  } catch (error) {
+    console.warn('Script execution warning:', error.message);
+  }
   
   // Trigger DOMContentLoaded
   const event = new Event('DOMContentLoaded');

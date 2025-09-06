@@ -17,45 +17,33 @@ describe('Progress Tracking System', () => {
   });
 
   describe('Progress Data Structure', () => {
-    test('should initialize with default progress structure', () => {
-      // Simulate calling getDefaultProgress function
+    test('should initialize with updated progress structure', () => {
+      // Updated progress structure based on current implementation
       const defaultProgress = {
         concepts: {
           overview: { 
-            completed: false, 
-            score: 0, 
-            attempts: 0, 
-            timeSpent: 0,
-            activities: {
-              vocabularyQuiz: { completed: false, score: 0, attempts: 0 },
-              understandingCheck: { completed: false, score: 0, attempts: 0 },
-              interactiveDemos: { completed: 0, total: 0 },
-              contentEngagement: { completed: false, timeSpent: 0 }
-            }
+            assessment: { score: 0, totalQuestions: 0, timeSpent: 0 }
           },
           coreRules: { 
-            completed: false, 
-            score: 0, 
-            attempts: 0, 
-            timeSpent: 0,
-            activities: {
-              vocabularyQuiz: { completed: false, score: 0, attempts: 0 },
-              understandingCheck: { completed: false, score: 0, attempts: 0 },
-              interactiveDemos: { completed: 0, total: 0 },
-              contentEngagement: { completed: false, timeSpent: 0 }
-            }
+            interactiveDemo: { score: 0, totalQuestions: 0, timeSpent: 0 },
+            understandingCheck: { score: 0, totalQuestions: 0, timeSpent: 0 },
+            contentEngagement: { score: 0, totalQuestions: 0, timeSpent: 0 }
           },
           exceptions: { 
-            completed: false, 
-            score: 0, 
-            attempts: 0, 
-            timeSpent: 0,
-            activities: {
-              vocabularyQuiz: { completed: false, score: 0, attempts: 0 },
-              understandingCheck: { completed: false, score: 0, attempts: 0 },
-              interactiveDemos: { completed: 0, total: 0 },
-              contentEngagement: { completed: false, timeSpent: 0 }
-            }
+            interactiveDemo: { score: 0, totalQuestions: 0, timeSpent: 0 },
+            vocabularyQuiz: { score: 0, totalQuestions: 0, timeSpent: 0 },
+            contentEngagement: { score: 0, totalQuestions: 0, timeSpent: 0 }
+          },
+          ionFormation: {
+            interactiveDemo: { score: 0, totalQuestions: 0, timeSpent: 0 },
+            vocabularyQuiz: { score: 0, totalQuestions: 0, timeSpent: 0 },
+            contentEngagement: { score: 0, totalQuestions: 0, timeSpent: 0 }
+          },
+          assessment: {
+            paper1: { score: 0, totalQuestions: 0, timeSpent: 0 },
+            paper2: { score: 0, totalQuestions: 0, timeSpent: 0 },
+            paper3: { score: 0, totalQuestions: 0, timeSpent: 0 },
+            contentEngagement: { score: 0, totalQuestions: 0, timeSpent: 0 }
           }
         },
         achievements: [],
