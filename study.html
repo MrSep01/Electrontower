@@ -5295,6 +5295,62 @@
                         <div class="answer-space">
                             <textarea id="p2q1a" placeholder="Write configurations here..." rows="5"></textarea>
                         </div>
+                        
+                        <!-- Math Input Toolbar Toggle -->
+                        <button class="math-toolbar-toggle" id="toggle_p2q1a" onclick="toggleMathToolbar('p2q1a')">
+                            <span>⌨️</span>
+                            <span>Math Tools</span>
+                            <span class="toggle-icon">▼</span>
+                        </button>
+                        
+                        <!-- Math Input Toolbar - Collapsible -->
+                        <div class="math-toolbar" id="toolbar_p2q1a">
+                            <div class="math-toolbar-group">
+                                <h5>Numbers:</h5>
+                                <div class="math-symbols-grid">
+                                    <button class="math-btn" onclick="insertMathSymbol('0', 'p2q1a')">0</button>
+                                    <button class="math-btn" onclick="insertMathSymbol('1', 'p2q1a')">1</button>
+                                    <button class="math-btn" onclick="insertMathSymbol('2', 'p2q1a')">2</button>
+                                    <button class="math-btn" onclick="insertMathSymbol('3', 'p2q1a')">3</button>
+                                    <button class="math-btn" onclick="insertMathSymbol('4', 'p2q1a')">4</button>
+                                    <button class="math-btn" onclick="insertMathSymbol('5', 'p2q1a')">5</button>
+                                    <button class="math-btn" onclick="insertMathSymbol('6', 'p2q1a')">6</button>
+                                    <button class="math-btn" onclick="insertMathSymbol('7', 'p2q1a')">7</button>
+                                    <button class="math-btn" onclick="insertMathSymbol('8', 'p2q1a')">8</button>
+                                    <button class="math-btn" onclick="insertMathSymbol('9', 'p2q1a')">9</button>
+                                </div>
+                            </div>
+                            
+                            <div class="math-toolbar-group">
+                                <h5>Mode:</h5>
+                                <button class="math-btn" id="normalMode_p2q1a" onclick="setMathMode('normal', 'p2q1a')">Normal</button>
+                                <button class="math-btn" id="superscriptMode_p2q1a" onclick="setMathMode('superscript', 'p2q1a')">Superscript</button>
+                                <button class="math-btn" id="subscriptMode_p2q1a" onclick="setMathMode('subscript', 'p2q1a')">Subscript</button>
+                            </div>
+                            
+                            <div class="math-toolbar-group">
+                                <h5>Symbols:</h5>
+                                <div class="math-symbols-grid">
+                                    <button class="math-btn" onclick="insertMathSymbol('s', 'p2q1a')">s</button>
+                                    <button class="math-btn" onclick="insertMathSymbol('p', 'p2q1a')">p</button>
+                                    <button class="math-btn" onclick="insertMathSymbol('d', 'p2q1a')">d</button>
+                                    <button class="math-btn" onclick="insertMathSymbol('f', 'p2q1a')">f</button>
+                                    <button class="math-btn" onclick="insertMathSymbol('+', 'p2q1a')">+</button>
+                                    <button class="math-btn" onclick="insertMathSymbol('-', 'p2q1a')">-</button>
+                                    <button class="math-btn" onclick="insertMathSymbol('[', 'p2q1a')">[</button>
+                                    <button class="math-btn" onclick="insertMathSymbol(']', 'p2q1a')">]</button>
+                                    <button class="math-btn" onclick="insertMathSymbol('↑', 'p2q1a')">↑</button>
+                                    <button class="math-btn" onclick="insertMathSymbol('↓', 'p2q1a')">↓</button>
+                                </div>
+                            </div>
+                            
+                            <div class="math-toolbar-group">
+                                <h5>Actions:</h5>
+                                <button class="math-btn" onclick="clearMathInput('p2q1a')">Clear</button>
+                                <button class="math-btn" onclick="insertMathSymbol(' ', 'p2q1a')">Space</button>
+                                <button class="math-btn" onclick="insertMathSymbol('←', 'p2q1a')">←</button>
+                            </div>
+                        </div>
                         <button class="btn secondary" onclick="showMarkScheme('p2q1a')">Show Mark Scheme</button>
                         <div class="mark-scheme" id="p2q1a-scheme" style="display: none;">
                             <strong>Mark Scheme:</strong>
@@ -5310,6 +5366,62 @@
                         <p>Explain why these elements have exceptional electron configurations instead of following the standard Aufbau principle. Include specific reasons for each element.</p>
                         <div class="answer-space">
                             <textarea id="p2q1b" placeholder="Explain the stability factors..." rows="6"></textarea>
+                        </div>
+                        
+                        <!-- Math Input Toolbar Toggle -->
+                        <button class="math-toolbar-toggle" id="toggle_p2q1b" onclick="toggleMathToolbar('p2q1b')">
+                            <span>⌨️</span>
+                            <span>Math Tools</span>
+                            <span class="toggle-icon">▼</span>
+                        </button>
+                        
+                        <!-- Math Input Toolbar - Collapsible -->
+                        <div class="math-toolbar" id="toolbar_p2q1b">
+                            <div class="math-toolbar-group">
+                                <h5>Numbers:</h5>
+                                <div class="math-symbols-grid">
+                                    <button class="math-btn" onclick="insertMathSymbol('0', 'p2q1b')">0</button>
+                                    <button class="math-btn" onclick="insertMathSymbol('1', 'p2q1b')">1</button>
+                                    <button class="math-btn" onclick="insertMathSymbol('2', 'p2q1b')">2</button>
+                                    <button class="math-btn" onclick="insertMathSymbol('3', 'p2q1b')">3</button>
+                                    <button class="math-btn" onclick="insertMathSymbol('4', 'p2q1b')">4</button>
+                                    <button class="math-btn" onclick="insertMathSymbol('5', 'p2q1b')">5</button>
+                                    <button class="math-btn" onclick="insertMathSymbol('6', 'p2q1b')">6</button>
+                                    <button class="math-btn" onclick="insertMathSymbol('7', 'p2q1b')">7</button>
+                                    <button class="math-btn" onclick="insertMathSymbol('8', 'p2q1b')">8</button>
+                                    <button class="math-btn" onclick="insertMathSymbol('9', 'p2q1b')">9</button>
+                                </div>
+                            </div>
+                            
+                            <div class="math-toolbar-group">
+                                <h5>Mode:</h5>
+                                <button class="math-btn" id="normalMode_p2q1b" onclick="setMathMode('normal', 'p2q1b')">Normal</button>
+                                <button class="math-btn" id="superscriptMode_p2q1b" onclick="setMathMode('superscript', 'p2q1b')">Superscript</button>
+                                <button class="math-btn" id="subscriptMode_p2q1b" onclick="setMathMode('subscript', 'p2q1b')">Subscript</button>
+                            </div>
+                            
+                            <div class="math-toolbar-group">
+                                <h5>Symbols:</h5>
+                                <div class="math-symbols-grid">
+                                    <button class="math-btn" onclick="insertMathSymbol('s', 'p2q1b')">s</button>
+                                    <button class="math-btn" onclick="insertMathSymbol('p', 'p2q1b')">p</button>
+                                    <button class="math-btn" onclick="insertMathSymbol('d', 'p2q1b')">d</button>
+                                    <button class="math-btn" onclick="insertMathSymbol('f', 'p2q1b')">f</button>
+                                    <button class="math-btn" onclick="insertMathSymbol('+', 'p2q1b')">+</button>
+                                    <button class="math-btn" onclick="insertMathSymbol('-', 'p2q1b')">-</button>
+                                    <button class="math-btn" onclick="insertMathSymbol('[', 'p2q1b')">[</button>
+                                    <button class="math-btn" onclick="insertMathSymbol(']', 'p2q1b')">]</button>
+                                    <button class="math-btn" onclick="insertMathSymbol('↑', 'p2q1b')">↑</button>
+                                    <button class="math-btn" onclick="insertMathSymbol('↓', 'p2q1b')">↓</button>
+                                </div>
+                            </div>
+                            
+                            <div class="math-toolbar-group">
+                                <h5>Actions:</h5>
+                                <button class="math-btn" onclick="clearMathInput('p2q1b')">Clear</button>
+                                <button class="math-btn" onclick="insertMathSymbol(' ', 'p2q1b')">Space</button>
+                                <button class="math-btn" onclick="insertMathSymbol('←', 'p2q1b')">←</button>
+                            </div>
                         </div>
                         <button class="btn secondary" onclick="showMarkScheme('p2q1b')">Show Mark Scheme</button>
                         <div class="mark-scheme" id="p2q1b-scheme" style="display: none;">
@@ -5336,7 +5448,63 @@
                         <p><strong>(ii)</strong> Nickel (Ni) vs Copper (Cu)</p>
                         <p><strong>(iii)</strong> Palladium (Pd) vs Silver (Ag)</p>
                         <div class="answer-space">
-                            <textarea id="p2q2a" placeholder="Compare and explain differences..." rows="6"></textarea>
+                            <textarea id="p2q2a_2" placeholder="Compare and explain differences..." rows="6"></textarea>
+                        </div>
+                        
+                        <!-- Math Input Toolbar Toggle -->
+                        <button class="math-toolbar-toggle" id="toggle_p2q2a_2" onclick="toggleMathToolbar('p2q2a_2')">
+                            <span>⌨️</span>
+                            <span>Math Tools</span>
+                            <span class="toggle-icon">▼</span>
+                        </button>
+                        
+                        <!-- Math Input Toolbar - Collapsible -->
+                        <div class="math-toolbar" id="toolbar_p2q2a_2">
+                            <div class="math-toolbar-group">
+                                <h5>Numbers:</h5>
+                                <div class="math-symbols-grid">
+                                    <button class="math-btn" onclick="insertMathSymbol('0', 'p2q2a_2')">0</button>
+                                    <button class="math-btn" onclick="insertMathSymbol('1', 'p2q2a_2')">1</button>
+                                    <button class="math-btn" onclick="insertMathSymbol('2', 'p2q2a_2')">2</button>
+                                    <button class="math-btn" onclick="insertMathSymbol('3', 'p2q2a_2')">3</button>
+                                    <button class="math-btn" onclick="insertMathSymbol('4', 'p2q2a_2')">4</button>
+                                    <button class="math-btn" onclick="insertMathSymbol('5', 'p2q2a_2')">5</button>
+                                    <button class="math-btn" onclick="insertMathSymbol('6', 'p2q2a_2')">6</button>
+                                    <button class="math-btn" onclick="insertMathSymbol('7', 'p2q2a_2')">7</button>
+                                    <button class="math-btn" onclick="insertMathSymbol('8', 'p2q2a_2')">8</button>
+                                    <button class="math-btn" onclick="insertMathSymbol('9', 'p2q2a_2')">9</button>
+                                </div>
+                            </div>
+                            
+                            <div class="math-toolbar-group">
+                                <h5>Mode:</h5>
+                                <button class="math-btn" id="normalMode_p2q2a_2" onclick="setMathMode('normal', 'p2q2a_2')">Normal</button>
+                                <button class="math-btn" id="superscriptMode_p2q2a_2" onclick="setMathMode('superscript', 'p2q2a_2')">Superscript</button>
+                                <button class="math-btn" id="subscriptMode_p2q2a_2" onclick="setMathMode('subscript', 'p2q2a_2')">Subscript</button>
+                            </div>
+                            
+                            <div class="math-toolbar-group">
+                                <h5>Symbols:</h5>
+                                <div class="math-symbols-grid">
+                                    <button class="math-btn" onclick="insertMathSymbol('s', 'p2q2a_2')">s</button>
+                                    <button class="math-btn" onclick="insertMathSymbol('p', 'p2q2a_2')">p</button>
+                                    <button class="math-btn" onclick="insertMathSymbol('d', 'p2q2a_2')">d</button>
+                                    <button class="math-btn" onclick="insertMathSymbol('f', 'p2q2a_2')">f</button>
+                                    <button class="math-btn" onclick="insertMathSymbol('+', 'p2q2a_2')">+</button>
+                                    <button class="math-btn" onclick="insertMathSymbol('-', 'p2q2a_2')">-</button>
+                                    <button class="math-btn" onclick="insertMathSymbol('[', 'p2q2a_2')">[</button>
+                                    <button class="math-btn" onclick="insertMathSymbol(']', 'p2q2a_2')">]</button>
+                                    <button class="math-btn" onclick="insertMathSymbol('↑', 'p2q2a_2')">↑</button>
+                                    <button class="math-btn" onclick="insertMathSymbol('↓', 'p2q2a_2')">↓</button>
+                                </div>
+                            </div>
+                            
+                            <div class="math-toolbar-group">
+                                <h5>Actions:</h5>
+                                <button class="math-btn" onclick="clearMathInput('p2q2a_2')">Clear</button>
+                                <button class="math-btn" onclick="insertMathSymbol(' ', 'p2q2a_2')">Space</button>
+                                <button class="math-btn" onclick="insertMathSymbol('←', 'p2q2a_2')">←</button>
+                            </div>
                         </div>
                         <button class="btn secondary" onclick="showMarkScheme('p2q2a')">Show Mark Scheme</button>
                         <div class="mark-scheme" id="p2q2a-scheme" style="display: none;">
