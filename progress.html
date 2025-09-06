@@ -803,22 +803,29 @@
 
             updateOverallProgress() {
                 // Calculate completion based on activities for each concept
-                const completedConcepts = Object.values(this.progress.concepts).filter(concept => {
+                const completedConcepts = Object.entries(this.progress.concepts).filter(([key, concept]) => {
                     if (!concept.activities) return false;
                     
                     const activities = concept.activities;
-                    const vocabWeight = 0.2;
-                    const understandingWeight = 0.3;
-                    const interactiveWeight = 0.3;
-                    const engagementWeight = 0.2;
                     
-                    let completionScore = 0;
-                    if (activities.vocabularyQuiz.completed) completionScore += vocabWeight;
-                    if (activities.understandingCheck.completed) completionScore += understandingWeight;
-                    if (activities.interactiveDemos.completed > 0) completionScore += interactiveWeight;
-                    if (activities.contentEngagement.completed) completionScore += engagementWeight;
-                    
-                    return completionScore >= 0.7;
+                    // Special handling for overview concept - treat as single activity
+                    if (key === 'overview') {
+                        return activities.understandingCheck.completed;
+                    } else {
+                        // Standard calculation for other concepts
+                        const vocabWeight = 0.2;
+                        const understandingWeight = 0.3;
+                        const interactiveWeight = 0.3;
+                        const engagementWeight = 0.2;
+                        
+                        let completionScore = 0;
+                        if (activities.vocabularyQuiz.completed) completionScore += vocabWeight;
+                        if (activities.understandingCheck.completed) completionScore += understandingWeight;
+                        if (activities.interactiveDemos.completed > 0) completionScore += interactiveWeight;
+                        if (activities.contentEngagement.completed) completionScore += engagementWeight;
+                        
+                        return completionScore >= 0.7;
+                    }
                 }).length;
                 
                 const totalConcepts = Object.keys(this.concepts).length;
@@ -847,19 +854,29 @@
                     
                     if (progress.activities) {
                         const activities = progress.activities;
-                        const vocabWeight = 0.2;
-                        const understandingWeight = 0.3;
-                        const interactiveWeight = 0.3;
-                        const engagementWeight = 0.2;
                         
-                        let completionScore = 0;
-                        if (activities.vocabularyQuiz.completed) completionScore += vocabWeight;
-                        if (activities.understandingCheck.completed) completionScore += understandingWeight;
-                        if (activities.interactiveDemos.completed > 0) completionScore += interactiveWeight;
-                        if (activities.contentEngagement.completed) completionScore += engagementWeight;
-                        
-                        isCompleted = completionScore >= 0.7;
-                        activitiesCompleted = Math.round(completionScore * 4);
+                        // Special handling for overview concept - treat as single activity
+                        if (key === 'overview') {
+                            // For overview, completion is based on assessment completion
+                            isCompleted = activities.understandingCheck.completed;
+                            activitiesCompleted = isCompleted ? 1 : 0;
+                            totalActivities = 1;
+                        } else {
+                            // Standard calculation for other concepts
+                            const vocabWeight = 0.2;
+                            const understandingWeight = 0.3;
+                            const interactiveWeight = 0.3;
+                            const engagementWeight = 0.2;
+                            
+                            let completionScore = 0;
+                            if (activities.vocabularyQuiz.completed) completionScore += vocabWeight;
+                            if (activities.understandingCheck.completed) completionScore += understandingWeight;
+                            if (activities.interactiveDemos.completed > 0) completionScore += interactiveWeight;
+                            if (activities.contentEngagement.completed) completionScore += engagementWeight;
+                            
+                            isCompleted = completionScore >= 0.7;
+                            activitiesCompleted = Math.round(completionScore * 4);
+                        }
                     }
                     
                     if (isCompleted) {
@@ -983,18 +1000,25 @@
                 
                 // Update completion based on activities (compatible with study.html system)
                 const activities = progress.concepts[concept].activities;
-                const vocabWeight = 0.2;
-                const understandingWeight = 0.3;
-                const interactiveWeight = 0.3;
-                const engagementWeight = 0.2;
                 
-                let completionScore = 0;
-                if (activities.vocabularyQuiz.completed) completionScore += vocabWeight;
-                if (activities.understandingCheck.completed) completionScore += understandingWeight;
-                if (activities.interactiveDemos.completed > 0) completionScore += interactiveWeight;
-                if (activities.contentEngagement.completed) completionScore += engagementWeight;
-                
-                progress.concepts[concept].completed = completionScore >= 0.7;
+                // Special handling for overview concept - treat as single activity
+                if (concept === 'overview') {
+                    progress.concepts[concept].completed = activities.understandingCheck.completed;
+                } else {
+                    // Standard calculation for other concepts
+                    const vocabWeight = 0.2;
+                    const understandingWeight = 0.3;
+                    const interactiveWeight = 0.3;
+                    const engagementWeight = 0.2;
+                    
+                    let completionScore = 0;
+                    if (activities.vocabularyQuiz.completed) completionScore += vocabWeight;
+                    if (activities.understandingCheck.completed) completionScore += understandingWeight;
+                    if (activities.interactiveDemos.completed > 0) completionScore += interactiveWeight;
+                    if (activities.contentEngagement.completed) completionScore += engagementWeight;
+                    
+                    progress.concepts[concept].completed = completionScore >= 0.7;
+                }
                 
                 // Update streak
                 const today = new Date().toDateString();

@@ -9706,19 +9706,12 @@
             const overviewProgress = progress.concepts.overview;
             if (overviewProgress && overviewProgress.activities) {
                 const activities = overviewProgress.activities;
-                const vocabWeight = 0.2;
-                const understandingWeight = 0.3;
-                const interactiveWeight = 0.3;
-                const engagementWeight = 0.2;
                 
-                let completionScore = 0;
-                if (activities.vocabularyQuiz.completed) completionScore += vocabWeight;
-                if (activities.understandingCheck.completed) completionScore += understandingWeight;
-                if (activities.interactiveDemos.completed > 0) completionScore += interactiveWeight;
-                if (activities.contentEngagement.completed) completionScore += engagementWeight;
-                
-                const percentage = Math.round(completionScore * 100);
-                const activitiesCompleted = Math.round(completionScore * 4);
+                // Special handling for overview - treat as single activity
+                const isCompleted = activities.understandingCheck.completed;
+                const percentage = isCompleted ? 100 : 0;
+                const activitiesCompleted = isCompleted ? 1 : 0;
+                const totalActivities = 1;
                 
                 const tile = document.querySelector('.study-tile.overview');
                 if (tile) {
@@ -9749,7 +9742,7 @@
                         margin-top: 10px;
                         text-align: center;
                     `;
-                    progressDiv.innerHTML = `Progress: ${percentage}% (${activitiesCompleted}/4 activities)`;
+                    progressDiv.innerHTML = `Progress: ${percentage}% (${activitiesCompleted}/${totalActivities} activity)`;
                     tile.querySelector('.tile-header').appendChild(progressDiv);
                 }
             }
