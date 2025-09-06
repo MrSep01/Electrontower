@@ -817,6 +817,14 @@
             border-color: var(--danger);
         }
 
+        .core-slot {
+            background: var(--muted);
+            border-color: var(--muted);
+            color: var(--text-muted);
+            font-size: 0.8em;
+            font-weight: normal;
+        }
+
         /* Energy ordering: f (highest) → d → p → s (lowest) */
         .floor[data-n="2"] .wing-p { grid-row: 1; }
         .floor[data-n="2"] .wing-s { grid-row: 2; }
@@ -3310,12 +3318,12 @@
                     <h4>🔬 Cation Formation: Sodium (Na → Na⁺)</h4>
                     <div class="demo-layout">
                         <div class="building" id="sodiumBuilding">
-                            <!-- Shell n=3 (Highest Energy - Top) -->
+                            <!-- Valence Shell Only -->
                             <div class="floor" data-n="3">
-                                <div class="floor-label">Shell n=3 (Highest Energy)</div>
+                                <div class="floor-label">Valence Shell n=3 (Outer Electrons Only)</div>
                                 <div class="wings">
                                     <div class="wing wing-s" data-sub="3s">
-                                        <div class="wing-title">3s wing — <span class="mini">ℓ=0 (s)</span></div>
+                                        <div class="wing-title">3s orbital — <span class="mini">Valence electron</span></div>
                                         <div class="units">
                                             <div class="unit" data-wing="3s" data-index="0">
                                                 <div class="unit-label">3s</div>
@@ -3328,62 +3336,24 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- Shell n=2 -->
-                            <div class="floor" data-n="2">
-                                <div class="floor-label">Shell n=2</div>
+                            <!-- Core Electrons (Simplified) -->
+                            <div class="floor" data-n="core">
+                                <div class="floor-label">Core Electrons: [Ne] 1s² 2s² 2p⁶</div>
                                 <div class="wings">
-                                    <div class="wing wing-s" data-sub="2s">
-                                        <div class="wing-title">2s wing — <span class="mini">ℓ=0 (s)</span></div>
+                                    <div class="wing wing-core">
+                                        <div class="wing-title">Inner shells (not shown for clarity)</div>
                                         <div class="units">
-                                            <div class="unit" data-wing="2s" data-index="0">
-                                                <div class="unit-label">2s</div>
+                                            <div class="unit" data-wing="core" data-index="0">
+                                                <div class="unit-label">[Ne]</div>
                                                 <div class="slots">
-                                                    <div class="slot" data-slot="0" data-orbital="2s-1"></div>
-                                                    <div class="slot" data-slot="1" data-orbital="2s-2"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="wing wing-p" data-sub="2p">
-                                        <div class="wing-title">2p wing — <span class="mini">ℓ=1 (p)</span> <span class="degenerate-label">DEGENERATE</span></div>
-                                        <div class="units">
-                                            <div class="unit" data-wing="2p" data-index="0">
-                                                <div class="unit-label">2px</div>
-                                                <div class="slots">
-                                                    <div class="slot" data-slot="0" data-orbital="2p-1"></div>
-                                                    <div class="slot" data-slot="1" data-orbital="2p-2"></div>
-                                                </div>
-                                            </div>
-                                            <div class="unit" data-wing="2p" data-index="1">
-                                                <div class="unit-label">2py</div>
-                                                <div class="slots">
-                                                    <div class="slot" data-slot="0" data-orbital="2p-3"></div>
-                                                    <div class="slot" data-slot="1" data-orbital="2p-4"></div>
-                                                </div>
-                                            </div>
-                                            <div class="unit" data-wing="2p" data-index="2">
-                                                <div class="unit-label">2pz</div>
-                                                <div class="slots">
-                                                    <div class="slot" data-slot="0" data-orbital="2p-5"></div>
-                                                    <div class="slot" data-slot="1" data-orbital="2p-6"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Shell n=1 (Lowest Energy - Bottom) -->
-                            <div class="floor" data-n="1">
-                                <div class="floor-label">Shell n=1 (Lowest Energy)</div>
-                                <div class="wings">
-                                    <div class="wing wing-s" data-sub="1s">
-                                        <div class="wing-title">1s wing — <span class="mini">ℓ=0 (s)</span></div>
-                                        <div class="units">
-                                            <div class="unit" data-wing="1s" data-index="0">
-                                                <div class="unit-label">1s</div>
-                                                <div class="slots">
-                                                    <div class="slot" data-slot="0" data-orbital="1s-1"></div>
-                                                    <div class="slot" data-slot="1" data-orbital="1s-2"></div>
+                                                    <div class="slot core-slot">Filled</div>
+                                                    <div class="slot core-slot">Filled</div>
+                                                    <div class="slot core-slot">Filled</div>
+                                                    <div class="slot core-slot">Filled</div>
+                                                    <div class="slot core-slot">Filled</div>
+                                                    <div class="slot core-slot">Filled</div>
+                                                    <div class="slot core-slot">Filled</div>
+                                                    <div class="slot core-slot">Filled</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -3410,12 +3380,12 @@
                     <h4>⚡ Anion Formation: Chlorine (Cl → Cl⁻)</h4>
                     <div class="demo-layout">
                         <div class="building" id="chlorineBuilding">
-                            <!-- Shell n=3 (Highest Energy - Top) -->
+                            <!-- Valence Shell Only -->
                             <div class="floor" data-n="3">
-                                <div class="floor-label">Shell n=3 (Highest Energy)</div>
+                                <div class="floor-label">Valence Shell n=3 (Outer Electrons Only)</div>
                                 <div class="wings">
                                     <div class="wing wing-s" data-sub="3s">
-                                        <div class="wing-title">3s wing — <span class="mini">ℓ=0 (s)</span></div>
+                                        <div class="wing-title">3s orbital — <span class="mini">Valence electrons</span></div>
                                         <div class="units">
                                             <div class="unit" data-wing="3s" data-index="0">
                                                 <div class="unit-label">3s</div>
@@ -3427,7 +3397,7 @@
                                         </div>
                                     </div>
                                     <div class="wing wing-p" data-sub="3p">
-                                        <div class="wing-title">3p wing — <span class="mini">ℓ=1 (p)</span> <span class="degenerate-label">DEGENERATE</span></div>
+                                        <div class="wing-title">3p orbitals — <span class="mini">Valence electrons</span></div>
                                         <div class="units">
                                             <div class="unit" data-wing="3p" data-index="0">
                                                 <div class="unit-label">3px</div>
@@ -3454,62 +3424,24 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- Shell n=2 -->
-                            <div class="floor" data-n="2">
-                                <div class="floor-label">Shell n=2</div>
+                            <!-- Core Electrons (Simplified) -->
+                            <div class="floor" data-n="core">
+                                <div class="floor-label">Core Electrons: [Ne] 1s² 2s² 2p⁶</div>
                                 <div class="wings">
-                                    <div class="wing wing-s" data-sub="2s">
-                                        <div class="wing-title">2s wing — <span class="mini">ℓ=0 (s)</span></div>
+                                    <div class="wing wing-core">
+                                        <div class="wing-title">Inner shells (not shown for clarity)</div>
                                         <div class="units">
-                                            <div class="unit" data-wing="2s" data-index="0">
-                                                <div class="unit-label">2s</div>
+                                            <div class="unit" data-wing="core" data-index="0">
+                                                <div class="unit-label">[Ne]</div>
                                                 <div class="slots">
-                                                    <div class="slot" data-slot="0" data-orbital="2s-1"></div>
-                                                    <div class="slot" data-slot="1" data-orbital="2s-2"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="wing wing-p" data-sub="2p">
-                                        <div class="wing-title">2p wing — <span class="mini">ℓ=1 (p)</span> <span class="degenerate-label">DEGENERATE</span></div>
-                                        <div class="units">
-                                            <div class="unit" data-wing="2p" data-index="0">
-                                                <div class="unit-label">2px</div>
-                                                <div class="slots">
-                                                    <div class="slot" data-slot="0" data-orbital="2p-1"></div>
-                                                    <div class="slot" data-slot="1" data-orbital="2p-2"></div>
-                                                </div>
-                                            </div>
-                                            <div class="unit" data-wing="2p" data-index="1">
-                                                <div class="unit-label">2py</div>
-                                                <div class="slots">
-                                                    <div class="slot" data-slot="0" data-orbital="2p-3"></div>
-                                                    <div class="slot" data-slot="1" data-orbital="2p-4"></div>
-                                                </div>
-                                            </div>
-                                            <div class="unit" data-wing="2p" data-index="2">
-                                                <div class="unit-label">2pz</div>
-                                                <div class="slots">
-                                                    <div class="slot" data-slot="0" data-orbital="2p-5"></div>
-                                                    <div class="slot" data-slot="1" data-orbital="2p-6"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Shell n=1 (Lowest Energy - Bottom) -->
-                            <div class="floor" data-n="1">
-                                <div class="floor-label">Shell n=1 (Lowest Energy)</div>
-                                <div class="wings">
-                                    <div class="wing wing-s" data-sub="1s">
-                                        <div class="wing-title">1s wing — <span class="mini">ℓ=0 (s)</span></div>
-                                        <div class="units">
-                                            <div class="unit" data-wing="1s" data-index="0">
-                                                <div class="unit-label">1s</div>
-                                                <div class="slots">
-                                                    <div class="slot" data-slot="0" data-orbital="1s-1"></div>
-                                                    <div class="slot" data-slot="1" data-orbital="1s-2"></div>
+                                                    <div class="slot core-slot">Filled</div>
+                                                    <div class="slot core-slot">Filled</div>
+                                                    <div class="slot core-slot">Filled</div>
+                                                    <div class="slot core-slot">Filled</div>
+                                                    <div class="slot core-slot">Filled</div>
+                                                    <div class="slot core-slot">Filled</div>
+                                                    <div class="slot core-slot">Filled</div>
+                                                    <div class="slot core-slot">Filled</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -10839,12 +10771,14 @@
             if (actualConfig) actualConfig.textContent = 'Cl⁻: [Ne] 3s² 3p⁶';
 
             // Animate electron gain in 3p orbital
-            const slot3p6 = document.getElementById('cl3p6');
+            const slot3p6 = building.querySelector('[data-orbital="3p-6"]');
             if (slot3p6) {
                 setTimeout(() => {
                     slot3p6.textContent = '↓';
                     slot3p6.style.color = 'var(--success)';
                     slot3p6.style.fontWeight = 'bold';
+                    slot3p6.style.backgroundColor = '#51cf6620';
+                    slot3p6.style.border = '2px solid #51cf66';
                     
                     // Update configuration display
                     if (standardConfig) {
