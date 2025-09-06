@@ -1011,7 +1011,7 @@
                         <div class="achievement-title">${achievement.title}</div>
                         <div class="achievement-desc">${achievement.desc}</div>
                     `;
-                    
+
                     achievementGrid.appendChild(achievementItem);
                 });
                 
@@ -1170,6 +1170,42 @@
                     dashboard.updateAchievements();
                 }
             });
+        });
+
+        // Test function to check if sections are visible
+        function testProgressSections() {
+            console.log('🧪 Testing Progress Sections...');
+            
+            // Check if Study Statistics section exists
+            const statsSection = document.querySelector('.progress-card:nth-of-type(3)');
+            if (statsSection) {
+                console.log('✅ Study Statistics section found');
+                console.log('📊 Stats section HTML:', statsSection.outerHTML.substring(0, 200) + '...');
+            } else {
+                console.error('❌ Study Statistics section not found');
+            }
+            
+            // Check if Achievements section exists
+            const achievementsSection = document.querySelector('.progress-card:nth-of-type(4)');
+            if (achievementsSection) {
+                console.log('✅ Achievements section found');
+                console.log('🏆 Achievements section HTML:', achievementsSection.outerHTML.substring(0, 200) + '...');
+            } else {
+                console.error('❌ Achievements section not found');
+            }
+            
+            // Check all progress cards
+            const allCards = document.querySelectorAll('.progress-card');
+            console.log(`📋 Total progress cards found: ${allCards.length}`);
+            allCards.forEach((card, index) => {
+                const title = card.querySelector('.card-title');
+                console.log(`Card ${index + 1}: ${title ? title.textContent : 'No title'}`);
+            });
+        }
+
+        // Run test when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(testProgressSections, 1000);
         });
     </script>
 </body>
