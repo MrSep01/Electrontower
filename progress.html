@@ -783,14 +783,23 @@
                     }
                 };
                 
+                const assessmentConcept = {
+                    ...defaultConcept,
+                    activities: {
+                        ...defaultConcept.activities,
+                        paper1: { completed: false, score: 0, attempts: 0 },
+                        paper2: { completed: false, score: 0, attempts: 0 },
+                        paper3: { completed: false, score: 0, attempts: 0 }
+                    }
+                };
+                
                 return {
                     concepts: {
                         overview: { ...defaultConcept },
                         coreRules: { ...defaultConcept },
-                        sublevels: { ...defaultConcept },
                         exceptions: { ...defaultConcept },
                         ionFormation: { ...defaultConcept },
-                        assessment: { ...defaultConcept }
+                        assessment: { ...assessmentConcept }
                     },
                     achievements: [],
                     streak: 0,
@@ -1201,6 +1210,13 @@
                 const title = card.querySelector('.card-title');
                 console.log(`Card ${index + 1}: ${title ? title.textContent : 'No title'}`);
             });
+        }
+
+        // Function to reset progress data to ensure correct structure
+        function resetProgressData() {
+            console.log('🔄 Resetting progress data to ensure correct structure...');
+            localStorage.removeItem('electronTowerProgress');
+            console.log('✅ Progress data reset! Refresh the page to see all concepts and achievements.');
         }
 
         // Run test when page loads
