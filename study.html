@@ -2392,6 +2392,169 @@
 
 
 
+        /* ======= Overview Progress Tracking Styles ======= */
+        .progress-tracker {
+            margin-bottom: 20px;
+        }
+
+        .progress-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .progress-item:last-child {
+            border-bottom: none;
+        }
+
+        .progress-item.completed {
+            color: var(--success);
+        }
+
+        .progress-checkbox {
+            font-size: 18px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .progress-text {
+            color: var(--light);
+            font-size: 16px;
+        }
+
+        .overall-progress {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--secondary);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--success));
+            transition: width 0.5s ease;
+        }
+
+        .progress-text {
+            color: var(--light);
+            font-weight: 600;
+        }
+
+        /* ======= Overview Assessment Styles ======= */
+        .assessment-questions {
+            margin-bottom: 30px;
+        }
+
+        .question-card {
+            background: var(--secondary);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border);
+        }
+
+        .question-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .option-label {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            background: var(--primary);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .option-label:hover {
+            background: var(--accent);
+            transform: translateX(5px);
+        }
+
+        .option-label.selected {
+            border-color: var(--success);
+            background: var(--success);
+            color: var(--primary);
+        }
+
+        .option-label input[type="radio"] {
+            margin: 0;
+            accent-color: var(--success);
+        }
+
+        .option-text {
+            color: var(--light);
+            font-size: 16px;
+        }
+
+        .assessment-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .assessment-results {
+            background: var(--secondary);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            border: 2px solid var(--success);
+        }
+
+        .results-card h4 {
+            margin-bottom: 15px;
+        }
+
+        .score-display {
+            margin-bottom: 15px;
+        }
+
+        .score-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--success);
+        }
+
+        .completion-message {
+            color: var(--light);
+            font-size: 16px;
+        }
+
+        /* ======= Overview Tile Progress Styles ======= */
+        .tile-progress {
+            background: var(--success);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .tile-progress.incomplete {
+            background: var(--warning);
+        }
+
+        .tile-progress.not-started {
+            background: var(--neutral);
+        }
+
     </style>
     
     <!-- MathJax for electron configuration superscripts -->
@@ -2805,6 +2968,211 @@
                             <div class="importance-icon">🏗️</div>
                             <h4>Material Design</h4>
                             <p>Create new materials with desired properties</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Overview Progress Tracker -->
+                <div class="content-card" id="overviewProgressCard">
+                    <h3 style="color: var(--success); font-size: 24px; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+                        <span class="custom-emoji emoji-energy"></span>
+                        Overview Progress
+                    </h3>
+                    <div class="progress-tracker" id="overviewProgressTracker">
+                        <div class="progress-item" data-completed="false" id="progress-core-concepts">
+                            <span class="progress-checkbox">☐</span>
+                            <span class="progress-text">Read Core Concepts Overview</span>
+                        </div>
+                        <div class="progress-item" data-completed="false" id="progress-learning-objectives">
+                            <span class="progress-checkbox">☐</span>
+                            <span class="progress-text">Review Learning Objectives</span>
+                        </div>
+                        <div class="progress-item" data-completed="false" id="progress-importance">
+                            <span class="progress-checkbox">☐</span>
+                            <span class="progress-text">Understand Importance Section</span>
+                        </div>
+                        <div class="progress-item" data-completed="false" id="progress-assessment">
+                            <span class="progress-checkbox">☐</span>
+                            <span class="progress-text">Complete Overview Assessment</span>
+                        </div>
+                    </div>
+                    <div class="overall-progress" id="overviewOverallProgress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="overviewProgressFill" style="width: 0%"></div>
+                        </div>
+                        <span class="progress-text" id="overviewProgressText">0% Complete</span>
+                    </div>
+                    <div class="progress-actions" style="margin-top: 20px; text-align: center;">
+                        <button class="btn primary" onclick="showOverviewAssessment()" id="showAssessmentBtn">
+                            <span class="custom-emoji emoji-study"></span>
+                            Take Overview Assessment
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Overview Assessment Section -->
+                <div class="content-card" id="overviewAssessmentCard" style="display: none;">
+                    <h3 style="color: var(--accent); font-size: 24px; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+                        <span class="custom-emoji emoji-study"></span>
+                        Overview Assessment
+                    </h3>
+                    <p style="color: var(--light); margin-bottom: 20px;">
+                        Test your understanding of the overview content. Answer all questions to complete the overview section.
+                    </p>
+                    
+                    <div class="assessment-questions">
+                        <!-- Question 1 -->
+                        <div class="question-card" id="overviewQ1">
+                            <h4 style="color: var(--warning); margin-bottom: 15px;">Question 1: Core Principles</h4>
+                            <p style="color: var(--light); margin-bottom: 15px;">
+                                According to the Aufbau principle, electrons occupy orbitals in what order?
+                            </p>
+                            <div class="question-options">
+                                <label class="option-label">
+                                    <input type="radio" name="overviewQ1" value="a">
+                                    <span class="option-text">Highest energy first</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="overviewQ1" value="b">
+                                    <span class="option-text">Lowest energy first</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="overviewQ1" value="c">
+                                    <span class="option-text">Random order</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="overviewQ1" value="d">
+                                    <span class="option-text">Alphabetical order</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Question 2 -->
+                        <div class="question-card" id="overviewQ2">
+                            <h4 style="color: var(--warning); margin-bottom: 15px;">Question 2: Hund's Rule</h4>
+                            <p style="color: var(--light); margin-bottom: 15px;">
+                                In a set of degenerate orbitals, how should electrons be placed according to Hund's rule?
+                            </p>
+                            <div class="question-options">
+                                <label class="option-label">
+                                    <input type="radio" name="overviewQ2" value="a">
+                                    <span class="option-text">Pair electrons first, then fill singly</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="overviewQ2" value="b">
+                                    <span class="option-text">Place one electron in each orbital with same spin, then pair</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="overviewQ2" value="c">
+                                    <span class="option-text">Fill orbitals randomly</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="overviewQ2" value="d">
+                                    <span class="option-text">Fill orbitals in numerical order</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Question 3 -->
+                        <div class="question-card" id="overviewQ3">
+                            <h4 style="color: var(--warning); margin-bottom: 15px;">Question 3: Pauli Exclusion Principle</h4>
+                            <p style="color: var(--light); margin-bottom: 15px;">
+                                What is the maximum number of electrons that can occupy a single orbital?
+                            </p>
+                            <div class="question-options">
+                                <label class="option-label">
+                                    <input type="radio" name="overviewQ3" value="a">
+                                    <span class="option-text">1 electron</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="overviewQ3" value="b">
+                                    <span class="option-text">2 electrons</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="overviewQ3" value="c">
+                                    <span class="option-text">4 electrons</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="overviewQ3" value="d">
+                                    <span class="option-text">8 electrons</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Question 4 -->
+                        <div class="question-card" id="overviewQ4">
+                            <h4 style="color: var(--warning); margin-bottom: 15px;">Question 4: Exceptions</h4>
+                            <p style="color: var(--light); margin-bottom: 15px;">
+                                Which elements are known for having exceptions to the normal electron configuration order?
+                            </p>
+                            <div class="question-options">
+                                <label class="option-label">
+                                    <input type="radio" name="overviewQ4" value="a">
+                                    <span class="option-text">Sodium and Potassium</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="overviewQ4" value="b">
+                                    <span class="option-text">Chromium and Copper</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="overviewQ4" value="c">
+                                    <span class="option-text">Helium and Neon</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="overviewQ4" value="d">
+                                    <span class="option-text">All elements have exceptions</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Question 5 -->
+                        <div class="question-card" id="overviewQ5">
+                            <h4 style="color: var(--warning); margin-bottom: 15px;">Question 5: Ion Formation</h4>
+                            <p style="color: var(--light); margin-bottom: 15px;">
+                                When a sodium atom (Na) forms an ion, what happens to its electron configuration?
+                            </p>
+                            <div class="question-options">
+                                <label class="option-label">
+                                    <input type="radio" name="overviewQ5" value="a">
+                                    <span class="option-text">Gains an electron</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="overviewQ5" value="b">
+                                    <span class="option-text">Loses an electron</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="overviewQ5" value="c">
+                                    <span class="option-text">Gains two electrons</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="overviewQ5" value="d">
+                                    <span class="option-text">No change occurs</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="assessment-actions">
+                        <button class="btn primary" onclick="submitOverviewAssessment()" id="submitOverviewBtn">
+                            <span class="custom-emoji emoji-check"></span>
+                            Submit Assessment
+                        </button>
+                        <button class="btn secondary" onclick="resetOverviewAssessment()" id="resetOverviewBtn">
+                            <span class="custom-emoji emoji-refresh"></span>
+                            Reset Answers
+                        </button>
+                    </div>
+
+                    <div class="assessment-results" id="overviewAssessmentResults" style="display: none;">
+                        <div class="results-card">
+                            <h4 style="color: var(--success); margin-bottom: 15px;">Assessment Complete!</h4>
+                            <div class="score-display">
+                                <span class="score-text">Score: </span>
+                                <span class="score-value" id="overviewScore">0/5</span>
+                            </div>
+                            <div class="completion-message" id="overviewCompletionMessage">
+                                Great job! You've completed the overview assessment.
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -8285,6 +8653,211 @@
             document.getElementById('coreRulesContent').style.display = 'none';
             document.querySelector('.study-tiles').style.display = 'none';
             document.querySelector('.page-title').style.display = 'none';
+            
+            // Initialize overview progress tracking
+            initializeOverviewProgress();
+        }
+
+        // ======= Overview Progress Tracking Functions =======
+
+        function initializeOverviewProgress() {
+            // Load saved progress
+            const savedProgress = localStorage.getItem('electronTowerProgress');
+            let progress = savedProgress ? JSON.parse(savedProgress) : getDefaultProgress();
+            
+            // Initialize overview concept if not exists
+            if (!progress.concepts.overview) {
+                progress.concepts.overview = {
+                    completed: false,
+                    score: 0,
+                    attempts: 0,
+                    timeSpent: 0,
+                    activities: {
+                        vocabularyQuiz: { completed: false, score: 0, attempts: 0 },
+                        understandingCheck: { completed: false, score: 0, attempts: 0 },
+                        interactiveDemos: { completed: 0, total: 0 },
+                        contentEngagement: { completed: false, timeSpent: 0 }
+                    }
+                };
+                localStorage.setItem('electronTowerProgress', JSON.stringify(progress));
+            }
+            
+            // Update progress display
+            updateOverviewProgressDisplay();
+            
+            // Track content engagement
+            updateProgress('overview', 'contentEngagement', 0, 0, 1);
+        }
+
+        function updateOverviewProgressDisplay() {
+            const savedProgress = localStorage.getItem('electronTowerProgress');
+            const progress = savedProgress ? JSON.parse(savedProgress) : getDefaultProgress();
+            const overviewProgress = progress.concepts.overview;
+            
+            if (!overviewProgress) return;
+            
+            // Calculate completion based on activities
+            const activities = overviewProgress.activities;
+            let completedCount = 0;
+            const totalCount = 4;
+            
+            // Check each progress item
+            const progressItems = [
+                'progress-core-concepts',
+                'progress-learning-objectives', 
+                'progress-importance',
+                'progress-assessment'
+            ];
+            
+            // Mark core concepts as completed (user is viewing the page)
+            if (activities.contentEngagement.completed) {
+                markProgressItemCompleted('progress-core-concepts');
+                completedCount++;
+            }
+            
+            // Check if assessment is completed
+            if (activities.understandingCheck.completed) {
+                markProgressItemCompleted('progress-assessment');
+                completedCount++;
+            }
+            
+            // Update progress bar
+            const percentage = Math.round((completedCount / totalCount) * 100);
+            updateProgressBar(percentage);
+            
+            // Update tile progress
+            updateTileProgressIndicators();
+        }
+
+        function markProgressItemCompleted(itemId) {
+            const item = document.getElementById(itemId);
+            if (item) {
+                item.setAttribute('data-completed', 'true');
+                item.classList.add('completed');
+                const checkbox = item.querySelector('.progress-checkbox');
+                if (checkbox) {
+                    checkbox.textContent = '✅';
+                }
+            }
+        }
+
+        function updateProgressBar(percentage) {
+            const progressFill = document.getElementById('overviewProgressFill');
+            const progressText = document.getElementById('overviewProgressText');
+            
+            if (progressFill) {
+                progressFill.style.width = percentage + '%';
+            }
+            
+            if (progressText) {
+                progressText.textContent = percentage + '% Complete';
+            }
+        }
+
+        // ======= Overview Assessment Functions =======
+
+        function showOverviewAssessment() {
+            document.getElementById('overviewAssessmentCard').style.display = 'block';
+            document.getElementById('showAssessmentBtn').style.display = 'none';
+            markProgressItemCompleted('progress-assessment');
+            updateOverviewProgressDisplay();
+        }
+
+        function submitOverviewAssessment() {
+            // Get answers
+            const answers = {
+                q1: document.querySelector('input[name="overviewQ1"]:checked')?.value,
+                q2: document.querySelector('input[name="overviewQ2"]:checked')?.value,
+                q3: document.querySelector('input[name="overviewQ3"]:checked')?.value,
+                q4: document.querySelector('input[name="overviewQ4"]:checked')?.value,
+                q5: document.querySelector('input[name="overviewQ5"]:checked')?.value
+            };
+            
+            // Check if all questions answered
+            const unanswered = Object.values(answers).some(answer => !answer);
+            if (unanswered) {
+                alert('Please answer all questions before submitting.');
+                return;
+            }
+            
+            // Correct answers
+            const correctAnswers = {
+                q1: 'b', // Lowest energy first
+                q2: 'b', // Place one electron in each orbital with same spin, then pair
+                q3: 'b', // 2 electrons
+                q4: 'b', // Chromium and Copper
+                q5: 'b'  // Loses an electron
+            };
+            
+            // Calculate score
+            let score = 0;
+            Object.keys(answers).forEach(question => {
+                if (answers[question] === correctAnswers[question]) {
+                    score++;
+                }
+            });
+            
+            // Update progress
+            updateProgress('overview', 'understandingCheck', score, 5, 0);
+            
+            // Show results
+            showAssessmentResults(score, 5);
+            
+            // Mark assessment as completed
+            markProgressItemCompleted('progress-assessment');
+            updateOverviewProgressDisplay();
+        }
+
+        function showAssessmentResults(score, total) {
+            const resultsDiv = document.getElementById('overviewAssessmentResults');
+            const scoreElement = document.getElementById('overviewScore');
+            const messageElement = document.getElementById('overviewCompletionMessage');
+            
+            if (scoreElement) {
+                scoreElement.textContent = `${score}/${total}`;
+            }
+            
+            if (messageElement) {
+                if (score >= 4) {
+                    messageElement.textContent = 'Excellent! You have a strong understanding of the overview content.';
+                } else if (score >= 3) {
+                    messageElement.textContent = 'Good job! You understand most of the overview content.';
+                } else {
+                    messageElement.textContent = 'Consider reviewing the overview content to improve your understanding.';
+                }
+            }
+            
+            if (resultsDiv) {
+                resultsDiv.style.display = 'block';
+            }
+            
+            // Hide submit button and show reset
+            const submitBtn = document.getElementById('submitOverviewBtn');
+            const resetBtn = document.getElementById('resetOverviewBtn');
+            
+            if (submitBtn) submitBtn.style.display = 'none';
+            if (resetBtn) resetBtn.style.display = 'inline-flex';
+        }
+
+        function resetOverviewAssessment() {
+            // Clear all radio button selections
+            const radioButtons = document.querySelectorAll('#overviewAssessmentCard input[type="radio"]');
+            radioButtons.forEach(radio => {
+                radio.checked = false;
+            });
+            
+            // Hide results
+            const resultsDiv = document.getElementById('overviewAssessmentResults');
+            if (resultsDiv) {
+                resultsDiv.style.display = 'none';
+            }
+            
+            // Show submit button and hide reset
+            const submitBtn = document.getElementById('submitOverviewBtn');
+            const resetBtn = document.getElementById('resetOverviewBtn');
+            
+            if (submitBtn) submitBtn.style.display = 'inline-flex';
+            if (resetBtn) resetBtn.style.display = 'none';
         }
 
         // ======= Core Rules Interactive Functions =======
@@ -9096,6 +9669,58 @@
                     progressDiv.className = 'tile-progress';
                     progressDiv.style.cssText = `
                         background: ${percentage > 0 ? 'var(--success)' : 'var(--neutral)'};
+                        color: white;
+                        padding: 5px 10px;
+                        border-radius: 15px;
+                        font-size: 0.8rem;
+                        margin-top: 10px;
+                        text-align: center;
+                    `;
+                    progressDiv.innerHTML = `Progress: ${percentage}% (${activitiesCompleted}/4 activities)`;
+                    tile.querySelector('.tile-header').appendChild(progressDiv);
+                }
+            }
+
+            // Update Overview tile
+            const overviewProgress = progress.concepts.overview;
+            if (overviewProgress && overviewProgress.activities) {
+                const activities = overviewProgress.activities;
+                const vocabWeight = 0.2;
+                const understandingWeight = 0.3;
+                const interactiveWeight = 0.3;
+                const engagementWeight = 0.2;
+                
+                let completionScore = 0;
+                if (activities.vocabularyQuiz.completed) completionScore += vocabWeight;
+                if (activities.understandingCheck.completed) completionScore += understandingWeight;
+                if (activities.interactiveDemos.completed > 0) completionScore += interactiveWeight;
+                if (activities.contentEngagement.completed) completionScore += engagementWeight;
+                
+                const percentage = Math.round(completionScore * 100);
+                const activitiesCompleted = Math.round(completionScore * 4);
+                
+                const tile = document.querySelector('.study-tile.overview');
+                if (tile) {
+                    // Remove existing progress div if it exists
+                    const existingProgress = tile.querySelector('.tile-progress');
+                    if (existingProgress) {
+                        existingProgress.remove();
+                    }
+                    
+                    // Create new progress div
+                    const progressDiv = document.createElement('div');
+                    progressDiv.className = 'tile-progress';
+                    
+                    let progressClass = 'not-started';
+                    if (percentage > 0 && percentage < 100) {
+                        progressClass = 'incomplete';
+                    } else if (percentage >= 100) {
+                        progressClass = 'completed';
+                    }
+                    
+                    progressDiv.classList.add(progressClass);
+                    progressDiv.style.cssText = `
+                        background: ${percentage >= 100 ? 'var(--success)' : percentage > 0 ? 'var(--warning)' : 'var(--neutral)'};
                         color: white;
                         padding: 5px 10px;
                         border-radius: 15px;
