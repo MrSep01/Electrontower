@@ -1106,6 +1106,180 @@
             justify-content: center;
         }
 
+        /* Math Input Toolbar Styles */
+        .math-toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding: 15px;
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin: 10px 0;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .math-toolbar-group {
+            display: flex;
+            gap: 5px;
+            align-items: center;
+            padding: 5px 10px;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        .math-toolbar-group h5 {
+            margin: 0 8px 0 0;
+            font-size: 12px;
+            color: #666;
+            font-weight: 600;
+        }
+
+        .math-btn {
+            padding: 6px 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background: white;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            min-width: 30px;
+            text-align: center;
+        }
+
+        .math-btn:hover {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        .math-btn.active {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        .math-btn.superscript {
+            font-size: 12px;
+            vertical-align: super;
+        }
+
+        .math-btn.subscript {
+            font-size: 12px;
+            vertical-align: sub;
+        }
+
+        .math-input-container {
+            position: relative;
+            width: 100%;
+        }
+
+        .math-input-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            font-family: 'Courier New', monospace;
+            font-size: 18px;
+            padding: 10px;
+            border: 2px solid transparent;
+            border-radius: 8px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            z-index: 1;
+        }
+
+        .math-input-hidden {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            font-family: 'Courier New', monospace;
+            font-size: 18px;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            background: transparent;
+            z-index: 2;
+        }
+
+        .math-symbols-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(40px, 1fr));
+            gap: 5px;
+            max-width: 300px;
+        }
+
+        .math-functions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+            gap: 5px;
+            max-width: 400px;
+        }
+
+        .subscript-superscript-controls {
+            display: flex;
+            gap: 5px;
+            align-items: center;
+        }
+
+        .subscript-superscript-controls input {
+            width: 40px;
+            padding: 4px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        .math-help {
+            background: #e3f2fd;
+            border: 1px solid #2196f3;
+            border-radius: 6px;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 14px;
+        }
+
+        .math-help h6 {
+            margin: 0 0 8px 0;
+            color: #1976d2;
+            font-weight: 600;
+        }
+
+        .math-help ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .math-help li {
+            margin: 4px 0;
+        }
+
+        /* Responsive design for math toolbar */
+        @media (max-width: 768px) {
+            .math-toolbar {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .math-toolbar-group {
+                justify-content: center;
+            }
+            
+            .math-symbols-grid,
+            .math-functions-grid {
+                max-width: 100%;
+            }
+        }
+
         /* Responsive design for drawing tools */
         @media (max-width: 768px) {
             .drawing-toolbar {
@@ -4011,13 +4185,59 @@
                     Enter an element to see its electron configuration
                 </div>
 
+                <!-- Enhanced Math Input for Custom Configuration -->
                 <div style="margin: 20px 0;">
                     <label for="customConfig" style="display: block; margin-bottom: 10px; font-weight: 600; color: var(--accent);">
                         Custom Electron Configuration:
                     </label>
-                    <input type="text" id="customConfig" class="electron-config-input" 
-                           placeholder="e.g., 1s²2s²2p⁶3s²3p⁶4s²3d⁶" 
-                           oninput="updateConfigPreview()">
+                    
+                    <!-- Math Input Toolbar for Custom Config -->
+                    <div class="math-toolbar">
+                        <div class="math-toolbar-group">
+                            <h5>Quick Input:</h5>
+                            <button class="math-btn" onclick="insertMathSymbol('1s²')">1s²</button>
+                            <button class="math-btn" onclick="insertMathSymbol('2s²')">2s²</button>
+                            <button class="math-btn" onclick="insertMathSymbol('2p⁶')">2p⁶</button>
+                            <button class="math-btn" onclick="insertMathSymbol('3s²')">3s²</button>
+                            <button class="math-btn" onclick="insertMathSymbol('3p⁶')">3p⁶</button>
+                            <button class="math-btn" onclick="insertMathSymbol('4s²')">4s²</button>
+                            <button class="math-btn" onclick="insertMathSymbol('3d¹⁰')">3d¹⁰</button>
+                            <button class="math-btn" onclick="insertMathSymbol('[Ar]')">[Ar]</button>
+                            <button class="math-btn" onclick="insertMathSymbol('[Ne]')">[Ne]</button>
+                            <button class="math-btn" onclick="insertMathSymbol('[Kr]')">[Kr]</button>
+                        </div>
+                        
+                        <div class="math-toolbar-group">
+                            <h5>Superscripts:</h5>
+                            <div class="math-symbols-grid">
+                                <button class="math-btn superscript" onclick="insertMathSymbol('¹')">¹</button>
+                                <button class="math-btn superscript" onclick="insertMathSymbol('²')">²</button>
+                                <button class="math-btn superscript" onclick="insertMathSymbol('³')">³</button>
+                                <button class="math-btn superscript" onclick="insertMathSymbol('⁴')">⁴</button>
+                                <button class="math-btn superscript" onclick="insertMathSymbol('⁵')">⁵</button>
+                                <button class="math-btn superscript" onclick="insertMathSymbol('⁶')">⁶</button>
+                                <button class="math-btn superscript" onclick="insertMathSymbol('⁷')">⁷</button>
+                                <button class="math-btn superscript" onclick="insertMathSymbol('⁸')">⁸</button>
+                                <button class="math-btn superscript" onclick="insertMathSymbol('⁹')">⁹</button>
+                                <button class="math-btn superscript" onclick="insertMathSymbol('¹⁰')">¹⁰</button>
+                            </div>
+                        </div>
+                        
+                        <div class="math-toolbar-group">
+                            <h5>Actions:</h5>
+                            <button class="math-btn" onclick="clearCustomConfig()">Clear</button>
+                            <button class="math-btn" onclick="insertMathSymbol(' ')">Space</button>
+                        </div>
+                    </div>
+                    
+                    <div class="math-input-container">
+                        <div class="math-input-overlay" id="customConfigOverlay"></div>
+                        <input type="text" id="customConfig" class="math-input-hidden" 
+                               placeholder="e.g., 1s²2s²2p⁶3s²3p⁶4s²3d⁶" 
+                               oninput="updateMathInput('customConfig', 'customConfigOverlay', 'customConfigPreview')"
+                               onkeydown="handleMathInputKeydown(event, 'customConfig', 'customConfigOverlay', 'customConfigPreview')">
+                    </div>
+                    
                     <div class="electron-config-preview" id="customConfigPreview">
                         Your configuration will appear here with proper formatting
                     </div>
@@ -4074,14 +4294,120 @@
                                 <p style="margin: 0; font-size: 14px; color: #666;">Use the tools below to write proper electron configurations with superscripts</p>
                             </div>
                             
+                            <!-- Math Input Toolbar -->
+                            <div class="math-toolbar">
+                                <div class="math-toolbar-group">
+                                    <h5>Numbers:</h5>
+                                    <div class="math-symbols-grid">
+                                        <button class="math-btn" onclick="insertMathSymbol('0')">0</button>
+                                        <button class="math-btn" onclick="insertMathSymbol('1')">1</button>
+                                        <button class="math-btn" onclick="insertMathSymbol('2')">2</button>
+                                        <button class="math-btn" onclick="insertMathSymbol('3')">3</button>
+                                        <button class="math-btn" onclick="insertMathSymbol('4')">4</button>
+                                        <button class="math-btn" onclick="insertMathSymbol('5')">5</button>
+                                        <button class="math-btn" onclick="insertMathSymbol('6')">6</button>
+                                        <button class="math-btn" onclick="insertMathSymbol('7')">7</button>
+                                        <button class="math-btn" onclick="insertMathSymbol('8')">8</button>
+                                        <button class="math-btn" onclick="insertMathSymbol('9')">9</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="math-toolbar-group">
+                                    <h5>Letters:</h5>
+                                    <div class="math-symbols-grid">
+                                        <button class="math-btn" onclick="insertMathSymbol('s')">s</button>
+                                        <button class="math-btn" onclick="insertMathSymbol('p')">p</button>
+                                        <button class="math-btn" onclick="insertMathSymbol('d')">d</button>
+                                        <button class="math-btn" onclick="insertMathSymbol('f')">f</button>
+                                        <button class="math-btn" onclick="insertMathSymbol('x')">x</button>
+                                        <button class="math-btn" onclick="insertMathSymbol('y')">y</button>
+                                        <button class="math-btn" onclick="insertMathSymbol('z')">z</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="math-toolbar-group">
+                                    <h5>Superscripts:</h5>
+                                    <div class="math-symbols-grid">
+                                        <button class="math-btn superscript" onclick="insertMathSymbol('⁰')">⁰</button>
+                                        <button class="math-btn superscript" onclick="insertMathSymbol('¹')">¹</button>
+                                        <button class="math-btn superscript" onclick="insertMathSymbol('²')">²</button>
+                                        <button class="math-btn superscript" onclick="insertMathSymbol('³')">³</button>
+                                        <button class="math-btn superscript" onclick="insertMathSymbol('⁴')">⁴</button>
+                                        <button class="math-btn superscript" onclick="insertMathSymbol('⁵')">⁵</button>
+                                        <button class="math-btn superscript" onclick="insertMathSymbol('⁶')">⁶</button>
+                                        <button class="math-btn superscript" onclick="insertMathSymbol('⁷')">⁷</button>
+                                        <button class="math-btn superscript" onclick="insertMathSymbol('⁸')">⁸</button>
+                                        <button class="math-btn superscript" onclick="insertMathSymbol('⁹')">⁹</button>
+                                        <button class="math-btn superscript" onclick="insertMathSymbol('¹⁰')">¹⁰</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="math-toolbar-group">
+                                    <h5>Subscripts:</h5>
+                                    <div class="math-symbols-grid">
+                                        <button class="math-btn subscript" onclick="insertMathSymbol('₀')">₀</button>
+                                        <button class="math-btn subscript" onclick="insertMathSymbol('₁')">₁</button>
+                                        <button class="math-btn subscript" onclick="insertMathSymbol('₂')">₂</button>
+                                        <button class="math-btn subscript" onclick="insertMathSymbol('₃')">₃</button>
+                                        <button class="math-btn subscript" onclick="insertMathSymbol('₄')">₄</button>
+                                        <button class="math-btn subscript" onclick="insertMathSymbol('₅')">₅</button>
+                                        <button class="math-btn subscript" onclick="insertMathSymbol('₆')">₆</button>
+                                        <button class="math-btn subscript" onclick="insertMathSymbol('₇')">₇</button>
+                                        <button class="math-btn subscript" onclick="insertMathSymbol('₈')">₈</button>
+                                        <button class="math-btn subscript" onclick="insertMathSymbol('₉')">₉</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="math-toolbar-group">
+                                    <h5>Symbols:</h5>
+                                    <div class="math-symbols-grid">
+                                        <button class="math-btn" onclick="insertMathSymbol('+')">+</button>
+                                        <button class="math-btn" onclick="insertMathSymbol('-')">-</button>
+                                        <button class="math-btn" onclick="insertMathSymbol('±')">±</button>
+                                        <button class="math-btn" onclick="insertMathSymbol('→')">→</button>
+                                        <button class="math-btn" onclick="insertMathSymbol('↑')">↑</button>
+                                        <button class="math-btn" onclick="insertMathSymbol('↓')">↓</button>
+                                        <button class="math-btn" onclick="insertMathSymbol('↗')">↗</button>
+                                        <button class="math-btn" onclick="insertMathSymbol('↘')">↘</button>
+                                        <button class="math-btn" onclick="insertMathSymbol('[')">[</button>
+                                        <button class="math-btn" onclick="insertMathSymbol(']')">]</button>
+                                        <button class="math-btn" onclick="insertMathSymbol('(')">(</button>
+                                        <button class="math-btn" onclick="insertMathSymbol(')')">)</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="math-toolbar-group">
+                                    <h5>Actions:</h5>
+                                    <button class="math-btn" onclick="clearCurrentInput()">Clear</button>
+                                    <button class="math-btn" onclick="insertMathSymbol(' ')">Space</button>
+                                    <button class="math-btn" onclick="insertMathSymbol('←')">←</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Math Help -->
+                            <div class="math-help">
+                                <h6>💡 Quick Tips:</h6>
+                                <ul>
+                                    <li><strong>Superscripts:</strong> Use ¹²³⁴⁵⁶⁷⁸⁹⁰ for electron counts (e.g., 1s²)</li>
+                                    <li><strong>Subscripts:</strong> Use ₁₂₃₄₅₆₇₈₉₀ for atomic numbers (e.g., ₂₄Cr)</li>
+                                    <li><strong>Arrows:</strong> Use ↑↓ for electron spin, → for electron flow</li>
+                                    <li><strong>Ions:</strong> Use + and - for charges (e.g., Na⁺, Cl⁻)</li>
+                                    <li><strong>Brackets:</strong> Use [Ar] for noble gas notation</li>
+                                </ul>
+                            </div>
+                            
                             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 15px 0;">
                                 <div>
                                     <label style="display: block; margin-bottom: 8px; font-weight: 600; color: var(--accent);">
                                         Sodium (Na) Configuration:
                                     </label>
-                                    <input type="text" id="naConfig" class="electron-config-input" 
-                                           placeholder="e.g., 1s²2s²2p⁶3s¹" 
-                                           oninput="updateConfigPreview('naConfig', 'naPreview')">
+                                    <div class="math-input-container">
+                                        <div class="math-input-overlay" id="naOverlay"></div>
+                                        <input type="text" id="naConfig" class="math-input-hidden" 
+                                               placeholder="e.g., 1s²2s²2p⁶3s¹" 
+                                               oninput="updateMathInput('naConfig', 'naOverlay', 'naPreview')"
+                                               onkeydown="handleMathInputKeydown(event, 'naConfig', 'naOverlay', 'naPreview')">
+                                    </div>
                                     <div class="electron-config-preview" id="naPreview" style="min-height: 40px; font-size: 16px;">
                                         Your configuration will appear here
                                     </div>
@@ -4091,9 +4417,13 @@
                                     <label style="display: block; margin-bottom: 8px; font-weight: 600; color: var(--accent);">
                                         Chlorine (Cl) Configuration:
                                     </label>
-                                    <input type="text" id="clConfig" class="electron-config-input" 
-                                           placeholder="e.g., 1s²2s²2p⁶3s²3p⁵" 
-                                           oninput="updateConfigPreview('clConfig', 'clPreview')">
+                                    <div class="math-input-container">
+                                        <div class="math-input-overlay" id="clOverlay"></div>
+                                        <input type="text" id="clConfig" class="math-input-hidden" 
+                                               placeholder="e.g., 1s²2s²2p⁶3s²3p⁵" 
+                                               oninput="updateMathInput('clConfig', 'clOverlay', 'clPreview')"
+                                               onkeydown="handleMathInputKeydown(event, 'clConfig', 'clOverlay', 'clPreview')">
+                                    </div>
                                     <div class="electron-config-preview" id="clPreview" style="min-height: 40px; font-size: 16px;">
                                         Your configuration will appear here
                                     </div>
@@ -9565,7 +9895,95 @@
             saveQuestionDrawingState(questionId);
         }
 
-        // ======= Question-Specific Electron Configuration Functions =======
+        // ======= Enhanced Math Input Functions =======
+        let currentMathInput = null;
+
+        function insertMathSymbol(symbol) {
+            if (currentMathInput) {
+                const input = document.getElementById(currentMathInput);
+                if (input) {
+                    const start = input.selectionStart;
+                    const end = input.selectionEnd;
+                    const value = input.value;
+                    
+                    // Handle special symbols
+                    if (symbol === '←') {
+                        // Backspace
+                        if (start > 0) {
+                            input.value = value.substring(0, start - 1) + value.substring(end);
+                            input.setSelectionRange(start - 1, start - 1);
+                        }
+                    } else {
+                        // Insert symbol
+                        input.value = value.substring(0, start) + symbol + value.substring(end);
+                        input.setSelectionRange(start + symbol.length, start + symbol.length);
+                    }
+                    
+                    // Update display
+                    const overlayId = currentMathInput.replace('Config', 'Overlay');
+                    const previewId = currentMathInput.replace('Config', 'Preview');
+                    updateMathInput(currentMathInput, overlayId, previewId);
+                }
+            }
+        }
+
+        function clearCurrentInput() {
+            if (currentMathInput) {
+                const input = document.getElementById(currentMathInput);
+                if (input) {
+                    input.value = '';
+                    const overlayId = currentMathInput.replace('Config', 'Overlay');
+                    const previewId = currentMathInput.replace('Config', 'Preview');
+                    updateMathInput(currentMathInput, overlayId, previewId);
+                }
+            }
+        }
+
+        function updateMathInput(inputId, overlayId, previewId) {
+            const input = document.getElementById(inputId);
+            const overlay = document.getElementById(overlayId);
+            const preview = document.getElementById(previewId);
+            
+            if (!input || !overlay || !preview) return;
+            
+            const value = input.value;
+            
+            // Update overlay with formatted text
+            overlay.textContent = value || input.placeholder;
+            
+            // Update preview with MathJax
+            if (value.trim()) {
+                preview.innerHTML = `$${value}$`;
+                // Re-render MathJax
+                if (window.MathJax) {
+                    MathJax.typesetPromise([preview]);
+                }
+            } else {
+                preview.innerHTML = 'Your configuration will appear here';
+            }
+        }
+
+        function handleMathInputKeydown(event, inputId, overlayId, previewId) {
+            currentMathInput = inputId;
+            
+            // Handle special key combinations
+            if (event.ctrlKey || event.metaKey) {
+                switch(event.key) {
+                    case 'v':
+                        // Paste - update after paste
+                        setTimeout(() => updateMathInput(inputId, overlayId, previewId), 10);
+                        break;
+                    case 'z':
+                        event.preventDefault();
+                        // Undo functionality could be added here
+                        break;
+                }
+            }
+            
+            // Update display on any key press
+            setTimeout(() => updateMathInput(inputId, overlayId, previewId), 10);
+        }
+
         function updateConfigPreview(inputId, previewId) {
             const input = document.getElementById(inputId);
             const preview = document.getElementById(previewId);
@@ -9603,6 +10021,14 @@
                     updateConfigPreview(id, id.replace('Config', 'Preview'));
                 }
             });
+        }
+
+        function clearCustomConfig() {
+            const input = document.getElementById('customConfig');
+            if (input) {
+                input.value = '';
+                updateMathInput('customConfig', 'customConfigOverlay', 'customConfigPreview');
+            }
         }
 
         // Initialize question drawing canvases when they become visible
