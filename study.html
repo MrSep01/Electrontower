@@ -1125,6 +1125,14 @@
             display: flex;
         }
 
+        .question-buttons {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+
         .math-toolbar-toggle {
             display: flex;
             align-items: center;
@@ -1139,7 +1147,7 @@
             font-size: 14px;
             font-weight: 500;
             transition: all 0.3s ease;
-            margin: 10px 0;
+            margin: 0;
         }
 
         .math-toolbar-toggle:hover {
@@ -4334,12 +4342,18 @@
                             <textarea id="q1a" placeholder="Write your answers here..." rows="3"></textarea>
                         </div>
                         
-                        <!-- Math Input Toolbar Toggle -->
-                        <button class="math-toolbar-toggle" id="toggle_q1a" onclick="toggleMathToolbar('q1a')">
-                            <span>⌨️</span>
-                            <span>Math Tools</span>
-                            <span class="toggle-icon">▼</span>
-                        </button>
+                        <!-- Question Buttons Container -->
+                        <div class="question-buttons">
+                            <!-- Math Input Toolbar Toggle -->
+                            <button class="math-toolbar-toggle" id="toggle_q1a" onclick="toggleMathToolbar('q1a')">
+                                <span>⌨️</span>
+                                <span>Math Tools</span>
+                                <span class="toggle-icon">▼</span>
+                            </button>
+                            
+                            <!-- Mark Scheme Button -->
+                            <button class="btn secondary" onclick="showMarkScheme('q1a')">Show Mark Scheme</button>
+                        </div>
                         
                         <!-- Math Input Toolbar - Collapsible -->
                         <div class="math-toolbar" id="toolbar_q1a">
@@ -4389,7 +4403,6 @@
                                 <button class="math-btn" onclick="insertMathSymbol('←', 'q1a')">←</button>
                             </div>
                         </div>
-                        <button class="btn secondary" onclick="showMarkScheme('q1a')">Show Mark Scheme</button>
                         <div class="mark-scheme" id="q1a-scheme" style="display: none;">
                             <strong>Mark Scheme:</strong>
                             <p><strong>M1:</strong> Na: 1s² 2s² 2p⁶ 3s¹ (1 mark)</p>
@@ -4459,12 +4472,18 @@
                             <textarea id="q1b" placeholder="Additional written explanation (optional)..." rows="3"></textarea>
                         </div>
                         
-                        <!-- Math Input Toolbar Toggle -->
-                        <button class="math-toolbar-toggle" id="toggle_q1b" onclick="toggleMathToolbar('q1b')">
-                            <span>⌨️</span>
-                            <span>Math Tools</span>
-                            <span class="toggle-icon">▼</span>
-                        </button>
+                        <!-- Question Buttons Container -->
+                        <div class="question-buttons">
+                            <!-- Math Input Toolbar Toggle -->
+                            <button class="math-toolbar-toggle" id="toggle_q1b" onclick="toggleMathToolbar('q1b')">
+                                <span>⌨️</span>
+                                <span>Math Tools</span>
+                                <span class="toggle-icon">▼</span>
+                            </button>
+                            
+                            <!-- Mark Scheme Button -->
+                            <button class="btn secondary" onclick="showMarkScheme('q1b')">Show Mark Scheme</button>
+                        </div>
                         
                         <!-- Math Input Toolbar - Collapsible -->
                         <div class="math-toolbar" id="toolbar_q1b">
@@ -4514,7 +4533,6 @@
                                 <button class="math-btn" onclick="insertMathSymbol('←', 'q1b')">←</button>
                             </div>
                         </div>
-                        <button class="btn secondary" onclick="showMarkScheme('q1b')">Show Mark Scheme</button>
                         <div class="mark-scheme" id="q1b-scheme" style="display: none;">
                             <strong>Mark Scheme:</strong>
                             <p><strong>M1:</strong> Three separate 2p orbitals shown (1 mark)</p>
@@ -4534,12 +4552,18 @@
                             <textarea id="q1c" placeholder="Explain each principle..." rows="6"></textarea>
                         </div>
                         
-                        <!-- Math Input Toolbar Toggle -->
-                        <button class="math-toolbar-toggle" id="toggle_q1c" onclick="toggleMathToolbar('q1c')">
-                            <span>⌨️</span>
-                            <span>Math Tools</span>
-                            <span class="toggle-icon">▼</span>
-                        </button>
+                        <!-- Question Buttons Container -->
+                        <div class="question-buttons">
+                            <!-- Math Input Toolbar Toggle -->
+                            <button class="math-toolbar-toggle" id="toggle_q1c" onclick="toggleMathToolbar('q1c')">
+                                <span>⌨️</span>
+                                <span>Math Tools</span>
+                                <span class="toggle-icon">▼</span>
+                            </button>
+                            
+                            <!-- Mark Scheme Button -->
+                            <button class="btn secondary" onclick="showMarkScheme('q1c')">Show Mark Scheme</button>
+                        </div>
                         
                         <!-- Math Input Toolbar - Collapsible -->
                         <div class="math-toolbar" id="toolbar_q1c">
@@ -4589,7 +4613,6 @@
                                 <button class="math-btn" onclick="insertMathSymbol('←', 'q1c')">←</button>
                             </div>
                         </div>
-                        <button class="btn secondary" onclick="showMarkScheme('q1c')">Show Mark Scheme</button>
                         <div class="mark-scheme" id="q1c-scheme" style="display: none;">
                             <strong>Mark Scheme:</strong>
                             <p><strong>M1:</strong> Aufbau: Electrons occupy lowest energy orbitals first (1 mark)</p>
@@ -4615,12 +4638,18 @@
                             <textarea id="p2q2a" placeholder="Write configurations here..." rows="4"></textarea>
                         </div>
                         
-                        <!-- Math Input Toolbar Toggle -->
-                        <button class="math-toolbar-toggle" id="toggle_p2q2a" onclick="toggleMathToolbar('p2q2a')">
-                            <span>⌨️</span>
-                            <span>Math Tools</span>
-                            <span class="toggle-icon">▼</span>
-                        </button>
+                        <!-- Question Buttons Container -->
+                        <div class="question-buttons">
+                            <!-- Math Input Toolbar Toggle -->
+                            <button class="math-toolbar-toggle" id="toggle_p2q2a" onclick="toggleMathToolbar('p2q2a')">
+                                <span>⌨️</span>
+                                <span>Math Tools</span>
+                                <span class="toggle-icon">▼</span>
+                            </button>
+                            
+                            <!-- Mark Scheme Button -->
+                            <button class="btn secondary" onclick="showMarkScheme('p2q2a')">Show Mark Scheme</button>
+                        </div>
                         
                         <!-- Math Input Toolbar - Collapsible -->
                         <div class="math-toolbar" id="toolbar_p2q2a">
@@ -4670,7 +4699,6 @@
                                 <button class="math-btn" onclick="insertMathSymbol('←', 'p2q2a')">←</button>
                             </div>
                         </div>
-                        <button class="btn secondary" onclick="showMarkScheme('p2q2a')">Show Mark Scheme</button>
                         <div class="mark-scheme" id="p2q2a-scheme" style="display: none;">
                             <strong>Mark Scheme:</strong>
                             <p><strong>M1:</strong> Sc: [Ar] 4s² 3d¹ (1 mark)</p>
