@@ -10629,17 +10629,36 @@
                 slot.className = 'slot'; // Reset all classes
             });
 
-            // Restore original electron configuration for Sodium (Na: [Ne] 3s¹)
-            // Only populate the 3s orbital since that's what's visible in the HTML
+            // Restore original electron configuration for Sodium (Na: 1s² 2s² 2p⁶ 3s¹)
+            // Populate the 2s, 2p, and 3s orbitals that are visible in the HTML
+            const slot2s1 = building.querySelector('[data-orbital="2s-1"]');
+            const slot2s2 = building.querySelector('[data-orbital="2s-2"]');
+            const slot2p1 = building.querySelector('[data-orbital="2p-1"]');
+            const slot2p2 = building.querySelector('[data-orbital="2p-2"]');
+            const slot2p3 = building.querySelector('[data-orbital="2p-3"]');
+            const slot2p4 = building.querySelector('[data-orbital="2p-4"]');
+            const slot2p5 = building.querySelector('[data-orbital="2p-5"]');
+            const slot2p6 = building.querySelector('[data-orbital="2p-6"]');
             const slot3s1 = building.querySelector('[data-orbital="3s-1"]');
 
-            console.log('Restoring Sodium electron configuration (Na: [Ne] 3s¹)...');
+            console.log('Restoring Sodium electron configuration (Na: 1s² 2s² 2p⁶ 3s¹)...');
+            // Fill 2s orbital (2 electrons)
+            if (slot2s1) { slot2s1.textContent = '↑'; slot2s1.style.color = '#51cf66'; slot2s1.style.fontWeight = 'bold'; }
+            if (slot2s2) { slot2s2.textContent = '↓'; slot2s2.style.color = '#51cf66'; slot2s2.style.fontWeight = 'bold'; }
+            // Fill 2p orbital (6 electrons)
+            if (slot2p1) { slot2p1.textContent = '↑'; slot2p1.style.color = '#51cf66'; slot2p1.style.fontWeight = 'bold'; }
+            if (slot2p2) { slot2p2.textContent = '↓'; slot2p2.style.color = '#51cf66'; slot2p2.style.fontWeight = 'bold'; }
+            if (slot2p3) { slot2p3.textContent = '↑'; slot2p3.style.color = '#51cf66'; slot2p3.style.fontWeight = 'bold'; }
+            if (slot2p4) { slot2p4.textContent = '↓'; slot2p4.style.color = '#51cf66'; slot2p4.style.fontWeight = 'bold'; }
+            if (slot2p5) { slot2p5.textContent = '↑'; slot2p5.style.color = '#51cf66'; slot2p5.style.fontWeight = 'bold'; }
+            if (slot2p6) { slot2p6.textContent = '↓'; slot2p6.style.color = '#51cf66'; slot2p6.style.fontWeight = 'bold'; }
+            // Fill 3s orbital (1 electron - valence)
             if (slot3s1) { 
                 slot3s1.textContent = '↑'; 
                 slot3s1.style.color = '#51cf66'; 
                 slot3s1.style.fontWeight = 'bold'; 
             }
-            console.log('✅ Sodium electron configuration restored: [Ne] 3s¹');
+            console.log('✅ Sodium electron configuration restored: 1s² 2s² 2p⁶ 3s¹');
 
             // Reset configuration display styling
             if (standardConfig) {
