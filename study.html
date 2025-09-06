@@ -900,6 +900,234 @@
             font-size: 14px;
         }
 
+        /* ======= Drawing Tools Styles ======= */
+        .drawing-tools-container {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            border: 2px solid var(--accent);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .drawing-tools-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .drawing-tools-header h3 {
+            color: var(--accent);
+            font-size: 24px;
+            margin: 0 0 10px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .drawing-canvas-container {
+            position: relative;
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            margin: 20px 0;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        #drawingCanvas {
+            display: block;
+            cursor: crosshair;
+            touch-action: none;
+            background: white;
+        }
+
+        .drawing-toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .drawing-tool {
+            padding: 8px 16px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .drawing-tool:hover {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        .drawing-tool.active {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        .drawing-tool input[type="range"] {
+            width: 80px;
+            margin: 0 5px;
+        }
+
+        .drawing-tool input[type="color"] {
+            width: 30px;
+            height: 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .drawing-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
+        .drawing-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .drawing-btn.primary {
+            background: var(--accent);
+            color: white;
+        }
+
+        .drawing-btn.primary:hover {
+            background: var(--accent-dark);
+            transform: translateY(-2px);
+        }
+
+        .drawing-btn.secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .drawing-btn.secondary:hover {
+            background: #5a6268;
+        }
+
+        .drawing-btn.danger {
+            background: #dc3545;
+            color: white;
+        }
+
+        .drawing-btn.danger:hover {
+            background: #c82333;
+        }
+
+        .drawing-status {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .drawing-templates {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .drawing-template {
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .drawing-template:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .drawing-template h4 {
+            margin: 0 0 10px 0;
+            color: var(--accent);
+            font-size: 16px;
+        }
+
+        .drawing-template p {
+            margin: 0;
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* MathJax styling for electron configuration */
+        .electron-config-input {
+            font-family: 'Courier New', monospace;
+            font-size: 18px;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            width: 100%;
+            margin: 10px 0;
+        }
+
+        .electron-config-preview {
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            text-align: center;
+            font-size: 20px;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Responsive design for drawing tools */
+        @media (max-width: 768px) {
+            .drawing-toolbar {
+                flex-direction: column;
+                gap: 8px;
+            }
+            
+            .drawing-tool {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            #drawingCanvas {
+                width: 100%;
+                height: 300px;
+            }
+            
+            .drawing-templates {
+                grid-template-columns: 1fr;
+            }
+        }
+
         /* ======= Paper Assessment Styles ===== */
         .paper-timer {
             background: rgba(239, 68, 68, 0.1);
@@ -1940,6 +2168,20 @@
 
 
     </style>
+    
+    <!-- MathJax for electron configuration superscripts -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            options: {
+                skipHtmlTags: ['script', 'style', 'textarea', 'pre']
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
     <!-- ======= Header (Consistent with main app) ======= -->
@@ -3651,6 +3893,133 @@
                             <li><strong>Explanations:</strong> Use precise scientific terminology</li>
                             <li><strong>Units:</strong> Always include appropriate units in numerical answers</li>
                         </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ======= Drawing Tools Section ======= -->
+            <div class="drawing-tools-container">
+                <div class="drawing-tools-header">
+                    <h3>
+                        <span class="custom-emoji emoji-pencil"></span>
+                        Interactive Drawing & Writing Tools
+                    </h3>
+                    <p>Draw orbital diagrams, write electron configurations, and sketch molecular structures with touch support for tablets</p>
+                </div>
+
+                <!-- Drawing Canvas -->
+                <div class="drawing-canvas-container">
+                    <div class="drawing-toolbar">
+                        <div class="drawing-tool active" data-tool="pencil">
+                            <span>✏️</span>
+                            <span>Pencil</span>
+                        </div>
+                        <div class="drawing-tool" data-tool="brush">
+                            <span>🖌️</span>
+                            <span>Brush</span>
+                        </div>
+                        <div class="drawing-tool" data-tool="eraser">
+                            <span>🧹</span>
+                            <span>Eraser</span>
+                        </div>
+                        <div class="drawing-tool" data-tool="shapes">
+                            <span>🔷</span>
+                            <span>Shapes</span>
+                        </div>
+                        <div class="drawing-tool">
+                            <span>Size:</span>
+                            <input type="range" id="brushSize" min="1" max="20" value="3">
+                            <span id="brushSizeValue">3</span>
+                        </div>
+                        <div class="drawing-tool">
+                            <span>Color:</span>
+                            <input type="color" id="brushColor" value="#000000">
+                        </div>
+                    </div>
+                    <canvas id="drawingCanvas" width="800" height="400"></canvas>
+                </div>
+
+                <!-- Drawing Actions -->
+                <div class="drawing-actions">
+                    <button class="drawing-btn primary" onclick="saveDrawing()">
+                        <span>💾</span>
+                        Save Drawing
+                    </button>
+                    <button class="drawing-btn secondary" onclick="undoDrawing()">
+                        <span>↶</span>
+                        Undo
+                    </button>
+                    <button class="drawing-btn secondary" onclick="redoDrawing()">
+                        <span>↷</span>
+                        Redo
+                    </button>
+                    <button class="drawing-btn danger" onclick="clearDrawing()">
+                        <span>🗑️</span>
+                        Clear
+                    </button>
+                </div>
+
+                <!-- Drawing Status -->
+                <div class="drawing-status" id="drawingStatus">
+                    Ready to draw! Use your finger or stylus on tablets.
+                </div>
+
+                <!-- Drawing Templates -->
+                <div class="drawing-templates">
+                    <div class="drawing-template" onclick="loadTemplate('orbital')">
+                        <h4>🔬 Orbital Diagram</h4>
+                        <p>Template for drawing electron orbital diagrams</p>
+                    </div>
+                    <div class="drawing-template" onclick="loadTemplate('lewis')">
+                        <h4>⚛️ Lewis Structure</h4>
+                        <p>Template for drawing Lewis dot structures</p>
+                    </div>
+                    <div class="drawing-template" onclick="loadTemplate('molecular')">
+                        <h4>🧪 Molecular Geometry</h4>
+                        <p>Template for 3D molecular shapes</p>
+                    </div>
+                    <div class="drawing-template" onclick="loadTemplate('energy')">
+                        <h4>⚡ Energy Level Diagram</h4>
+                        <p>Template for energy level diagrams</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ======= Electron Configuration Input ======= -->
+            <div class="drawing-tools-container">
+                <div class="drawing-tools-header">
+                    <h3>
+                        <span class="custom-emoji emoji-nucleus"></span>
+                        Electron Configuration Writer
+                    </h3>
+                    <p>Write electron configurations with proper superscripts and formatting</p>
+                </div>
+
+                <div style="margin: 20px 0;">
+                    <label for="elementInput" style="display: block; margin-bottom: 10px; font-weight: 600; color: var(--accent);">
+                        Element Symbol or Name:
+                    </label>
+                    <input type="text" id="elementInput" placeholder="e.g., Fe, Carbon, 26" 
+                           style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px;">
+                    <button class="drawing-btn primary" onclick="generateElectronConfig()" style="margin-top: 10px;">
+                        <span>⚛️</span>
+                        Generate Configuration
+                    </button>
+                </div>
+
+                <div class="electron-config-preview" id="electronConfigPreview">
+                    Enter an element to see its electron configuration
+                </div>
+
+                <div style="margin: 20px 0;">
+                    <label for="customConfig" style="display: block; margin-bottom: 10px; font-weight: 600; color: var(--accent);">
+                        Custom Electron Configuration:
+                    </label>
+                    <input type="text" id="customConfig" class="electron-config-input" 
+                           placeholder="e.g., 1s²2s²2p⁶3s²3p⁶4s²3d⁶" 
+                           oninput="updateConfigPreview()">
+                    <div class="electron-config-preview" id="customConfigPreview">
+                        Your configuration will appear here with proper formatting
                     </div>
                 </div>
             </div>
@@ -8355,6 +8724,438 @@
             }
 
         });
+
+        // ======= Drawing Tools Functions =======
+        let drawingCanvas, drawingCtx;
+        let isDrawing = false;
+        let currentTool = 'pencil';
+        let drawingHistory = [];
+        let historyIndex = -1;
+        let lastX = 0, lastY = 0;
+
+        // Initialize drawing canvas when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeDrawingCanvas();
+            setupDrawingEventListeners();
+        });
+
+        function initializeDrawingCanvas() {
+            drawingCanvas = document.getElementById('drawingCanvas');
+            if (!drawingCanvas) return;
+            
+            drawingCtx = drawingCanvas.getContext('2d');
+            drawingCtx.lineCap = 'round';
+            drawingCtx.lineJoin = 'round';
+            
+            // Set initial drawing state
+            updateDrawingSettings();
+            
+            // Save initial blank state
+            saveDrawingState();
+        }
+
+        function setupDrawingEventListeners() {
+            if (!drawingCanvas) return;
+
+            // Mouse events
+            drawingCanvas.addEventListener('mousedown', startDrawing);
+            drawingCanvas.addEventListener('mousemove', draw);
+            drawingCanvas.addEventListener('mouseup', stopDrawing);
+            drawingCanvas.addEventListener('mouseout', stopDrawing);
+
+            // Touch events for tablets
+            drawingCanvas.addEventListener('touchstart', handleTouchStart, { passive: false });
+            drawingCanvas.addEventListener('touchmove', handleTouchMove, { passive: false });
+            drawingCanvas.addEventListener('touchend', handleTouchEnd, { passive: false });
+
+            // Tool selection
+            document.querySelectorAll('.drawing-tool[data-tool]').forEach(tool => {
+                tool.addEventListener('click', function() {
+                    selectDrawingTool(this.dataset.tool);
+                });
+            });
+
+            // Brush size slider
+            const brushSizeSlider = document.getElementById('brushSize');
+            if (brushSizeSlider) {
+                brushSizeSlider.addEventListener('input', function() {
+                    document.getElementById('brushSizeValue').textContent = this.value;
+                    updateDrawingSettings();
+                });
+            }
+
+            // Color picker
+            const brushColorPicker = document.getElementById('brushColor');
+            if (brushColorPicker) {
+                brushColorPicker.addEventListener('change', updateDrawingSettings);
+            }
+        }
+
+        function startDrawing(e) {
+            isDrawing = true;
+            const rect = drawingCanvas.getBoundingClientRect();
+            lastX = e.clientX - rect.left;
+            lastY = e.clientY - rect.top;
+            
+            if (currentTool === 'pencil' || currentTool === 'brush') {
+                drawingCtx.beginPath();
+                drawingCtx.moveTo(lastX, lastY);
+            }
+            
+            updateDrawingStatus('Drawing...');
+        }
+
+        function draw(e) {
+            if (!isDrawing) return;
+            
+            const rect = drawingCanvas.getBoundingClientRect();
+            const currentX = e.clientX - rect.left;
+            const currentY = e.clientY - rect.top;
+
+            if (currentTool === 'pencil' || currentTool === 'brush') {
+                drawingCtx.lineTo(currentX, currentY);
+                drawingCtx.stroke();
+            } else if (currentTool === 'eraser') {
+                drawingCtx.globalCompositeOperation = 'destination-out';
+                drawingCtx.lineTo(currentX, currentY);
+                drawingCtx.stroke();
+                drawingCtx.globalCompositeOperation = 'source-over';
+            }
+
+            lastX = currentX;
+            lastY = currentY;
+        }
+
+        function stopDrawing() {
+            if (isDrawing) {
+                isDrawing = false;
+                saveDrawingState();
+                updateDrawingStatus('Drawing saved. Ready to continue.');
+            }
+        }
+
+        function handleTouchStart(e) {
+            e.preventDefault();
+            const touch = e.touches[0];
+            const rect = drawingCanvas.getBoundingClientRect();
+            lastX = touch.clientX - rect.left;
+            lastY = touch.clientY - rect.top;
+            startDrawing({ clientX: touch.clientX, clientY: touch.clientY });
+        }
+
+        function handleTouchMove(e) {
+            e.preventDefault();
+            if (!isDrawing) return;
+            const touch = e.touches[0];
+            draw({ clientX: touch.clientX, clientY: touch.clientY });
+        }
+
+        function handleTouchEnd(e) {
+            e.preventDefault();
+            stopDrawing();
+        }
+
+        function selectDrawingTool(tool) {
+            currentTool = tool;
+            
+            // Update active tool
+            document.querySelectorAll('.drawing-tool[data-tool]').forEach(t => {
+                t.classList.remove('active');
+            });
+            document.querySelector(`[data-tool="${tool}"]`).classList.add('active');
+            
+            // Update cursor
+            drawingCanvas.style.cursor = tool === 'eraser' ? 'grab' : 'crosshair';
+            
+            updateDrawingStatus(`Selected: ${tool.charAt(0).toUpperCase() + tool.slice(1)} tool`);
+        }
+
+        function updateDrawingSettings() {
+            if (!drawingCtx) return;
+            
+            const brushSize = document.getElementById('brushSize')?.value || 3;
+            const brushColor = document.getElementById('brushColor')?.value || '#000000';
+            
+            drawingCtx.lineWidth = brushSize;
+            drawingCtx.strokeStyle = brushColor;
+        }
+
+        function saveDrawingState() {
+            if (!drawingCanvas) return;
+            
+            const imageData = drawingCtx.getImageData(0, 0, drawingCanvas.width, drawingCanvas.height);
+            
+            // Remove any states after current index (for redo functionality)
+            drawingHistory = drawingHistory.slice(0, historyIndex + 1);
+            
+            // Add new state
+            drawingHistory.push(imageData);
+            historyIndex++;
+            
+            // Limit history size
+            if (drawingHistory.length > 20) {
+                drawingHistory.shift();
+                historyIndex--;
+            }
+        }
+
+        function undoDrawing() {
+            if (historyIndex > 0) {
+                historyIndex--;
+                drawingCtx.putImageData(drawingHistory[historyIndex], 0, 0);
+                updateDrawingStatus('Undone. Ready to continue.');
+            } else {
+                updateDrawingStatus('Nothing to undo.');
+            }
+        }
+
+        function redoDrawing() {
+            if (historyIndex < drawingHistory.length - 1) {
+                historyIndex++;
+                drawingCtx.putImageData(drawingHistory[historyIndex], 0, 0);
+                updateDrawingStatus('Redone. Ready to continue.');
+            } else {
+                updateDrawingStatus('Nothing to redo.');
+            }
+        }
+
+        function clearDrawing() {
+            if (confirm('Are you sure you want to clear the drawing?')) {
+                drawingCtx.clearRect(0, 0, drawingCanvas.width, drawingCanvas.height);
+                saveDrawingState();
+                updateDrawingStatus('Drawing cleared. Ready to start fresh.');
+            }
+        }
+
+        function saveDrawing() {
+            if (!drawingCanvas) return;
+            
+            const link = document.createElement('a');
+            link.download = `electron-configuration-drawing-${Date.now()}.png`;
+            link.href = drawingCanvas.toDataURL();
+            link.click();
+            
+            updateDrawingStatus('Drawing saved as PNG file!');
+        }
+
+        function loadTemplate(templateType) {
+            if (!drawingCanvas || !drawingCtx) return;
+            
+            // Clear current drawing
+            drawingCtx.clearRect(0, 0, drawingCanvas.width, drawingCanvas.height);
+            
+            // Draw template based on type
+            switch(templateType) {
+                case 'orbital':
+                    drawOrbitalTemplate();
+                    break;
+                case 'lewis':
+                    drawLewisTemplate();
+                    break;
+                case 'molecular':
+                    drawMolecularTemplate();
+                    break;
+                case 'energy':
+                    drawEnergyTemplate();
+                    break;
+            }
+            
+            saveDrawingState();
+            updateDrawingStatus(`Loaded ${templateType} template. Ready to customize.`);
+        }
+
+        function drawOrbitalTemplate() {
+            drawingCtx.strokeStyle = '#333';
+            drawingCtx.lineWidth = 2;
+            
+            // Draw orbital boxes
+            const startX = 50;
+            const startY = 100;
+            const boxWidth = 40;
+            const boxHeight = 30;
+            const spacing = 50;
+            
+            // 1s orbital
+            drawingCtx.strokeRect(startX, startY, boxWidth, boxHeight);
+            drawingCtx.fillText('1s', startX + 15, startY + 20);
+            
+            // 2s orbital
+            drawingCtx.strokeRect(startX + spacing, startY, boxWidth, boxHeight);
+            drawingCtx.fillText('2s', startX + spacing + 15, startY + 20);
+            
+            // 2p orbitals
+            for (let i = 0; i < 3; i++) {
+                const x = startX + (spacing * 2) + (i * spacing);
+                drawingCtx.strokeRect(x, startY, boxWidth, boxHeight);
+                drawingCtx.fillText(`2p${i === 0 ? 'x' : i === 1 ? 'y' : 'z'}`, x + 10, startY + 20);
+            }
+            
+            // Add labels
+            drawingCtx.font = '16px Arial';
+            drawingCtx.fillText('Orbital Diagram Template', startX, startY - 20);
+            drawingCtx.fillText('Draw electrons as arrows ↑ or ↓', startX, startY + 80);
+        }
+
+        function drawLewisTemplate() {
+            drawingCtx.strokeStyle = '#333';
+            drawingCtx.lineWidth = 2;
+            
+            const centerX = drawingCanvas.width / 2;
+            const centerY = drawingCanvas.height / 2;
+            const radius = 60;
+            
+            // Draw central atom
+            drawingCtx.beginPath();
+            drawingCtx.arc(centerX, centerY, 20, 0, 2 * Math.PI);
+            drawingCtx.stroke();
+            drawingCtx.fillText('X', centerX - 5, centerY + 5);
+            
+            // Draw bonding positions
+            const positions = [
+                { x: centerX, y: centerY - radius },
+                { x: centerX + radius, y: centerY },
+                { x: centerX, y: centerY + radius },
+                { x: centerX - radius, y: centerY }
+            ];
+            
+            positions.forEach(pos => {
+                drawingCtx.beginPath();
+                drawingCtx.arc(pos.x, pos.y, 15, 0, 2 * Math.PI);
+                drawingCtx.stroke();
+                drawingCtx.fillText('Y', pos.x - 5, pos.y + 5);
+                
+                // Draw bond line
+                drawingCtx.beginPath();
+                drawingCtx.moveTo(centerX, centerY);
+                drawingCtx.lineTo(pos.x, pos.y);
+                drawingCtx.stroke();
+            });
+            
+            drawingCtx.font = '16px Arial';
+            drawingCtx.fillText('Lewis Structure Template', centerX - 80, centerY - 100);
+        }
+
+        function drawMolecularTemplate() {
+            drawingCtx.strokeStyle = '#333';
+            drawingCtx.lineWidth = 2;
+            
+            const centerX = drawingCanvas.width / 2;
+            const centerY = drawingCanvas.height / 2;
+            
+            // Draw 3D molecular shape template
+            drawingCtx.font = '16px Arial';
+            drawingCtx.fillText('Molecular Geometry Template', centerX - 100, 50);
+            drawingCtx.fillText('Draw 3D molecular shapes here', centerX - 100, 80);
+            
+            // Draw coordinate axes
+            drawingCtx.strokeStyle = '#999';
+            drawingCtx.beginPath();
+            drawingCtx.moveTo(centerX - 100, centerY);
+            drawingCtx.lineTo(centerX + 100, centerY);
+            drawingCtx.stroke();
+            
+            drawingCtx.beginPath();
+            drawingCtx.moveTo(centerX, centerY - 100);
+            drawingCtx.lineTo(centerX, centerY + 100);
+            drawingCtx.stroke();
+        }
+
+        function drawEnergyTemplate() {
+            drawingCtx.strokeStyle = '#333';
+            drawingCtx.lineWidth = 2;
+            
+            const startX = 50;
+            const startY = 50;
+            const levelHeight = 40;
+            const levelWidth = 200;
+            
+            // Draw energy levels
+            const levels = ['4p', '3d', '4s', '3p', '3s', '2p', '2s', '1s'];
+            
+            levels.forEach((level, index) => {
+                const y = startY + (index * levelHeight);
+                drawingCtx.strokeRect(startX, y, levelWidth, levelHeight - 5);
+                drawingCtx.fillText(level, startX + 10, y + 20);
+            });
+            
+            drawingCtx.font = '16px Arial';
+            drawingCtx.fillText('Energy Level Diagram Template', startX, startY - 20);
+        }
+
+        function updateDrawingStatus(message) {
+            const statusElement = document.getElementById('drawingStatus');
+            if (statusElement) {
+                statusElement.textContent = message;
+            }
+        }
+
+        // ======= Electron Configuration Functions =======
+        const electronConfigurations = {
+            'H': '1s¹', 'He': '1s²',
+            'Li': '1s²2s¹', 'Be': '1s²2s²', 'B': '1s²2s²2p¹', 'C': '1s²2s²2p²', 'N': '1s²2s²2p³', 'O': '1s²2s²2p⁴', 'F': '1s²2s²2p⁵', 'Ne': '1s²2s²2p⁶',
+            'Na': '1s²2s²2p⁶3s¹', 'Mg': '1s²2s²2p⁶3s²', 'Al': '1s²2s²2p⁶3s²3p¹', 'Si': '1s²2s²2p⁶3s²3p²', 'P': '1s²2s²2p⁶3s²3p³', 'S': '1s²2s²2p⁶3s²3p⁴', 'Cl': '1s²2s²2p⁶3s²3p⁵', 'Ar': '1s²2s²2p⁶3s²3p⁶',
+            'K': '1s²2s²2p⁶3s²3p⁶4s¹', 'Ca': '1s²2s²2p⁶3s²3p⁶4s²',
+            'Sc': '1s²2s²2p⁶3s²3p⁶4s²3d¹', 'Ti': '1s²2s²2p⁶3s²3p⁶4s²3d²', 'V': '1s²2s²2p⁶3s²3p⁶4s²3d³', 'Cr': '1s²2s²2p⁶3s²3p⁶4s¹3d⁵', 'Mn': '1s²2s²2p⁶3s²3p⁶4s²3d⁵',
+            'Fe': '1s²2s²2p⁶3s²3p⁶4s²3d⁶', 'Co': '1s²2s²2p⁶3s²3p⁶4s²3d⁷', 'Ni': '1s²2s²2p⁶3s²3p⁶4s²3d⁸', 'Cu': '1s²2s²2p⁶3s²3p⁶4s¹3d¹⁰', 'Zn': '1s²2s²2p⁶3s²3p⁶4s²3d¹⁰'
+        };
+
+        function generateElectronConfig() {
+            const elementInput = document.getElementById('elementInput');
+            const previewElement = document.getElementById('electronConfigPreview');
+            
+            if (!elementInput || !previewElement) return;
+            
+            const input = elementInput.value.trim();
+            let config = '';
+            
+            // Try to find configuration
+            if (electronConfigurations[input]) {
+                config = electronConfigurations[input];
+            } else {
+                // Try case-insensitive search
+                const upperInput = input.toUpperCase();
+                if (electronConfigurations[upperInput]) {
+                    config = electronConfigurations[upperInput];
+                } else {
+                    // Try atomic number
+                    const atomicNumber = parseInt(input);
+                    if (atomicNumber && atomicNumber >= 1 && atomicNumber <= 30) {
+                        const elementSymbols = Object.keys(electronConfigurations);
+                        if (elementSymbols[atomicNumber - 1]) {
+                            config = electronConfigurations[elementSymbols[atomicNumber - 1]];
+                        }
+                    }
+                }
+            }
+            
+            if (config) {
+                previewElement.innerHTML = `$${config}$`;
+                // Re-render MathJax
+                if (window.MathJax) {
+                    MathJax.typesetPromise([previewElement]);
+                }
+            } else {
+                previewElement.innerHTML = 'Element not found. Please try a valid element symbol, name, or atomic number (1-30).';
+            }
+        }
+
+        function updateConfigPreview() {
+            const customConfig = document.getElementById('customConfig');
+            const previewElement = document.getElementById('customConfigPreview');
+            
+            if (!customConfig || !previewElement) return;
+            
+            const config = customConfig.value.trim();
+            if (config) {
+                previewElement.innerHTML = `$${config}$`;
+                // Re-render MathJax
+                if (window.MathJax) {
+                    MathJax.typesetPromise([previewElement]);
+                }
+            } else {
+                previewElement.innerHTML = 'Your configuration will appear here with proper formatting';
+            }
+        }
 
         // ======= Vocabulary Functions =======
         function showVocabDefinition(term) {
