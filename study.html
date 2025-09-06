@@ -9733,8 +9733,33 @@
         }
         
         // Quick test function for browser console
-        
-        
+        function testProgressSync() {
+            console.log('🧪 Testing Progress Synchronization...');
+            
+            // Test Overview progress
+            updateProgress('overview', 'understandingCheck', 5, 5, 0);
+            console.log('✅ Overview assessment completed');
+            
+            // Test Core Rules progress
+            updateProgress('coreRules', 'contentEngagement', 0, 0, 1);
+            updateProgress('coreRules', 'understandingCheck', 4, 5, 0);
+            updateProgress('coreRules', 'interactiveDemos', 1, 1, 0);
+            console.log('✅ Core Rules activities completed');
+            
+            // Test Assessment progress
+            updateProgress('assessment', 'contentEngagement', 0, 0, 1);
+            updateProgress('assessment', 'paper1', 45, 50, 0);
+            updateProgress('assessment', 'paper2', 42, 50, 0);
+            console.log('✅ Assessment activities completed');
+            
+            // Update tile indicators
+            updateTileProgressIndicators();
+            
+            // Trigger dashboard refresh
+            triggerProgressDashboardRefresh();
+            
+            console.log('🎉 Progress sync test completed! Check both study tiles and progress.html dashboard.');
+        }
         
         function calculateConceptProgress(activities) {
             const vocabWeight = 0.2;
