@@ -8959,8 +8959,61 @@
             document.querySelector('.study-tiles').style.display = 'none';
             document.querySelector('.page-title').style.display = 'none';
             
+            // Initialize Exceptions progress tracking
+            initializeExceptionsProgress();
+        }
+
+        // ======= Exceptions Progress Tracking Functions =======
+
+        function initializeExceptionsProgress() {
+            // Load saved progress
+            const savedProgress = localStorage.getItem('electronTowerProgress');
+            let progress = savedProgress ? JSON.parse(savedProgress) : getDefaultProgress();
+            
+            // Initialize exceptions concept if not exists
+            if (!progress.concepts.exceptions) {
+                progress.concepts.exceptions = {
+                    completed: false,
+                    score: 0,
+                    attempts: 0,
+                    timeSpent: 0,
+                    activities: {
+                        vocabularyQuiz: { completed: false, score: 0, attempts: 0 },
+                        understandingCheck: { completed: false, score: 0, attempts: 0 },
+                        interactiveDemos: { completed: 0, total: 0 },
+                        contentEngagement: { completed: false, timeSpent: 0 }
+                    }
+                };
+                localStorage.setItem('electronTowerProgress', JSON.stringify(progress));
+            }
+            
             // Track content engagement
             updateProgress('exceptions', 'contentEngagement', 0, 0, 1);
+            
+            // Update progress display
+            updateExceptionsProgressDisplay();
+        }
+
+        function updateExceptionsProgressDisplay() {
+            const savedProgress = localStorage.getItem('electronTowerProgress');
+            const progress = savedProgress ? JSON.parse(savedProgress) : getDefaultProgress();
+            const exceptionsProgress = progress.concepts.exceptions;
+            
+            if (!exceptionsProgress) return;
+            
+            // Calculate completion based on activities
+            const activities = exceptionsProgress.activities;
+            let completedCount = 0;
+            const totalCount = 4;
+            
+            // Check each activity
+            if (activities.contentEngagement.completed) completedCount++;
+            if (activities.understandingCheck.completed) completedCount++;
+            if (activities.interactiveDemos.completed > 0) completedCount++;
+            if (activities.vocabularyQuiz.completed) completedCount++;
+            
+            // Update tile progress
+            updateTileProgressIndicators();
         }
 
         // Show detailed content when clicking on Ion Formation tile
@@ -9820,6 +9873,9 @@
             
             if (!building) return;
 
+            // Track interactive demo completion
+            updateProgress('exceptions', 'interactiveDemo', 0, 0, 0);
+
             // Clear all slots first
             const slots = building.querySelectorAll('.slot');
             slots.forEach(slot => {
@@ -9920,6 +9976,9 @@
             const actualConfig = document.getElementById('copperActual');
             
             if (!building) return;
+
+            // Track interactive demo completion
+            updateProgress('exceptions', 'interactiveDemo', 0, 0, 0);
 
             // Clear all slots first
             const slots = building.querySelectorAll('.slot');
@@ -10115,6 +10174,9 @@
                     correct++;
                 }
             }
+            
+            // Track vocabulary quiz completion
+            updateProgress('exceptions', 'vocabularyQuiz', correct, total, 0);
             
             const resultsDiv = document.getElementById('exceptionsResults');
             const percentage = Math.round((correct / total) * 100);
