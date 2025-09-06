@@ -9596,17 +9596,26 @@
             const progress = savedProgress ? JSON.parse(savedProgress) : getDefaultProgress();
             
             if (!progress.concepts[concept]) {
+                const defaultActivities = {
+                    vocabularyQuiz: { completed: false, score: 0, attempts: 0 },
+                    understandingCheck: { completed: false, score: 0, attempts: 0 },
+                    interactiveDemos: { completed: 0, total: 0 },
+                    contentEngagement: { completed: false, timeSpent: 0 }
+                };
+                
+                // Add Assessment-specific activities
+                if (concept === 'assessment') {
+                    defaultActivities.paper1 = { completed: false, score: 0, attempts: 0 };
+                    defaultActivities.paper2 = { completed: false, score: 0, attempts: 0 };
+                    defaultActivities.paper3 = { completed: false, score: 0, attempts: 0 };
+                }
+                
                 progress.concepts[concept] = { 
                     completed: false, 
                     score: 0, 
                     attempts: 0, 
                     timeSpent: 0,
-                    activities: {
-                        vocabularyQuiz: { completed: false, score: 0, attempts: 0 },
-                        understandingCheck: { completed: false, score: 0, attempts: 0 },
-                        interactiveDemos: { completed: 0, total: 0 },
-                        contentEngagement: { completed: false, timeSpent: 0 }
-                    }
+                    activities: defaultActivities
                 };
             }
             
@@ -9624,6 +9633,18 @@
             } else if (activityType === 'contentEngagement') {
                 progress.concepts[concept].activities.contentEngagement.completed = true;
                 progress.concepts[concept].activities.contentEngagement.timeSpent += timeSpent;
+            } else if (activityType === 'paper1') {
+                progress.concepts[concept].activities.paper1.score = score;
+                progress.concepts[concept].activities.paper1.attempts++;
+                progress.concepts[concept].activities.paper1.completed = (score / totalQuestions) >= 0.7;
+            } else if (activityType === 'paper2') {
+                progress.concepts[concept].activities.paper2.score = score;
+                progress.concepts[concept].activities.paper2.attempts++;
+                progress.concepts[concept].activities.paper2.completed = (score / totalQuestions) >= 0.7;
+            } else if (activityType === 'paper3') {
+                progress.concepts[concept].activities.paper3.score = score;
+                progress.concepts[concept].activities.paper3.attempts++;
+                progress.concepts[concept].activities.paper3.completed = (score / totalQuestions) >= 0.7;
             }
             
             // Update overall concept progress
@@ -9631,20 +9652,44 @@
             progress.concepts[concept].attempts++;
             progress.concepts[concept].timeSpent += timeSpent;
             
-            // Calculate overall completion based on weighted activities
+            // Calculate overall completion based on activities
             const activities = progress.concepts[concept].activities;
-            const vocabWeight = 0.2;
-            const understandingWeight = 0.3;
-            const interactiveWeight = 0.3;
-            const engagementWeight = 0.2;
             
-            let completionScore = 0;
-            if (activities.vocabularyQuiz.completed) completionScore += vocabWeight;
-            if (activities.understandingCheck.completed) completionScore += understandingWeight;
-            if (activities.interactiveDemos.completed > 0) completionScore += interactiveWeight;
-            if (activities.contentEngagement.completed) completionScore += engagementWeight;
-            
-            progress.concepts[concept].completed = completionScore >= 0.7; // 70% of activities completed
+            if (concept === 'overview') {
+                // Overview: single activity (assessment-based completion)
+                progress.concepts[concept].completed = activities.understandingCheck.completed;
+            } else if (concept === 'assessment') {
+                // Assessment: 7 activities (4 standard + 3 papers)
+                let completedCount = 0;
+                const totalCount = 7;
+                
+                // Check standard activities
+                if (activities.contentEngagement.completed) completedCount++;
+                if (activities.understandingCheck.completed) completedCount++;
+                if (activities.interactiveDemos.completed > 0) completedCount++;
+                if (activities.vocabularyQuiz.completed) completedCount++;
+                
+                // Check paper completions
+                if (activities.paper1 && activities.paper1.completed) completedCount++;
+                if (activities.paper2 && activities.paper2.completed) completedCount++;
+                if (activities.paper3 && activities.paper3.completed) completedCount++;
+                
+                progress.concepts[concept].completed = (completedCount / totalCount) >= 0.7;
+            } else {
+                // Standard concepts: 4 activities with weighted scoring
+                const vocabWeight = 0.2;
+                const understandingWeight = 0.3;
+                const interactiveWeight = 0.3;
+                const engagementWeight = 0.2;
+                
+                let completionScore = 0;
+                if (activities.vocabularyQuiz.completed) completionScore += vocabWeight;
+                if (activities.understandingCheck.completed) completionScore += understandingWeight;
+                if (activities.interactiveDemos.completed > 0) completionScore += interactiveWeight;
+                if (activities.contentEngagement.completed) completionScore += engagementWeight;
+                
+                progress.concepts[concept].completed = completionScore >= 0.7;
+            }
             
             // Update streak
             const today = new Date().toDateString();
@@ -9676,14 +9721,23 @@
                 }
             };
             
+            const assessmentConcept = {
+                ...defaultConcept,
+                activities: {
+                    ...defaultConcept.activities,
+                    paper1: { completed: false, score: 0, attempts: 0 },
+                    paper2: { completed: false, score: 0, attempts: 0 },
+                    paper3: { completed: false, score: 0, attempts: 0 }
+                }
+            };
+            
             return {
                 concepts: {
                     overview: { ...defaultConcept },
                     coreRules: { ...defaultConcept },
-                    sublevels: { ...defaultConcept },
                     exceptions: { ...defaultConcept },
-                    applications: { ...defaultConcept },
-                    practice: { ...defaultConcept }
+                    ionFormation: { ...defaultConcept },
+                    assessment: { ...assessmentConcept }
                 },
                 achievements: [],
                 streak: 0,
