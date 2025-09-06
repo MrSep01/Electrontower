@@ -10653,12 +10653,14 @@
 
         // Initialize Ion Formation demos
         function initializeIonFormationDemos() {
+            console.log('🔧 Initializing Ion Formation demos...');
             // Initialize Sodium demo
             resetSodiumDemo();
             // Initialize Chlorine demo  
             resetChlorineDemo();
             // Initialize Iron demo
             resetIronDemo();
+            console.log('✅ Ion Formation demos initialized!');
         }
 
         // Sodium Cation Formation Demonstration
@@ -10699,14 +10701,20 @@
         }
 
         function resetSodiumDemo() {
+            console.log('🔄 Resetting Sodium demo...');
             const building = document.getElementById('sodiumBuilding');
             const standardConfig = document.getElementById('sodiumStandard');
             const actualConfig = document.getElementById('sodiumActual');
             
-            if (!building) return;
+            if (!building) {
+                console.error('❌ Sodium building not found!');
+                return;
+            }
+            console.log('✅ Sodium building found');
 
             // Reset all slots
             const slots = building.querySelectorAll('.slot');
+            console.log(`Found ${slots.length} slots in Sodium building`);
             slots.forEach(slot => {
                 slot.textContent = '';
                 slot.style.opacity = '1';
