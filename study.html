@@ -9839,6 +9839,7 @@
             console.log('  - Ion Formation: 100% (4/4 activities)');
             console.log('  - Assessment: 100% (7/7 activities)');
             console.log('🔍 Check both study tiles and progress.html dashboard for consistency!');
+            console.log('🏆 Check achievements with: showAllAchievements()');
         }
         
         function calculateConceptProgress(activities) {
@@ -9867,28 +9868,48 @@
             const totalQuizzes = Object.values(progress.concepts).reduce((sum, c) => sum + c.attempts, 0);
             if (totalQuizzes >= 1 && !achievements.includes('first_quiz')) {
                 achievements.push('first_quiz');
-                showAchievementNotification('First Steps', 'Complete your first quiz!');
+                showAchievementNotification('First Steps', 'Complete your first quiz!', '👶');
+            }
+            
+            // Core Rules mastery achievement
+            const coreRulesCompleted = progress.concepts.coreRules && progress.concepts.coreRules.completed;
+            if (coreRulesCompleted && !achievements.includes('core_master')) {
+                achievements.push('core_master');
+                showAchievementNotification('Core Master', 'Master all core rules!', '🎓');
             }
             
             // Perfect score achievement
             const hasPerfectScore = Object.values(progress.concepts).some(c => c.score > 0 && c.score === c.attempts);
             if (hasPerfectScore && !achievements.includes('perfect_score')) {
                 achievements.push('perfect_score');
-                showAchievementNotification('Perfectionist', 'Get a perfect quiz score!');
+                showAchievementNotification('Perfectionist', 'Get a perfect quiz score!', '💯');
+            }
+            
+            // 7-day streak achievement
+            if (progress.streak >= 7 && !achievements.includes('streak_7')) {
+                achievements.push('streak_7');
+                showAchievementNotification('Week Warrior', 'Study for 7 days straight!', '🔥');
+            }
+            
+            // Speed demon achievement (complete a quiz in under 2 minutes)
+            const hasSpeedDemon = Object.values(progress.concepts).some(c => c.timeSpent > 0 && c.timeSpent < 120);
+            if (hasSpeedDemon && !achievements.includes('speed_demon')) {
+                achievements.push('speed_demon');
+                showAchievementNotification('Speed Demon', 'Complete a quiz in under 2 minutes!', '⚡');
             }
             
             // All concepts achievement
             const allCompleted = Object.values(progress.concepts).every(c => c.completed);
             if (allCompleted && !achievements.includes('all_concepts')) {
                 achievements.push('all_concepts');
-                showAchievementNotification('Electron Expert', 'Complete all concepts!');
+                showAchievementNotification('Electron Expert', 'Complete all concepts!', '👨‍🔬');
             }
             
             progress.achievements = achievements;
             localStorage.setItem('electronTowerProgress', JSON.stringify(progress));
         }
 
-        function showAchievementNotification(title, description) {
+        function showAchievementNotification(title, description, icon = '🏆') {
             // Create a simple notification
             const notification = document.createElement('div');
             notification.style.cssText = `
@@ -9904,7 +9925,7 @@
                 animation: slideIn 0.3s ease;
             `;
             notification.innerHTML = `
-                <div style="font-weight: bold; margin-bottom: 5px;">🏆 ${title}</div>
+                <div style="font-weight: bold; margin-bottom: 5px;">${icon} ${title}</div>
                 <div style="font-size: 0.9rem;">${description}</div>
             `;
             
@@ -9913,6 +9934,33 @@
             setTimeout(() => {
                 notification.remove();
             }, 3000);
+        }
+
+        // Achievement definitions (matching progress.html)
+        const achievementDefinitions = [
+            { id: 'first_quiz', title: 'First Steps', desc: 'Complete your first quiz', icon: '👶' },
+            { id: 'core_master', title: 'Core Master', desc: 'Master all core rules', icon: '🎓' },
+            { id: 'perfect_score', title: 'Perfectionist', desc: 'Get a perfect quiz score', icon: '💯' },
+            { id: 'streak_7', title: 'Week Warrior', desc: 'Study for 7 days straight', icon: '🔥' },
+            { id: 'speed_demon', title: 'Speed Demon', desc: 'Complete a quiz in under 2 minutes', icon: '⚡' },
+            { id: 'all_concepts', title: 'Electron Expert', desc: 'Complete all concepts', icon: '👨‍🔬' }
+        ];
+
+        function showAllAchievements() {
+            const savedProgress = localStorage.getItem('electronTowerProgress');
+            const progress = savedProgress ? JSON.parse(savedProgress) : getDefaultProgress();
+            const userAchievements = progress.achievements || [];
+            
+            console.log('🏆 ACHIEVEMENTS:');
+            console.log('================');
+            
+            achievementDefinitions.forEach(achievement => {
+                const isUnlocked = userAchievements.includes(achievement.id);
+                const status = isUnlocked ? '✅ UNLOCKED' : '❌ LOCKED';
+                console.log(`${achievement.icon} ${achievement.title} - ${achievement.desc} [${status}]`);
+            });
+            
+            console.log(`\n📊 Progress: ${userAchievements.length}/${achievementDefinitions.length} achievements unlocked`);
         }
 
         function updateTileProgressIndicators() {

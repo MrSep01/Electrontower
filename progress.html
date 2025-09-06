@@ -829,18 +829,18 @@
                         return (completedCount / totalCount) >= 0.7;
                     } else {
                         // Standard calculation for other concepts
-                        const vocabWeight = 0.2;
-                        const understandingWeight = 0.3;
-                        const interactiveWeight = 0.3;
-                        const engagementWeight = 0.2;
-                        
-                        let completionScore = 0;
-                        if (activities.vocabularyQuiz.completed) completionScore += vocabWeight;
-                        if (activities.understandingCheck.completed) completionScore += understandingWeight;
-                        if (activities.interactiveDemos.completed > 0) completionScore += interactiveWeight;
-                        if (activities.contentEngagement.completed) completionScore += engagementWeight;
-                        
-                        return completionScore >= 0.7;
+                    const vocabWeight = 0.2;
+                    const understandingWeight = 0.3;
+                    const interactiveWeight = 0.3;
+                    const engagementWeight = 0.2;
+                    
+                    let completionScore = 0;
+                    if (activities.vocabularyQuiz.completed) completionScore += vocabWeight;
+                    if (activities.understandingCheck.completed) completionScore += understandingWeight;
+                    if (activities.interactiveDemos.completed > 0) completionScore += interactiveWeight;
+                    if (activities.contentEngagement.completed) completionScore += engagementWeight;
+                    
+                    return completionScore >= 0.7;
                     }
                 }).length;
                 
@@ -897,19 +897,19 @@
                             activitiesCompleted = completedCount;
                         } else {
                             // Standard calculation for other concepts
-                            const vocabWeight = 0.2;
-                            const understandingWeight = 0.3;
-                            const interactiveWeight = 0.3;
-                            const engagementWeight = 0.2;
-                            
-                            let completionScore = 0;
-                            if (activities.vocabularyQuiz.completed) completionScore += vocabWeight;
-                            if (activities.understandingCheck.completed) completionScore += understandingWeight;
-                            if (activities.interactiveDemos.completed > 0) completionScore += interactiveWeight;
-                            if (activities.contentEngagement.completed) completionScore += engagementWeight;
-                            
-                            isCompleted = completionScore >= 0.7;
-                            activitiesCompleted = Math.round(completionScore * 4);
+                        const vocabWeight = 0.2;
+                        const understandingWeight = 0.3;
+                        const interactiveWeight = 0.3;
+                        const engagementWeight = 0.2;
+                        
+                        let completionScore = 0;
+                        if (activities.vocabularyQuiz.completed) completionScore += vocabWeight;
+                        if (activities.understandingCheck.completed) completionScore += understandingWeight;
+                        if (activities.interactiveDemos.completed > 0) completionScore += interactiveWeight;
+                        if (activities.contentEngagement.completed) completionScore += engagementWeight;
+                        
+                        isCompleted = completionScore >= 0.7;
+                        activitiesCompleted = Math.round(completionScore * 4);
                         }
                     }
                     
@@ -968,20 +968,38 @@
             }
 
             updateStatistics() {
+                console.log('📊 Updating statistics...');
                 const totalQuizzes = Object.values(this.progress.concepts).reduce((sum, c) => sum + c.attempts, 0);
                 const totalScores = Object.values(this.progress.concepts).reduce((sum, c) => sum + c.score, 0);
                 const averageScore = totalQuizzes > 0 ? Math.round((totalScores / totalQuizzes) * 100) : 0;
                 const totalTime = Math.round(this.progress.totalTimeSpent / 60000); // Convert to minutes
 
-                document.getElementById('totalQuizzes').textContent = totalQuizzes;
-                document.getElementById('averageScore').textContent = averageScore + '%';
-                document.getElementById('studyStreak').textContent = this.progress.streak;
-                document.getElementById('totalTime').textContent = totalTime + 'm';
+                console.log('📊 Stats:', { totalQuizzes, averageScore, streak: this.progress.streak, totalTime });
+
+                const totalQuizzesEl = document.getElementById('totalQuizzes');
+                const averageScoreEl = document.getElementById('averageScore');
+                const studyStreakEl = document.getElementById('studyStreak');
+                const totalTimeEl = document.getElementById('totalTime');
+
+                if (totalQuizzesEl) totalQuizzesEl.textContent = totalQuizzes;
+                if (averageScoreEl) averageScoreEl.textContent = averageScore + '%';
+                if (studyStreakEl) studyStreakEl.textContent = this.progress.streak;
+                if (totalTimeEl) totalTimeEl.textContent = totalTime + 'm';
+
+                console.log('📊 Statistics updated successfully');
             }
 
             updateAchievements() {
+                console.log('🏆 Updating achievements...');
                 const achievementGrid = document.getElementById('achievementGrid');
+                
+                if (!achievementGrid) {
+                    console.error('❌ Achievement grid not found!');
+                    return;
+                }
+                
                 achievementGrid.innerHTML = '';
+                console.log('🏆 Achievements to display:', this.achievements.length);
 
                 this.achievements.forEach(achievement => {
                     const isUnlocked = this.progress.achievements.includes(achievement.id);
@@ -993,9 +1011,11 @@
                         <div class="achievement-title">${achievement.title}</div>
                         <div class="achievement-desc">${achievement.desc}</div>
                     `;
-
+                    
                     achievementGrid.appendChild(achievementItem);
                 });
+                
+                console.log('🏆 Achievements updated successfully');
             }
 
             // Static method to update progress from other pages
