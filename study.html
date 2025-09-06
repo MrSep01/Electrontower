@@ -4066,8 +4066,58 @@
                         <p>Write the electron configuration for the following elements:</p>
                         <p><strong>(i)</strong> Sodium (Na) - atomic number 11</p>
                         <p><strong>(ii)</strong> Chlorine (Cl) - atomic number 17</p>
+                        
+                        <!-- Electron Configuration Writing Tools -->
+                        <div class="drawing-tools-container" style="margin: 15px 0;">
+                            <div class="drawing-tools-header">
+                                <h4 style="color: var(--accent); margin: 0 0 10px 0;">⚛️ Electron Configuration Writer</h4>
+                                <p style="margin: 0; font-size: 14px; color: #666;">Use the tools below to write proper electron configurations with superscripts</p>
+                            </div>
+                            
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 15px 0;">
+                                <div>
+                                    <label style="display: block; margin-bottom: 8px; font-weight: 600; color: var(--accent);">
+                                        Sodium (Na) Configuration:
+                                    </label>
+                                    <input type="text" id="naConfig" class="electron-config-input" 
+                                           placeholder="e.g., 1s²2s²2p⁶3s¹" 
+                                           oninput="updateConfigPreview('naConfig', 'naPreview')">
+                                    <div class="electron-config-preview" id="naPreview" style="min-height: 40px; font-size: 16px;">
+                                        Your configuration will appear here
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <label style="display: block; margin-bottom: 8px; font-weight: 600; color: var(--accent);">
+                                        Chlorine (Cl) Configuration:
+                                    </label>
+                                    <input type="text" id="clConfig" class="electron-config-input" 
+                                           placeholder="e.g., 1s²2s²2p⁶3s²3p⁵" 
+                                           oninput="updateConfigPreview('clConfig', 'clPreview')">
+                                    <div class="electron-config-preview" id="clPreview" style="min-height: 40px; font-size: 16px;">
+                                        Your configuration will appear here
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="drawing-actions">
+                                <button class="drawing-btn primary" onclick="generateConfigForElement('Na', 'naConfig')">
+                                    <span>⚛️</span>
+                                    Generate Na Config
+                                </button>
+                                <button class="drawing-btn primary" onclick="generateConfigForElement('Cl', 'clConfig')">
+                                    <span>⚛️</span>
+                                    Generate Cl Config
+                                </button>
+                                <button class="drawing-btn secondary" onclick="clearConfigInputs(['naConfig', 'clConfig'])">
+                                    <span>🗑️</span>
+                                    Clear All
+                                </button>
+                            </div>
+                        </div>
+                        
                         <div class="answer-space">
-                            <textarea id="q1a" placeholder="Write your answers here..." rows="3"></textarea>
+                            <textarea id="q1a" placeholder="Additional written explanation (optional)..." rows="2"></textarea>
                         </div>
                         <button class="btn secondary" onclick="showMarkScheme('q1a')">Show Mark Scheme</button>
                         <div class="mark-scheme" id="q1a-scheme" style="display: none;">
@@ -4080,8 +4130,63 @@
                     <div class="question-part">
                         <h4>(b) [3 marks]</h4>
                         <p>Draw the orbital diagram for nitrogen (N) showing the arrangement of electrons in the 2p subshell. Use arrows to represent electrons and indicate their spin.</p>
+                        
+                        <!-- Drawing Tools for Orbital Diagram -->
+                        <div class="drawing-tools-container" style="margin: 15px 0;">
+                            <div class="drawing-tools-header">
+                                <h4 style="color: var(--accent); margin: 0 0 10px 0;">🎨 Drawing Tools</h4>
+                                <p style="margin: 0; font-size: 14px; color: #666;">Use the drawing canvas below to create your orbital diagram</p>
+                            </div>
+                            
+                            <div class="drawing-canvas-container">
+                                <div class="drawing-toolbar">
+                                    <div class="drawing-tool active" data-tool="pencil">
+                                        <span>✏️</span>
+                                        <span>Pencil</span>
+                                    </div>
+                                    <div class="drawing-tool" data-tool="brush">
+                                        <span>🖌️</span>
+                                        <span>Brush</span>
+                                    </div>
+                                    <div class="drawing-tool" data-tool="eraser">
+                                        <span>🧹</span>
+                                        <span>Eraser</span>
+                                    </div>
+                                    <div class="drawing-tool">
+                                        <span>Size:</span>
+                                        <input type="range" class="brushSize" min="1" max="20" value="3">
+                                        <span class="brushSizeValue">3</span>
+                                    </div>
+                                    <div class="drawing-tool">
+                                        <span>Color:</span>
+                                        <input type="color" class="brushColor" value="#000000">
+                                    </div>
+                                </div>
+                                <canvas class="question-drawing-canvas" width="600" height="200" data-question="q1b"></canvas>
+                            </div>
+                            
+                            <div class="drawing-actions">
+                                <button class="drawing-btn primary" onclick="saveQuestionDrawing('q1b')">
+                                    <span>💾</span>
+                                    Save Drawing
+                                </button>
+                                <button class="drawing-btn secondary" onclick="undoQuestionDrawing('q1b')">
+                                    <span>↶</span>
+                                    Undo
+                                </button>
+                                <button class="drawing-btn secondary" onclick="clearQuestionDrawing('q1b')">
+                                    <span>🗑️</span>
+                                    Clear
+                                </button>
+                                <button class="drawing-btn secondary" onclick="loadOrbitalTemplate('q1b')">
+                                    <span>🔬</span>
+                                    Load Template
+                                </button>
+                            </div>
+                        </div>
+                        
                         <div class="answer-space">
-                            <textarea id="q1b" placeholder="Draw orbital diagram here..." rows="4"></textarea>
+                            <textarea id="q1b" placeholder="Additional written explanation (optional)..." rows="3"></textarea>
                         </div>
                         <button class="btn secondary" onclick="showMarkScheme('q1b')">Show Mark Scheme</button>
                         <div class="mark-scheme" id="q1b-scheme" style="display: none;">
@@ -4234,8 +4339,63 @@
                     <div class="question-part">
                         <h4>(a) [4 marks]</h4>
                         <p>Draw the orbital diagram for oxygen (O) and explain how Hund's rule applies to the 2p subshell.</p>
+                        
+                        <!-- Drawing Tools for Orbital Diagram -->
+                        <div class="drawing-tools-container" style="margin: 15px 0;">
+                            <div class="drawing-tools-header">
+                                <h4 style="color: var(--accent); margin: 0 0 10px 0;">🎨 Drawing Tools</h4>
+                                <p style="margin: 0; font-size: 14px; color: #666;">Use the drawing canvas below to create your orbital diagram</p>
+                            </div>
+                            
+                            <div class="drawing-canvas-container">
+                                <div class="drawing-toolbar">
+                                    <div class="drawing-tool active" data-tool="pencil">
+                                        <span>✏️</span>
+                                        <span>Pencil</span>
+                                    </div>
+                                    <div class="drawing-tool" data-tool="brush">
+                                        <span>🖌️</span>
+                                        <span>Brush</span>
+                                    </div>
+                                    <div class="drawing-tool" data-tool="eraser">
+                                        <span>🧹</span>
+                                        <span>Eraser</span>
+                                    </div>
+                                    <div class="drawing-tool">
+                                        <span>Size:</span>
+                                        <input type="range" class="brushSize" min="1" max="20" value="3">
+                                        <span class="brushSizeValue">3</span>
+                                    </div>
+                                    <div class="drawing-tool">
+                                        <span>Color:</span>
+                                        <input type="color" class="brushColor" value="#000000">
+                                    </div>
+                                </div>
+                                <canvas class="question-drawing-canvas" width="600" height="200" data-question="p2q4a"></canvas>
+                            </div>
+                            
+                            <div class="drawing-actions">
+                                <button class="drawing-btn primary" onclick="saveQuestionDrawing('p2q4a')">
+                                    <span>💾</span>
+                                    Save Drawing
+                                </button>
+                                <button class="drawing-btn secondary" onclick="undoQuestionDrawing('p2q4a')">
+                                    <span>↶</span>
+                                    Undo
+                                </button>
+                                <button class="drawing-btn secondary" onclick="clearQuestionDrawing('p2q4a')">
+                                    <span>🗑️</span>
+                                    Clear
+                                </button>
+                                <button class="drawing-btn secondary" onclick="loadOrbitalTemplate('p2q4a')">
+                                    <span>🔬</span>
+                                    Load Template
+                                </button>
+                            </div>
+                        </div>
+                        
                         <div class="answer-space">
-                            <textarea id="p2q4a" placeholder="Draw diagram and explain Hund's rule..." rows="5"></textarea>
+                            <textarea id="p2q4a" placeholder="Explain how Hund's rule applies to the 2p subshell..." rows="4"></textarea>
                         </div>
                         <button class="btn secondary" onclick="showMarkScheme('p2q4a')">Show Mark Scheme</button>
                         <div class="mark-scheme" id="p2q4a-scheme" style="display: none;">
@@ -9156,6 +9316,311 @@
                 previewElement.innerHTML = 'Your configuration will appear here with proper formatting';
             }
         }
+
+        // ======= Question-Specific Drawing Functions =======
+        let questionDrawingCanvases = {};
+        let questionDrawingContexts = {};
+        let questionDrawingHistory = {};
+        let questionHistoryIndex = {};
+
+        function initializeQuestionDrawingCanvas(questionId) {
+            const canvas = document.querySelector(`[data-question="${questionId}"]`);
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            
+            questionDrawingCanvases[questionId] = canvas;
+            questionDrawingContexts[questionId] = ctx;
+            questionDrawingHistory[questionId] = [];
+            questionHistoryIndex[questionId] = -1;
+            
+            // Set up event listeners for this specific canvas
+            setupQuestionDrawingEventListeners(questionId);
+            
+            // Save initial blank state
+            saveQuestionDrawingState(questionId);
+        }
+
+        function setupQuestionDrawingEventListeners(questionId) {
+            const canvas = questionDrawingCanvases[questionId];
+            if (!canvas) return;
+
+            // Mouse events
+            canvas.addEventListener('mousedown', (e) => startQuestionDrawing(e, questionId));
+            canvas.addEventListener('mousemove', (e) => drawQuestionDrawing(e, questionId));
+            canvas.addEventListener('mouseup', () => stopQuestionDrawing(questionId));
+            canvas.addEventListener('mouseout', () => stopQuestionDrawing(questionId));
+
+            // Touch events for tablets
+            canvas.addEventListener('touchstart', (e) => handleQuestionTouchStart(e, questionId), { passive: false });
+            canvas.addEventListener('touchmove', (e) => handleQuestionTouchMove(e, questionId), { passive: false });
+            canvas.addEventListener('touchend', (e) => handleQuestionTouchEnd(e, questionId), { passive: false });
+
+            // Tool selection for this question
+            const container = canvas.closest('.drawing-tools-container');
+            if (container) {
+                container.querySelectorAll('.drawing-tool[data-tool]').forEach(tool => {
+                    tool.addEventListener('click', function() {
+                        selectQuestionDrawingTool(this.dataset.tool, questionId);
+                    });
+                });
+
+                // Brush size slider
+                const brushSizeSlider = container.querySelector('.brushSize');
+                if (brushSizeSlider) {
+                    brushSizeSlider.addEventListener('input', function() {
+                        const valueSpan = container.querySelector('.brushSizeValue');
+                        if (valueSpan) valueSpan.textContent = this.value;
+                        updateQuestionDrawingSettings(questionId);
+                    });
+                }
+
+                // Color picker
+                const brushColorPicker = container.querySelector('.brushColor');
+                if (brushColorPicker) {
+                    brushColorPicker.addEventListener('change', () => updateQuestionDrawingSettings(questionId));
+                }
+            }
+        }
+
+        function startQuestionDrawing(e, questionId) {
+            const canvas = questionDrawingCanvases[questionId];
+            const ctx = questionDrawingContexts[questionId];
+            if (!canvas || !ctx) return;
+            
+            const rect = canvas.getBoundingClientRect();
+            const lastX = e.clientX - rect.left;
+            const lastY = e.clientY - rect.top;
+            
+            canvas.dataset.lastX = lastX;
+            canvas.dataset.lastY = lastY;
+            canvas.dataset.isDrawing = 'true';
+            
+            ctx.beginPath();
+            ctx.moveTo(lastX, lastY);
+        }
+
+        function drawQuestionDrawing(e, questionId) {
+            const canvas = questionDrawingCanvases[questionId];
+            const ctx = questionDrawingContexts[questionId];
+            if (!canvas || !ctx || canvas.dataset.isDrawing !== 'true') return;
+            
+            const rect = canvas.getBoundingClientRect();
+            const currentX = e.clientX - rect.left;
+            const currentY = e.clientY - rect.top;
+            const lastX = parseFloat(canvas.dataset.lastX);
+            const lastY = parseFloat(canvas.dataset.lastY);
+
+            ctx.lineTo(currentX, currentY);
+            ctx.stroke();
+
+            canvas.dataset.lastX = currentX;
+            canvas.dataset.lastY = currentY;
+        }
+
+        function stopQuestionDrawing(questionId) {
+            const canvas = questionDrawingCanvases[questionId];
+            if (!canvas) return;
+            
+            if (canvas.dataset.isDrawing === 'true') {
+                canvas.dataset.isDrawing = 'false';
+                saveQuestionDrawingState(questionId);
+            }
+        }
+
+        function handleQuestionTouchStart(e, questionId) {
+            e.preventDefault();
+            const touch = e.touches[0];
+            const syntheticEvent = {
+                clientX: touch.clientX,
+                clientY: touch.clientY
+            };
+            startQuestionDrawing(syntheticEvent, questionId);
+        }
+
+        function handleQuestionTouchMove(e, questionId) {
+            e.preventDefault();
+            const touch = e.touches[0];
+            const syntheticEvent = {
+                clientX: touch.clientX,
+                clientY: touch.clientY
+            };
+            drawQuestionDrawing(syntheticEvent, questionId);
+        }
+
+        function handleQuestionTouchEnd(e, questionId) {
+            e.preventDefault();
+            stopQuestionDrawing(questionId);
+        }
+
+        function selectQuestionDrawingTool(tool, questionId) {
+            const container = questionDrawingCanvases[questionId]?.closest('.drawing-tools-container');
+            if (!container) return;
+            
+            // Update active tool
+            container.querySelectorAll('.drawing-tool[data-tool]').forEach(t => {
+                t.classList.remove('active');
+            });
+            container.querySelector(`[data-tool="${tool}"]`).classList.add('active');
+            
+            // Update cursor
+            const canvas = questionDrawingCanvases[questionId];
+            if (canvas) {
+                canvas.style.cursor = tool === 'eraser' ? 'grab' : 'crosshair';
+            }
+        }
+
+        function updateQuestionDrawingSettings(questionId) {
+            const ctx = questionDrawingContexts[questionId];
+            const container = questionDrawingCanvases[questionId]?.closest('.drawing-tools-container');
+            if (!ctx || !container) return;
+            
+            const brushSize = container.querySelector('.brushSize')?.value || 3;
+            const brushColor = container.querySelector('.brushColor')?.value || '#000000';
+            
+            ctx.lineWidth = brushSize;
+            ctx.strokeStyle = brushColor;
+        }
+
+        function saveQuestionDrawingState(questionId) {
+            const canvas = questionDrawingCanvases[questionId];
+            const ctx = questionDrawingContexts[questionId];
+            if (!canvas || !ctx) return;
+            
+            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            
+            // Remove any states after current index
+            questionDrawingHistory[questionId] = questionDrawingHistory[questionId].slice(0, questionHistoryIndex[questionId] + 1);
+            
+            // Add new state
+            questionDrawingHistory[questionId].push(imageData);
+            questionHistoryIndex[questionId]++;
+            
+            // Limit history size
+            if (questionDrawingHistory[questionId].length > 20) {
+                questionDrawingHistory[questionId].shift();
+                questionHistoryIndex[questionId]--;
+            }
+        }
+
+        function saveQuestionDrawing(questionId) {
+            const canvas = questionDrawingCanvases[questionId];
+            if (!canvas) return;
+            
+            const link = document.createElement('a');
+            link.download = `question-${questionId}-drawing-${Date.now()}.png`;
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+
+        function undoQuestionDrawing(questionId) {
+            const ctx = questionDrawingContexts[questionId];
+            if (!ctx || questionHistoryIndex[questionId] <= 0) return;
+            
+            questionHistoryIndex[questionId]--;
+            ctx.putImageData(questionDrawingHistory[questionId][questionHistoryIndex[questionId]], 0, 0);
+        }
+
+        function clearQuestionDrawing(questionId) {
+            const canvas = questionDrawingCanvases[questionId];
+            const ctx = questionDrawingContexts[questionId];
+            if (!canvas || !ctx) return;
+            
+            if (confirm('Are you sure you want to clear the drawing?')) {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                saveQuestionDrawingState(questionId);
+            }
+        }
+
+        function loadOrbitalTemplate(questionId) {
+            const canvas = questionDrawingCanvases[questionId];
+            const ctx = questionDrawingContexts[questionId];
+            if (!canvas || !ctx) return;
+            
+            // Clear current drawing
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw orbital template
+            ctx.strokeStyle = '#333';
+            ctx.lineWidth = 2;
+            ctx.font = '14px Arial';
+            
+            const startX = 50;
+            const startY = 80;
+            const boxWidth = 40;
+            const boxHeight = 30;
+            const spacing = 50;
+            
+            // Draw 2p orbitals for nitrogen/oxygen
+            for (let i = 0; i < 3; i++) {
+                const x = startX + (i * spacing);
+                ctx.strokeRect(x, startY, boxWidth, boxHeight);
+                ctx.fillText(`2p${i === 0 ? 'x' : i === 1 ? 'y' : 'z'}`, x + 10, startY + 20);
+            }
+            
+            ctx.fillText('Orbital Diagram Template - Add electrons as arrows ↑ or ↓', startX, startY - 20);
+            
+            saveQuestionDrawingState(questionId);
+        }
+
+        // ======= Question-Specific Electron Configuration Functions =======
+        function updateConfigPreview(inputId, previewId) {
+            const input = document.getElementById(inputId);
+            const preview = document.getElementById(previewId);
+            
+            if (!input || !preview) return;
+            
+            const config = input.value.trim();
+            if (config) {
+                preview.innerHTML = `$${config}$`;
+                // Re-render MathJax
+                if (window.MathJax) {
+                    MathJax.typesetPromise([preview]);
+                }
+            } else {
+                preview.innerHTML = 'Your configuration will appear here';
+            }
+        }
+
+        function generateConfigForElement(element, inputId) {
+            const input = document.getElementById(inputId);
+            if (!input) return;
+            
+            const config = electronConfigurations[element];
+            if (config) {
+                input.value = config;
+                updateConfigPreview(inputId, inputId.replace('Config', 'Preview'));
+            }
+        }
+
+        function clearConfigInputs(inputIds) {
+            inputIds.forEach(id => {
+                const input = document.getElementById(id);
+                if (input) {
+                    input.value = '';
+                    updateConfigPreview(id, id.replace('Config', 'Preview'));
+                }
+            });
+        }
+
+        // Initialize question drawing canvases when they become visible
+        function initializeVisibleQuestionCanvases() {
+            document.querySelectorAll('.question-drawing-canvas').forEach(canvas => {
+                const questionId = canvas.dataset.question;
+                if (questionId && !questionDrawingCanvases[questionId]) {
+                    initializeQuestionDrawingCanvas(questionId);
+                }
+            });
+        }
+
+        // Call initialization when assessment content is shown
+        const originalShowAssessmentContent = showAssessmentContent;
+        showAssessmentContent = function() {
+            originalShowAssessmentContent();
+            setTimeout(initializeVisibleQuestionCanvases, 100);
+        };
 
         // ======= Vocabulary Functions =======
         function showVocabDefinition(term) {
