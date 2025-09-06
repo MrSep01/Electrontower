@@ -1108,7 +1108,7 @@
 
         /* Math Input Toolbar Styles */
         .math-toolbar {
-            display: flex;
+            display: none; /* Hidden by default */
             flex-wrap: wrap;
             gap: 8px;
             padding: 15px;
@@ -1118,6 +1118,45 @@
             margin: 10px 0;
             justify-content: center;
             align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .math-toolbar.visible {
+            display: flex;
+        }
+
+        .math-toolbar-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin: 10px 0;
+        }
+
+        .math-toolbar-toggle:hover {
+            background: var(--accent-dark);
+            transform: translateY(-1px);
+        }
+
+        .math-toolbar-toggle.active {
+            background: #6c757d;
+        }
+
+        .math-toolbar-toggle .toggle-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .math-toolbar-toggle.active .toggle-icon {
+            transform: rotate(180deg);
         }
 
         .math-toolbar-group {
@@ -4291,8 +4330,15 @@
                             <textarea id="q1a" placeholder="Write your answers here..." rows="3"></textarea>
                         </div>
                         
-                        <!-- Math Input Toolbar - Moved to bottom -->
-                        <div class="math-toolbar" style="margin-top: 15px;">
+                        <!-- Math Input Toolbar Toggle -->
+                        <button class="math-toolbar-toggle" id="toggle_q1a" onclick="toggleMathToolbar('q1a')">
+                            <span>⌨️</span>
+                            <span>Math Tools</span>
+                            <span class="toggle-icon">▼</span>
+                        </button>
+                        
+                        <!-- Math Input Toolbar - Collapsible -->
+                        <div class="math-toolbar" id="toolbar_q1a">
                             <div class="math-toolbar-group">
                                 <h5>Numbers:</h5>
                                 <div class="math-symbols-grid">
@@ -4311,9 +4357,9 @@
                             
                             <div class="math-toolbar-group">
                                 <h5>Mode:</h5>
-                                <button class="math-btn" id="normalMode" onclick="setMathMode('normal', 'q1a')">Normal</button>
-                                <button class="math-btn" id="superscriptMode" onclick="setMathMode('superscript', 'q1a')">Superscript</button>
-                                <button class="math-btn" id="subscriptMode" onclick="setMathMode('subscript', 'q1a')">Subscript</button>
+                                <button class="math-btn" id="normalMode_q1a" onclick="setMathMode('normal', 'q1a')">Normal</button>
+                                <button class="math-btn" id="superscriptMode_q1a" onclick="setMathMode('superscript', 'q1a')">Superscript</button>
+                                <button class="math-btn" id="subscriptMode_q1a" onclick="setMathMode('subscript', 'q1a')">Subscript</button>
                             </div>
                             
                             <div class="math-toolbar-group">
@@ -4409,8 +4455,15 @@
                             <textarea id="q1b" placeholder="Additional written explanation (optional)..." rows="3"></textarea>
                         </div>
                         
-                        <!-- Math Input Toolbar - Moved to bottom -->
-                        <div class="math-toolbar" style="margin-top: 15px;">
+                        <!-- Math Input Toolbar Toggle -->
+                        <button class="math-toolbar-toggle" id="toggle_q1b" onclick="toggleMathToolbar('q1b')">
+                            <span>⌨️</span>
+                            <span>Math Tools</span>
+                            <span class="toggle-icon">▼</span>
+                        </button>
+                        
+                        <!-- Math Input Toolbar - Collapsible -->
+                        <div class="math-toolbar" id="toolbar_q1b">
                             <div class="math-toolbar-group">
                                 <h5>Numbers:</h5>
                                 <div class="math-symbols-grid">
@@ -4667,8 +4720,15 @@
                             <textarea id="p2q4a" placeholder="Explain how Hund's rule applies to the 2p subshell..." rows="4"></textarea>
                         </div>
                         
-                        <!-- Math Input Toolbar - Moved to bottom -->
-                        <div class="math-toolbar" style="margin-top: 15px;">
+                        <!-- Math Input Toolbar Toggle -->
+                        <button class="math-toolbar-toggle" id="toggle_p2q4a" onclick="toggleMathToolbar('p2q4a')">
+                            <span>⌨️</span>
+                            <span>Math Tools</span>
+                            <span class="toggle-icon">▼</span>
+                        </button>
+                        
+                        <!-- Math Input Toolbar - Collapsible -->
+                        <div class="math-toolbar" id="toolbar_p2q4a">
                             <div class="math-toolbar-group">
                                 <h5>Numbers:</h5>
                                 <div class="math-symbols-grid">
@@ -9290,14 +9350,15 @@
             const currentX = e.clientX - rect.left;
             const currentY = e.clientY - rect.top;
 
-            if (currentTool === 'pencil' || currentTool === 'brush') {
-                drawingCtx.lineTo(currentX, currentY);
-                drawingCtx.stroke();
-            } else if (currentTool === 'eraser') {
+            if (currentTool === 'eraser') {
                 drawingCtx.globalCompositeOperation = 'destination-out';
                 drawingCtx.lineTo(currentX, currentY);
                 drawingCtx.stroke();
                 drawingCtx.globalCompositeOperation = 'source-over';
+            } else {
+                // Normal drawing mode (pencil, brush, shapes)
+                drawingCtx.lineTo(currentX, currentY);
+                drawingCtx.stroke();
             }
 
             lastX = currentX;
@@ -9731,8 +9792,21 @@
             const lastX = parseFloat(canvas.dataset.lastX);
             const lastY = parseFloat(canvas.dataset.lastY);
 
-            ctx.lineTo(currentX, currentY);
-            ctx.stroke();
+            // Get current tool from the drawing toolbar
+            const container = canvas.closest('.drawing-tools-container');
+            const activeTool = container?.querySelector('.drawing-tool.active')?.dataset.tool || 'pencil';
+            
+            if (activeTool === 'eraser') {
+                // Eraser mode
+                ctx.globalCompositeOperation = 'destination-out';
+                ctx.lineTo(currentX, currentY);
+                ctx.stroke();
+                ctx.globalCompositeOperation = 'source-over';
+            } else {
+                // Normal drawing mode
+                ctx.lineTo(currentX, currentY);
+                ctx.stroke();
+            }
 
             canvas.dataset.lastX = currentX;
             canvas.dataset.lastY = currentY;
@@ -9966,6 +10040,23 @@
             if (input) {
                 input.value = '';
                 input.focus();
+            }
+        }
+
+        function toggleMathToolbar(targetId) {
+            const toolbar = document.getElementById('toolbar_' + targetId);
+            const toggle = document.getElementById('toggle_' + targetId);
+            
+            if (toolbar && toggle) {
+                toolbar.classList.toggle('visible');
+                toggle.classList.toggle('active');
+                
+                // Update toggle text
+                const isVisible = toolbar.classList.contains('visible');
+                const textSpan = toggle.querySelector('span:nth-child(2)');
+                if (textSpan) {
+                    textSpan.textContent = isVisible ? 'Hide Math Tools' : 'Math Tools';
+                }
             }
         }
 
