@@ -9788,23 +9788,42 @@
         
         // Quick test function for browser console
         function testProgressSync() {
-            console.log('🧪 Testing Progress Synchronization...');
+            console.log('🧪 Testing Complete Progress System...');
             
-            // Test Overview progress
+            // Test Overview progress (1 activity)
             updateProgress('overview', 'understandingCheck', 5, 5, 0);
-            console.log('✅ Overview assessment completed');
+            console.log('✅ Overview: Assessment completed (1/1 activity)');
             
-            // Test Core Rules progress
+            // Test Core Rules progress (4 activities)
             updateProgress('coreRules', 'contentEngagement', 0, 0, 1);
             updateProgress('coreRules', 'understandingCheck', 4, 5, 0);
             updateProgress('coreRules', 'interactiveDemos', 1, 1, 0);
-            console.log('✅ Core Rules activities completed');
+            updateProgress('coreRules', 'vocabularyQuiz', 8, 10, 0);
+            console.log('✅ Core Rules: All 4 activities completed');
             
-            // Test Assessment progress
+            // Test Exceptions progress (4 activities)
+            updateProgress('exceptions', 'contentEngagement', 0, 0, 1);
+            updateProgress('exceptions', 'understandingCheck', 4, 5, 0);
+            updateProgress('exceptions', 'interactiveDemos', 1, 1, 0);
+            updateProgress('exceptions', 'vocabularyQuiz', 7, 10, 0);
+            console.log('✅ Exceptions: All 4 activities completed');
+            
+            // Test Ion Formation progress (4 activities)
+            updateProgress('ionFormation', 'contentEngagement', 0, 0, 1);
+            updateProgress('ionFormation', 'understandingCheck', 4, 5, 0);
+            updateProgress('ionFormation', 'interactiveDemos', 1, 1, 0);
+            updateProgress('ionFormation', 'vocabularyQuiz', 6, 10, 0);
+            console.log('✅ Ion Formation: All 4 activities completed');
+            
+            // Test Assessment progress (7 activities)
             updateProgress('assessment', 'contentEngagement', 0, 0, 1);
+            updateProgress('assessment', 'understandingCheck', 4, 5, 0);
+            updateProgress('assessment', 'interactiveDemos', 1, 1, 0);
+            updateProgress('assessment', 'vocabularyQuiz', 8, 10, 0);
             updateProgress('assessment', 'paper1', 45, 50, 0);
             updateProgress('assessment', 'paper2', 42, 50, 0);
-            console.log('✅ Assessment activities completed');
+            updateProgress('assessment', 'paper3', 50, 60, 0);
+            console.log('✅ Assessment: All 7 activities completed');
             
             // Update tile indicators
             updateTileProgressIndicators();
@@ -9812,7 +9831,14 @@
             // Trigger dashboard refresh
             triggerProgressDashboardRefresh();
             
-            console.log('🎉 Progress sync test completed! Check both study tiles and progress.html dashboard.');
+            console.log('🎉 Complete progress test finished!');
+            console.log('📊 Expected Results:');
+            console.log('  - Overview: 100% (1/1 activity)');
+            console.log('  - Core Rules: 100% (4/4 activities)');
+            console.log('  - Exceptions: 100% (4/4 activities)');
+            console.log('  - Ion Formation: 100% (4/4 activities)');
+            console.log('  - Assessment: 100% (7/7 activities)');
+            console.log('🔍 Check both study tiles and progress.html dashboard for consistency!');
         }
         
         function calculateConceptProgress(activities) {
