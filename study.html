@@ -2725,28 +2725,6 @@
                 </div>
             </div>
 
-            <!-- Practice Tile -->
-            <div class="study-tile practice">
-                <div class="tile-header">
-                    <h2>
-                        <span class="custom-emoji emoji-syringe"></span>
-                        Practice
-                    </h2>
-                    <p>Interactive exercises to master electron configuration</p>
-                </div>
-                <div class="tile-content">
-                    <ul class="tile-features">
-                        <li><strong>Interactive Atom Builder:</strong> Build atoms step by step</li>
-                        <li><strong>Guided Problem Solving:</strong> Step-by-step guidance</li>
-                        <li><strong>Interactive Quizzes:</strong> Test your knowledge</li>
-                        <li><strong>Simulation Activities:</strong> Visualize electron behavior</li>
-                        <li><strong>Practice Problems:</strong> Master the concepts</li>
-                    </ul>
-                </div>
-                <div class="tile-actions">
-                    <button class="tile-btn" onclick="showPracticeContent()">Learn More</button>
-                </div>
-            </div>
 
 
             <!-- Assessment Tile -->
@@ -7591,50 +7569,134 @@
             </div>
         </div>
 
-        <!-- ======= Practice Detailed Content ======= -->
-        <div id="practiceContent" class="content-section" style="display: none;">
+
+        <!-- ======= Assessment Detailed Content ======= -->
+        <div id="assessmentContent" class="content-section" style="display: none;">
             <div class="content-header">
                 <button class="btn ghost" onclick="hideDetailedContent()" style="display: flex; align-items: center; gap: 8px;">
                     <span class="custom-emoji emoji-arrow-left"></span>
                     Back to Study Guide
                 </button>
                 <h1 class="content-title">
-                    <span class="custom-emoji emoji-syringe"></span>
-                    Interactive Practice Center
+                    <span class="custom-emoji emoji-nucleus"></span>
+                    A-Level Edexcel Pearson Assessment
                 </h1>
-                <p class="content-description">
-                    Master electron configuration through hands-on interactive activities. Build atoms, solve problems, and test your understanding with engaging exercises.
-                </p>
+                <p class="content-subtitle">Comprehensive examination-style assessments with detailed mark schemes</p>
             </div>
-
-            <!-- Practice Navigation -->
-            <div class="practice-nav" style="display: flex; gap: 15px; margin-bottom: 30px; flex-wrap: wrap;">
-                <button class="btn secondary" onclick="showPracticeSection('atom-builder')" id="atomBuilderBtn">
-                    <span class="custom-emoji emoji-atom"></span>
-                    Atom Builder
-                </button>
-                <button class="btn secondary" onclick="showPracticeSection('guided-problems')" id="guidedProblemsBtn">
-                    <span class="custom-emoji emoji-lightbulb"></span>
-                    Guided Problems
-                </button>
-                <button class="btn secondary" onclick="showPracticeSection('interactive-quiz')" id="interactiveQuizBtn">
-                    <span class="custom-emoji emoji-quiz"></span>
-                    Interactive Quiz
-                </button>
-                <button class="btn secondary" onclick="showPracticeSection('simulations')" id="simulationsBtn">
-                    <span class="custom-emoji emoji-simulation"></span>
-                    Simulations
-                </button>
-                <button class="btn secondary" onclick="showPracticeSection('practice-problems')" id="practiceProblemsBtn">
-                    <span class="custom-emoji emoji-practice"></span>
-                    Practice Problems
-                </button>
+            <!-- Assessment Overview -->
+            <div class="objectives-section">
+                <h3>📋 Electron Configuration Assessment Structure</h3>
+                <p>Comprehensive assessments focused specifically on electron configuration topics:</p>
+                <div class="objectives-grid">
+                    <div class="objective-card">
+                        <h4>📄 Paper 1: Core Principles & Rules</h4>
+                        <p><strong>Duration:</strong> 45 minutes | <strong>Marks:</strong> 50</p>
+                        <ul>
+                            <li>Aufbau Principle & Orbital Filling</li>
+                            <li>Hund's Rule & Electron Spin</li>
+                            <li>Pauli Exclusion Principle</li>
+                            <li>Orbital Diagrams & Notation</li>
+                            <li>Energy Level Ordering</li>
+                        </ul>
+                    </div>
+                    <div class="objective-card">
+                        <h4>🧪 Paper 2: Exceptions & Complex Cases</h4>
+                        <p><strong>Duration:</strong> 45 minutes | <strong>Marks:</strong> 50</p>
+                        <ul>
+                            <li>Chromium & Copper Exceptions</li>
+                            <li>Half-filled Subshell Stability</li>
+                            <li>Filled Subshell Stability</li>
+                            <li>d-block Configurations</li>
+                            <li>Stability Principles</li>
+                        </ul>
+                    </div>
+                    <div class="objective-card">
+                        <h4>⚡ Paper 3: Ion Formation & Applications</h4>
+                        <p><strong>Duration:</strong> 50 minutes | <strong>Marks:</strong> 60</p>
+                        <ul>
+                            <li>Cation Formation (Metals)</li>
+                            <li>Anion Formation (Non-metals)</li>
+                            <li>Electron Configuration Changes</li>
+                            <li>Ionic Radius Trends</li>
+                            <li>Real-world Applications</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
+            <!-- Paper Selection -->
+            <div class="interactive-section">
+                <h3>🎯 Select Your Assessment</h3>
+                <p>Choose a paper to begin your Edexcel-style examination practice:</p>
+                
+                <div class="ion-formation-grid">
+                    <div class="formation-card">
+                        <h4>📄 Paper 1: Core Principles & Rules</h4>
+                        <p>Master the fundamental principles of electron configuration</p>
+                        <div class="example-box">
+                            <strong>Key Topics:</strong>
+                            <p>• Aufbau principle application<br>
+                            • Hund's rule & electron spin<br>
+                            • Pauli exclusion principle<br>
+                            • Orbital diagrams & notation</p>
+                        </div>
+                        <div class="formation-actions">
+                            <button class="btn primary" onclick="startPaper1()">Start Paper 1</button>
+                            <button class="btn secondary" onclick="viewPaper1MarkScheme()">View Mark Scheme</button>
+                        </div>
+                    </div>
 
-            <!-- Atom Builder Section -->
-            <div id="atomBuilderSection" class="practice-section" style="display: none;">
-                <h2 style="color: var(--accent); margin-bottom: 20px;">
-                    <span class="custom-emoji emoji-atom"></span>
+                    <div class="formation-card">
+                        <h4>🧪 Paper 2: Exceptions & Complex Cases</h4>
+                        <p>Explore transition metal exceptions and stability principles</p>
+                        <div class="example-box">
+                            <strong>Key Topics:</strong>
+                            <p>• Chromium & Copper exceptions<br>
+                            • Half-filled subshell stability<br>
+                            • Filled subshell stability<br>
+                            • d-block configurations</p>
+                        </div>
+                        <div class="formation-actions">
+                            <button class="btn primary" onclick="startPaper2()">Start Paper 2</button>
+                            <button class="btn secondary" onclick="viewPaper2MarkScheme()">View Mark Scheme</button>
+                        </div>
+                    </div>
+
+                    <div class="formation-card">
+                        <h4>⚡ Paper 3: Ion Formation & Applications</h4>
+                        <p>Understand how atoms gain and lose electrons to form ions</p>
+                        <div class="example-box">
+                            <strong>Key Topics:</strong>
+                            <p>• Cation formation (metals)<br>
+                            • Anion formation (non-metals)<br>
+                            • Electron configuration changes<br>
+                            • Real-world applications</p>
+                        </div>
+                        <div class="formation-actions">
+                            <button class="btn primary" onclick="startPaper3()">Start Paper 3</button>
+                            <button class="btn secondary" onclick="viewPaper3MarkScheme()">View Mark Scheme</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ======= Paper 1: Core Principles & Rules ======= -->
+        <div id="paper1Content" class="content-section" style="display: none;">
+            <div class="content-header">
+                <button class="btn ghost" onclick="hidePaperContent()" style="display: flex; align-items: center; gap: 8px;">
+                    <span class="custom-emoji emoji-arrow-left"></span>
+                    Back to Assessment
+                </button>
+                <h1 class="content-title">
+                    <span class="custom-emoji emoji-nucleus"></span>
+                    Paper 1: Core Principles & Rules
+                </h1>
+                <p class="content-subtitle">Duration: 45 minutes | Total Marks: 50</p>
+                <div class="paper-timer" id="paper1Timer">
+                    <span class="timer-label">Time Remaining:</span>
+                    <span class="timer-display" id="paper1TimeDisplay">45:00</span>
+                </div>
+            </div>
                     Interactive Atom Builder
                 </h2>
                 <p style="color: var(--light); margin-bottom: 25px;">
