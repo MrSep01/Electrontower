@@ -8892,8 +8892,61 @@
             document.querySelector('.study-tiles').style.display = 'none';
             document.querySelector('.page-title').style.display = 'none';
             
+            // Initialize Core Rules progress tracking
+            initializeCoreRulesProgress();
+        }
+
+        // ======= Core Rules Progress Tracking Functions =======
+
+        function initializeCoreRulesProgress() {
+            // Load saved progress
+            const savedProgress = localStorage.getItem('electronTowerProgress');
+            let progress = savedProgress ? JSON.parse(savedProgress) : getDefaultProgress();
+            
+            // Initialize coreRules concept if not exists
+            if (!progress.concepts.coreRules) {
+                progress.concepts.coreRules = {
+                    completed: false,
+                    score: 0,
+                    attempts: 0,
+                    timeSpent: 0,
+                    activities: {
+                        vocabularyQuiz: { completed: false, score: 0, attempts: 0 },
+                        understandingCheck: { completed: false, score: 0, attempts: 0 },
+                        interactiveDemos: { completed: 0, total: 0 },
+                        contentEngagement: { completed: false, timeSpent: 0 }
+                    }
+                };
+                localStorage.setItem('electronTowerProgress', JSON.stringify(progress));
+            }
+            
             // Track content engagement
             updateProgress('coreRules', 'contentEngagement', 0, 0, 1);
+            
+            // Update progress display
+            updateCoreRulesProgressDisplay();
+        }
+
+        function updateCoreRulesProgressDisplay() {
+            const savedProgress = localStorage.getItem('electronTowerProgress');
+            const progress = savedProgress ? JSON.parse(savedProgress) : getDefaultProgress();
+            const coreRulesProgress = progress.concepts.coreRules;
+            
+            if (!coreRulesProgress) return;
+            
+            // Calculate completion based on activities
+            const activities = coreRulesProgress.activities;
+            let completedCount = 0;
+            const totalCount = 4;
+            
+            // Check each activity
+            if (activities.contentEngagement.completed) completedCount++;
+            if (activities.understandingCheck.completed) completedCount++;
+            if (activities.interactiveDemos.completed > 0) completedCount++;
+            if (activities.vocabularyQuiz.completed) completedCount++;
+            
+            // Update tile progress
+            updateTileProgressIndicators();
         }
 
         // Show detailed content when clicking on Exceptions tile
@@ -8928,6 +8981,9 @@
         function showFillingOrder() {
             // Complete Aufbau sequence from main app: 1s → 2s → 2p → 3s → 3p → 4s → 3d → 4p → 5s → 4d → 5p → 6s → 4f → 5d → 6p → 7s → 5f → 6d → 7p
             // This follows the main app's electron filling logic exactly
+            
+            // Track interactive demo completion
+            updateProgress('coreRules', 'interactiveDemo', 0, 0, 0);
             
             // Reset all slots first
             resetAufbau();
@@ -9140,12 +9196,18 @@
             } else {
                 slot.classList.add('filled');
                 slot.textContent = '↑'; // Use main app's "up" spin symbol
+                
+                // Track interactive demo completion when user interacts
+                updateProgress('coreRules', 'interactiveDemo', 0, 0, 0);
             }
         }
 
         function showElectronDistribution() {
             // Show the correct Hund's rule distribution matching main app logic exactly
             // Main app logic: "Spread out: single-occupy all orbitals first" with same spin, then pair
+            
+            // Track interactive demo completion
+            updateProgress('coreRules', 'interactiveDemo', 0, 0, 0);
             
             // Reset first
             resetHund();
