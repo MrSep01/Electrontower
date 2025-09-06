@@ -9996,6 +9996,53 @@
                     tile.querySelector('.tile-header').appendChild(progressDiv);
                 }
             }
+
+            // Update Assessment tile
+            const assessmentProgress = progress.concepts.assessment;
+            if (assessmentProgress && assessmentProgress.activities) {
+                const activities = assessmentProgress.activities;
+                
+                // Calculate completion based on activities (7 total: 4 standard + 3 papers)
+                let completedCount = 0;
+                const totalCount = 7;
+                
+                // Check standard activities
+                if (activities.contentEngagement.completed) completedCount++;
+                if (activities.understandingCheck.completed) completedCount++;
+                if (activities.interactiveDemos.completed > 0) completedCount++;
+                if (activities.vocabularyQuiz.completed) completedCount++;
+                
+                // Check paper completions
+                if (activities.paper1.completed) completedCount++;
+                if (activities.paper2.completed) completedCount++;
+                if (activities.paper3.completed) completedCount++;
+                
+                const percentage = Math.round((completedCount / totalCount) * 100);
+                
+                const tile = document.querySelector('.study-tile.assessment');
+                if (tile) {
+                    // Remove existing progress div if it exists
+                    const existingProgress = tile.querySelector('.tile-progress');
+                    if (existingProgress) {
+                        existingProgress.remove();
+                    }
+                    
+                    // Create new progress div
+                    const progressDiv = document.createElement('div');
+                    progressDiv.className = 'tile-progress';
+                    progressDiv.style.cssText = `
+                        background: ${percentage > 0 ? 'var(--success)' : 'var(--neutral)'};
+                        color: white;
+                        padding: 5px 10px;
+                        border-radius: 15px;
+                        font-size: 0.8rem;
+                        margin-top: 10px;
+                        text-align: center;
+                    `;
+                    progressDiv.innerHTML = `Progress: ${percentage}% (${completedCount}/${totalCount} activities)`;
+                    tile.querySelector('.tile-header').appendChild(progressDiv);
+                }
+            }
         }
 
         // ======= Exceptions Interactive Functions =======

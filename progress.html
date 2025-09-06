@@ -739,10 +739,9 @@
                 this.concepts = {
                     overview: { name: 'Overview', icon: '🔍', description: 'Introduction to electron configuration' },
                     coreRules: { name: 'Core Rules', icon: '⚛️', description: 'Aufbau, Hund\'s, and Pauli principles' },
-                    sublevels: { name: 'Sublevels & Orbitals', icon: '🌌', description: 'Understanding orbital structure' },
                     exceptions: { name: 'Exceptions', icon: '⚠️', description: 'Special cases and anomalies' },
-                    applications: { name: 'Applications', icon: '🧪', description: 'Real-world applications' },
-                    practice: { name: 'Practice', icon: '💪', description: 'Interactive practice problems' }
+                    ionFormation: { name: 'Ion Formation', icon: '⚡', description: 'How atoms gain and lose electrons' },
+                    assessment: { name: 'Assessment', icon: '📝', description: 'A-Level Edexcel examination papers' }
                 };
 
                 this.achievements = [
@@ -790,8 +789,8 @@
                         coreRules: { ...defaultConcept },
                         sublevels: { ...defaultConcept },
                         exceptions: { ...defaultConcept },
-                        applications: { ...defaultConcept },
-                        practice: { ...defaultConcept }
+                        ionFormation: { ...defaultConcept },
+                        assessment: { ...defaultConcept }
                     },
                     achievements: [],
                     streak: 0,
@@ -811,6 +810,23 @@
                     // Special handling for overview concept - treat as single activity
                     if (key === 'overview') {
                         return activities.understandingCheck.completed;
+                    } else if (key === 'assessment') {
+                        // Special handling for assessment - 7 activities (4 standard + 3 papers)
+                        let completedCount = 0;
+                        const totalCount = 7;
+                        
+                        // Check standard activities
+                        if (activities.contentEngagement.completed) completedCount++;
+                        if (activities.understandingCheck.completed) completedCount++;
+                        if (activities.interactiveDemos.completed > 0) completedCount++;
+                        if (activities.vocabularyQuiz.completed) completedCount++;
+                        
+                        // Check paper completions
+                        if (activities.paper1 && activities.paper1.completed) completedCount++;
+                        if (activities.paper2 && activities.paper2.completed) completedCount++;
+                        if (activities.paper3 && activities.paper3.completed) completedCount++;
+                        
+                        return (completedCount / totalCount) >= 0.7;
                     } else {
                         // Standard calculation for other concepts
                         const vocabWeight = 0.2;
@@ -861,6 +877,24 @@
                             isCompleted = activities.understandingCheck.completed;
                             activitiesCompleted = isCompleted ? 1 : 0;
                             totalActivities = 1;
+                        } else if (key === 'assessment') {
+                            // Special handling for assessment - 7 activities (4 standard + 3 papers)
+                            let completedCount = 0;
+                            totalActivities = 7;
+                            
+                            // Check standard activities
+                            if (activities.contentEngagement.completed) completedCount++;
+                            if (activities.understandingCheck.completed) completedCount++;
+                            if (activities.interactiveDemos.completed > 0) completedCount++;
+                            if (activities.vocabularyQuiz.completed) completedCount++;
+                            
+                            // Check paper completions
+                            if (activities.paper1 && activities.paper1.completed) completedCount++;
+                            if (activities.paper2 && activities.paper2.completed) completedCount++;
+                            if (activities.paper3 && activities.paper3.completed) completedCount++;
+                            
+                            isCompleted = (completedCount / totalActivities) >= 0.7;
+                            activitiesCompleted = completedCount;
                         } else {
                             // Standard calculation for other concepts
                             const vocabWeight = 0.2;
