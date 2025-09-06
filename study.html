@@ -10957,6 +10957,8 @@
 
         // Ion Formation Understanding Check
         function checkIonUnderstanding() {
+            console.log('🧪 Testing Ion Formation Understanding Check...');
+            
             const answers = {
                 uq1: 'b', // Mg²⁺ (loses 2 electrons)
                 uq2: 'c', // Both Cl⁻ and K⁺ are isoelectronic with Ar
@@ -10966,15 +10968,23 @@
             let correct = 0;
             let total = Object.keys(answers).length;
 
+            console.log('📊 Checking answers...');
             Object.keys(answers).forEach(question => {
                 const selected = document.querySelector(`input[name="${question}"]:checked`);
+                console.log(`Question ${question}: Selected = ${selected ? selected.value : 'none'}, Correct = ${answers[question]}`);
                 if (selected && selected.value === answers[question]) {
                     correct++;
                 }
             });
 
             const resultsDiv = document.getElementById('ionUnderstandingResults');
+            if (!resultsDiv) {
+                console.error('❌ Results div not found!');
+                return;
+            }
+            
             const percentage = Math.round((correct / total) * 100);
+            console.log(`📈 Score: ${correct}/${total} (${percentage}%)`);
             
             resultsDiv.innerHTML = `
                 <div class="understanding-score">
@@ -10987,12 +10997,22 @@
 
             // Track progress
             updateProgress('ionFormation', 'understandingCheck', correct, total);
+            console.log('✅ Ion Formation Understanding Check completed!');
         }
 
         function resetIonUnderstanding() {
+            console.log('🔄 Resetting Ion Formation Understanding Check...');
             const inputs = document.querySelectorAll('#ionUnderstandingCheck input[type="radio"]');
+            console.log(`Found ${inputs.length} radio inputs`);
             inputs.forEach(input => input.checked = false);
-            document.getElementById('ionUnderstandingResults').style.display = 'none';
+            const resultsDiv = document.getElementById('ionUnderstandingResults');
+            if (resultsDiv) {
+                resultsDiv.style.display = 'none';
+                console.log('✅ Results hidden');
+            } else {
+                console.error('❌ Results div not found!');
+            }
+            console.log('✅ Ion Formation Understanding Check reset!');
         }
 
         // Update tile click handlers to show detailed content
