@@ -10701,19 +10701,12 @@
             console.log('Chlorine building:', chlorineBuilding ? '✅ Found' : '❌ Not found');
             console.log('Iron building:', ironBuilding ? '✅ Found' : '❌ Not found');
             
-            // Clear all slots to start empty
-            const allSlots = document.querySelectorAll('.slot');
-            allSlots.forEach(slot => {
-                slot.textContent = '';
-                slot.style.opacity = '1';
-                slot.style.color = 'inherit';
-                slot.style.fontWeight = 'normal';
-                slot.style.backgroundColor = '';
-                slot.style.border = '';
-                slot.style.borderRadius = '';
-            });
+            // Initialize all demos with neutral atom configurations
+            resetSodiumDemo();
+            resetChlorineDemo();
+            resetIronDemo();
             
-            console.log('✅ All demos initialized - starting empty. Use Reset buttons to populate.');
+            console.log('✅ All demos initialized with neutral atom configurations.');
         }
 
         // Sodium Cation Formation Demonstration
@@ -13031,4 +13024,4 @@
         }
     </script>
 </body>
-</html>
+</html>pty 
